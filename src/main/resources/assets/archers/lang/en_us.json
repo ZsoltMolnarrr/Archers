@@ -1,4 +1,6 @@
 {
   "itemGroup.archers.general": "Archers",
-  "item.archers.auto_fire_hook":  "Auto-Fire Hook"
+  "item.archers.auto_fire_hook": "Auto-Fire Hook",
+  "item.archers.auto_fire_hook.description_1": "Automatically releases charged arrow.",
+  "item.archers.auto_fire_hook.description_2": "Can be attached to Crossbows on an Anvil."
 }

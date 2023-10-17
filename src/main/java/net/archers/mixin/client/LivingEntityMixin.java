@@ -1,7 +1,7 @@
 package net.archers.mixin.client;
 
 import net.archers.item.AutoFireHook;
-import net.archers.item.ItemUseDelay;
+import net.archers.client.ItemUseDelay;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.world.ClientWorld;

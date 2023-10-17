@@ -1,10 +1,8 @@
 package net.archers.mixin;
 
 import net.archers.item.AutoFireHook;
-import net.archers.item.Misc;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.screen.*;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
