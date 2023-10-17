@@ -20,7 +20,7 @@ public class AutoFireHook extends Item {
     public static final Identifier id = new Identifier(ArchersMod.ID, "auto_fire_hook");
     public static final Item item = new AutoFireHook((new FabricItemSettings()).maxCount(1));
     public static final String NBT_KEY = ArchersMod.ID + ":afh";
-    public static final TagKey<Item> crossbowsTag = TagKey.of(RegistryKeys.ITEM, new Identifier(ArchersMod.ID, "crossbows"));
+    public static final TagKey<Item> crossbowsTag = TagKey.of(RegistryKeys.ITEM, new Identifier(ArchersMod.ID, "auto_fire_hook_attachables"));
     public static boolean isApplied(ItemStack itemStack) {
         return itemStack.hasNbt() && itemStack.getNbt().contains(NBT_KEY);
     }
