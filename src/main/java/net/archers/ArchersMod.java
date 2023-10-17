@@ -2,6 +2,7 @@ package net.archers;
 
 import net.archers.item.Group;
 import net.archers.item.Misc;
+import net.archers.item.Weapons;
 import net.archers.util.SoundHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -32,6 +33,7 @@ public class ArchersMod implements ModInitializer {
 
     private void registerItems() {
         Misc.register();
+        Weapons.register();
     }
 
     private void subscribeEvents() {

@@ -4,7 +4,8 @@
   "package": "net.archers.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AnvilScreenHandlerMixin"
+    "AnvilScreenHandlerMixin",
+    "item.BowItemMixin"
   ],
   "client": [
     "client.LivingEntityMixin",
