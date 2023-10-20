@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/mechanic_shortbow",
+  "textures": {
+    "layer0": "archers:item/mechanic_shortbow_pulling_0"
+  }
+}

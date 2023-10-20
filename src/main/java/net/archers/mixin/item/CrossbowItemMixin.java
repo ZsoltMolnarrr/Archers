@@ -24,7 +24,7 @@ public class CrossbowItemMixin implements CustomRangedWeaponProperties {
     private int customPullTime = 0;
     @Override
     public int getCustomPullTime_RPGS() {
-        return 0;
+        return customPullTime;
     }
     @Override
     public void setCustomPullTime_RPGS(int pullTime) {
