@@ -1,6 +1,8 @@
 package net.archers.client;
 
-import net.archers.item.CustomBow;
+import net.archers.item.weapon.CustomBow;
+import net.archers.item.weapon.CustomCrossbow;
+import net.archers.item.weapon.CustomRangedWeaponProperties;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
@@ -14,7 +16,7 @@ public class ModelPredicateHelper {
             if (entity == null) {
                 return 0.0F;
             } else {
-                return entity.getActiveItem() != stack ? 0.0F : (float)(stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / ((float)bow.pullTime);
+                return entity.getActiveItem() != stack ? 0.0F : (float)(stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / ((float) ((CustomRangedWeaponProperties)bow).getCustomPullTime_RPGS());
             }
         });
         ModelPredicateProviderRegistry.register(bow, new Identifier("pulling"), (stack, world, entity, seed) -> {
@@ -22,23 +24,36 @@ public class ModelPredicateHelper {
         });
     }
 
-    public static void registerCrossbowModelPredicates(Item item) {
+    public static void registerCrossbowModelPredicates(CustomCrossbow crossbow) {
+        var predicatesToCopy = new Identifier[] {
+                new Identifier("pull"),
+                new Identifier("pulling"),
+                new Identifier("charged"),
+                new Identifier("firework")
+        };
+        for (var predicateId : predicatesToCopy) {
+            var predicateProvider = ModelPredicateProviderRegistry.get(Items.CROSSBOW, predicateId);
+            ModelPredicateProviderRegistry.register(crossbow, predicateId, (stack, world, entity, seed) -> {
+                return predicateProvider.call(stack, world, entity, seed);
+            });
+        }
+
         // We cannot reuse what is already registered for Vanilla bow, because it uses static pull time calculation
-        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("pull"), (stack, world, entity, seed) -> {
-            if (entity == null) {
-                return 0.0F;
-            } else {
-                return CrossbowItem.isCharged(stack) ? 0.0F : (float)(stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / (float)CrossbowItem.getPullTime(stack); // FIXME
-            }
-        });
-        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("pulling"), (stack, world, entity, seed) -> {
-            return entity != null && entity.isUsingItem() && entity.getActiveItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F;
-        });
-        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("charged"), (stack, world, entity, seed) -> {
-            return CrossbowItem.isCharged(stack) ? 1.0F : 0.0F;
-        });
-        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("firework"), (stack, world, entity, seed) -> {
-            return CrossbowItem.isCharged(stack) && CrossbowItem.hasProjectile(stack, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
-        });
+//        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("pull"), (stack, world, entity, seed) -> {
+//            if (entity == null) {
+//                return 0.0F;
+//            } else {
+//                return CrossbowItem.isCharged(stack) ? 0.0F : (float)(stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / ((float) ((CustomRangedWeaponProperties)crossbow).getCustomPullTime_RPGS());
+//            }
+//        });
+//        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("pulling"), (stack, world, entity, seed) -> {
+//            return entity != null && entity.isUsingItem() && entity.getActiveItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F;
+//        });
+//        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("charged"), (stack, world, entity, seed) -> {
+//            return CrossbowItem.isCharged(stack) ? 1.0F : 0.0F;
+//        });
+//        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("firework"), (stack, world, entity, seed) -> {
+//            return CrossbowItem.isCharged(stack) && CrossbowItem.hasProjectile(stack, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
+//        });
     }
 }

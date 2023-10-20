@@ -1,6 +1,8 @@
 {
   "values": [
+    "minecraft:bow",
     "minecraft:crossbow",
+    "#archers:bows",
     "#archers:crossbows"
   ]
 }

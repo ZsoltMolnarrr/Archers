@@ -1,7 +1,7 @@
 package net.archers.client;
 
 import net.archers.item.AutoFireHook;
-import net.archers.item.CustomBow;
+import net.archers.item.weapon.CustomBow;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.minecraft.text.Text;
