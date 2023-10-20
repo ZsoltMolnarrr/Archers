@@ -22,7 +22,7 @@ public class PlayerEntityRendererMixin {
     )
     private static boolean armPose_crossbowHold_SpellEngine(ItemStack itemStack, Item item, Operation<Boolean> original) {
         if (item == Items.CROSSBOW) {
-            if (itemStack.getItem() instanceof CustomCrossbow) {
+            if (CustomCrossbow.instances.contains(itemStack.getItem())) {
                 return true;
             }
         }
