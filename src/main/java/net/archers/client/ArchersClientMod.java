@@ -1,6 +1,6 @@
 package net.archers.client;
 
-import net.archers.item.AutoFireHook;
+import net.archers.item.misc.AutoFireHook;
 import net.archers.item.weapon.CustomBow;
 import net.archers.item.weapon.CustomCrossbow;
 import net.fabricmc.api.ClientModInitializer;

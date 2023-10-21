@@ -41,24 +41,33 @@ public class Weapons {
         return add(new Identifier(ArchersMod.ID, name), item, defaults);
     }
 
-    private static final int durabilityTier1 = 384;
-    private static final int durabilityTier2 = ToolMaterials.IRON.getDurability();
-    private static final int durabilityTier3 = ToolMaterials.DIAMOND.getDurability();
-    private static final int durabilityTier4 = ToolMaterials.NETHERITE.getDurability();
+    private static final int durabilityTier0 = 384;
+    private static final int durabilityTier1 = 465; // Matches Vanilla Crossbow durability
+    private static final int durabilityTier2 = ToolMaterials.DIAMOND.getDurability();
+    private static final int durabilityTier3 = ToolMaterials.NETHERITE.getDurability();
 
     /**
      * BOWS
      */
 
+    public static Entry composite_longbow = bow("composite_longbow", durabilityTier1,
+            () -> Ingredient.ofItems(Items.BONE),
+            new RangedConfig(30, 7, null));
+
     public static Entry mechanic_shortbow = bow("mechanic_shortbow", durabilityTier2,
-            () -> Ingredient.ofItems(Items.IRON_INGOT),
+            () -> Ingredient.ofItems(Items.REDSTONE),
             new RangedConfig(10, 5, null));
+
+    public static Entry royal_longbow = bow("royal_longbow", durabilityTier2,
+            () -> Ingredient.ofItems(Items.GOLD_INGOT),
+            new RangedConfig(30, 8, null));
 
     /**
      * CROSSBOWS
      */
+
     public static Entry rapid_crossbow = crossbow("rapid_crossbow", durabilityTier2,
-            () -> Ingredient.ofItems(Items.IRON_INGOT),
+            () -> Ingredient.ofItems(Items.REDSTONE),
             new RangedConfig(10, 10, null));
 
     public static void register() {

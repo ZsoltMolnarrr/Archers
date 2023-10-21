@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/composite_longbow",
+  "textures": {
+    "layer0": "archers:item/composite_longbow_pulling_2"
+  }
+}

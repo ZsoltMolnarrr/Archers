@@ -1,7 +1,7 @@
 package net.archers;
 
 import net.archers.item.Group;
-import net.archers.item.Misc;
+import net.archers.item.misc.Misc;
 import net.archers.item.Weapons;
 import net.archers.util.SoundHelper;
 import net.fabricmc.api.ModInitializer;

@@ -1,6 +1,6 @@
 package net.archers.mixin;
 
-import net.archers.item.AutoFireHook;
+import net.archers.item.misc.AutoFireHook;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.*;

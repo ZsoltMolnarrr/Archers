@@ -1,5 +1,6 @@
-package net.archers.item;
+package net.archers.item.misc;
 
+import net.archers.item.Group;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;

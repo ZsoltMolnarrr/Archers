@@ -1,4 +1,4 @@
-package net.archers.item;
+package net.archers.item.misc;
 
 import net.archers.ArchersMod;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
