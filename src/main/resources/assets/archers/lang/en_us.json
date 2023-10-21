@@ -3,5 +3,8 @@
   "item.archers.auto_fire_hook": "Auto-Fire Hook",
   "item.archers.auto_fire_hook.description_1": "Automatically releases charged arrow.",
   "item.archers.auto_fire_hook.description_2": "Can be applied to ranged weapons, on an Anvil.",
-  "item.ranged_weapon.pull_time": "%1$s sec Pull Time"
+  "item.ranged_weapon.pull_time": "%1$s sec Pull Time",
+
+  "block.archers.archers_workbench": "Archery Artisan Table",
+  "block.archers.archers_workbench.hint": "Workbench for Archery Artisan Villagers."
 }

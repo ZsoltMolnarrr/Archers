@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "archers:block/archers_workbench"
+    },
+    "facing=south": {
+      "model": "archers:block/archers_workbench",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "archers:block/archers_workbench",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "archers:block/archers_workbench",
+      "y": 270
+    }
+  }
+}

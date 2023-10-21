@@ -1,5 +1,6 @@
 package net.archers;
 
+import net.archers.block.ArcherBlocks;
 import net.archers.item.Group;
 import net.archers.item.misc.Misc;
 import net.archers.item.Weapons;
@@ -32,6 +33,7 @@ public class ArchersMod implements ModInitializer {
     }
 
     private void registerItems() {
+        ArcherBlocks.register();
         Misc.register();
         Weapons.register();
     }
