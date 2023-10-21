@@ -1,4 +1,4 @@
-package net.archers.mixin.client;
+package net.archers.mixin.client.item;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(HeldItemRenderer.class)
 public class HeldItemRendererMixin {
+
     /**
      * HeldItemRenderer checks for `ItemStack.isOf(Items.CROSSBOW)` to implement specific render angles.
      * All of these checks are wrapped to also check for our custom crossbows.

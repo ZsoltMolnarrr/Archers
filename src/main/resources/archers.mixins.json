@@ -5,14 +5,15 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AnvilScreenHandlerMixin",
-    "client.HeldItemRendererMixin",
+    "client.item.HeldItemRendererMixin",
     "item.BowItemMixin",
     "item.CrossbowItemMixin"
   ],
   "client": [
-    "client.LivingEntityMixin",
-    "client.MinecraftClientMixin",
-    "client.PlayerEntityRendererMixin"
+    "client.autofire.LivingEntityMixin",
+    "client.autofire.MinecraftClientMixin",
+    "client.item.AbstractClientPlayerEntityMixin",
+    "client.item.PlayerEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,4 +1,4 @@
-package net.archers.mixin.client;
+package net.archers.mixin.client.autofire;
 
 import net.archers.client.ItemUseDelay;
 import net.archers.item.misc.AutoFireHook;

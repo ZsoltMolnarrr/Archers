@@ -1,4 +1,4 @@
-package net.archers.mixin.client;
+package net.archers.mixin.client.item;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
