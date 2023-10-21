@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AnvilScreenHandlerMixin",
+    "client.compat.ProjectileDamageTooltipMixin",
     "client.item.HeldItemRendererMixin",
     "item.BowItemMixin",
     "item.CrossbowItemMixin"

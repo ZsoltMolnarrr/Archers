@@ -1,6 +1,7 @@
 package net.archers.item.weapon;
 
 import net.archers.config.RangedConfig;
+import net.minecraft.item.BowItem;
 import net.projectile_damage.api.IProjectileWeapon;
 
 public interface CustomRangedWeaponProperties {

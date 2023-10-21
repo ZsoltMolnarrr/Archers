@@ -1,12 +1,8 @@
 package net.archers.client;
 
-import net.archers.item.misc.AutoFireHook;
 import net.archers.item.weapon.CustomBow;
 import net.archers.item.weapon.CustomCrossbow;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 
 public class ArchersClientMod implements ClientModInitializer {
     @Override
@@ -17,10 +13,6 @@ public class ArchersClientMod implements ClientModInitializer {
         for (var crossbow: CustomCrossbow.instances) {
             ModelPredicateHelper.registerCrossbowModelPredicates(crossbow);
         }
-        ItemTooltipCallback.EVENT.register((itemStack, context, lines) -> {
-            if (AutoFireHook.isApplied(itemStack)) {
-                lines.add(1, Text.translatable(AutoFireHook.item.getTranslationKey()).formatted(Formatting.DARK_GREEN));
-            }
-        });
+        ArchersTooltip.init();
     }
 }
