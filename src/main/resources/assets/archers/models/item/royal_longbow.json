@@ -1,5 +1,5 @@
 {
-  "parent": "archers:item/bow_20",
+  "parent": "archers:item/base/bow_20",
   "textures": {
     "layer0": "archers:item/royal_longbow"
   },

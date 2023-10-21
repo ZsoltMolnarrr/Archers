@@ -70,6 +70,10 @@ public class Weapons {
             () -> Ingredient.ofItems(Items.REDSTONE),
             new RangedConfig(10, 10, null));
 
+    public static Entry heavy_crossbow = crossbow("heavy_crossbow", durabilityTier2,
+            () -> Ingredient.ofItems(Items.DIAMOND),
+            new RangedConfig(30, 11, null));
+
     public static void register() {
         for (var entry: all) {
             Registry.register(Registries.ITEM, entry.id, entry.item);
