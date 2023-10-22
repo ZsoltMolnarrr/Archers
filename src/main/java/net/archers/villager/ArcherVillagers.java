@@ -3,6 +3,7 @@ package net.archers.villager;
 import com.google.common.collect.ImmutableSet;
 import net.archers.ArchersMod;
 import net.archers.block.ArcherBlocks;
+import net.archers.block.ArcherWorkbenchBlock;
 import net.archers.item.Weapons;
 import net.archers.item.armor.ArcherArmor;
 import net.archers.item.armor.Armors;
@@ -42,7 +43,7 @@ public class ArcherVillagers {
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
-                ArcherArmor.equipSound)
+                ArcherWorkbenchBlock.sound)
         );
     }
 

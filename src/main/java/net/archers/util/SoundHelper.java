@@ -1,6 +1,7 @@
 package net.archers.util;
 
 import net.archers.ArchersMod;
+import net.archers.block.ArcherWorkbenchBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
@@ -31,6 +32,7 @@ public class SoundHelper {
                     : SoundEvent.of(soundId, customTravelDistance);
             Registry.register(Registries.SOUND_EVENT, soundId, soundEvent);
         }
+        Registry.register(Registries.SOUND_EVENT, ArcherWorkbenchBlock.ID, ArcherWorkbenchBlock.sound);
     }
 
     public static void playSoundEvent(World world, Entity entity, SoundEvent soundEvent) {

@@ -7,6 +7,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.sound.SoundEvents;
 import net.projectile_damage.api.EntityAttributes_ProjectileDamage;
 import net.spell_engine.api.item.ItemConfig;
 import net.spell_engine.api.item.armor.Armor;
@@ -36,7 +37,7 @@ public class Armors {
                         "archer_armor",
                         10,
                         9,
-                        ArcherArmor.equipSound,
+                        SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
                         () -> { return Ingredient.ofItems(Items.LEATHER); }
                     ),
                     ItemConfig.ArmorSet.with(
@@ -66,7 +67,7 @@ public class Armors {
                             "marksmen_armor",
                             20,
                             10,
-                            ArcherArmor.equipSound,
+                            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
                             () -> { return Ingredient.ofItems(Items.SCUTE); }
                     ),
                     ItemConfig.ArmorSet.with(

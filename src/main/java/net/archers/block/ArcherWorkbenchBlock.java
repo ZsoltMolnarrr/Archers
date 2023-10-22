@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -18,9 +19,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ArcherWorkstationBlock extends Block {
+public class ArcherWorkbenchBlock extends Block {
     public static Identifier ID = new Identifier(ArchersMod.ID, "archers_workbench");
-    public ArcherWorkstationBlock(Settings settings) {
+    public static SoundEvent sound = SoundEvent.of(ID);
+    public ArcherWorkbenchBlock(Settings settings) {
         super(settings);
     }
 
