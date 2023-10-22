@@ -8,6 +8,7 @@ import net.archers.item.armor.Armors;
 import net.archers.item.misc.Misc;
 import net.archers.item.Weapons;
 import net.archers.util.SoundHelper;
+import net.archers.villager.ArcherVillagers;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemStack;
@@ -34,6 +35,7 @@ public class ArchersMod implements ModInitializer {
     public void onInitialize() {
         registerItemGroup();
         registerItems();
+        ArcherVillagers.register();
         SoundHelper.registerSounds();
         subscribeEvents();
     }

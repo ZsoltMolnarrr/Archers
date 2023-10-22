@@ -6,6 +6,8 @@
 
   "block.archers.archers_workbench": "Archery Artisan Table",
   "block.archers.archers_workbench.hint": "Workbench for Archery Artisan Villagers.",
+  "entity.minecraft.villager.archery_artisan": "Archery Artisan",
+  "entity.minecraft.villager.paladins:archery_artisan": "Archery Artisan",
 
   "item.archers.auto_fire_hook": "Auto-Fire Hook",
 

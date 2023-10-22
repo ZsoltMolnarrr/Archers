@@ -32,7 +32,7 @@ public class ArcherBlocks {
         return entry;
     }
 
-    public static final Entry WORKSTATION = entry(ArcherWorkstationBlock.ID.getPath(), new ArcherWorkstationBlock(
+    public static final Entry WORKBENCH = entry(ArcherWorkstationBlock.ID.getPath(), new ArcherWorkstationBlock(
             FabricBlockSettings.create()
                     .mapColor(MapColor.OAK_TAN)
                     .instrument(Instrument.BASS)
