@@ -3,13 +3,16 @@ package net.archers;
 import net.archers.block.ArcherBlocks;
 import net.archers.config.ArchersItemConfig;
 import net.archers.config.Default;
+import net.archers.config.WorldGenConfig;
 import net.archers.item.Group;
 import net.archers.item.Weapons;
 import net.archers.item.armor.Armors;
 import net.archers.item.misc.Misc;
 import net.archers.util.SoundHelper;
-import net.archers.villager.ArcherVillagers;
+import net.archers.village.ArcherVillagers;
+import net.archers.village.VillageGeneration;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -27,12 +30,19 @@ public class ArchersMod implements ModInitializer {
             .sanitize(true)
             .build();
 
+    public static ConfigManager<WorldGenConfig> worldGenConfig = new ConfigManager<>
+            ("world_gen", Default.worldGen)
+            .builder()
+            .setDirectory(ID)
+            .sanitize(true)
+            .build();
+
     @Override
     public void onInitialize() {
         registerItemGroup();
         registerItems();
-        ArcherVillagers.register();
         SoundHelper.registerSounds();
+        registerVillages();
         subscribeEvents();
     }
 
@@ -51,6 +61,12 @@ public class ArchersMod implements ModInitializer {
         Weapons.register(itemConfig.value.weapons);
         Armors.register(itemConfig.value.armor_sets);
         itemConfig.save();
+    }
+
+    private void registerVillages() {
+        worldGenConfig.refresh();
+        ArcherVillagers.register();
+        ServerLifecycleEvents.SERVER_STARTING.register(VillageGeneration::init);
     }
 
     private void subscribeEvents() {

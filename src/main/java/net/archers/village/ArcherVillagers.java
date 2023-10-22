@@ -1,4 +1,4 @@
-package net.archers.villager;
+package net.archers.village;
 
 import com.google.common.collect.ImmutableSet;
 import net.archers.ArchersMod;
