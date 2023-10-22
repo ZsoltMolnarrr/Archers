@@ -80,11 +80,11 @@ public class Weapons {
             new RangedConfig(pullTime_longBow, 12, null));
 
     public static Entry netherite_shortbow = bow("netherite_shortbow", durabilityTier3,
-            () -> Ingredient.ofItems(Items.REDSTONE),
+            () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
             new RangedConfig(pullTime_shortBow, 7, null));
 
     public static Entry netherite_longbow = bow("netherite_longbow", durabilityTier3,
-            () -> Ingredient.ofItems(Items.GOLD_INGOT),
+            () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
             new RangedConfig(pullTime_longBow, 14, null));
 
 
@@ -101,11 +101,11 @@ public class Weapons {
             new RangedConfig(pullTime_heavyCrossbow, 14, null));
 
     public static Entry netherite_rapid_crossbow = crossbow("netherite_rapid_crossbow", durabilityTier3,
-            () -> Ingredient.ofItems(Items.REDSTONE),
+            () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
             new RangedConfig(pullTime_rapidCrossbow, 9.5F, null));
 
     public static Entry netherite_heavy_crossbow = crossbow("netherite_heavy_crossbow", durabilityTier3,
-            () -> Ingredient.ofItems(Items.DIAMOND),
+            () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
             new RangedConfig(pullTime_heavyCrossbow, 16, null));
 
 

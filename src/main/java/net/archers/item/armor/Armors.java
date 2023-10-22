@@ -67,7 +67,7 @@ public class Armors {
                             20,
                             10,
                             ArcherArmor.equipSound,
-                            () -> { return Ingredient.ofItems(Items.LEATHER); }
+                            () -> { return Ingredient.ofItems(Items.SCUTE); }
                     ),
                     ItemConfig.ArmorSet.with(
                             new ItemConfig.ArmorSet.Piece(2)
