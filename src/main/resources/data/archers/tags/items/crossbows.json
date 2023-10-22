@@ -1,5 +1,8 @@
 {
   "values": [
-    "archers:rapid_crossbow"
+    "archers:rapid_crossbow",
+    "archers:heavy_crossbow",
+    "archers:netherite_rapid_crossbow",
+    "archers:netherite_heavy_crossbow"
   ]
 }

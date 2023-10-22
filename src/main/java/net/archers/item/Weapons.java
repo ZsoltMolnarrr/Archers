@@ -46,30 +46,45 @@ public class Weapons {
     private static final int durabilityTier2 = ToolMaterials.DIAMOND.getDurability();
     private static final int durabilityTier3 = ToolMaterials.NETHERITE.getDurability();
 
+    private static final int pullTime_shortBow = 16;
+    private static final int pullTime_longBow = 30;
+    private static final int pullTime_rapidCrossbow = 20;
+    private static final int pullTime_heavyCrossbow = 35;
+
+    /**
+     * DPS Tiers
+     * T0: 6 DPS (from Vanilla Bow, 6 / 1)
+     * T1: 7.2 DPS (from Vanilla CrossBow, 9 / 1.25)
+     *  T0 -> T1  20% increase
+     * T2: 8.4 DPS
+     * T3: 9.6 DPS
+     *
+     * Target Item Damage = DPS * Pull Time (for example:  7.2 * (25/20) )
+     */
+
     /**
      * BOWS
      */
 
     public static Entry composite_longbow = bow("composite_longbow", durabilityTier1,
             () -> Ingredient.ofItems(Items.BONE),
-            new RangedConfig(30, 7, null));
+            new RangedConfig(pullTime_longBow, 9, null));
 
     public static Entry mechanic_shortbow = bow("mechanic_shortbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.REDSTONE),
-            new RangedConfig(10, 5, null));
+            new RangedConfig(pullTime_shortBow, 6.5F, null));
 
     public static Entry royal_longbow = bow("royal_longbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.GOLD_INGOT),
-            new RangedConfig(30, 8, null));
+            new RangedConfig(pullTime_longBow, 12, null));
 
-
-    public static Entry netherite_shortbow = bow("netherite_shortbow", durabilityTier2,
+    public static Entry netherite_shortbow = bow("netherite_shortbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.REDSTONE),
-            new RangedConfig(10, 5, null));
+            new RangedConfig(pullTime_shortBow, 7, null));
 
-    public static Entry netherite_longbow = bow("netherite_longbow", durabilityTier2,
+    public static Entry netherite_longbow = bow("netherite_longbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.GOLD_INGOT),
-            new RangedConfig(30, 8, null));
+            new RangedConfig(pullTime_longBow, 14, null));
 
 
     /**
@@ -78,19 +93,19 @@ public class Weapons {
 
     public static Entry rapid_crossbow = crossbow("rapid_crossbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.REDSTONE),
-            new RangedConfig(10, 10, null));
+            new RangedConfig(pullTime_rapidCrossbow, 8.5F, null));
 
     public static Entry heavy_crossbow = crossbow("heavy_crossbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.DIAMOND),
-            new RangedConfig(30, 11, null));
+            new RangedConfig(pullTime_heavyCrossbow, 14, null));
 
-    public static Entry netherite_rapid_crossbow = crossbow("netherite_rapid_crossbow", durabilityTier2,
+    public static Entry netherite_rapid_crossbow = crossbow("netherite_rapid_crossbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.REDSTONE),
-            new RangedConfig(10, 10, null));
+            new RangedConfig(pullTime_rapidCrossbow, 9.5F, null));
 
-    public static Entry netherite_heavy_crossbow = crossbow("netherite_heavy_crossbow", durabilityTier2,
+    public static Entry netherite_heavy_crossbow = crossbow("netherite_heavy_crossbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.DIAMOND),
-            new RangedConfig(30, 11, null));
+            new RangedConfig(pullTime_heavyCrossbow, 16, null));
 
 
     public static void register() {

@@ -1,5 +1,9 @@
 {
   "values": [
-    "archers:mechanic_shortbow"
+    "archers:composite_longbow",
+    "archers:mechanic_shortbow",
+    "archers:royal_longbow",
+    "archers:netherite_shortbow",
+    "archers:netherite_longbow"
   ]
 }
