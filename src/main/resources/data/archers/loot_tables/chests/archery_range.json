@@ -12,14 +12,14 @@
         {
           "type": "minecraft:item",
           "weight": 2,
-          "name": "minecraft:raw_gold",
+          "name": "minecraft:flint",
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1,
-                "max": 4
+                "max": 10
               },
               "add": false
             }
@@ -27,15 +27,15 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "name": "minecraft:gold_ingot",
+          "weight": 2,
+          "name": "minecraft:feather",
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1,
-                "max": 3
+                "max": 12
               },
               "add": false
             }
@@ -43,7 +43,23 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
+          "name": "minecraft:arrow",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 16
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
           "name": "minecraft:string",
           "functions": [
             {
@@ -51,22 +67,6 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1,
-                "max": 3
-              },
-              "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 2,
-          "name": "minecraft:raw_copper",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
                 "max": 5
               },
               "add": false
@@ -75,15 +75,15 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
-          "name": "minecraft:copper_ingot",
+          "weight": 3,
+          "name": "minecraft:leather",
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1,
-                "max": 5
+                "max": 8
               },
               "add": false
             }
@@ -91,55 +91,31 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
-          "name": "minecraft:charcoal",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 6
-              },
-              "add": false
-            }
-          ]
+          "name": "archers:archer_armor_head"
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "name": "minecraft:quartz",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
-              },
-              "add": false
-            }
-          ]
+          "name": "archers:archer_armor_chest"
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "name": "minecraft:emerald",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
-              },
-              "add": false
-            }
-          ]
+          "name": "archers:archer_armor_legs"
         },
         {
           "type": "minecraft:item",
-          "name": "jewelry:emerald_necklace"
+          "name": "archers:archer_armor_feet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "archers:composite_longbow"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bow"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:crossbow"
         }
       ]
     }
