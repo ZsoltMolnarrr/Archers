@@ -23,6 +23,8 @@ public class SoundHelper {
         // "sound_name", Float.valueOf(48F)
     );
 
+    public static final SoundEvent WORKBENCH = SoundEvent.of(ArcherWorkbenchBlock.ID);
+
     public static void registerSounds() {
         for (var soundKey: soundKeys) {
             var soundId = new Identifier(ArchersMod.ID, soundKey);
@@ -32,7 +34,9 @@ public class SoundHelper {
                     : SoundEvent.of(soundId, customTravelDistance);
             Registry.register(Registries.SOUND_EVENT, soundId, soundEvent);
         }
-        Registry.register(Registries.SOUND_EVENT, ArcherWorkbenchBlock.ID, ArcherWorkbenchBlock.sound);
+
+        Registry.register(Registries.SOUND_EVENT, ArcherWorkbenchBlock.ID, WORKBENCH);
+        System.out.println("Registered sound " + ArcherWorkbenchBlock.ID + " with soundEvent " + WORKBENCH);
     }
 
     public static void playSoundEvent(World world, Entity entity, SoundEvent soundEvent) {

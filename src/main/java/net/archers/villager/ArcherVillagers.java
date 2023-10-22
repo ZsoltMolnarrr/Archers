@@ -3,10 +3,9 @@ package net.archers.villager;
 import com.google.common.collect.ImmutableSet;
 import net.archers.ArchersMod;
 import net.archers.block.ArcherBlocks;
-import net.archers.block.ArcherWorkbenchBlock;
 import net.archers.item.Weapons;
-import net.archers.item.armor.ArcherArmor;
 import net.archers.item.armor.Armors;
+import net.archers.util.SoundHelper;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.block.Block;
@@ -43,7 +42,7 @@ public class ArcherVillagers {
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
-                ArcherWorkbenchBlock.sound)
+                SoundHelper.WORKBENCH)
         );
     }
 
