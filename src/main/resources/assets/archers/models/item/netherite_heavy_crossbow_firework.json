@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/netherite_heavy_crossbow",
+  "textures": {
+    "layer0": "archers:item/netherite_heavy_crossbow_firework"
+  }
+}

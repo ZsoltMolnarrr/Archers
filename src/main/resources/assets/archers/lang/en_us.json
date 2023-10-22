@@ -23,5 +23,9 @@
   "item.archers.mechanic_shortbow": "Mechanical Shortbow",
   "item.archers.royal_longbow": "Royal Longbow",
   "item.archers.rapid_crossbow": "Rapid Crossbow",
-  "item.archers.heavy_crossbow": "Heavy Crossbow"
+  "item.archers.heavy_crossbow": "Heavy Crossbow",
+  "item.archers.netherite_shortbow": "Netherite Shortbow",
+  "item.archers.netherite_longbow": "Netherite Longbow",
+  "item.archers.netherite_rapid_crossbow": "Netherite Rapid Crossbow",
+  "item.archers.netherite_heavy_crossbow": "Netherite Heavy Crossbow"
 }

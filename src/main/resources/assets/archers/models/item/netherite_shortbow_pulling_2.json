@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/netherite_shortbow",
+  "textures": {
+    "layer0": "archers:item/netherite_shortbow_pulling_2"
+  }
+}

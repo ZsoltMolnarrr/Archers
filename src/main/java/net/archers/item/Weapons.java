@@ -62,6 +62,16 @@ public class Weapons {
             () -> Ingredient.ofItems(Items.GOLD_INGOT),
             new RangedConfig(30, 8, null));
 
+
+    public static Entry netherite_shortbow = bow("netherite_shortbow", durabilityTier2,
+            () -> Ingredient.ofItems(Items.REDSTONE),
+            new RangedConfig(10, 5, null));
+
+    public static Entry netherite_longbow = bow("netherite_longbow", durabilityTier2,
+            () -> Ingredient.ofItems(Items.GOLD_INGOT),
+            new RangedConfig(30, 8, null));
+
+
     /**
      * CROSSBOWS
      */
@@ -73,6 +83,15 @@ public class Weapons {
     public static Entry heavy_crossbow = crossbow("heavy_crossbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.DIAMOND),
             new RangedConfig(30, 11, null));
+
+    public static Entry netherite_rapid_crossbow = crossbow("netherite_rapid_crossbow", durabilityTier2,
+            () -> Ingredient.ofItems(Items.REDSTONE),
+            new RangedConfig(10, 10, null));
+
+    public static Entry netherite_heavy_crossbow = crossbow("netherite_heavy_crossbow", durabilityTier2,
+            () -> Ingredient.ofItems(Items.DIAMOND),
+            new RangedConfig(30, 11, null));
+
 
     public static void register() {
         for (var entry: all) {

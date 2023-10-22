@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/netherite_rapid_crossbow",
+  "textures": {
+    "layer0": "archers:item/netherite_rapid_crossbow_pulling_2"
+  }
+}
