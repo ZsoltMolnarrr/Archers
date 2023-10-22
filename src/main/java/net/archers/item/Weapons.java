@@ -16,6 +16,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class Weapons {
@@ -108,8 +109,13 @@ public class Weapons {
             new RangedConfig(pullTime_heavyCrossbow, 16, null));
 
 
-    public static void register() {
+    public static void register(Map<String, RangedConfig> configs) {
         for (var entry: all) {
+            var config = configs.get(entry.id.toString());
+            if (config == null) {
+                config = entry.defaults;
+                configs.put(entry.id.toString(), config);
+            }
             Registry.register(Registries.ITEM, entry.id, entry.item);
         }
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {

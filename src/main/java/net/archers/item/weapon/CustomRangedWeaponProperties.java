@@ -1,7 +1,6 @@
 package net.archers.item.weapon;
 
 import net.archers.config.RangedConfig;
-import net.minecraft.item.BowItem;
 import net.projectile_damage.api.IProjectileWeapon;
 
 public interface CustomRangedWeaponProperties {
@@ -13,7 +12,7 @@ public interface CustomRangedWeaponProperties {
 
     default void configure(RangedConfig config) {
         var rangedWeapon = (CustomRangedWeaponProperties)this;
-        rangedWeapon.setCustomPullTime_RPGS(config.pullTime());
+        rangedWeapon.setCustomPullTime_RPGS(config.pull_time());
         if (config.velocity() != null) {
             float velocity = config.velocity();
             rangedWeapon.setCustomVelocity_RPGS(velocity);

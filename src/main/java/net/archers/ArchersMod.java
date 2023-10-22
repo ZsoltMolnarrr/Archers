@@ -1,6 +1,8 @@
 package net.archers;
 
 import net.archers.block.ArcherBlocks;
+import net.archers.config.ArchersItemConfig;
+import net.archers.config.Default;
 import net.archers.item.Group;
 import net.archers.item.armor.Armors;
 import net.archers.item.misc.Misc;
@@ -13,11 +15,20 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
+import net.spell_engine.api.item.ItemConfig;
+import net.tinyconfig.ConfigManager;
 
 import java.util.HashMap;
 
 public class ArchersMod implements ModInitializer {
     public static final String ID = "archers";
+
+    public static ConfigManager<ArchersItemConfig> itemConfig = new ConfigManager<ArchersItemConfig>
+            ("items", Default.itemConfig)
+            .builder()
+            .setDirectory(ID)
+            .sanitize(true)
+            .build();
 
     @Override
     public void onInitialize() {
@@ -36,10 +47,12 @@ public class ArchersMod implements ModInitializer {
     }
 
     private void registerItems() {
+        itemConfig.refresh();
         ArcherBlocks.register();
         Misc.register();
-        Weapons.register();
-        Armors.register(new HashMap<>());
+        Weapons.register(itemConfig.value.weapons);
+        Armors.register(itemConfig.value.armor_sets);
+        itemConfig.save();
     }
 
     private void subscribeEvents() {
