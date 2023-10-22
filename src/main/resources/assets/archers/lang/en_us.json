@@ -1,10 +1,27 @@
 {
   "itemGroup.archers.general": "Archers",
-  "item.archers.auto_fire_hook": "Auto-Fire Hook",
   "item.archers.auto_fire_hook.description_1": "Automatically releases charged arrow.",
   "item.archers.auto_fire_hook.description_2": "Can be applied to ranged weapons, on an Anvil.",
   "item.ranged_weapon.pull_time": "%1$s sec Pull Time",
 
   "block.archers.archers_workbench": "Archery Artisan Table",
-  "block.archers.archers_workbench.hint": "Workbench for Archery Artisan Villagers."
+  "block.archers.archers_workbench.hint": "Workbench for Archery Artisan Villagers.",
+
+  "item.archers.auto_fire_hook": "Auto-Fire Hook",
+
+  "item.archers.archer_armor_head": "Archer Hood",
+  "item.archers.archer_armor_chest": "Archer Tunic",
+  "item.archers.archer_armor_legs": "Archer Leggings",
+  "item.archers.archer_armor_feet": "Archer Boots",
+
+  "item.archers.marksmen_armor_head": "Marksmen Hood",
+  "item.archers.marksmen_armor_chest": "Marksmen Tunic",
+  "item.archers.marksmen_armor_legs": "Marksmen Leggings",
+  "item.archers.marksmen_armor_feet": "Marksmen Boots",
+
+  "item.archers.composite_longbow": "Composite Longbow",
+  "item.archers.mechanic_shortbow": "Mechanical Shortbow",
+  "item.archers.royal_longbow": "Royal Longbow",
+  "item.archers.rapid_crossbow": "Rapid Crossbow",
+  "item.archers.heavy_crossbow": "Heavy Crossbow"
 }

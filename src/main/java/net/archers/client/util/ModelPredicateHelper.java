@@ -1,4 +1,4 @@
-package net.archers.client;
+package net.archers.client.util;
 
 import net.archers.item.weapon.CustomBow;
 import net.archers.item.weapon.CustomCrossbow;

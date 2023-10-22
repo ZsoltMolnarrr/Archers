@@ -2,6 +2,7 @@ package net.archers;
 
 import net.archers.block.ArcherBlocks;
 import net.archers.item.Group;
+import net.archers.item.armor.Armors;
 import net.archers.item.misc.Misc;
 import net.archers.item.Weapons;
 import net.archers.util.SoundHelper;
@@ -12,6 +13,8 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
+
+import java.util.HashMap;
 
 public class ArchersMod implements ModInitializer {
     public static final String ID = "archers";
@@ -36,6 +39,7 @@ public class ArchersMod implements ModInitializer {
         ArcherBlocks.register();
         Misc.register();
         Weapons.register();
+        Armors.register(new HashMap<>());
     }
 
     private void subscribeEvents() {

@@ -139,18 +139,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "jewelry:copper_ring"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "jewelry:iron_ring"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "jewelry:gold_ring"
-        },
-        {
-          "type": "minecraft:item",
           "name": "jewelry:emerald_necklace"
         }
       ]

@@ -1,6 +1,6 @@
 package net.archers.mixin.client.compat;
 
-import net.archers.client.ArchersTooltip;
+import net.archers.client.util.ArchersTooltip;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.projectile_damage.client.TooltipHelper;

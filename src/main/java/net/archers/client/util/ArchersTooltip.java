@@ -1,4 +1,4 @@
-package net.archers.client;
+package net.archers.client.util;
 
 import com.ibm.icu.text.DecimalFormat;
 import net.archers.item.misc.AutoFireHook;

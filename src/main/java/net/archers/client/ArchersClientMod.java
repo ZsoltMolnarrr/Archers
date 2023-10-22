@@ -1,5 +1,7 @@
 package net.archers.client;
 
+import net.archers.client.util.ArchersTooltip;
+import net.archers.client.util.ModelPredicateHelper;
 import net.archers.item.weapon.CustomBow;
 import net.archers.item.weapon.CustomCrossbow;
 import net.fabricmc.api.ClientModInitializer;
