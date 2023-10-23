@@ -76,7 +76,7 @@ public class BowItemMixin implements CustomRangedWeaponProperties {
     }
 
     /**
-     * Apply power enchantment multiplier
+     * Modify damage bonus of vanilla Power enchantment
      */
     @WrapOperation(method = "onStoppedUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/PersistentProjectileEntity;setDamage(D)V"))
     private void applyPowerEnchantmentMultiplier(
@@ -86,7 +86,6 @@ public class BowItemMixin implements CustomRangedWeaponProperties {
             ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         var configValue = ArchersMod.tweaksConfig.value.power_enchantment_multiplier_per_level;
         if (configValue > 0) {
-            // Replacing Power enchantment bonus due to poorly scaling
             int level = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
             if (level > 0) {
                 projectile.setDamage(projectile.getDamage() * (1 + level * configValue));

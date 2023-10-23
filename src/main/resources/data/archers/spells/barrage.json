@@ -1,0 +1,45 @@
+{
+  "school": "PHYSICAL_RANGED",
+  "range": 0,
+  "learn": {
+    "tier": 3
+  },
+  "cast": {
+    "duration": 0.5,
+    "animation": "spell_engine:one_handed_projectile_charge",
+    "particles": [
+      {
+        "particle_id": "spell_engine:dripping_blood",
+        "shape": "PILLAR",
+        "origin": "CENTER",
+        "count": 1,
+        "min_speed": 0,
+        "max_speed": 0
+      }
+    ]
+  },
+  "casting_animates_ranged_weapon": true,
+  "release": {
+    "target": {
+      "type": "SHOOT_ARROW",
+      "shoot_arrow": {
+        "launch_properties": {
+          "velocity": 3.15,
+          "extra_launch_count": 2
+        }
+      }
+    },
+    "animation": "spell_engine:one_handed_projectile_release",
+    "sound": {
+      "id": "spell_engine:generic_fire_release"
+    }
+  },
+  "arrow_perks": {
+    "bypass_iframes": true,
+    "knockback": 0.5
+  },
+  "cost": {
+    "cooldown_duration": 1,
+    "item_id": "arrow"
+  }
+}

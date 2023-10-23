@@ -19,6 +19,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.spell_engine.api.item.trinket.SpellBooks;
+import net.spell_engine.api.spell.SpellContainer;
 import net.tinyconfig.ConfigManager;
 
 public class ArchersMod implements ModInitializer {
@@ -65,6 +68,7 @@ public class ArchersMod implements ModInitializer {
 
     private void registerItems() {
         itemConfig.refresh();
+        SpellBooks.createAndRegister(new Identifier(ID, "archer"), SpellContainer.ContentType.ARCHERY, Group.KEY);
         ArcherBlocks.register();
         Misc.register();
         Weapons.register(itemConfig.value.weapons);

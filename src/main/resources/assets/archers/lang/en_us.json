@@ -7,7 +7,7 @@
   "block.archers.archers_workbench": "Archery Artisan Table",
   "block.archers.archers_workbench.hint": "Workbench for Archery Artisan Villagers.",
   "entity.minecraft.villager.archery_artisan": "Archery Artisan",
-  "entity.minecraft.villager.paladins:archery_artisan": "Archery Artisan",
+  "entity.minecraft.villager.archers:archery_artisan": "Archery Artisan",
 
   "item.archers.auto_fire_hook": "Auto-Fire Hook",
 
@@ -29,5 +29,18 @@
   "item.archers.netherite_shortbow": "Netherite Shortbow",
   "item.archers.netherite_longbow": "Netherite Longbow",
   "item.archers.netherite_rapid_crossbow": "Netherite Rapid Crossbow",
-  "item.archers.netherite_heavy_crossbow": "Netherite Heavy Crossbow"
+  "item.archers.netherite_heavy_crossbow": "Netherite Heavy Crossbow",
+
+  "item.archers.archer_spell_book": "Archery Manual",
+
+  "spell.archers.power_shot.name": "Power Shot",
+  "spell.archers.power_shot.description": "Shoots a powerful arrow, inflicts the target with Hunter's Mark, increasing its damage taken by 5%%, stacking up to {effect_amplifier} times.",
+  "effect.archers.hunters_mark": "Hunter's Mark",
+
+  "spell.archers.entangling_roots.name": "Entangling Roots",
+  "spell.archers.entangling_roots.description": "Conjures roots to sprout from the ground in the nearby area, slowing down enemies for {duration} seconds.",
+  "effect.archers.entangling_roots": "Entangling Roots",
+
+  "spell.archers.barrage.name": "Barrage",
+  "spell.archers.barrage.description": "Fires a barrage of arrows in quick succession."
 }
