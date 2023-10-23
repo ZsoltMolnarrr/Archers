@@ -1,10 +1,13 @@
 package net.archers.mixin.item;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.archers.ArchersMod;
 import net.archers.item.weapon.CustomRangedWeaponProperties;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -53,6 +56,24 @@ public class CrossbowItemMixin implements CustomRangedWeaponProperties {
         return f;
     }
 
+    @WrapOperation(method = "onStoppedUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/CrossbowItem;getPullProgress(ILnet/minecraft/item/ItemStack;)F"))
+    private float applyServerSide_PullProgress_Tolerance(
+            // Mixin Parameters
+            int useTicks, ItemStack stack, Operation<Float> original,
+            // Context Parameters
+            ItemStack itemStack, World world, LivingEntity user, int remainingUseTicks) {
+        var progress = original.call(useTicks, stack);
+        var tolerance = ArchersMod.tweaksConfig.value.serverside_crossbow_charging_tolerance;
+
+        // Is valid tolerance
+        if (tolerance > 0 && tolerance < 1
+                // Is above tolerance
+                && progress > tolerance) {
+            progress = 1F;
+        }
+        return progress;
+    }
+
     /**
      * Apply custom pull time
      */
@@ -62,13 +83,13 @@ public class CrossbowItemMixin implements CustomRangedWeaponProperties {
         var weapon = (CustomRangedWeaponProperties)item;
         var pullTime = weapon.getCustomPullTime_RPGS();
         if (stack.isOf(Items.CROSSBOW)) {
+            // Using default pull time for vanilla Crossbow as `custom`,
+            // So tweaked Quick Charge pull time multiplier is applied
             pullTime = DEFAULT_PULL_TIME;
         }
         if (pullTime > 0) {
             var quickChargeStacks = EnchantmentHelper.getLevel(Enchantments.QUICK_CHARGE, stack);
-            // Vanilla QuickCharge applies: `- 5 * i;` for `25` total pull time
-            // This equals -20% per level
-            pullTime -= (int) (pullTime * ArchersMod.enchantmentsConfig.value.quick_charge_multiplier_per_level) * quickChargeStacks;
+            pullTime -= (int) (pullTime * ArchersMod.tweaksConfig.value.quick_charge_enchantment_multiplier_per_level) * quickChargeStacks;
             cir.setReturnValue(pullTime);
             cir.cancel();
         }

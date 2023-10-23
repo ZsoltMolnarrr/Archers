@@ -38,8 +38,8 @@ public class ArchersMod implements ModInitializer {
             .sanitize(true)
             .build();
 
-    public static ConfigManager<EnchantmentsConfig> enchantmentsConfig = new ConfigManager<>
-            ("enchantmentsConfig", new EnchantmentsConfig())
+    public static ConfigManager<EnchantmentsConfig> tweaksConfig = new ConfigManager<>
+            ("tweaks", new EnchantmentsConfig())
             .builder()
             .setDirectory(ID)
             .sanitize(true)
@@ -52,7 +52,7 @@ public class ArchersMod implements ModInitializer {
         SoundHelper.registerSounds();
         registerVillages();
         subscribeEvents();
-        enchantmentsConfig.refresh();
+        tweaksConfig.refresh();
     }
 
     private void registerItemGroup() {

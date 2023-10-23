@@ -84,7 +84,7 @@ public class BowItemMixin implements CustomRangedWeaponProperties {
             PersistentProjectileEntity projectile, double damage, Operation<Void> original,
             // Context Parameters
             ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        var configValue = ArchersMod.enchantmentsConfig.value.power_multiplier_per_level;
+        var configValue = ArchersMod.tweaksConfig.value.power_enchantment_multiplier_per_level;
         if (configValue > 0) {
             // Replacing Power enchantment bonus due to poorly scaling
             int level = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
