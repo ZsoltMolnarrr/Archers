@@ -3,10 +3,15 @@ package net.archers.mixin.item;
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.archers.ArchersMod;
 import net.archers.item.weapon.CustomRangedWeaponProperties;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.BowItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -68,5 +73,26 @@ public class BowItemMixin implements CustomRangedWeaponProperties {
             }
         }
         return true;
+    }
+
+    /**
+     * Apply power enchantment multiplier
+     */
+    @WrapOperation(method = "onStoppedUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/PersistentProjectileEntity;setDamage(D)V"))
+    private void applyPowerEnchantmentMultiplier(
+            // Mixin Parameters
+            PersistentProjectileEntity projectile, double damage, Operation<Void> original,
+            // Context Parameters
+            ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+        var configValue = ArchersMod.enchantmentsConfig.value.power_multiplier_per_level;
+        if (configValue > 0) {
+            // Replacing Power enchantment bonus due to poorly scaling
+            int level = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
+            if (level > 0) {
+                projectile.setDamage(projectile.getDamage() * (1 + level * configValue));
+            }
+        } else {
+            original.call();
+        }
     }
 }

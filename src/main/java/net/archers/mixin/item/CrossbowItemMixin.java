@@ -1,11 +1,13 @@
 package net.archers.mixin.item;
 
+import net.archers.ArchersMod;
 import net.archers.item.weapon.CustomRangedWeaponProperties;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -59,15 +61,19 @@ public class CrossbowItemMixin implements CustomRangedWeaponProperties {
         var item = stack.getItem();
         var weapon = (CustomRangedWeaponProperties)item;
         var pullTime = weapon.getCustomPullTime_RPGS();
+        if (stack.isOf(Items.CROSSBOW)) {
+            pullTime = DEFAULT_PULL_TIME;
+        }
         if (pullTime > 0) {
             var quickChargeStacks = EnchantmentHelper.getLevel(Enchantments.QUICK_CHARGE, stack);
             // Vanilla QuickCharge applies: `- 5 * i;` for `25` total pull time
             // This equals -20% per level
-            pullTime -= (int) (pullTime * 0.2F) * quickChargeStacks;
+            pullTime -= (int) (pullTime * ArchersMod.enchantmentsConfig.value.quick_charge_multiplier_per_level) * quickChargeStacks;
             cir.setReturnValue(pullTime);
             cir.cancel();
         }
     }
+
 
     /**
      * Apply custom velocity
@@ -82,4 +88,5 @@ public class CrossbowItemMixin implements CustomRangedWeaponProperties {
         }
     }
     @Shadow @Final private static float DEFAULT_SPEED;
+    private static int DEFAULT_PULL_TIME = 25;
 }

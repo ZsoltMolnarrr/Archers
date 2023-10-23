@@ -3,6 +3,7 @@ package net.archers;
 import net.archers.block.ArcherBlocks;
 import net.archers.config.ArchersItemConfig;
 import net.archers.config.Default;
+import net.archers.config.EnchantmentsConfig;
 import net.archers.config.WorldGenConfig;
 import net.archers.item.Group;
 import net.archers.item.Weapons;
@@ -37,6 +38,13 @@ public class ArchersMod implements ModInitializer {
             .sanitize(true)
             .build();
 
+    public static ConfigManager<EnchantmentsConfig> enchantmentsConfig = new ConfigManager<>
+            ("enchantmentsConfig", new EnchantmentsConfig())
+            .builder()
+            .setDirectory(ID)
+            .sanitize(true)
+            .build();
+
     @Override
     public void onInitialize() {
         registerItemGroup();
@@ -44,6 +52,7 @@ public class ArchersMod implements ModInitializer {
         SoundHelper.registerSounds();
         registerVillages();
         subscribeEvents();
+        enchantmentsConfig.refresh();
     }
 
     private void registerItemGroup() {

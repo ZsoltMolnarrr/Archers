@@ -36,7 +36,6 @@ public class SoundHelper {
         }
 
         Registry.register(Registries.SOUND_EVENT, ArcherWorkbenchBlock.ID, WORKBENCH);
-        System.out.println("Registered sound " + ArcherWorkbenchBlock.ID + " with soundEvent " + WORKBENCH);
     }
 
     public static void playSoundEvent(World world, Entity entity, SoundEvent soundEvent) {
