@@ -3,5 +3,15 @@
     "sounds": [
       "archers:archers_workbench"
     ]
+  },
+  "entangling_roots": {
+    "sounds": [
+      "archers:entangling_roots"
+    ]
+  },
+  "bow_pull": {
+    "sounds": [
+      "archers:bow_pull"
+    ]
   }
 }

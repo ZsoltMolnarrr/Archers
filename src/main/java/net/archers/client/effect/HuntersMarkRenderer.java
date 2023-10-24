@@ -19,6 +19,7 @@ public class HuntersMarkRenderer implements CustomModelStatusEffect.Renderer {
 
     @Override
     public void renderEffect(int amplifier, LivingEntity livingEntity, float delta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light) {
+        if (livingEntity.getHealth() <= 0 || !livingEntity.isAlive()) { return; }
         var itemRenderer = MinecraftClient.getInstance().getItemRenderer();
         var camera =  MinecraftClient.getInstance().gameRenderer.getCamera();
         var direction = camera.getPos().subtract(livingEntity.getPos()).normalize().multiply(livingEntity.getWidth() * 0.5F);

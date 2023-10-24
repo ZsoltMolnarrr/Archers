@@ -7,16 +7,9 @@
   "cast": {
     "duration": 0.5,
     "animation": "spell_engine:one_handed_projectile_charge",
-    "particles": [
-      {
-        "particle_id": "spell_engine:dripping_blood",
-        "shape": "PILLAR",
-        "origin": "CENTER",
-        "count": 1,
-        "min_speed": 0,
-        "max_speed": 0
-      }
-    ]
+    "sound": {
+      "id": "archers:bow_pull"
+    }
   },
   "casting_animates_ranged_weapon": true,
   "release": {

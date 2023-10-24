@@ -4,11 +4,11 @@
     "tier": 2
   },
   "cast": {
-    "duration": 1,
-    "animation": "spell_engine:two_handed_channeling",
+    "duration": 0,
     "particles": []
   },
   "release": {
+    "animation": "spell_engine:one_handed_area_release",
     "target": {
       "type": "CLOUD",
       "cloud": {
@@ -16,8 +16,12 @@
           "radius": 3.0,
           "area": {
             "vertical_range_multiplier": 0.1
+          },
+          "sound": {
+            "id": "archers:entangling_roots"
           }
         },
+        "impact_tick_interval": 15,
         "time_to_live_seconds": 5,
         "client_data": {
           "particles": [
@@ -40,7 +44,7 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "archers:entangling_roots",
-          "duration": 6,
+          "duration": 1,
           "apply_mode": "ADD",
           "apply_limit": {
             "health_base": 50,
@@ -49,9 +53,16 @@
           "show_particles": false
         }
       },
-      "sound": {
-        "id": "wizards:frost_nova_effect_impact"
-      }
+      "particles": [
+        {
+          "particle_id": "falling_spore_blossom",
+          "shape": "SPHERE",
+          "origin": "CENTER",
+          "count": 2.0,
+          "min_speed": 0.1,
+          "max_speed": 0.2
+        }
+      ]
     }
   ]
 }
