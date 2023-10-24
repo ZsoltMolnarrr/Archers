@@ -34,8 +34,8 @@
   "item.archers.archer_spell_book": "Archery Manual",
 
   "spell.archers.power_shot.name": "Power Shot",
-  "spell.archers.power_shot.description": "Shoots a powerful arrow, inflicts the target with Hunter's Mark, increasing its damage taken by 5%%, stacking up to {effect_amplifier} times.",
-  "effect.archers.hunters_mark": "Hunter's Mark",
+  "spell.archers.power_shot.description": "Shoots a powerful arrow, inflicts the target with Hunter's Mark for {effect_duration} seconds, increasing its damage taken by 5%%, stacking up to {effect_amplifier} times.",
+  "effect.archers.hunters_mark": "Marked",
 
   "spell.archers.entangling_roots.name": "Entangling Roots",
   "spell.archers.entangling_roots.description": "Conjures roots to sprout from the ground in the nearby area, slowing down enemies for {duration} seconds.",

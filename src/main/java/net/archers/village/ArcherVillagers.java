@@ -82,12 +82,12 @@ public class ArcherVillagers {
                 Offer.sell(1, new ItemStack(Items.ARROW, 8), 2, 128, 1, 0.01f),
                 Offer.buy(1, new ItemStack(Items.LEATHER, 8), 5, 12, 4, 0.01f),
                 Offer.sell(2, Weapons.composite_longbow.item().getDefaultStack(), 12, 12, 10, 0.1f),
-                Offer.sell(2, Armors.archerArmorSet_T1.head.getDefaultStack(), 15, 12, 13, 0.1f),
+                Offer.sell(2, Armors.archerArmorSet_T1.head.getDefaultStack(), 15, 12, 13, 0.05f),
                 Offer.buy(2, new ItemStack(Items.STRING, 5), 3, 12, 4, 0.01f),
-                Offer.sell(3, Armors.archerArmorSet_T1.feet.getDefaultStack(), 15, 12, 13, 0.1f),
+                Offer.sell(3, Armors.archerArmorSet_T1.feet.getDefaultStack(), 15, 12, 13, 0.05f),
                 Offer.buy(3, new ItemStack(Items.REDSTONE, 12), 3, 12, 5, 0.01f),
-                Offer.sell(3, Armors.archerArmorSet_T1.legs.getDefaultStack(), 15, 12, 13, 0.1f),
-                Offer.sell(4, Armors.archerArmorSet_T1.chest.getDefaultStack(), 15, 12, 13, 0.1f),
+                Offer.sell(3, Armors.archerArmorSet_T1.legs.getDefaultStack(), 15, 12, 13, 0.05f),
+                Offer.sell(4, Armors.archerArmorSet_T1.chest.getDefaultStack(), 15, 12, 13, 0.05f),
                 Offer.sell(4, new ItemStack(Items.SCUTE, 3), 20, 12, 5, 0.01f)
             );
 
@@ -106,28 +106,28 @@ public class ArcherVillagers {
                     40,
                     3,
                     30,
-                    0.1F).create(entity, random)
+                    0F).create(entity, random)
             ));
             factories.add(((entity, random) -> new TradeOffers.SellEnchantedToolFactory(
                     Weapons.mechanic_shortbow.item(),
                     40,
                     3,
                     30,
-                    0.1F).create(entity, random)
+                    0F).create(entity, random)
             ));
             factories.add(((entity, random) -> new TradeOffers.SellEnchantedToolFactory(
                     Weapons.rapid_crossbow.item(),
                     40,
                     3,
                     30,
-                    0.1F).create(entity, random)
+                    0F).create(entity, random)
             ));
             factories.add(((entity, random) -> new TradeOffers.SellEnchantedToolFactory(
                     Weapons.heavy_crossbow.item(),
                     40,
                     3,
                     30,
-                    0.1F).create(entity, random)
+                    0F).create(entity, random)
             ));
         });
     }

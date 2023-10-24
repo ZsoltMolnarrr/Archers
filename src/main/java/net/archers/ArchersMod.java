@@ -5,6 +5,7 @@ import net.archers.config.ArchersItemConfig;
 import net.archers.config.Default;
 import net.archers.config.EnchantmentsConfig;
 import net.archers.config.WorldGenConfig;
+import net.archers.effect.Effects;
 import net.archers.item.Group;
 import net.archers.item.Weapons;
 import net.archers.item.armor.Armors;
@@ -53,6 +54,7 @@ public class ArchersMod implements ModInitializer {
         registerItemGroup();
         registerItems();
         SoundHelper.registerSounds();
+        Effects.register();
         registerVillages();
         subscribeEvents();
         tweaksConfig.refresh();

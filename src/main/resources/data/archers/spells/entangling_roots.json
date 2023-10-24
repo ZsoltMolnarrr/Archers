@@ -39,12 +39,12 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "wizards:frozen",
+          "effect_id": "archers:entangling_roots",
           "duration": 6,
           "apply_mode": "ADD",
           "apply_limit": {
             "health_base": 50,
-            "spell_power_multiplier": 2
+            "spell_power_multiplier": 5
           },
           "show_particles": false
         }

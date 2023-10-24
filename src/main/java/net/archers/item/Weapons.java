@@ -77,7 +77,7 @@ public class Weapons {
 
     public static Entry royal_longbow = bow("royal_longbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.GOLD_INGOT),
-            new RangedConfig(pullTime_longBow, 12, null));
+            new RangedConfig(pullTime_longBow, 10, null));
 
     public static Entry netherite_shortbow = bow("netherite_shortbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
@@ -85,7 +85,7 @@ public class Weapons {
 
     public static Entry netherite_longbow = bow("netherite_longbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
-            new RangedConfig(pullTime_longBow, 14, null));
+            new RangedConfig(pullTime_longBow, 12, null));
 
 
     /**
