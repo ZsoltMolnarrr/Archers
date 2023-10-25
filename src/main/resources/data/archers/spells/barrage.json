@@ -6,7 +6,7 @@
   },
   "cast": {
     "duration": 0.5,
-    "animation": "spell_engine:one_handed_projectile_charge",
+    "animation": "spell_engine:archery_pull",
     "sound": {
       "id": "archers:bow_pull"
     }
@@ -22,7 +22,7 @@
         }
       }
     },
-    "animation": "spell_engine:one_handed_projectile_release"
+    "animation": "spell_engine:archery_release"
   },
   "arrow_perks": {
     "bypass_iframes": true,
