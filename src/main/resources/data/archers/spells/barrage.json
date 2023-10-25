@@ -29,7 +29,7 @@
     "knockback": 0.5
   },
   "cost": {
-    "cooldown_duration": 1,
-    "item_id": "arrow"
+    "item_id": "arrow",
+    "cooldown_duration": 10
   }
 }

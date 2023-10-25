@@ -22,7 +22,7 @@
           }
         },
         "impact_tick_interval": 15,
-        "time_to_live_seconds": 5,
+        "time_to_live_seconds": 8,
         "client_data": {
           "particles": [
             {
@@ -64,5 +64,9 @@
         }
       ]
     }
-  ]
+  ],
+  "cost": {
+    "exhaust": 0.2,
+    "cooldown_duration": 18
+  }
 }
