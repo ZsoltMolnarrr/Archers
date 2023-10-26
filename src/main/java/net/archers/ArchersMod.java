@@ -4,7 +4,6 @@ import net.archers.block.ArcherBlocks;
 import net.archers.config.ArchersItemConfig;
 import net.archers.config.Default;
 import net.archers.config.EnchantmentsConfig;
-import net.archers.config.WorldGenConfig;
 import net.archers.effect.Effects;
 import net.archers.item.Group;
 import net.archers.item.Weapons;
@@ -12,9 +11,8 @@ import net.archers.item.armor.Armors;
 import net.archers.item.misc.Misc;
 import net.archers.util.SoundHelper;
 import net.archers.village.ArcherVillagers;
-import net.archers.village.VillageGeneration;
+import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -35,8 +33,8 @@ public class ArchersMod implements ModInitializer {
             .sanitize(true)
             .build();
 
-    public static ConfigManager<WorldGenConfig> worldGenConfig = new ConfigManager<>
-            ("world_gen", Default.worldGen)
+    public static ConfigManager<StructurePoolConfig> villagesConfig = new ConfigManager<>
+            ("villages", Default.villages)
             .builder()
             .setDirectory(ID)
             .sanitize(true)
@@ -79,9 +77,8 @@ public class ArchersMod implements ModInitializer {
     }
 
     private void registerVillages() {
-        worldGenConfig.refresh();
+        villagesConfig.refresh();
         ArcherVillagers.register();
-        ServerLifecycleEvents.SERVER_STARTING.register(VillageGeneration::init);
     }
 
     private void subscribeEvents() {
