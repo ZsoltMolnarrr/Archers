@@ -30,6 +30,7 @@
   },
   "cost": {
     "item_id": "arrow",
+    "consume_item": false,
     "cooldown_duration": 10
   }
 }

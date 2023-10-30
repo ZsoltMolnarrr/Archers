@@ -38,7 +38,7 @@
   "effect.archers.hunters_mark": "Marked",
 
   "spell.archers.entangling_roots.name": "Entangling Roots",
-  "spell.archers.entangling_roots.description": "Conjures roots to sprout from the ground in the nearby area, slowing down enemies for {duration} seconds.",
+  "spell.archers.entangling_roots.description": "Conjures roots to sprout from the ground in the nearby area, slowing down enemies for {cloud_duration} seconds.",
   "effect.archers.entangling_roots": "Entangling Roots",
 
   "spell.archers.barrage.name": "Barrage",

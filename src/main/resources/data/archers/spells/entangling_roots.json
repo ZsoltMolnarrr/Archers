@@ -13,9 +13,9 @@
       "type": "CLOUD",
       "cloud": {
         "volume": {
-          "radius": 3.0,
+          "radius": 3.5,
           "area": {
-            "vertical_range_multiplier": 0.1
+            "vertical_range_multiplier": 0.3
           },
           "sound": {
             "id": "archers:entangling_roots"
@@ -29,7 +29,7 @@
               "particle_id": "spell_engine:roots",
               "shape": "PILLAR",
               "origin": "FEET",
-              "count": 5.0,
+              "count": 2.0,
               "min_speed": 0.0,
               "max_speed": 0.0
             }
