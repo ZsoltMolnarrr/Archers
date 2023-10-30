@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "archers:item/marksmen_armor_feet"
+    "layer0": "archers:item/ranger_armor_legs"
   }
 }

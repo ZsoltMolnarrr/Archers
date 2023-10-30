@@ -16,10 +16,10 @@
   "item.archers.archer_armor_legs": "Archer Leggings",
   "item.archers.archer_armor_feet": "Archer Boots",
 
-  "item.archers.marksmen_armor_head": "Marksmen Hood",
-  "item.archers.marksmen_armor_chest": "Marksmen Tunic",
-  "item.archers.marksmen_armor_legs": "Marksmen Leggings",
-  "item.archers.marksmen_armor_feet": "Marksmen Boots",
+  "item.archers.ranger_armor_head": "Ranger Hood",
+  "item.archers.ranger_armor_chest": "Ranger Tunic",
+  "item.archers.ranger_armor_legs": "Ranger Leggings",
+  "item.archers.ranger_armor_feet": "Ranger Boots",
 
   "item.archers.composite_longbow": "Composite Longbow",
   "item.archers.mechanic_shortbow": "Mechanical Shortbow",

@@ -64,7 +64,7 @@ public class Armors {
     public static final Armor.Set archerArmorSet_T2 =
             create(
                     new Armor.CustomMaterial(
-                            "marksmen_armor",
+                            "ranger_armor",
                             20,
                             10,
                             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
