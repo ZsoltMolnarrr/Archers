@@ -36,10 +36,10 @@ dependencies {
     include(modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}"))
 
     modImplementation("mod.azure.azurelibarmor:azurelibarmor-fabric-${project.azure_mc_version}:${project.azure_lib_version}")
-//    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}")
+    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}")
     modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-fabric")
     modImplementation("maven.modrinth:projectile-damage-attribute:${project.projectile_version}-fabric")
-    modImplementation(files("run/mods/dev/spell_engine-${project.spell_engine_version}.jar"))
+//    modImplementation(files("run/mods/dev/spell_engine-${project.spell_engine_version}.jar"))
 //    modImplementation(files("run/mods/dev/spell_power-fabric-${project.spell_power_version}.jar"))
 }
 
