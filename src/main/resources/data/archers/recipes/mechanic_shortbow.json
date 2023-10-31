@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "X": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    " IX",
+    "R X",
+    " IX"
+  ],
+  "result": {
+    "item": "archers:mechanic_shortbow"
+  },
+  "show_notification": true
+}

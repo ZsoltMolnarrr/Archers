@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "$": {
+      "item": "minecraft:tripwire_hook"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "~": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "#D#",
+    "~$~",
+    " # "
+  ],
+  "result": {
+    "item": "archers:heavy_crossbow"
+  },
+  "show_notification": true
+}

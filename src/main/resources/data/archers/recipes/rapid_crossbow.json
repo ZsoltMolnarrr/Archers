@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "$": {
+      "item": "minecraft:tripwire_hook"
+    },
+    "~": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "SRS",
+    "~$~",
+    " I "
+  ],
+  "result": {
+    "item": "archers:rapid_crossbow"
+  },
+  "show_notification": true
+}

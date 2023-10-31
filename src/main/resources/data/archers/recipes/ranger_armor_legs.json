@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": {
+      "item": "minecraft:scute"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "L L",
+    "L L"
+  ],
+  "result": {
+    "item": "archers:ranger_armor_legs"
+  },
+  "show_notification": true
+}
