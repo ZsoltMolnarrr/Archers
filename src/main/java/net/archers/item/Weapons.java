@@ -69,11 +69,11 @@ public class Weapons {
 
     public static Entry composite_longbow = bow("composite_longbow", durabilityTier1,
             () -> Ingredient.ofItems(Items.BONE),
-            new RangedConfig(pullTime_longBow, 9, null));
+            new RangedConfig(pullTime_longBow, 8, null));
 
     public static Entry mechanic_shortbow = bow("mechanic_shortbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.REDSTONE),
-            new RangedConfig(pullTime_shortBow, 6.5F, null));
+            new RangedConfig(pullTime_shortBow, 8F, null));
 
     public static Entry royal_longbow = bow("royal_longbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.GOLD_INGOT),
@@ -81,7 +81,7 @@ public class Weapons {
 
     public static Entry netherite_shortbow = bow("netherite_shortbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
-            new RangedConfig(pullTime_shortBow, 7, null));
+            new RangedConfig(pullTime_shortBow, 9, null));
 
     public static Entry netherite_longbow = bow("netherite_longbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
@@ -98,7 +98,7 @@ public class Weapons {
 
     public static Entry heavy_crossbow = crossbow("heavy_crossbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.DIAMOND),
-            new RangedConfig(pullTime_heavyCrossbow, 14, null));
+            new RangedConfig(pullTime_heavyCrossbow, 13, null));
 
     public static Entry netherite_rapid_crossbow = crossbow("netherite_rapid_crossbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
@@ -106,7 +106,7 @@ public class Weapons {
 
     public static Entry netherite_heavy_crossbow = crossbow("netherite_heavy_crossbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
-            new RangedConfig(pullTime_heavyCrossbow, 16, null));
+            new RangedConfig(pullTime_heavyCrossbow, 15, null));
 
 
     public static void register(Map<String, RangedConfig> configs) {
