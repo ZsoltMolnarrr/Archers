@@ -79,18 +79,19 @@ public class CrossbowItemMixin implements CustomRangedWeaponProperties {
     @Inject(method = "getPullTime", at = @At("HEAD"), cancellable = true)
     private static void applyCustomPullTime_SpellEngine(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
         var item = stack.getItem();
-        var weapon = (CustomRangedWeaponProperties)item;
-        var pullTime = weapon.getCustomPullTime_RPGS();
-        if (stack.isOf(Items.CROSSBOW)) {
-            // Using default pull time for vanilla Crossbow as `custom`,
-            // So tweaked Quick Charge pull time multiplier is applied
-            pullTime = DEFAULT_PULL_TIME;
-        }
-        if (pullTime > 0) {
-            var quickChargeStacks = EnchantmentHelper.getLevel(Enchantments.QUICK_CHARGE, stack);
-            pullTime -= (int) (pullTime * ArchersMod.tweaksConfig.value.quick_charge_enchantment_multiplier_per_level) * quickChargeStacks;
-            cir.setReturnValue(pullTime);
-            cir.cancel();
+        if (item instanceof CustomRangedWeaponProperties weapon) {
+            var pullTime = weapon.getCustomPullTime_RPGS();
+            if (stack.isOf(Items.CROSSBOW)) {
+                // Using default pull time for vanilla Crossbow as `custom`,
+                // So tweaked Quick Charge pull time multiplier is applied
+                pullTime = DEFAULT_PULL_TIME;
+            }
+            if (pullTime > 0) {
+                var quickChargeStacks = EnchantmentHelper.getLevel(Enchantments.QUICK_CHARGE, stack);
+                pullTime -= (int) (pullTime * ArchersMod.tweaksConfig.value.quick_charge_enchantment_multiplier_per_level) * quickChargeStacks;
+                cir.setReturnValue(pullTime);
+                cir.cancel();
+            }
         }
     }
 
@@ -100,12 +101,14 @@ public class CrossbowItemMixin implements CustomRangedWeaponProperties {
      */
     @ModifyVariable(method = "shoot", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private static float applyCustomVelocity_SpellEngine(float speed, World world, LivingEntity shooter, Hand hand, ItemStack crossbow, ItemStack projectile, float soundPitch, boolean creative, float speed1, float divergence, float simulated) {
-        var customVelocity = ((CustomRangedWeaponProperties)crossbow.getItem()).getCustomVelocity_RPGS();
-        if (customVelocity > 0) {
-            return speed * (customVelocity / DEFAULT_SPEED);
-        } else {
-            return speed;
+        var item = crossbow.getItem();
+        if (item instanceof CustomRangedWeaponProperties weapon) {
+            var customVelocity = ((CustomRangedWeaponProperties)crossbow.getItem()).getCustomVelocity_RPGS();
+            if (customVelocity > 0) {
+                return speed * (customVelocity / DEFAULT_SPEED);
+            }
         }
+        return speed;
     }
     @Shadow @Final private static float DEFAULT_SPEED;
     private static int DEFAULT_PULL_TIME = 25;
