@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import net.archers.ArchersMod;
 import net.archers.block.ArcherBlocks;
 import net.archers.item.Weapons;
-import net.archers.item.armor.Armors;
+import net.archers.item.Armors;
 import net.archers.util.SoundHelper;
 import net.fabric_extras.structure_pool.api.StructurePoolAPI;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;

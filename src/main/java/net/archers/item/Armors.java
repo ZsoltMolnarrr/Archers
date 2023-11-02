@@ -1,7 +1,8 @@
-package net.archers.item.armor;
+package net.archers.item;
 
 import net.archers.ArchersMod;
 import net.archers.item.Group;
+import net.archers.item.armor.ArcherArmor;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;

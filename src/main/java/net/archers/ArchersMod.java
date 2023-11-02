@@ -5,21 +5,25 @@ import net.archers.config.ArchersItemConfig;
 import net.archers.config.Default;
 import net.archers.config.EnchantmentsConfig;
 import net.archers.effect.Effects;
+import net.archers.item.ArcherItems;
 import net.archers.item.Group;
 import net.archers.item.Weapons;
-import net.archers.item.armor.Armors;
+import net.archers.item.Armors;
 import net.archers.item.misc.Misc;
 import net.archers.util.SoundHelper;
 import net.archers.village.ArcherVillagers;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.item.trinket.SpellBooks;
+import net.spell_engine.api.loot.LootConfig;
+import net.spell_engine.api.loot.LootHelper;
 import net.spell_engine.api.spell.SpellContainer;
 import net.tinyconfig.ConfigManager;
 
@@ -47,15 +51,23 @@ public class ArchersMod implements ModInitializer {
             .sanitize(true)
             .build();
 
+    public static ConfigManager<LootConfig> lootConfig = new ConfigManager<>
+            ("loot_v2", Default.lootConfig)
+            .builder()
+            .setDirectory(ID)
+            .sanitize(true)
+            .constrain(LootConfig::constrainValues)
+            .build();
+
     @Override
     public void onInitialize() {
+        tweaksConfig.refresh();
         registerItemGroup();
         registerItems();
         SoundHelper.registerSounds();
         Effects.register();
         registerVillages();
         subscribeEvents();
-        tweaksConfig.refresh();
     }
 
     private void registerItemGroup() {
@@ -82,5 +94,8 @@ public class ArchersMod implements ModInitializer {
     }
 
     private void subscribeEvents() {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            LootHelper.configure(id, tableBuilder, ArchersMod.lootConfig.value, ArcherItems.entries);
+        });
     }
 }

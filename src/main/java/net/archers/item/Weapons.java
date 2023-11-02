@@ -20,11 +20,11 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class Weapons {
-    public static final ArrayList<Entry> all = new ArrayList<>();
+    public static final ArrayList<Entry> entries = new ArrayList<>();
     public record Entry(Identifier id, Item item, RangedConfig defaults) { }
     private static Entry add(Identifier id, Item item, RangedConfig defaults) {
         var entry = new Entry(id, item, defaults);
-        all.add(entry);
+        entries.add(entry);
         return entry;
     }
 
@@ -110,7 +110,7 @@ public class Weapons {
 
 
     public static void register(Map<String, RangedConfig> configs) {
-        for (var entry: all) {
+        for (var entry: entries) {
             var config = configs.get(entry.id.toString());
             if (config == null) {
                 config = entry.defaults;
@@ -119,7 +119,7 @@ public class Weapons {
             Registry.register(Registries.ITEM, entry.id, entry.item);
         }
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-            for (var entry: all) {
+            for (var entry: entries) {
                 content.add(entry.item);
             }
         });
