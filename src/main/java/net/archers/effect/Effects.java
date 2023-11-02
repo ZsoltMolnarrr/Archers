@@ -27,7 +27,7 @@ public class Effects {
 
         Synchronized.configure(entanglingRoots, true);
 
-        int rawId = 730;
+        int rawId = 743;
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(ArchersMod.ID, "hunters_mark").toString(), huntersMark);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(ArchersMod.ID, "entangling_roots").toString(), entanglingRoots);
     }
