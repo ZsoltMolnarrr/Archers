@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "archers:royal_longbow"
+    },
+    "title": {
+      "translate": "advancements.rpg_classes.archer_mastery.title"
+    },
+    "description": {
+      "translate": "advancements.rpg_classes.archer_mastery.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "rpg_classes:obtain_arrow",
+  "criteria": {
+    "cast": {
+      "trigger": "spell_engine:spell_binding",
+      "conditions": {
+        "complete": true,
+        "spell_pool": "archers:archer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cast"
+    ]
+  ]
+}

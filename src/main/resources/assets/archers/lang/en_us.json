@@ -42,5 +42,10 @@
   "effect.archers.entangling_roots": "Entangling Roots",
 
   "spell.archers.barrage.name": "Barrage",
-  "spell.archers.barrage.description": "Fires a barrage of arrows in quick succession."
+  "spell.archers.barrage.description": "Fires a barrage of arrows in quick succession.",
+
+  "advancements.rpg_classes.obtain_arrow.title": "Path of Archer",
+  "advancements.rpg_classes.obtain_arrow.description": "Obtain an Arrow",
+  "advancements.rpg_classes.archer_mastery.title": "Ballistics Expert",
+  "advancements.rpg_classes.archer_mastery.description": "Complete the full Archery Manual"
 }
