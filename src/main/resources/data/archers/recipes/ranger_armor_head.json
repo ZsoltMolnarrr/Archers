@@ -7,10 +7,13 @@
     },
     "L": {
       "item": "minecraft:leather"
+    },
+    "R": {
+      "item": "minecraft:rabbit_hide"
     }
   },
   "pattern": [
-    "SSS",
+    "SRS",
     "L L"
   ],
   "result": {

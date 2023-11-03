@@ -7,12 +7,15 @@
     },
     "L": {
       "item": "minecraft:leather"
+    },
+    "R": {
+      "item": "minecraft:rabbit_hide"
     }
   },
   "pattern": [
     "SSS",
     "L L",
-    "L L"
+    "R R"
   ],
   "result": {
     "item": "archers:ranger_armor_legs"
