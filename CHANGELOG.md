@@ -1,3 +1,7 @@
+# 1.0.3
+
+- Texture bug Archery Artisan Table #3
+
 # 1.0.2
 
 - Add missing textures
