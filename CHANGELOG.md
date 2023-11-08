@@ -1,3 +1,7 @@
+# 1.0.2
+
+- Add missing textures
+
 # 1.0.1
 
 - Add missing assets and mod icon
