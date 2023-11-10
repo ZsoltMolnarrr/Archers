@@ -1,9 +1,10 @@
 # 1.0.4
 
 - Reduce damage done by Barrage skill
-- Improve Russian translation, thanks to kel39eek66 #7
+- Fix Forge compatibility (via Sinytra Connector), by lowering some mixin requirements
 - Fix Z fighting on Archery Artisan Table block model
 - Fix Ranger Armor model clipping into some player skins
+- Improve Russian translation, thanks to kel39eek66 #7
 
 # 1.0.3
 

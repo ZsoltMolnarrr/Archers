@@ -59,6 +59,7 @@ public class HeldItemRendererMixin {
 
     @WrapOperation(
             method = "renderFirstPersonItem",
+            require = 0, // For Sinytra Connector, Forge replaces the `isOf` check with `instanceof`
             at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z")
     )
     private static boolean renderFirstPersonItem_ItemStack_IsOf_Crossbow(ItemStack itemStack, Item item, Operation<Boolean> original) {
