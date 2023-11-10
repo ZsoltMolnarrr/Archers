@@ -1,6 +1,8 @@
 # 1.0.4
 
 - Reduce damage done by Barrage skill
+- Fix Z fighting on Archery Artisan Table block model
+- Improve Russian translation, thanks to kel39eek66 #7
 
 # 1.0.3
 
