@@ -1,8 +1,9 @@
 # 1.0.4
 
 - Reduce damage done by Barrage skill
-- Fix Z fighting on Archery Artisan Table block model
 - Improve Russian translation, thanks to kel39eek66 #7
+- Fix Z fighting on Archery Artisan Table block model
+- Fix Ranger Armor model clipping into some player skins
 
 # 1.0.3
 
