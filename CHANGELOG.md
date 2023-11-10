@@ -1,3 +1,7 @@
+# 1.0.4
+
+- Reduce damage done by Barrage skill
+
 # 1.0.3
 
 - Texture bug Archery Artisan Table #3
