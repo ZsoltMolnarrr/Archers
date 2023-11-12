@@ -1,5 +1,6 @@
 # 1.0.5
 
+- Add basic, craftable, two-handed spears, so Archers can defend themselves in melee
 - Slightly increase damage done by Barrage skill
 - Disable Spell Power related enchantments for archer equipment
 - Remove false range tooltips from skills

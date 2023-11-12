@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "P": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "  P",
+    " # ",
+    "#  "
+  ],
+  "result": {
+    "item": "archers:golden_spear"
+  },
+  "show_notification": true
+}
