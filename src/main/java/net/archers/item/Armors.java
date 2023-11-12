@@ -59,7 +59,8 @@ public class Armors {
                     new ArcherArmor(material, ArmorItem.Type.BOOTS, new Item.Settings())
             ))
             .put(entries)
-            .armorSet();
+            .armorSet()
+            .allowSpellPowerEnchanting(false);
 
 
     public static final Armor.Set archerArmorSet_T2 =
@@ -89,7 +90,8 @@ public class Armors {
                     new ArcherArmor(material, ArmorItem.Type.BOOTS, new Item.Settings())
             ))
             .put(entries)
-            .armorSet();
+            .armorSet()
+            .allowSpellPowerEnchanting(false);
 
     public static void register(Map<String, ItemConfig.ArmorSet> configs) {
         Armor.register(configs, entries, Group.KEY);

@@ -1,5 +1,6 @@
 {
   "school": "PHYSICAL_RANGED",
+  "range": 0,
   "learn": {
     "tier": 1
   },

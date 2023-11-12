@@ -1,3 +1,9 @@
+# 1.0.5
+
+- Slightly increase damage done by Barrage skill
+- Disable Spell Power related enchantments for archer equipment
+- Remove false range tooltips from skills
+
 # 1.0.4
 
 - Reduce damage done by Barrage skill
