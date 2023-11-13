@@ -1,25 +1,31 @@
 {
-  "itemGroup.archers.general": "Лучники",
+  "itemGroup.archers.general": "Archers",
   "item.archers.auto_fire_hook.description_1": "При полном заряде выпускает снаряд",
   "item.archers.auto_fire_hook.description_2": "Устанавливается на дальнобойное оружие, на наковальне",
   "item.ranged_weapon.pull_time": "Скорость заряда: %1$s",
 
   "block.archers.archers_workbench": "Стол ремесленника",
-  "block.archers.archers_workbench.hint": "Рабочее место для лучника-ремесленника",
+  "block.archers.archers_workbench.hint": "Рабочее место лучника-ремесленника",
   "entity.minecraft.villager.archery_artisan": "Лучник-ремесленник",
   "entity.minecraft.villager.archers:archery_artisan": "Лучник-ремесленник",
 
   "item.archers.auto_fire_hook": "Модуль автострельбы",
 
+  "item.archers.flint_spear": "Кремниевое копьё",
+  "item.archers.iron_spear": "Железное копьё",
+  "item.archers.golden_spear": "Золотое копьё",
+  "item.archers.diamond_spear": "Алмазное копьё",
+  "item.archers.netherite_spear": "Незеритовое копьё",
+
   "item.archers.archer_armor_head": "Капюшон лучника",
   "item.archers.archer_armor_chest": "Куртка лучника",
-  "item.archers.archer_armor_legs": "Поножи лучника",
+  "item.archers.archer_armor_legs": "Штаны лучника",
   "item.archers.archer_armor_feet": "Ботинки лучника",
 
-  "item.archers.ranger_armor_head": "Капюшон рейнджера",
-  "item.archers.ranger_armor_chest": "Куртка рейнджера",
-  "item.archers.ranger_armor_legs": "Поножи рейнджера",
-  "item.archers.ranger_armor_feet": "Ботинки рейнджера",
+  "item.archers.ranger_armor_head": "Капюшон охотника",
+  "item.archers.ranger_armor_chest": "Куртка охотника",
+  "item.archers.ranger_armor_legs": "Штаны охотника",
+  "item.archers.ranger_armor_feet": "Ботинки охотника",
 
   "item.archers.composite_longbow": "Композитный большой лук",
   "item.archers.mechanic_shortbow": "Механический короткий лук",
@@ -31,7 +37,7 @@
   "item.archers.netherite_rapid_crossbow": "Незеритовый скоростной арбалет",
   "item.archers.netherite_heavy_crossbow": "Незеритовый тяжёлый арбалет",
 
-  "item.archers.archer_spell_book": "Руководство лучника",
+  "item.archers.archer_spell_book": "Пособие лучника",
 
   "spell.archers.power_shot.name": "Мощный выстрел",
   "spell.archers.power_shot.description": "Производит мощный выстрел снаряда и накладывает на цель метку длительностью в {effect_duration} сек., тем самым повышая её урон на 5%%. Действие эффекта может складываться до {effect_amplifier} раз",
@@ -41,11 +47,11 @@
   "spell.archers.entangling_roots.description": "Наделяет область растущими из-под земли корнями, замедляя врагов на {cloud_duration} сек.",
   "effect.archers.entangling_roots": "Заросшие корни",
 
-  "spell.archers.barrage.name": "Обстрел",
-  "spell.archers.barrage.description": "Производит выстрел снарядами очередью",
+  "spell.archers.barrage.name": "Шквал",
+  "spell.archers.barrage.description": "Производит серию выстрелов",
 
   "advancements.rpg_classes.obtain_arrow.title": "Время охоты",
   "advancements.rpg_classes.obtain_arrow.description": "Получите стрелу",
   "advancements.rpg_classes.archer_mastery.title": "Выдающийся охотник",
-  "advancements.rpg_classes.archer_mastery.description": "Полностью заполните руководство лучника"
+  "advancements.rpg_classes.archer_mastery.description": "Заполучите все умения лучника"
 }
