@@ -9,7 +9,10 @@ public class ArcherItems {
     public static final HashMap<String, Item> entries;
     static {
         entries = new HashMap<>();
-        for(var weaponEntry: Weapons.entries) {
+        for(var weaponEntry: Weapons.rangedEntries) {
+            entries.put(weaponEntry.id().toString(), weaponEntry.item());
+        }
+        for(var weaponEntry: Weapons.meleeEntries) {
             entries.put(weaponEntry.id().toString(), weaponEntry.item());
         }
         for(var entry: Armors.entries) {

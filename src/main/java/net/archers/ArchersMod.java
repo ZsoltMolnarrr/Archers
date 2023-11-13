@@ -72,7 +72,7 @@ public class ArchersMod implements ModInitializer {
 
     private void registerItemGroup() {
         Group.ARCHERS = FabricItemGroup.builder()
-                .icon(() -> new ItemStack(Armors.archerArmorSet_T1.head.asItem()))
+                .icon(() -> new ItemStack(Armors.archerArmorSet_T2.head.asItem()))
                 .displayName(Text.translatable("itemGroup." + ID + ".general"))
                 .build();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS);
@@ -83,7 +83,7 @@ public class ArchersMod implements ModInitializer {
         SpellBooks.createAndRegister(new Identifier(ID, "archer"), SpellContainer.ContentType.ARCHERY, Group.KEY);
         ArcherBlocks.register();
         Misc.register();
-        Weapons.register(itemConfig.value.weapons);
+        Weapons.register(itemConfig.value.ranged_weapons, itemConfig.value.melee_weapons);
         Armors.register(itemConfig.value.armor_sets);
         itemConfig.save();
     }

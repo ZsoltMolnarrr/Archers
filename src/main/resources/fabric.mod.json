@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "archers",
   "version": "${version}",
-  "name": "Archers",
+  "name": "Archers (RPG Series)",
   "description": "Draw, Release, Conquer - Master the art of Archery!",
   "authors": [
     "Daedelus"

@@ -5,6 +5,7 @@ import net.archers.config.RangedConfig;
 import net.archers.item.weapon.CustomBow;
 import net.archers.item.weapon.CustomCrossbow;
 import net.archers.item.weapon.CustomRangedWeaponProperties;
+import net.archers.item.weapon.CustomWeaponItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
@@ -14,32 +15,75 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.spell_engine.api.item.ItemConfig;
+import net.spell_engine.api.item.weapon.Weapon;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.function.Supplier;
 
 public class Weapons {
-    public static final ArrayList<Entry> entries = new ArrayList<>();
-    public record Entry(Identifier id, Item item, RangedConfig defaults) { }
-    private static Entry add(Identifier id, Item item, RangedConfig defaults) {
-        var entry = new Entry(id, item, defaults);
-        entries.add(entry);
+    public static final ArrayList<RangedEntry> rangedEntries = new ArrayList<>();
+    public static final ArrayList<Weapon.Entry> meleeEntries = new ArrayList<>();
+    public record RangedEntry(Identifier id, Item item, RangedConfig defaults) { }
+
+    /**
+     * MELEE WEAPONS
+     */
+
+    private static Weapon.Entry addMelee(String requiredMod, String name, Weapon.CustomMaterial material, Item item, ItemConfig.Weapon defaults) {
+        var entry = new Weapon.Entry(ArchersMod.ID, name, material, item, defaults, null);
+        if (entry.isRequiredModInstalled()) {
+            // entries.add(entry);
+            meleeEntries.add(entry);
+        }
         return entry;
     }
 
-    private static Entry bow(String name, int durability, Supplier<Ingredient> repairIngredientSupplier, RangedConfig defaults) {
+    private static Weapon.Entry spear(String name, Weapon.CustomMaterial material, float damage) {
+        return spear(null, name, material, damage);
+    }
+
+    private static Weapon.Entry spear(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
+        var settings = new Item.Settings();
+        var item = new CustomWeaponItem(material, settings);
+        return addMelee(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -3F));
+    }
+    
+    public static final Weapon.Entry flint_spear = spear("flint_spear",
+            Weapon.CustomMaterial.matching(ToolMaterials.STONE, () -> Ingredient.ofItems(Items.FLINT)), 4F);
+    public static final Weapon.Entry iron_spear = spear("iron_spear",
+            Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.IRON_INGOT)), 5F);
+    public static final Weapon.Entry golden_spear = spear("golden_spear",
+            Weapon.CustomMaterial.matching(ToolMaterials.GOLD, () -> Ingredient.ofItems(Items.GOLD_INGOT)), 3F);
+    public static final Weapon.Entry diamond_spear = spear("diamond_spear",
+            Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 6F);
+    public static final Weapon.Entry netherite_spear = spear("netherite_spear",
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 7F);
+
+
+    /**
+     * RANGED WEAPONS
+     */
+
+    private static RangedEntry addRanged(Identifier id, Item item, RangedConfig defaults) {
+        var entry = new RangedEntry(id, item, defaults);
+        rangedEntries.add(entry);
+        return entry;
+    }
+
+    private static RangedEntry bow(String name, int durability, Supplier<Ingredient> repairIngredientSupplier, RangedConfig defaults) {
         var settings = new FabricItemSettings().maxDamage(durability);
         var item = new CustomBow(settings, repairIngredientSupplier);
         ((CustomRangedWeaponProperties)item).configure(defaults);
-        return add(new Identifier(ArchersMod.ID, name), item, defaults);
+        return addRanged(new Identifier(ArchersMod.ID, name), item, defaults);
     }
 
-    private static Entry crossbow(String name, int durability, Supplier<Ingredient> repairIngredientSupplier, RangedConfig defaults) {
+    private static RangedEntry crossbow(String name, int durability, Supplier<Ingredient> repairIngredientSupplier, RangedConfig defaults) {
         var settings = new FabricItemSettings().maxDamage(durability);
         var item = new CustomCrossbow(settings, repairIngredientSupplier);
         ((CustomRangedWeaponProperties)item).configure(defaults);
-        return add(new Identifier(ArchersMod.ID, name), item, defaults);
+        return addRanged(new Identifier(ArchersMod.ID, name), item, defaults);
     }
 
     private static final int durabilityTier0 = 384;
@@ -67,23 +111,23 @@ public class Weapons {
      * BOWS
      */
 
-    public static Entry composite_longbow = bow("composite_longbow", durabilityTier1,
+    public static RangedEntry composite_longbow = bow("composite_longbow", durabilityTier1,
             () -> Ingredient.ofItems(Items.BONE),
             new RangedConfig(pullTime_longBow, 8, null));
 
-    public static Entry mechanic_shortbow = bow("mechanic_shortbow", durabilityTier2,
+    public static RangedEntry mechanic_shortbow = bow("mechanic_shortbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.REDSTONE),
             new RangedConfig(pullTime_shortBow, 8F, null));
 
-    public static Entry royal_longbow = bow("royal_longbow", durabilityTier2,
+    public static RangedEntry royal_longbow = bow("royal_longbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.GOLD_INGOT),
             new RangedConfig(pullTime_longBow, 10, null));
 
-    public static Entry netherite_shortbow = bow("netherite_shortbow", durabilityTier3,
+    public static RangedEntry netherite_shortbow = bow("netherite_shortbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
             new RangedConfig(pullTime_shortBow, 9, null));
 
-    public static Entry netherite_longbow = bow("netherite_longbow", durabilityTier3,
+    public static RangedEntry netherite_longbow = bow("netherite_longbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
             new RangedConfig(pullTime_longBow, 12, null));
 
@@ -92,34 +136,36 @@ public class Weapons {
      * CROSSBOWS
      */
 
-    public static Entry rapid_crossbow = crossbow("rapid_crossbow", durabilityTier2,
+    public static RangedEntry rapid_crossbow = crossbow("rapid_crossbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.REDSTONE),
             new RangedConfig(pullTime_rapidCrossbow, 8.5F, null));
 
-    public static Entry heavy_crossbow = crossbow("heavy_crossbow", durabilityTier2,
+    public static RangedEntry heavy_crossbow = crossbow("heavy_crossbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.DIAMOND),
             new RangedConfig(pullTime_heavyCrossbow, 13, null));
 
-    public static Entry netherite_rapid_crossbow = crossbow("netherite_rapid_crossbow", durabilityTier3,
+    public static RangedEntry netherite_rapid_crossbow = crossbow("netherite_rapid_crossbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
             new RangedConfig(pullTime_rapidCrossbow, 9.5F, null));
 
-    public static Entry netherite_heavy_crossbow = crossbow("netherite_heavy_crossbow", durabilityTier3,
+    public static RangedEntry netherite_heavy_crossbow = crossbow("netherite_heavy_crossbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
             new RangedConfig(pullTime_heavyCrossbow, 15, null));
 
 
-    public static void register(Map<String, RangedConfig> configs) {
-        for (var entry: entries) {
-            var config = configs.get(entry.id.toString());
+    public static void register(Map<String, RangedConfig> rangedConfig, Map<String, ItemConfig.Weapon> meleeConfig) {
+        Weapon.register(meleeConfig, meleeEntries, Group.KEY);
+        for (var entry: rangedEntries) {
+            var config = rangedConfig.get(entry.id.toString());
             if (config == null) {
                 config = entry.defaults;
-                configs.put(entry.id.toString(), config);
+                rangedConfig.put(entry.id.toString(), config);
             }
+            ((CustomRangedWeaponProperties)entry.item).configure(config);
             Registry.register(Registries.ITEM, entry.id, entry.item);
         }
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-            for (var entry: entries) {
+            for (var entry: rangedEntries) {
                 content.add(entry.item);
             }
         });
