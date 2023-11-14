@@ -1,5 +1,7 @@
 # 1.0.6
 
+- Add item tag: `archers:spears`
+- Update Italian translation, thanks to Zano1999 #10
 - Update Russian translation, thanks to skel39eek66 #9
 
 # 1.0.5
