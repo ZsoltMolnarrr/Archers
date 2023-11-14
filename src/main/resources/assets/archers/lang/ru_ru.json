@@ -1,5 +1,5 @@
 {
-  "itemGroup.archers.general": "Лучники",
+  "itemGroup.archers.general": "Archers",
   "item.archers.auto_fire_hook.description_1": "При полном заряде выпускает снаряд",
   "item.archers.auto_fire_hook.description_2": "Устанавливается на дальнобойное оружие, на наковальне",
   "item.ranged_weapon.pull_time": "Скорость заряда: %1$s",
@@ -10,6 +10,12 @@
   "entity.minecraft.villager.archers:archery_artisan": "Лучник-ремесленник",
 
   "item.archers.auto_fire_hook": "Модуль автострельбы",
+
+  "item.archers.flint_spear": "Кремниевое копьё",
+  "item.archers.iron_spear": "Железное копьё",
+  "item.archers.golden_spear": "Золотое копьё",
+  "item.archers.diamond_spear": "Алмазное копьё",
+  "item.archers.netherite_spear": "Незеритовое копьё",
 
   "item.archers.archer_armor_head": "Капюшон лучника",
   "item.archers.archer_armor_chest": "Куртка лучника",
@@ -47,5 +53,5 @@
   "advancements.rpg_classes.obtain_arrow.title": "Время охоты",
   "advancements.rpg_classes.obtain_arrow.description": "Получите стрелу",
   "advancements.rpg_classes.archer_mastery.title": "Выдающийся охотник",
-  "advancements.rpg_classes.archer_mastery.description": "Полностью заполните руководство лучника"
+  "advancements.rpg_classes.archer_mastery.description": "Заполучите все умения лучника"
 }
