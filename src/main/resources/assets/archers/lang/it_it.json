@@ -11,6 +11,12 @@
 
   "item.archers.auto_fire_hook": "Colpo automatico",
 
+  "item.archers.flint_spear": "Lancia di selce",
+  "item.archers.iron_spear": "Lancia di ferro",
+  "item.archers.golden_spear": "Lancia d'oro",
+  "item.archers.diamond_spear": "Lancia di diamante",
+  "item.archers.netherite_spear": "Lancia di netherite",
+
   "item.archers.archer_armor_head": "Cappuccio da arciere",
   "item.archers.archer_armor_chest": "Tunica da arciere",
   "item.archers.archer_armor_legs": "Pantaloni da arciere",
