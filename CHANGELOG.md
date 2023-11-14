@@ -1,3 +1,7 @@
+# 1.0.6
+
+- Update Russian translation, thanks to skel39eek66 #9
+
 # 1.0.5
 
 - Add basic, craftable, two-handed spears, so Archers can defend themselves in melee
