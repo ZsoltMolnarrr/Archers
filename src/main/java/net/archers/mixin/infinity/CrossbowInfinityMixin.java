@@ -2,6 +2,7 @@ package net.archers.mixin.infinity;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.archers.ArchersMod;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -24,7 +25,8 @@ public class CrossbowInfinityMixin {
             // Context Parameters
             World world, LivingEntity entity, Hand hand, ItemStack stack, float speed, float divergence
     ) {
-        if (EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0) {
+        if (ArchersMod.tweaksConfig.value.enable_infinity_for_crossbows
+                && EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0) {
             return true;
         } else {
             return original.call(abilities);
@@ -39,7 +41,8 @@ public class CrossbowInfinityMixin {
             // Context Parameters
             LivingEntity shooter, ItemStack crossbow
     ) {
-        if (EnchantmentHelper.getLevel(Enchantments.INFINITY, crossbow) > 0) {
+        if (ArchersMod.tweaksConfig.value.enable_infinity_for_crossbows
+                && EnchantmentHelper.getLevel(Enchantments.INFINITY, crossbow) > 0) {
             return true;
         } else {
             return original.call(abilities);

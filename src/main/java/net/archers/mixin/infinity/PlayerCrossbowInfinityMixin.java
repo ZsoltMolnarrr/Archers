@@ -2,6 +2,7 @@ package net.archers.mixin.infinity;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.archers.ArchersMod;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerAbilities;
@@ -22,7 +23,9 @@ public class PlayerCrossbowInfinityMixin {
             // Context Parameters
             ItemStack stack
     ) {
-        if (stack.getItem() instanceof CrossbowItem && EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0) {
+        if (ArchersMod.tweaksConfig.value.enable_infinity_for_crossbows
+                && stack.getItem() instanceof CrossbowItem
+                && EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0) {
             return true;
         } else {
             return original.call(abilities);
