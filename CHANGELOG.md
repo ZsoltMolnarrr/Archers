@@ -2,6 +2,7 @@
 
 - Add feature: Allow Infinity enchantment for CrossBows (configurable in: `config/archers/tweaks.json`)
 - Add item tag: `archers:spears`
+- Add effect descriptions
 - Update Italian translation, thanks to Zano1999 #10
 - Update Russian translation, thanks to skel39eek66 #9
 
