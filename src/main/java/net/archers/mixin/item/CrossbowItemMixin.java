@@ -95,7 +95,6 @@ public class CrossbowItemMixin implements CustomRangedWeaponProperties {
         }
     }
 
-
     /**
      * Apply custom velocity
      */
