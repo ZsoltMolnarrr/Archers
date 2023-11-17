@@ -1,3 +1,7 @@
+# 1.0.7
+
+- Update Italian translation, thanks to Zano1999
+
 # 1.0.6
 
 - Add feature: Allow Infinity enchantment for CrossBows (configurable in: `config/archers/tweaks.json`)
