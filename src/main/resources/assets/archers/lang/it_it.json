@@ -42,10 +42,13 @@
   "spell.archers.power_shot.name": "Colpo potente",
   "spell.archers.power_shot.description": "Scocca una potente freccia e infligge al bersaglio il Marchio del cacciatore per {effect_duration} secondi, aumentandone i danni subiti del 5%, accumulandosi fino a {effect_amplifier} volte.",
   "effect.archers.hunters_mark": "Marchiato",
+  "effect.archers.hunters_mark.description": "Aumenta i danni di qualsiasi tipo ricevuti del 5%%",  
 
   "spell.archers.entangling_roots.name": "Radici",
   "spell.archers.entangling_roots.description": "Evoca radici che germogliano dal terreno nell'area vicina, rallentando i nemici per {cloud_duration} secondi.",
   "effect.archers.entangling_roots": "Impigliato",
+  "effect.archers.entangling_roots.description": "Riduce la velocità di movimento",  
+  
 
   "spell.archers.barrage.name": "Sbarramento",
   "spell.archers.barrage.description": "Scaglia frecce multiple in rapida successione.",
