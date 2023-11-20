@@ -1,6 +1,7 @@
 # 1.0.7
 
 - Update Italian translation, thanks to Zano1999
+- Update Chinese translation, thanks to Sillymoon
 
 # 1.0.6
 
