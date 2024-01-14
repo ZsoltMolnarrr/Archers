@@ -8,9 +8,14 @@
     "R": {
       "item": "minecraft:redstone"
     },
-    "S": {
-      "item": "minecraft:stick"
-    },
+    "S": [
+      {
+        "tag": "c:wood_sticks"
+      },
+      {
+        "item": "minecraft:stick"
+      }
+    ],
     "$": {
       "item": "minecraft:tripwire_hook"
     },
