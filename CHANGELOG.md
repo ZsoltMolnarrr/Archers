@@ -3,6 +3,7 @@
 - Add compatibility for `c:wood_sticks` in recipes
 - Update Italian translation, thanks to Zano1999
 - Update Chinese translation, thanks to Sillymoon
+- Fix Crossbow Infinity can fire tipped arrows without consuming them #16
 
 # 1.0.6
 
