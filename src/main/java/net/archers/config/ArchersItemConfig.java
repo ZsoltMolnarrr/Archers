@@ -1,5 +1,6 @@
 package net.archers.config;
 
+import net.fabric_extras.ranged_weapon.api.RangedConfig;
 import net.spell_engine.api.item.ItemConfig;
 
 import java.util.HashMap;

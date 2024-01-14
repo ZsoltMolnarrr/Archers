@@ -1,4 +1,4 @@
-package net.archers.mixin;
+package net.archers.mixin.screen;
 
 import net.archers.item.misc.AutoFireHook;
 import net.minecraft.entity.player.PlayerInventory;

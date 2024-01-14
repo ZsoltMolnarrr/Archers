@@ -1,11 +1,11 @@
 package net.archers.item;
 
 import net.archers.ArchersMod;
-import net.archers.config.RangedConfig;
-import net.archers.item.weapon.CustomBow;
-import net.archers.item.weapon.CustomCrossbow;
-import net.archers.item.weapon.CustomRangedWeaponProperties;
 import net.archers.item.weapon.CustomWeaponItem;
+import net.fabric_extras.ranged_weapon.api.CustomBow;
+import net.fabric_extras.ranged_weapon.api.CustomCrossbow;
+import net.fabric_extras.ranged_weapon.api.CustomRangedWeapon;
+import net.fabric_extras.ranged_weapon.api.RangedConfig;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
@@ -75,14 +75,14 @@ public class Weapons {
     private static RangedEntry bow(String name, int durability, Supplier<Ingredient> repairIngredientSupplier, RangedConfig defaults) {
         var settings = new FabricItemSettings().maxDamage(durability);
         var item = new CustomBow(settings, repairIngredientSupplier);
-        ((CustomRangedWeaponProperties)item).configure(defaults);
+        ((CustomRangedWeapon)item).configure(defaults);
         return addRanged(new Identifier(ArchersMod.ID, name), item, defaults);
     }
 
     private static RangedEntry crossbow(String name, int durability, Supplier<Ingredient> repairIngredientSupplier, RangedConfig defaults) {
         var settings = new FabricItemSettings().maxDamage(durability);
         var item = new CustomCrossbow(settings, repairIngredientSupplier);
-        ((CustomRangedWeaponProperties)item).configure(defaults);
+        ((CustomRangedWeapon)item).configure(defaults);
         return addRanged(new Identifier(ArchersMod.ID, name), item, defaults);
     }
 
@@ -161,7 +161,7 @@ public class Weapons {
                 config = entry.defaults;
                 rangedConfig.put(entry.id.toString(), config);
             }
-            ((CustomRangedWeaponProperties)entry.item).configure(config);
+            ((CustomRangedWeapon)entry.item).configure(config);
             Registry.register(Registries.ITEM, entry.id, entry.item);
         }
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {

@@ -12,10 +12,12 @@ import net.archers.item.Armors;
 import net.archers.item.misc.Misc;
 import net.archers.util.SoundHelper;
 import net.archers.village.ArcherVillagers;
+import net.fabric_extras.ranged_weapon.api.CrossbowMechanics;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
@@ -72,9 +74,15 @@ public class ArchersMod implements ModInitializer {
         registerVillages();
         subscribeEvents();
 
+        // Apply some of the tweaks
         if (tweaksConfig.value.enable_infinity_for_crossbows) {
             EnchantmentRestriction.permit(Enchantments.INFINITY, itemStack -> itemStack.getItem() instanceof CrossbowItem);
         }
+        CrossbowMechanics.PullTime.modifier = (originalPullTime, crossbow) -> {
+            int quickCharge = EnchantmentHelper.getLevel(Enchantments.QUICK_CHARGE, crossbow);
+            var multiplier = tweaksConfig.value.quick_charge_enchantment_multiplier_per_level;
+            return originalPullTime - (int)((double)originalPullTime * multiplier) * quickCharge;
+        };
     }
 
     private void registerItemGroup() {
