@@ -1,0 +1,60 @@
+{
+  "itemGroup.archers.general": "Archers",
+  "item.archers.auto_fire_hook.description_1": "Relâche automatiquement la flèche chargée.",
+  "item.archers.auto_fire_hook.description_2": "Peut être appliqué aux armes à distance, dans une enclume.",
+  "item.ranged_weapon.pull_time": "Temps pour tirer de %1$s sec",
+
+  "block.archers.archers_workbench": "Table d'artisan d'archerie",
+  "block.archers.archers_workbench.hint": "Établi pour les villageois artisans d'archerie.",
+  "entity.minecraft.villager.archery_artisan": "Artisan d'archerie",
+  "entity.minecraft.villager.archers:archery_artisan": "Artisan d'archerie",
+
+  "item.archers.auto_fire_hook": "Crochet de tir automatique",
+
+  "item.archers.flint_spear": "Lance en silex",
+  "item.archers.iron_spear": "Lance en fer",
+  "item.archers.golden_spear": "Lance en or",
+  "item.archers.diamond_spear": "Lance en diamant",
+  "item.archers.netherite_spear": "Lance en netherite",
+
+  "item.archers.archer_armor_head": "Capuche d'archer",
+  "item.archers.archer_armor_chest": "Tunique d'archer",
+  "item.archers.archer_armor_legs": "Jambières d'archer",
+  "item.archers.archer_armor_feet": "Bottes d'archer",
+
+  "item.archers.ranger_armor_head": "Capuche de garde",
+  "item.archers.ranger_armor_chest": "Tunique de garde",
+  "item.archers.ranger_armor_legs": "Jambières de garde",
+  "item.archers.ranger_armor_feet": "Bottes de garde",
+
+  "item.archers.composite_longbow": "Arc droit composite",
+  "item.archers.mechanic_shortbow": "Arc fin mécanique",
+  "item.archers.royal_longbow": "Arc droit royal",
+  "item.archers.rapid_crossbow": "Arbalète rapide",
+  "item.archers.heavy_crossbow": "Arbalète lourde",
+  "item.archers.netherite_shortbow": "Arc fin en netherite",
+  "item.archers.netherite_longbow": "Arc droit en netherite",
+  "item.archers.netherite_rapid_crossbow": "Arbalète rapide en netherite",
+  "item.archers.netherite_heavy_crossbow": "Arbalète lourde en netherite",
+
+  "item.archers.archer_spell_book": "Manuel de l'archerie",
+
+  "spell.archers.power_shot.name": "Tir puissant",
+  "spell.archers.power_shot.description": "Tire une flèche puissante qui inflige la marque de chasseur à la cible pendant {effect_duration} secondes, augmentant ses dégâts reçus par 5%%, s'accumumant jusqu'à {effect_amplifier} fois.",
+  "effect.archers.hunters_mark": "Marque",
+  "effect.archers.hunters_mark.description": "Augmente les dégâts reçus de toutes sources par 5%%",
+
+  "spell.archers.entangling_roots.name": "Racines enchevêtrées",
+  "spell.archers.entangling_roots.description": "Fait germer des racines du sol dans la zone alentour, ralentissant les ennemis pendant {cloud_duration} secondes.",
+  "effect.archers.entangling_roots": "Racines enchevêtrées",
+  "effect.archers.entangling_roots.description": "Réduit la vitesse de mouvement",
+
+
+  "spell.archers.barrage.name": "Barrage",
+  "spell.archers.barrage.description": "Tire plusieurs flèches à la suite.",
+
+  "advancements.rpg_classes.obtain_arrow.title": "Voie de l'archer",
+  "advancements.rpg_classes.obtain_arrow.description": "Obtenez une flèche",
+  "advancements.rpg_classes.archer_mastery.title": "Expert en balistique",
+  "advancements.rpg_classes.archer_mastery.description": "Complétez entièrement le manuel de l'archerie"
+}
