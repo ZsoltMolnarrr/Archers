@@ -1,0 +1,59 @@
+{
+  "itemGroup.archers.general": "Archers",
+  "item.archers.auto_fire_hook.description_1": "Libera automáticamente flechas cargadas.",
+  "item.archers.auto_fire_hook.description_2": "Se puede aplicar a armas de largo alcance en un yunque.",
+  "item.ranged_weapon.pull_time": "Tiempo de tensión: %1$s seg",
+
+  "block.archers.archers_workbench": "Banco de trabajo del Arquero",
+  "block.archers.archers_workbench.hint": "Banco de trabajo para aldeanos artesanos de arquería.",
+  "entity.minecraft.villager.archery_artisan": "Artesano de Arquería",
+  "entity.minecraft.villager.archers:archery_artisan": "Artesano de Arquería",
+
+  "item.archers.auto_fire_hook": "Gancho de Disparo Automático",
+
+  "item.archers.flint_spear": "Lanza de sílex",
+  "item.archers.iron_spear": "Lanza de gierro",
+  "item.archers.golden_spear": "Lanza dorada",
+  "item.archers.diamond_spear": "Lanza de diamante",
+  "item.archers.netherite_spear": "Lanza de netherite",
+
+  "item.archers.archer_armor_head": "Capucha de Arquero",
+  "item.archers.archer_armor_chest": "Túnica de Arquero",
+  "item.archers.archer_armor_legs": "Pantalones de Arquero",
+  "item.archers.archer_armor_feet": "Botas de Arquero",
+
+  "item.archers.ranger_armor_head": "Capucha del Explorador",
+  "item.archers.ranger_armor_chest": "Túnica del Explorador",
+  "item.archers.ranger_armor_legs": "Pantalones del Explorador",
+  "item.archers.ranger_armor_feet": "Botas del Explorador",
+
+  "item.archers.composite_longbow": "Arco Largo Compuesto",
+  "item.archers.mechanic_shortbow": "Arco Corto Mecánico",
+  "item.archers.royal_longbow": "Arco Largo Real",
+  "item.archers.rapid_crossbow": "Ballesta Rápida",
+  "item.archers.heavy_crossbow": "Ballesta Pesada",
+  "item.archers.netherite_shortbow": "Arco Corto de Netherite",
+  "item.archers.netherite_longbow": "Arco Largo de Netherite",
+  "item.archers.netherite_rapid_crossbow": "Ballesta Rápida de netherita",
+  "item.archers.netherite_heavy_crossbow": "Ballesta Pesada de netherita",
+
+  "item.archers.archer_spell_book": "Manual de Arquería",
+
+  "spell.archers.power_shot.name": "Disparo Potente",
+  "spell.archers.power_shot.description": "Dispara una flecha poderosa, inflige al objetivo la Marca del Cazador durante {effect_duration} segundos, aumentando el daño recibido en un 5%%, acumulándose hasta {effect_amplifier} veces.",
+  "effect.archers.hunters_mark": "Marcado",
+  "effect.archers.hunters_mark.description": "Aumenta el daño recibido de todas las fuentes en un 5%%",
+
+  "spell.archers.entangling_roots.name": "Raíces Enredadoras",
+  "spell.archers.entangling_roots.description": "Conjura raíces que brotan del suelo en el área cercana, ralentizando a los enemigos durante {cloud_duration} segundos.",
+  "effect.archers.entangling_roots": "Raíces Enredadoras",
+  "effect.archers.entangling_roots.description": "Reduce la velocidad de movimiento",
+
+  "spell.archers.barrage.name": "Ráfaga",
+  "spell.archers.barrage.description": "Dispara múltiples flechas en rápida sucesión.",
+
+  "advancements.rpg_classes.obtain_arrow.title": "Camino del Arquero",
+  "advancements.rpg_classes.obtain_arrow.description": "Obtén una flecha",
+  "advancements.rpg_classes.archer_mastery.title": "Experto en Balística",
+  "advancements.rpg_classes.archer_mastery.description": "Completa el Manual de Arquería"
+}
