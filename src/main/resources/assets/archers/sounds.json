@@ -13,5 +13,20 @@
     "sounds": [
       "archers:bow_pull"
     ]
+  },
+  "magic_arrow_impact": {
+    "sounds": [
+      "archers:magic_arrow_impact"
+    ]
+  },
+  "magic_arrow_release": {
+    "sounds": [
+      "archers:magic_arrow_release"
+    ]
+  },
+  "magic_arrow_start": {
+    "sounds": [
+      "archers:magic_arrow_start"
+    ]
   }
 }

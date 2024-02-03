@@ -17,7 +17,10 @@ import java.util.Map;
 public class SoundHelper {
     public static List<String> soundKeys = List.of(
         "entangling_roots",
-            "bow_pull"
+        "bow_pull",
+        "magic_arrow_impact",
+        "magic_arrow_release",
+        "magic_arrow_start"
     );
 
     public static Map<String, Float> soundDistances = Map.of(
