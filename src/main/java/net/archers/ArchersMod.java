@@ -57,7 +57,7 @@ public class ArchersMod implements ModInitializer {
             .build();
 
     public static ConfigManager<LootConfig> lootConfig = new ConfigManager<>
-            ("loot_v2", Default.lootConfig)
+            ("loot", Default.lootConfig)
             .builder()
             .setDirectory(ID)
             .sanitize(true)
@@ -72,6 +72,7 @@ public class ArchersMod implements ModInitializer {
         SoundHelper.registerSounds();
         Effects.register();
         registerVillages();
+        lootConfig.refresh();
         subscribeEvents();
 
         // Apply some of the tweaks
