@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "archers:archer_armor_chest",
+    "archers:archer_armor_feet",
+    "archers:archer_armor_head",
+    "archers:archer_armor_legs"
+  ]
+}
