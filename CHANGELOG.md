@@ -1,6 +1,7 @@
 # 1.1.0
 
 - Add new Archer skill: Magic Arrow
+- Add equipment tier item tags in `rpg_series` scope
 - Add Spanish translation, thanks to SirColor
 - Add French translation, thanks to YanisBft
 - Fix loot table injections not being configurable (missing `loot.json` file)
