@@ -49,9 +49,11 @@
   "effect.archers.entangling_roots": "Entangling Roots",
   "effect.archers.entangling_roots.description": "Reduces movement speed",
 
-
   "spell.archers.barrage.name": "Barrage",
   "spell.archers.barrage.description": "Fires multiple arrows in quick succession.",
+
+  "spell.archers.magic_arrow.name": "Magic Arrow",
+  "spell.archers.magic_arrow.description": "Shoots a magical arrow piercing thru all enemies in its path, dealing {damage} damage to each target.",
 
   "advancements.rpg_classes.obtain_arrow.title": "Path of Archer",
   "advancements.rpg_classes.obtain_arrow.description": "Obtain an Arrow",
