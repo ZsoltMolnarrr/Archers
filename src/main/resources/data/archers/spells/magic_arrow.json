@@ -80,7 +80,9 @@
             ],
             "model": {
               "model_id": "archers:projectile/magic_arrow",
-              "scale": 1
+              "light_emission": "RADIATE",
+              "scale": 1.2,
+              "light_level": 10
             }
           }
         }
