@@ -1,0 +1,35 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "betternether"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+    "$": {
+      "item": "minecraft:tripwire_hook"
+    },
+    "R": {
+      "item": "betternether:nether_ruby"
+    },
+    "~": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "#R#",
+    "~$~",
+    " R "
+  ],
+  "result": {
+    "item": "archers:ruby_heavy_crossbow"
+  },
+  "category": "equipment",
+  "show_notification": true
+}

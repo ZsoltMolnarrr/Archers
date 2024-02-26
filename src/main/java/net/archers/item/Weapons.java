@@ -8,6 +8,7 @@ import net.fabric_extras.ranged_weapon.api.CustomRangedWeapon;
 import net.fabric_extras.ranged_weapon.api.RangedConfig;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterials;
@@ -26,6 +27,19 @@ public class Weapons {
     public static final ArrayList<RangedEntry> rangedEntries = new ArrayList<>();
     public static final ArrayList<Weapon.Entry> meleeEntries = new ArrayList<>();
     public record RangedEntry(Identifier id, Item item, RangedConfig defaults) { }
+
+    private static Supplier<Ingredient> ingredient(String idString) {
+        return ingredient(idString, Items.DIAMOND);
+    }
+
+    private static Supplier<Ingredient> ingredient(String idString, Item fallback) {
+        var id = new Identifier(idString);
+        return () -> {
+            var item = Registries.ITEM.get(id);
+            var ingredient = item != null ? item : fallback;
+            return Ingredient.ofItems(ingredient);
+        };
+    }
 
     /**
      * MELEE WEAPONS
@@ -60,7 +74,6 @@ public class Weapons {
             Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 6F);
     public static final Weapon.Entry netherite_spear = spear("netherite_spear",
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 7F);
-
 
     /**
      * RANGED WEAPONS
@@ -154,6 +167,25 @@ public class Weapons {
 
 
     public static void register(Map<String, RangedConfig> rangedConfig, Map<String, ItemConfig.Weapon> meleeConfig) {
+        if (FabricLoader.getInstance().isModLoaded("betterend")) {
+            spear("aeternium_spear",
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, ingredient("betterend:aeternium_ingot")), 8F);
+            bow("crystal_shortbow", durabilityTier3,
+                    ingredient("betterend:crystal_shards"),
+                    new RangedConfig(pullTime_shortBow, 10F, null));
+            bow("crystal_longbow", durabilityTier3,
+                    ingredient("betterend:crystal_shards"),
+                    new RangedConfig(pullTime_longBow, 13.5F, null));
+        }
+        if (FabricLoader.getInstance().isModLoaded("betternether")) {
+            crossbow("ruby_rapid_crossbow", durabilityTier3,
+                    ingredient("betternether:nether_ruby"),
+                    new RangedConfig(pullTime_rapidCrossbow, 10.5F, null));
+            crossbow("ruby_heavy_crossbow", durabilityTier3,
+                    ingredient("betternether:nether_ruby"),
+                    new RangedConfig(pullTime_heavyCrossbow, 17, null));
+        }
+
         Weapon.register(meleeConfig, meleeEntries, Group.KEY);
         for (var entry: rangedEntries) {
             var config = rangedConfig.get(entry.id.toString());

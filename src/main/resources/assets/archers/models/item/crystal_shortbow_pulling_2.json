@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/crystal_shortbow",
+  "textures": {
+    "layer0": "archers:item/crystal_shortbow_pulling_2"
+  }
+}

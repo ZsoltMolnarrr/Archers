@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/ruby_heavy_crossbow",
+  "textures": {
+    "layer0": "archers:item/ruby_heavy_crossbow_pulling_1"
+  }
+}

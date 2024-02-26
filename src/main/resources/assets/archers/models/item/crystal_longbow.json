@@ -1,0 +1,28 @@
+{
+  "parent": "archers:item/base/bow_20",
+  "textures": {
+    "layer0": "archers:item/crystal_longbow"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "archers:item/crystal_longbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "archers:item/crystal_longbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "archers:item/crystal_longbow_pulling_2"
+    }
+  ]
+}

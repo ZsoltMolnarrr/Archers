@@ -1,6 +1,13 @@
 # 1.1.0
 
 - Add new Archer skill: Magic Arrow
+- Add BetterNether exclusive weapons
+  - Ruby Rapid Crossbow
+  - Ruby Heavy Crossbow
+- Add BetterEnd exclusive weapons
+  - Aeternium Spear
+  - Crystal Shortbow
+  - Crystal Longbow
 - Add equipment tier item tags in `rpg_series` scope
 - Add Spanish translation, thanks to SirColor
 - Add French translation, thanks to YanisBft

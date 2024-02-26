@@ -1,0 +1,33 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "betterend"
+      ]
+    }
+  ],
+  "key": {
+    "#": [
+      {
+        "tag": "c:wood_sticks"
+      },
+      {
+        "item": "minecraft:stick"
+      }
+    ],
+    "P": {
+      "item": "betterend:aeternium_ingot"
+    }
+  },
+  "pattern": [
+    "  P",
+    " # ",
+    "#  "
+  ],
+  "result": {
+    "item": "archers:aeternium_spear"
+  },
+  "category": "equipment",
+  "show_notification": true
+}

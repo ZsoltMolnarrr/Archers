@@ -1,5 +1,25 @@
 {
   "replace": false,
   "values": [
+    {
+      "id": "archers:aeternium_spear",
+      "required": false
+    },
+    {
+      "id": "archers:crystal_shortbow",
+      "required": false
+    },
+    {
+      "id": "archers:crystal_longbow",
+      "required": false
+    },
+    {
+      "id": "archers:ruby_rapid_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:ruby_heavy_crossbow",
+      "required": false
+    }
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "betterend"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "betterend:aeternium_ingot"
+    },
+    "C": {
+      "item": "betterend:crystal_shards"
+    },
+    "X": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "CCX",
+    "M X",
+    "CCX"
+  ],
+  "result": {
+    "item": "archers:crystal_longbow"
+  },
+  "category": "equipment",
+  "show_notification": true
+}

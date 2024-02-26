@@ -1,11 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "betternether"
+      ]
+    }
+  ],
+
   "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
+    "M": {
+      "item": "betternether:cincinnasite_ingot"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "item": "betternether:nether_ruby"
     },
     "S": [
       {
@@ -25,10 +33,11 @@
   "pattern": [
     "SRS",
     "~$~",
-    " I "
+    " M "
   ],
+
   "result": {
-    "item": "archers:rapid_crossbow"
+    "item": "archers:ruby_rapid_crossbow"
   },
   "category": "equipment",
   "show_notification": true

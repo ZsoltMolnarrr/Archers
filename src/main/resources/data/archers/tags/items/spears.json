@@ -4,6 +4,10 @@
     "archers:iron_spear",
     "archers:golden_spear",
     "archers:diamond_spear",
-    "archers:netherite_spear"
+    "archers:netherite_spear",
+    {
+      "id": "archers:aeternium_spear",
+      "required": false
+    }
   ]
 }

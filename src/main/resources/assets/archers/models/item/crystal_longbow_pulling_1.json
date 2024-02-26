@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/crystal_longbow",
+  "textures": {
+    "layer0": "archers:item/crystal_longbow_pulling_1"
+  }
+}

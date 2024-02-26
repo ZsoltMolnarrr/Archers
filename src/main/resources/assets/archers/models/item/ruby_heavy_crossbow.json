@@ -1,0 +1,41 @@
+{
+  "parent": "archers:item/base/crossbow_18",
+  "textures": {
+    "layer0": "archers:item/ruby_heavy_crossbow_standby"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "archers:item/ruby_heavy_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "archers:item/ruby_heavy_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "archers:item/ruby_heavy_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "charged": 1
+      },
+      "model": "archers:item/ruby_heavy_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "archers:item/ruby_heavy_crossbow_firework"
+    }
+  ]
+}

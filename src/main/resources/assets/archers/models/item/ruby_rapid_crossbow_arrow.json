@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/ruby_rapid_crossbow",
+  "textures": {
+    "layer0": "archers:item/ruby_rapid_crossbow_arrow"
+  }
+}

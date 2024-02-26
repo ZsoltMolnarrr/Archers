@@ -16,6 +16,7 @@
   "item.archers.golden_spear": "Golden Spear",
   "item.archers.diamond_spear": "Diamond Spear",
   "item.archers.netherite_spear": "Netherite Spear",
+  "item.archers.aeternium_spear": "Aeternium Spear",
 
   "item.archers.archer_armor_head": "Archer Hood",
   "item.archers.archer_armor_chest": "Archer Tunic",
@@ -36,6 +37,10 @@
   "item.archers.netherite_longbow": "Netherite Longbow",
   "item.archers.netherite_rapid_crossbow": "Netherite Rapid Crossbow",
   "item.archers.netherite_heavy_crossbow": "Netherite Heavy Crossbow",
+  "item.archers.crystal_shortbow": "Crystal Shortbow",
+  "item.archers.crystal_longbow": "Crystal Longbow",
+  "item.archers.ruby_rapid_crossbow": "Ruby Rapid Crossbow",
+  "item.archers.ruby_heavy_crossbow": "Ruby Heavy Crossbow",
 
   "item.archers.archer_spell_book": "Archery Manual",
 
