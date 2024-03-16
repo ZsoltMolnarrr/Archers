@@ -7,11 +7,11 @@
   "cast": {
     "duration": 0.5,
     "animation": "spell_engine:archery_pull",
+    "animates_ranged_weapon": true,
     "sound": {
       "id": "archers:bow_pull"
     }
   },
-  "casting_animates_ranged_weapon": true,
   "release": {
     "target": {
       "type": "SHOOT_ARROW",

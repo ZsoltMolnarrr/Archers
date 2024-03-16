@@ -7,6 +7,7 @@
   "cast": {
     "duration": 1,
     "animation": "spell_engine:archery_pull",
+    "animates_ranged_weapon": true,
     "particles": [
       {
         "particle_id": "spell_engine:nature_spark_mini",
@@ -23,7 +24,6 @@
       "id": "spell_engine:generic_wind_charging"
     }
   },
-  "casting_animates_ranged_weapon": true,
   "release": {
     "target": {
       "type": "PROJECTILE",
