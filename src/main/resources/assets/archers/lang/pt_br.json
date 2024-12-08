@@ -1,0 +1,80 @@
+{
+  "itemGroup.archers.general": "Arqueiros",
+  "item.archers.auto_fire_hook.description_1": "Libera automaticamente a flecha carregada.",
+  "item.archers.auto_fire_hook.description_2": "Pode ser aplicado a armas de longo alcance, em uma bigorna.",
+  "item.ranged_weapon.pull_time": "%1$s seg Tempo de carregamento",
+
+  "block.archers.archers_workbench": "Mesa de artesão de arqueria",
+  "block.archers.archers_workbench.hint": "Banco de trabalho para aldeões artesãos de arqueria.",
+  "entity.minecraft.villager.archery_artisan": "Artesão de arqueria",
+  "entity.minecraft.villager.archers:archery_artisan": "Artesão de arqueria",
+
+  "item.archers.auto_fire_hook": "Gancho de Disparo Automático",
+
+  "item.archers.flint_spear": "Lança de sílex",
+  "item.archers.iron_spear": "Lança de ferro",
+  "item.archers.golden_spear": "Lança de ouro",
+  "item.archers.diamond_spear": "Lança de diamante",
+  "item.archers.netherite_spear": "Lança de netherite",
+  "item.archers.aeternium_spear": "Lança de aeternium",
+  "item.archers.ruby_spear": "Lança de rubi",
+
+  "item.archers.archer_armor_head": "Capuz de arqueiro",
+  "item.archers.archer_armor_chest": "Túnica de arqueiro",
+  "item.archers.archer_armor_legs": "Calças de arqueiro",
+  "item.archers.archer_armor_feet": "Botas de arqueiro",
+
+  "item.archers.ranger_armor_head": "Capuz de ranger",
+  "item.archers.ranger_armor_chest": "Túnica de ranger",
+  "item.archers.ranger_armor_legs": "Calças de ranger",
+  "item.archers.ranger_armor_feet": "Botas de ranger",
+
+  "item.archers.netherite_ranger_armor_head": "Capuz de ranger de netherite",
+  "item.archers.netherite_ranger_armor_chest": "Túnica de ranger de netherite",
+  "item.archers.netherite_ranger_armor_legs": "Calças de ranger de netherite",
+  "item.archers.netherite_ranger_armor_feet": "Botas de ranger de netherite",
+
+  "item.archers.composite_longbow": "Arco longo composto",
+  "item.archers.mechanic_shortbow": "Arco curto mecânico",
+  "item.archers.royal_longbow": "Arco longo real",
+  "item.archers.rapid_crossbow": "Besta rápida",
+  "item.archers.heavy_crossbow": "Besta pesada",
+  "item.archers.netherite_shortbow": "Arco curto de netherite",
+  "item.archers.netherite_longbow": "Arco longo de netherite",
+  "item.archers.netherite_rapid_crossbow": "Besta rápida de netherite",
+  "item.archers.netherite_heavy_crossbow": "Besta pesada de netherite",
+  "item.archers.crystal_shortbow": "Arco curto de cristal",
+  "item.archers.crystal_longbow": "Arco longo de cristal",
+  "item.archers.ruby_rapid_crossbow": "Besta rápida de rubi",
+  "item.archers.ruby_heavy_crossbow": "Besta pesada de rubi",
+
+  "item.archers.archer_spell_book": "Manual de arqueria",
+
+  "spell.archers.power_shot.name": "Tiro poderoso",
+  "spell.archers.power_shot.description": "Habilidade passiva: flechas aplicam a Marca do Caçador no alvo por {effect_duration} segundos, aumentando o dano recebido em {damage_taken}, acumulando até {effect_amplifier} vezes.",
+  "effect.archers.hunters_mark": "Marcado",
+  "effect.archers.hunters_mark.description": "Aumenta o dano recebido de todas as fontes",
+
+  "spell.archers.entangling_roots.name": "Raízes entorpecentes",
+  "spell.archers.entangling_roots.description": "Conjura raízes que brotam do chão na área próxima, desacelerando inimigos por {cloud_duration} segundos.",
+  "effect.archers.entangling_roots": "Raízes entorpecentes",
+  "effect.archers.entangling_roots.description": "Reduz a velocidade de movimento",
+
+  "spell.archers.barrage.name": "Barrage",
+  "spell.archers.barrage.description": "Dispara várias flechas em rápida sucessão.",
+
+  "spell.archers.magic_arrow.name": "Flecha mágica",
+  "spell.archers.magic_arrow.description": "Dispara uma flecha mágica que perfura todos os inimigos em seu caminho, causando {damage} de dano a cada alvo.",
+
+  "advancements.rpg_series.path_choose_archer.title": "Caminho da arqueria",
+  "advancements.rpg_series.path_choose_archer.description": "Crie um manual de arqueria",
+
+  "advancements.rpg_series.spell_novice_archer.title": "Tiros letais",
+  "advancements.rpg_series.spell_novice_archer.description": "Obtenha sua primeira habilidade de arqueria",
+
+  "advancements.rpg_series.spell_master_archer.title": "Especialista em balística",
+  "advancements.rpg_series.spell_master_archer.description": "Complete o manual de arqueria",
+
+  "advancements.rpg_series.obtain_arrow.title": "Caminho do arqueiro",
+  "advancements.rpg_series.obtain_arrow.description": "Obtenha uma flecha"
+}
