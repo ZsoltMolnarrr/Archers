@@ -1,3 +1,8 @@
+# 2.2.0
+
+- Rework Power Shot into an active skill
+- Updated translations
+
 # 2.1.1
 
 - Update Ruby Heavy Crossbow texture

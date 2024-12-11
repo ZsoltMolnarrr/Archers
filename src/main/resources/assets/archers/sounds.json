@@ -4,6 +4,11 @@
       "archers:archers_workbench"
     ]
   },
+  "marker_shot": {
+    "sounds": [
+      "archers:marker_shot"
+    ]
+  },
   "entangling_roots": {
     "sounds": [
       "archers:entangling_roots"

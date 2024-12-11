@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class SoundHelper {
     public static List<String> soundKeys = List.of(
+        "marker_shot",
         "entangling_roots",
         "bow_pull",
         "magic_arrow_impact",
