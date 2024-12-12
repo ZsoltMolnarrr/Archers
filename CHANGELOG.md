@@ -1,7 +1,8 @@
-# 2.2.0
+# 2.1.2
 
 - Rework Power Shot into an active skill
-- Updated translations
+- Udpdate Russian translation, thanks to @Heimdallr
+- Add Brazilian translation, thanks to @demorogabrtz
 
 # 2.1.1
 
