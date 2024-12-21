@@ -5,7 +5,7 @@
 - Add Brazilian translation, thanks to @demorogabrtz
 - Add new weapons, obtainable only as loot from Aether dungeons
   - Holy Spear
-  - Silver Longbow of the Pantheon
+  - Silver Bow of the Acropolis
   - Sky Crossbow
   - Valkyrie Ballista
 
