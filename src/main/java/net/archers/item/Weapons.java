@@ -229,7 +229,7 @@ public class Weapons {
                     new RangedConfig(17, pullTime_heavyCrossbow,0));
         }
         if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(AETHER)) {
-            var aetherRepair = ingredient("aether:abrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
+            var aetherRepair = ingredient("aether:ambrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
             spear("aether_spear",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, aetherRepair), 8F);
             bow("aether_longbow", durabilityTier3, aetherRepair,
