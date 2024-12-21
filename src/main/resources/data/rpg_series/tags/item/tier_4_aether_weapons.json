@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "archers:netherite_shortbow",
+    "archers:netherite_longbow",
+    "archers:netherite_rapid_crossbow",
+    "archers:netherite_heavy_crossbow",
+    "archers:netherite_spear"
+  ]
+}

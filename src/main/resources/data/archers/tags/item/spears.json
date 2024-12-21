@@ -12,6 +12,10 @@
     {
       "id": "archers:ruby_spear",
       "required": false
+    },
+    {
+      "id": "archers:aether_spear",
+      "required": false
     }
   ]
 }

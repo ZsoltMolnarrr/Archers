@@ -98,6 +98,7 @@ public class Weapons {
 
     private static final String BETTER_END = "betterend";
     private static final String BETTER_NETHER = "betternether";
+    private static final String AETHER = "aether";
 
     /**
      * MELEE WEAPONS
@@ -227,8 +228,19 @@ public class Weapons {
             crossbow("ruby_heavy_crossbow", durabilityTier3, rubyRepair,
                     new RangedConfig(17, pullTime_heavyCrossbow,0));
         }
-        var netheriteTier = Tiers.unsafe("netherite");
+        if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(AETHER)) {
+            var aetherRepair = ingredient("aether:abrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
+            spear("aether_spear",
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, aetherRepair), 8F);
+            bow("aether_longbow", durabilityTier3, aetherRepair,
+                    new RangedConfig(13.5F, pullTime_longBow, 0));
+            crossbow("aether_rapid_crossbow", durabilityTier3, aetherRepair,
+                    new RangedConfig(10.5F, pullTime_rapidCrossbow, 0));
+            crossbow("aether_heavy_crossbow", durabilityTier3, aetherRepair,
+                    new RangedConfig(17, pullTime_heavyCrossbow,0));
+        }
 
+        var netheriteTier = Tiers.unsafe("netherite");
         Weapon.register(meleeConfig, meleeEntries, Group.KEY);
 
         for (var entry: rangedEntries) {

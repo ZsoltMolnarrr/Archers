@@ -12,6 +12,10 @@
     {
       "id": "archers:crystal_longbow",
       "required": false
+    },
+    {
+      "id": "archers:aether_longbow",
+      "required": false
     }
   ]
 }
