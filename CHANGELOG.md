@@ -1,8 +1,13 @@
-# 2.1.2
+# 2.2.0
 
 - Rework Power Shot into an active skill
 - Udpdate Russian translation, thanks to @Heimdallr
 - Add Brazilian translation, thanks to @demorogabrtz
+- Add new weapons, obtainable only as loot from Aether dungeons
+  - Holy Spear
+  - Silver Longbow of the Pantheon
+  - Sky Crossbow
+  - Valkyrie Ballista
 
 # 2.1.1
 
