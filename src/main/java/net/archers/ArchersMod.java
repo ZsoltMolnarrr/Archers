@@ -31,7 +31,7 @@ public class ArchersMod implements ModInitializer {
     public static final String ID = "archers";
 
     public static ConfigManager<ArchersItemConfig> itemConfig = new ConfigManager<ArchersItemConfig>
-            ("items_v3", Default.itemConfig)
+            ("items_v4", Default.itemConfig)
             .builder()
             .setDirectory(ID)
             .sanitize(true)
