@@ -1,3 +1,7 @@
+# 2.2.1
+
+- Add some Arrow Velocity bonus for Longbows and Heavy Crossbows
+
 # 2.2.0
 
 - Rework Power Shot into an active skill

@@ -150,6 +150,10 @@ public class Weapons {
     private static final float pullTime_longBow = 1.5F - 1F;
     private static final float pullTime_rapidCrossbow = 0;
     private static final float pullTime_heavyCrossbow = 1.75F - 1F;
+    private static final float velocity_shortBow = 0F;
+    private static final float velocity_longBow = 0.75F;
+    private static final float velocity_rapidCrossbow = 0F;
+    private static final float velocity_heavyCrossbow = 0.5F;
 
     /**
      * DPS Tiers
@@ -168,23 +172,23 @@ public class Weapons {
 
     public static RangedEntry composite_longbow = bow("composite_longbow", durabilityTier1,
             () -> Ingredient.ofItems(Items.BONE),
-            new RangedConfig(8, pullTime_longBow, 0));
+            new RangedConfig(8, pullTime_longBow, velocity_longBow));
 
     public static RangedEntry mechanic_shortbow = bow("mechanic_shortbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.REDSTONE),
-            new RangedConfig(8F, pullTime_shortBow,  0));
+            new RangedConfig(8F, pullTime_shortBow,  velocity_shortBow));
 
     public static RangedEntry royal_longbow = bow("royal_longbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.GOLD_INGOT),
-            new RangedConfig(10, pullTime_longBow, 0));
+            new RangedConfig(10, pullTime_longBow, velocity_longBow));
 
     public static RangedEntry netherite_shortbow = bow("netherite_shortbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
-            new RangedConfig(9, pullTime_shortBow, 0));
+            new RangedConfig(9, pullTime_shortBow, velocity_shortBow));
 
     public static RangedEntry netherite_longbow = bow("netherite_longbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
-            new RangedConfig(12, pullTime_longBow, 0));
+            new RangedConfig(12, pullTime_longBow, velocity_longBow));
 
 
     /**
@@ -193,19 +197,19 @@ public class Weapons {
 
     public static RangedEntry rapid_crossbow = crossbow("rapid_crossbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.REDSTONE),
-            new RangedConfig(8.5F, pullTime_rapidCrossbow, 0));
+            new RangedConfig(8.5F, pullTime_rapidCrossbow, velocity_rapidCrossbow));
 
     public static RangedEntry heavy_crossbow = crossbow("heavy_crossbow", durabilityTier2,
             () -> Ingredient.ofItems(Items.DIAMOND),
-            new RangedConfig(13, pullTime_heavyCrossbow,  0));
+            new RangedConfig(13, pullTime_heavyCrossbow,  velocity_heavyCrossbow));
 
     public static RangedEntry netherite_rapid_crossbow = crossbow("netherite_rapid_crossbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
-            new RangedConfig(9.5F, pullTime_rapidCrossbow, 0));
+            new RangedConfig(9.5F, pullTime_rapidCrossbow, velocity_rapidCrossbow));
 
     public static RangedEntry netherite_heavy_crossbow = crossbow("netherite_heavy_crossbow", durabilityTier3,
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
-            new RangedConfig(15, pullTime_heavyCrossbow, 0));
+            new RangedConfig(15, pullTime_heavyCrossbow, velocity_heavyCrossbow));
 
 
     public static void register(Map<String, RangedConfig> rangedConfig, Map<String, ItemConfig.Weapon> meleeConfig) {
@@ -215,29 +219,29 @@ public class Weapons {
             spear("aeternium_spear",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, aeterniumRepair), 8F);
             bow("crystal_shortbow", durabilityTier3, crystalRepair,
-                    new RangedConfig(10F, pullTime_shortBow, 0));
+                    new RangedConfig(10F, pullTime_shortBow, velocity_shortBow));
             bow("crystal_longbow", durabilityTier3, crystalRepair,
-                    new RangedConfig(13.5F, pullTime_longBow, 0));
+                    new RangedConfig(13.5F, pullTime_longBow, velocity_longBow));
         }
         if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_NETHER)) {
             var rubyRepair = ingredient("betternether:nether_ruby", FabricLoader.getInstance().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
             spear("ruby_spear",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, rubyRepair), 8F);
             crossbow("ruby_rapid_crossbow", durabilityTier3, rubyRepair,
-                    new RangedConfig(10.5F, pullTime_rapidCrossbow, 0));
+                    new RangedConfig(10.5F, pullTime_rapidCrossbow, velocity_rapidCrossbow));
             crossbow("ruby_heavy_crossbow", durabilityTier3, rubyRepair,
-                    new RangedConfig(17, pullTime_heavyCrossbow,0));
+                    new RangedConfig(17, pullTime_heavyCrossbow, velocity_heavyCrossbow));
         }
         if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(AETHER)) {
             var aetherRepair = ingredient("aether:ambrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
             spear("aether_spear",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, aetherRepair), 8F);
             bow("aether_longbow", durabilityTier3, aetherRepair,
-                    new RangedConfig(13.5F, pullTime_longBow, 0));
+                    new RangedConfig(13.5F, pullTime_longBow, velocity_rapidCrossbow));
             crossbow("aether_rapid_crossbow", durabilityTier3, aetherRepair,
-                    new RangedConfig(10.5F, pullTime_rapidCrossbow, 0));
+                    new RangedConfig(10.5F, pullTime_rapidCrossbow, velocity_rapidCrossbow));
             crossbow("aether_heavy_crossbow", durabilityTier3, aetherRepair,
-                    new RangedConfig(17, pullTime_heavyCrossbow,0));
+                    new RangedConfig(17, pullTime_heavyCrossbow,velocity_heavyCrossbow));
         }
 
         var netheriteTier = Tiers.unsafe("netherite");
