@@ -1,3 +1,7 @@
+# 2.2.2
+
+- Add support for Lithostitched village structure injection
+
 # 2.2.1
 
 - Add some Arrow Velocity bonus for Longbows and Heavy Crossbows

@@ -9,6 +9,7 @@ import net.archers.util.SoundHelper;
 import net.fabric_extras.structure_pool.api.StructurePoolAPI;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -75,7 +76,10 @@ public class ArcherVillagers {
 //    }
 
     public static void register() {
-        StructurePoolAPI.injectAll(ArchersMod.villagesConfig.value);
+        if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
+            // Only inject the village if the Lithostitched is not present
+            StructurePoolAPI.injectAll(ArchersMod.villagesConfig.value);
+        }
         var poi = registerPOI(ARCHERY_ARTISAN, ArcherBlocks.WORKBENCH.block());
         var profession = registerProfession(
                 ARCHERY_ARTISAN,
