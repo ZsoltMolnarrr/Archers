@@ -1,3 +1,7 @@
+# 2.2.3
+
+- Add spell scroll name
+
 # 2.2.2
 
 - Add support for Lithostitched village structure injection
