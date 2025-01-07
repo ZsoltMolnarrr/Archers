@@ -1,3 +1,7 @@
+# 2.2.4
+
+- Rebalance Quick Charge enchantment for crossbows
+
 # 2.2.3
 
 - Add spell scroll name
