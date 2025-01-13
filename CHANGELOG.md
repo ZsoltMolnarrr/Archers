@@ -1,3 +1,7 @@
+# 2.2.5
+
+- Support Lithostitched v1.4
+
 # 2.2.4
 
 - Rebalance Quick Charge enchantment for crossbows
