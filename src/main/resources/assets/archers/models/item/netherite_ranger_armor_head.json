@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "archers:item/netherite_ranger_armor_head"
+  }
+}
