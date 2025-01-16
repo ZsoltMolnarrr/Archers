@@ -1,3 +1,7 @@
+# 1.3.0
+
+- Added Netherite Ranger Armor, by ElocinDev (@nvb-uy)
+
 # 1.2.5
 
 - Update translations
