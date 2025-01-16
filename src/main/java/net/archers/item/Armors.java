@@ -38,6 +38,8 @@ public class Armors {
     public static final float damage_T1 = 0.05F;
     public static final float haste_T2 = 0.03F;
     public static final float damage_T2 = 0.08F;
+    public static final float damage_T3 = 0.10F;
+    public static final float haste_T3 = 0.05F;
 
     public static final Armor.Set archerArmorSet_T1 =
             create(
@@ -90,6 +92,39 @@ public class Armors {
                             new ItemConfig.ArmorSet.Piece(2)
                                     .add(damageMultiplier(damage_T2))
                                     .add(hasteMultiplier(haste_T2))
+                    )
+            )
+            .bundle(material -> new Armor.Set(ArchersMod.ID,
+                    new ArcherArmor(material, ArmorItem.Type.HELMET, new Item.Settings()),
+                    new ArcherArmor(material, ArmorItem.Type.CHESTPLATE, new Item.Settings()),
+                    new ArcherArmor(material, ArmorItem.Type.LEGGINGS, new Item.Settings()),
+                    new ArcherArmor(material, ArmorItem.Type.BOOTS, new Item.Settings())
+            ))
+            .put(entries)
+            .armorSet();
+
+	public static final Armor.Set archerArmorSet_T3 =
+            create(
+                    new Armor.CustomMaterial(
+                            "netherite_ranger_armor",
+                            30,
+                            15,
+                            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
+                            () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); }
+                    ),
+                    ItemConfig.ArmorSet.with(
+                            new ItemConfig.ArmorSet.Piece(2)
+                                    .add(damageMultiplier(damage_T3))
+                                    .add(hasteMultiplier(haste_T3)),
+                            new ItemConfig.ArmorSet.Piece(3)
+                                    .add(damageMultiplier(damage_T3))
+                                    .add(hasteMultiplier(haste_T3)),
+                            new ItemConfig.ArmorSet.Piece(3)
+                                    .add(damageMultiplier(damage_T3))
+                                    .add(hasteMultiplier(haste_T3)),
+                            new ItemConfig.ArmorSet.Piece(2)
+                                    .add(damageMultiplier(damage_T3))
+                                    .add(hasteMultiplier(haste_T3))
                     )
             )
             .bundle(material -> new Armor.Set(ArchersMod.ID,
