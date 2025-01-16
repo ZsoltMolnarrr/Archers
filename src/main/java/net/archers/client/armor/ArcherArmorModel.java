@@ -9,6 +9,8 @@ public class ArcherArmorModel extends GeoModel<ArcherArmor> {
     @Override
     public Identifier getModelResource(ArcherArmor armor) {
         var name = armor.customMaterial.name();
+        if (name.endsWith("netherite_ranger_armor")) name = "ranger_armor";
+        
         return new Identifier(ArchersMod.ID, "geo/" + name + ".geo.json");
     }
 
