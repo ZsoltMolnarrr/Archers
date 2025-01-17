@@ -29,6 +29,11 @@
   "item.archers.ranger_armor_legs": "Ranger Leggings",
   "item.archers.ranger_armor_feet": "Ranger Boots",
 
+  "item.archers.netherite_ranger_armor_head": "Netherite Ranger Hood",
+  "item.archers.netherite_ranger_armor_chest": "Netherite Ranger Tunic",
+  "item.archers.netherite_ranger_armor_legs": "Netherite Ranger Leggings",
+  "item.archers.netherite_ranger_armor_feet": "Netherite Ranger Boots",
+
   "item.archers.composite_longbow": "Composite Longbow",
   "item.archers.mechanic_shortbow": "Mechanical Shortbow",
   "item.archers.royal_longbow": "Royal Longbow",
