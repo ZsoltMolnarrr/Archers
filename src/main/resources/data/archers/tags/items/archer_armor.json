@@ -1,0 +1,18 @@
+{
+  "values": [
+    "archers:archer_armor_head",
+    "archers:archer_armor_chest",
+    "archers:archer_armor_legs",
+    "archers:archer_armor_feet",
+
+    "archers:ranger_armor_head",
+    "archers:ranger_armor_chest",
+    "archers:ranger_armor_legs",
+    "archers:ranger_armor_feet",
+
+    "archers:netherite_ranger_armor_head",
+    "archers:netherite_ranger_armor_chest",
+    "archers:netherite_ranger_armor_legs",
+    "archers:netherite_ranger_armor_feet"
+  ]
+}

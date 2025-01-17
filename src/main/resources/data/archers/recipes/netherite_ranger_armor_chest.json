@@ -7,7 +7,7 @@
     "item": "archers:ranger_armor_chest"
   },
   "result": {
-    "id": "archers:netherite_ranger_armor_chest"
+    "item": "archers:netherite_ranger_armor_chest"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"
