@@ -1,3 +1,8 @@
+# 2.3.0
+
+- Support Spell Engine v1.4.0
+- Fix Hunter's Mark bonus
+
 # 2.2.5
 
 - Support Lithostitched v1.4
