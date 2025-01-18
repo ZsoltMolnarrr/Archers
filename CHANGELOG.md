@@ -1,6 +1,7 @@
 # 2.3.0
 
 - Support Spell Engine v1.4.0
+- Support AzureLib Armor v3.X
 - Fix Hunter's Mark bonus
 
 # 2.2.5
