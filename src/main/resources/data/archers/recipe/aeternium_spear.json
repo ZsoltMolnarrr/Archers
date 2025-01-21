@@ -1,5 +1,4 @@
 {
-  "type": "minecraft:crafting_shaped",
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",
@@ -8,6 +7,8 @@
       ]
     }
   ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "key": {
     "#": [
       {
@@ -29,6 +30,5 @@
   "result": {
     "id": "archers:aeternium_spear"
   },
-  "category": "equipment",
   "show_notification": true
 }

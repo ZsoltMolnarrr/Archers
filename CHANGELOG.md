@@ -1,3 +1,7 @@
+# 2.3.1 
+
+- Add category for all crafting recipes
+
 # 2.3.0
 
 - Support Spell Engine v1.4.0

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",
@@ -27,6 +28,5 @@
   "result": {
     "id": "archers:crystal_shortbow"
   },
-  "category": "equipment",
   "show_notification": true
 }

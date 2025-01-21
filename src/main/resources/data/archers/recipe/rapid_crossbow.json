@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "key": {
     "I": {
       "item": "minecraft:iron_ingot"
@@ -30,6 +31,5 @@
   "result": {
     "id": "archers:rapid_crossbow"
   },
-  "category": "equipment",
   "show_notification": true
 }

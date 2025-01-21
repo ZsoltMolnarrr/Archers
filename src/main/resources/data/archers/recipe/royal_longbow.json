@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "key": {
     "S": [
       {
@@ -27,6 +28,5 @@
   "result": {
     "id": "archers:royal_longbow"
   },
-  "category": "equipment",
   "show_notification": true
 }
