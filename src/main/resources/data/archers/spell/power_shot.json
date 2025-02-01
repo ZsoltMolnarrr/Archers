@@ -4,10 +4,8 @@
   "learn": {
     "tier": 1
   },
+  "active": { },
   "release": {
-    "target": {
-      "type": "SELF"
-    },
     "sound": {
       "id": "archers:marker_shot",
       "volume": 0.5
@@ -23,48 +21,48 @@
       }
     ]
   },
+  "deliver": {
+    "type": "STASH_EFFECT",
+    "stash_effect": {
+      "id": "archers:hunters_mark_stash",
+      "duration": 12,
+      "amplifier": 2,
+      "trigger": {
+        "type": "ARROW_SHOT"
+      },
+      "impact_mode": "TRANSFER"
+    }
+  },
   "impact": [
     {
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "archers:marker_shot",
+          "apply_mode": "ADD",
           "duration": 12,
-          "apply_mode": "SET",
           "amplifier": 2,
+          "effect_id": "archers:hunters_mark",
           "show_particles": false
         }
-      }
+      },
+      "particles": [
+        {
+          "particle_id": "firework",
+          "shape": "PILLAR",
+          "origin": "CENTER",
+          "count": 3,
+          "min_speed": 0,
+          "max_speed": 0
+        }
+      ]
     }
   ],
   "arrow_perks": {
-    "bypass_iframes": true,
-    "impact": [
-      {
-        "action": {
-          "type": "STATUS_EFFECT",
-          "status_effect": {
-            "apply_mode": "ADD",
-            "duration": 12,
-            "amplifier": 2,
-            "effect_id": "archers:hunters_mark",
-            "show_particles": false
-          }
-        },
-        "particles": [
-          {
-            "particle_id": "firework",
-            "shape": "PILLAR",
-            "origin": "CENTER",
-            "count": 3,
-            "min_speed": 0,
-            "max_speed": 0
-          }
-        ]
-      }
-    ]
+    "bypass_iframes": true
   },
   "cost": {
-    "cooldown_duration": 8
+    "cooldown": {
+      "duration": 8
+    }
   }
 }

@@ -4,25 +4,27 @@
   "learn": {
     "tier": 3
   },
-  "cast": {
-    "duration": 0.5,
-    "animation": "spell_engine:archery_pull",
-    "animates_ranged_weapon": true,
-    "sound": {
-      "id": "archers:bow_pull"
+  "active": {
+    "cast": {
+      "duration": 0.5,
+      "animation": "spell_engine:archery_pull",
+      "animates_ranged_weapon": true,
+      "sound": {
+        "id": "archers:bow_pull"
+      }
     }
   },
   "release": {
-    "target": {
-      "type": "SHOOT_ARROW",
-      "shoot_arrow": {
-        "launch_properties": {
-          "velocity": 3.15,
-          "extra_launch_count": 2
-        }
-      }
-    },
     "animation": "spell_engine:archery_release"
+  },
+  "deliver": {
+    "type": "SHOOT_ARROW",
+    "shoot_arrow": {
+      "launch_properties": {
+        "velocity": 3.15,
+        "extra_launch_count": 2
+      }
+    }
   },
   "arrow_perks": {
     "damage_multiplier": 0.75,
@@ -30,8 +32,12 @@
     "knockback": 0.5
   },
   "cost": {
-    "item_id": "arrow",
-    "consume_item": false,
-    "cooldown_duration": 10
+    "item": {
+      "id": "arrow",
+      "consume": false
+    },
+    "cooldown": {
+      "duration": 10
+    }
   }
 }

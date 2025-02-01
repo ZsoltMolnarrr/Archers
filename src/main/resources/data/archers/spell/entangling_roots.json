@@ -4,38 +4,40 @@
   "learn": {
     "tier": 2
   },
-  "cast": {
-    "duration": 0,
-    "particles": []
+  "active": {
+    "cast": {
+      "duration": 0,
+      "particles": []
+    }
   },
   "release": {
-    "animation": "spell_engine:one_handed_area_release",
-    "target": {
-      "type": "CLOUD",
-      "cloud": {
-        "volume": {
-          "radius": 3.5,
-          "area": {
-            "vertical_range_multiplier": 0.3
-          },
-          "sound": {
-            "id": "archers:entangling_roots"
-          }
+    "animation": "spell_engine:one_handed_area_release"
+  },
+  "deliver": {
+    "type": "CLOUD",
+    "cloud": {
+      "volume": {
+        "radius": 3.5,
+        "area": {
+          "vertical_range_multiplier": 0.3
         },
-        "impact_tick_interval": 15,
-        "time_to_live_seconds": 8,
-        "client_data": {
-          "particles": [
-            {
-              "particle_id": "spell_engine:roots",
-              "shape": "PILLAR",
-              "origin": "FEET",
-              "count": 2.0,
-              "min_speed": 0.0,
-              "max_speed": 0.0
-            }
-          ]
+        "sound": {
+          "id": "archers:entangling_roots"
         }
+      },
+      "impact_tick_interval": 15,
+      "time_to_live_seconds": 8,
+      "client_data": {
+        "particles": [
+          {
+            "particle_id": "spell_engine:roots",
+            "shape": "PILLAR",
+            "origin": "FEET",
+            "count": 2.0,
+            "min_speed": 0.0,
+            "max_speed": 0.0
+          }
+        ]
       }
     }
   },
@@ -68,6 +70,8 @@
   ],
   "cost": {
     "exhaust": 0.2,
-    "cooldown_duration": 18
+    "cooldown": {
+      "duration": 18
+    }
   }
 }

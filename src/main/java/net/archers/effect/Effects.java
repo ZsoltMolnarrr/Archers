@@ -10,7 +10,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.HealthImpacting;
-import net.spell_engine.api.effect.SpellStash;
 import net.spell_engine.api.effect.Synchronized;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class Effects {
         }
     }
 
-    public static final Entry MARKER_SHOT = new Entry("marker_shot",
+    public static final Entry HUNTERS_MARK_STASH = new Entry("hunters_mark_stash",
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xff0000));
     public static final Entry HUNTERS_MARK = new Entry("hunters_mark", 
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0xff0000));
@@ -52,7 +51,6 @@ public class Effects {
                 ENTANGLING_ROOTS.modifierId(),
                 -0.5F,
                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
-        SpellStash.configure(MARKER_SHOT.effect, Identifier.of(ArchersMod.ID, "power_shot"), 1);
         Synchronized.configure(HUNTERS_MARK.effect, true);
         HealthImpacting.configureDamageTaken(HUNTERS_MARK.effect, config.hunters_mark_damage_per_stack);
         Synchronized.configure(ENTANGLING_ROOTS.effect, true);
