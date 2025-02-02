@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "archers:small_quiver",
+      "required": false
+    },
+    {
+      "id": "archers:medium_quiver",
+      "required": false
+    },
+    {
+      "id": "archers:large_quiver",
+      "required": false
+    }
+  ]
+}

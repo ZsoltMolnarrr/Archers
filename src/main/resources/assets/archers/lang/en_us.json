@@ -10,6 +10,10 @@
   "entity.minecraft.villager.archers:archery_artisan": "Archery Artisan",
 
   "item.archers.auto_fire_hook": "Auto-Fire Hook",
+  "item.archers.small_quiver": "Quiver",
+  "item.archers.medium_quiver": "Hunting Quiver",
+  "item.archers.large_quiver": "Battle Quiver",
+  "item.archers.quiver.hint": "Provides arrows for archery, when equipped.",
 
   "item.archers.flint_spear": "Flint Spear",
   "item.archers.iron_spear": "Iron Spear",

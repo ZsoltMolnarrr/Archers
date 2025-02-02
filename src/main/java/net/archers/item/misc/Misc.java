@@ -1,7 +1,9 @@
 package net.archers.item.misc;
 
 import net.archers.item.Group;
+import net.archers.item.Quivers;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -28,5 +30,8 @@ public class Misc {
                 content.add(entry.item);
             }
         });
+        if (FabricLoader.getInstance().isModLoaded("bundleapi")) {
+            Quivers.register();
+        }
     }
 }

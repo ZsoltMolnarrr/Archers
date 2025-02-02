@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/large_quiver",
+  "textures": {
+    "layer0": "archers:item/large_quiver_filled"
+  }
+}

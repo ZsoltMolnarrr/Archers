@@ -1,0 +1,6 @@
+{
+  "parent": "archers:item/small_quiver",
+  "textures": {
+    "layer0": "archers:item/small_quiver_filled"
+  }
+}

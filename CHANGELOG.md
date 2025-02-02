@@ -1,3 +1,10 @@
+# 2.4.0
+
+- Add Quiver (can store 4x64 arrows)
+- Add Hunting Quiver (can store 8x64 bolts)
+- Add Battle Quiver (can store 12x64 arrows)
+- Support Spell Engine 1.5.0
+
 # 2.3.1 
 
 - Add category for all crafting recipes
