@@ -5,6 +5,7 @@
 - Add Battle Quiver (can store 12x64 arrows)
 - Support Spell Engine 1.5.0
 - Add category for all crafting recipes
+- Entangling Roots now prevents jumping
 
 # 2.3.0
 

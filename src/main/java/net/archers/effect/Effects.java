@@ -47,10 +47,15 @@ public class Effects {
     public static void register() {
         var config = ArchersMod.tweaksConfig.value;
 
-        ENTANGLING_ROOTS.effect.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,
-                ENTANGLING_ROOTS.modifierId(),
-                -0.5F,
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        ENTANGLING_ROOTS.effect
+                .addAttributeModifier(
+                        EntityAttributes.GENERIC_MOVEMENT_SPEED, ENTANGLING_ROOTS.modifierId(),
+                        config.entangling_roots_movement_speed_modifier,
+                        EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+                .addAttributeModifier(
+                        EntityAttributes.GENERIC_JUMP_STRENGTH, ENTANGLING_ROOTS.modifierId(),
+                        config.entangling_roots_jump_strength_modifier,
+                        EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         Synchronized.configure(HUNTERS_MARK.effect, true);
         HealthImpacting.configureDamageTaken(HUNTERS_MARK.effect, config.hunters_mark_damage_per_stack);
         Synchronized.configure(ENTANGLING_ROOTS.effect, true);
