@@ -14,6 +14,8 @@ import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +23,8 @@ import java.util.List;
 public class Quivers {
     public static final List<Entry> entries = new ArrayList<>();
     public record Entry(Identifier id, int capacity, Item item) {  }
-    public static Entry entry(String name, int capacity) {
-        var bundle = new CustomBundleItem(ItemTags.ARROWS, new Item.Settings()
+    public static Entry entry(String name, int capacity, @Nullable Rarity rarity) {
+        var settings = new Item.Settings()
                 .maxCount(1)
                 .component(
                         DataComponentTypes.LORE,
@@ -34,8 +36,11 @@ public class Quivers {
                 .component(
                         BundleAPI.CUSTOM_BUNDLE_CONTENTS_COMPONENT,
                         CustomBundleContentsComponent.builder().size_multiplier(capacity).build()
-                )
-        );
+                );
+        if (rarity != null) {
+            settings.rarity(rarity);
+        }
+        var bundle = new CustomBundleItem(ItemTags.ARROWS, settings);
         var id = Identifier.of(ArchersMod.ID, name);
         var entry = new Entry(id, capacity, bundle);
         entries.add(entry);
@@ -43,9 +48,9 @@ public class Quivers {
     }
 
     public static void register() {
-        entry("small_quiver", 4);
-        entry("medium_quiver", 8);
-        entry("large_quiver", 12);
+        entry("small_quiver", 4, null);
+        entry("medium_quiver", 8, null);
+        entry("large_quiver", 12, Rarity.UNCOMMON);
 
         for(var entry: entries) {
             Registry.register(Registries.ITEM, entry.id(), entry.item());
