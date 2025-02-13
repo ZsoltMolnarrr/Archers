@@ -4,7 +4,7 @@ import net.archers.block.ArcherBlocks;
 import net.archers.config.ArchersItemConfig;
 import net.archers.config.Default;
 import net.archers.config.TweaksConfig;
-import net.archers.effect.Effects;
+import net.archers.effect.ArcherEffects;
 import net.archers.item.Group;
 import net.archers.item.Weapons;
 import net.archers.item.Armors;
@@ -23,7 +23,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.item.trinket.SpellBooks;
+import net.spell_engine.api.config.ConfigFile;
+import net.spell_engine.api.item.SpellBooks;
 import net.spell_engine.api.spell.container.SpellContainer;
 import net.tinyconfig.ConfigManager;
 
@@ -31,7 +32,13 @@ public class ArchersMod implements ModInitializer {
     public static final String ID = "archers";
 
     public static ConfigManager<ArchersItemConfig> itemConfig = new ConfigManager<ArchersItemConfig>
-            ("items_v4", Default.itemConfig)
+            ("equipment", Default.itemConfig)
+            .builder()
+            .setDirectory(ID)
+            .sanitize(true)
+            .build();
+    public static ConfigManager<ConfigFile.Effects> effectsConfig = new ConfigManager<>
+            ("effects", new ConfigFile.Effects())
             .builder()
             .setDirectory(ID)
             .sanitize(true)
@@ -54,10 +61,10 @@ public class ArchersMod implements ModInitializer {
     @Override
     public void onInitialize() {
         tweaksConfig.refresh();
+        registerEffects();
         registerItemGroup();
         registerItems();
         SoundHelper.registerSounds();
-        Effects.register();
         registerVillages();
         subscribeEvents();
 
@@ -71,11 +78,6 @@ public class ArchersMod implements ModInitializer {
                 return TriState.DEFAULT;
             });
         }
-//        CrossbowMechanics.PullTime.modifier = (originalPullTime, crossbow) -> {
-//            int quickCharge = EnchantmentHelper.getLevel(Enchantments.QUICK_CHARGE, crossbow);
-//            var multiplier = tweaksConfig.value.quick_charge_enchantment_multiplier_per_level;
-//            return originalPullTime - (int)((double)originalPullTime * multiplier) * quickCharge;
-//        };
     }
 
     private void registerItemGroup() {
@@ -99,6 +101,12 @@ public class ArchersMod implements ModInitializer {
     private void registerVillages() {
         villagesConfig.refresh();
         ArcherVillagers.register();
+    }
+
+    private void registerEffects() {
+        effectsConfig.refresh();
+        ArcherEffects.register(effectsConfig.value);
+        effectsConfig.save();
     }
 
     private void subscribeEvents() {

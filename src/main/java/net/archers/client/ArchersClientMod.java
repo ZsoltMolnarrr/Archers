@@ -8,7 +8,7 @@ import net.archers.client.armor.ArcherArmorRenderer;
 import net.archers.client.effect.HuntersMarkRenderer;
 import net.archers.client.effect.RootsRenderer;
 import net.archers.client.util.ArchersTooltip;
-import net.archers.effect.Effects;
+import net.archers.effect.ArcherEffects;
 import net.archers.item.Armors;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -32,8 +32,8 @@ public class ArchersClientMod implements ClientModInitializer {
                 RootsRenderer.modelId,
                 Identifier.of(ArchersMod.ID, "projectile/magic_arrow")
         ));
-        CustomModelStatusEffect.register(Effects.HUNTERS_MARK.effect, new HuntersMarkRenderer());
-        CustomModelStatusEffect.register(Effects.ENTANGLING_ROOTS.effect, new RootsRenderer());
+        CustomModelStatusEffect.register(ArcherEffects.HUNTERS_MARK.effect, new HuntersMarkRenderer());
+        CustomModelStatusEffect.register(ArcherEffects.ENTANGLING_ROOTS.effect, new RootsRenderer());
 
         ArchersTooltip.init();
 

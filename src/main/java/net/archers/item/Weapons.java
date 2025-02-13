@@ -13,7 +13,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.item.ItemConfig;
+import net.spell_engine.api.config.WeaponConfig;
 import net.spell_engine.api.item.Tiers;
 import net.spell_engine.api.item.weapon.SpellWeaponItem;
 import net.spell_engine.api.item.weapon.Weapon;
@@ -104,14 +104,14 @@ public class Weapons {
      * MELEE WEAPONS
      */
 
-    private static Weapon.Entry addMelee(String name, Weapon.CustomMaterial material, Weapon.Factory factory, ItemConfig.Weapon defaults) {
+    private static Weapon.Entry addMelee(String name, Weapon.CustomMaterial material, Weapon.Factory factory, WeaponConfig defaults) {
         var entry = new Weapon.Entry(ArchersMod.ID, name, material, factory, defaults, null);
         meleeEntries.add(entry);
         return entry;
     }
 
     private static Weapon.Entry spear(String name, Weapon.CustomMaterial material, float damage) {
-        return addMelee(name, material, SpellWeaponItem::new, new ItemConfig.Weapon(damage, -2.6F));
+        return addMelee(name, material, SpellWeaponItem::new, new WeaponConfig(damage, -2.6F));
     }
 
     public static final Weapon.Entry flint_spear = spear("flint_spear",
@@ -212,7 +212,7 @@ public class Weapons {
             new RangedConfig(15, pullTime_heavyCrossbow, velocity_heavyCrossbow));
 
 
-    public static void register(Map<String, RangedConfig> rangedConfig, Map<String, ItemConfig.Weapon> meleeConfig) {
+    public static void register(Map<String, RangedConfig> rangedConfig, Map<String, WeaponConfig> meleeConfig) {
         if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_END)) {
             var aeterniumRepair = ingredient("betterend:aeternium_ingot", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
             var crystalRepair = ingredient("betterend:crystal_shards", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);

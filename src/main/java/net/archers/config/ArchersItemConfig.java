@@ -1,13 +1,13 @@
 package net.archers.config;
 
 import net.fabric_extras.ranged_weapon.api.RangedConfig;
-import net.spell_engine.api.item.ItemConfig;
+import net.spell_engine.api.config.ArmorSetConfig;
+import net.spell_engine.api.config.WeaponConfig;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class ArchersItemConfig { public ArchersItemConfig() {}
-    public Map<String, RangedConfig> ranged_weapons = new HashMap();
-    public Map<String, ItemConfig.Weapon> melee_weapons = new HashMap();
-    public Map<String, ItemConfig.ArmorSet> armor_sets = new HashMap();
+    public LinkedHashMap<String, RangedConfig> ranged_weapons = new LinkedHashMap();
+    public LinkedHashMap<String, WeaponConfig> melee_weapons = new LinkedHashMap();
+    public LinkedHashMap<String, ArmorSetConfig> armor_sets = new LinkedHashMap();
 }

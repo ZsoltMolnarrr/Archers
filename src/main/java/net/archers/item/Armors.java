@@ -14,7 +14,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.item.ItemConfig;
+import net.spell_engine.api.config.ArmorSetConfig;
+import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.item.armor.Armor;
 
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class Armors {
 
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ItemConfig.ArmorSet defaults) {
+    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults) {
         var entry = Armor.Entry.create(
                 material,
                 id,
@@ -70,15 +71,15 @@ public class Armors {
         return entry;
     }
 
-    private static ItemConfig.Attribute damageMultiplier(float value) {
-        return new ItemConfig.Attribute(
+    private static AttributeModifier damageMultiplier(float value) {
+        return new AttributeModifier(
                 EntityAttributes_RangedWeapon.DAMAGE.id.toString(),
                 value,
                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     }
 
-    private static ItemConfig.Attribute hasteMultiplier(float value) {
-        return new ItemConfig.Attribute(
+    private static AttributeModifier hasteMultiplier(float value) {
+        return new AttributeModifier(
                 EntityAttributes_RangedWeapon.HASTE.id.toString(),
                 value,
                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
@@ -95,14 +96,14 @@ public class Armors {
             Identifier.of(ArchersMod.ID, "archer_armor"),
             15,
             ArcherArmor::archer,
-            ItemConfig.ArmorSet.with(
-                    new ItemConfig.ArmorSet.Piece(2)
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(2)
                             .add(damageMultiplier(damage_T1)),
-                    new ItemConfig.ArmorSet.Piece(3)
+                    new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(damage_T1)),
-                    new ItemConfig.ArmorSet.Piece(3)
+                    new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(damage_T1)),
-                    new ItemConfig.ArmorSet.Piece(2)
+                    new ArmorSetConfig.Piece(2)
                             .add(damageMultiplier(damage_T1))
             ))
             .armorSet();
@@ -112,17 +113,17 @@ public class Armors {
             Identifier.of(ArchersMod.ID, "ranger_armor"),
             25,
             ArcherArmor::ranger,
-            ItemConfig.ArmorSet.with(
-                    new ItemConfig.ArmorSet.Piece(2)
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(2)
                             .add(damageMultiplier(damage_T2))
                             .add(hasteMultiplier(haste_T2)),
-                    new ItemConfig.ArmorSet.Piece(3)
+                    new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(damage_T2))
                             .add(hasteMultiplier(haste_T2)),
-                    new ItemConfig.ArmorSet.Piece(3)
+                    new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(damage_T2))
                             .add(hasteMultiplier(haste_T2)),
-                    new ItemConfig.ArmorSet.Piece(2)
+                    new ArmorSetConfig.Piece(2)
                             .add(damageMultiplier(damage_T2))
                             .add(hasteMultiplier(haste_T2))
             ))
@@ -133,23 +134,23 @@ public class Armors {
             Identifier.of(ArchersMod.ID, "netherite_ranger_armor"),
             35,
             ArcherArmor::ranger,
-            ItemConfig.ArmorSet.with(
-                    new ItemConfig.ArmorSet.Piece(2)
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(2)
                             .add(damageMultiplier(damage_T3))
                             .add(hasteMultiplier(haste_T3)),
-                    new ItemConfig.ArmorSet.Piece(3)
+                    new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(damage_T3))
                             .add(hasteMultiplier(haste_T3)),
-                    new ItemConfig.ArmorSet.Piece(3)
+                    new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(damage_T3))
                             .add(hasteMultiplier(haste_T3)),
-                    new ItemConfig.ArmorSet.Piece(2)
+                    new ArmorSetConfig.Piece(2)
                             .add(damageMultiplier(damage_T3))
                             .add(hasteMultiplier(haste_T3))
             ))
             .armorSet();
 
-    public static void register(Map<String, ItemConfig.ArmorSet> configs) {
+    public static void register(Map<String, ArmorSetConfig> configs) {
         Armor.register(configs, entries, Group.KEY);
     }
 }

@@ -1,9 +1,6 @@
 package net.archers.config;
 
-import net.archers.item.Armors;
-import net.archers.item.Weapons;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
-import net.spell_engine.api.loot.LootConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
