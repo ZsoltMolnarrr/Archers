@@ -1,4 +1,9 @@
 {
+  "archer_armor": {
+    "sounds": [
+      "archers:archer_armor"
+    ]
+  },
   "archers_workbench": {
     "sounds": [
       "archers:archers_workbench"
@@ -7,11 +12,6 @@
   "bow_pull": {
     "sounds": [
       "archers:bow_pull"
-    ]
-  },
-  "cloth_equip": {
-    "sounds": [
-      "archers:cloth_equip"
     ]
   },
   "entangling_roots": {

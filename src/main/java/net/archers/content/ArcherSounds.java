@@ -48,7 +48,7 @@ public class ArcherSounds {
     public static final Entry MAGIC_ARROW_RELEASE = add(new Entry("magic_arrow_release"));
     public static final Entry MAGIC_ARROW_START = add(new Entry("magic_arrow_start"));
     public static final Entry WORKBENCH = add(new Entry(ArcherWorkbenchBlock.ID.getPath()));
-    public static final Entry ARCHER_ARMOR_EQUIP = add(new Entry("cloth_equip"));
+    public static final Entry ARCHER_ARMOR_EQUIP = add(new Entry("archer_armor"));
 
     public static void register() {
         for (var entry: entries) {
