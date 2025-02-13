@@ -37,11 +37,10 @@ public class ArchersClientMod implements ClientModInitializer {
 
         ArchersTooltip.init();
 
-        var config = ArchersMod.tweaksConfig.value;
         SpellTooltip.addDescriptionMutator(Identifier.of(ArchersMod.ID, "power_shot"), (args) -> {
             var description = args.description();
-            var huntersMarkPercent = ((int)(config.hunters_mark_damage_per_stack * 100)) + "%";
-            description = description.replace(SpellTooltip.placeholder("damage_taken"), "" + huntersMarkPercent);
+            var huntersMarkPercent = SpellTooltip.percent(ArcherEffects.HUNTERS_MARK.config().firstModifier().value);
+            description = description.replace(SpellTooltip.placeholder("damage_taken"), huntersMarkPercent);
             return description;
         });
 

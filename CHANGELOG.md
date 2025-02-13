@@ -6,6 +6,7 @@
 - Support Spell Engine 1.5.0
 - Add category for all crafting recipes
 - Entangling Roots now prevents jumping
+- Hunter's Mark stacks can now be applied with Barrage, all at once
 
 # 2.3.0
 

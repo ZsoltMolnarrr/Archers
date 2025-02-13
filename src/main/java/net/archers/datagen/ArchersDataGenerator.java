@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.registry.RegistryWrapper;
 import net.spell_engine.api.datagen.SimpleSoundGenerator;
+import net.spell_engine.api.datagen.SpellGenerator;
 
 import java.util.concurrent.CompletableFuture;
 
