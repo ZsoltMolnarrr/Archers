@@ -9,7 +9,7 @@ import net.archers.item.Group;
 import net.archers.item.Weapons;
 import net.archers.item.Armors;
 import net.archers.item.misc.Misc;
-import net.archers.util.ArcherSounds;
+import net.archers.content.ArcherSounds;
 import net.archers.village.ArcherVillagers;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.fabricmc.api.ModInitializer;

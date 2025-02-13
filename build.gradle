@@ -8,6 +8,13 @@ plugins {
 version = project.mod_version + "+" + project.minecraft_version
 group = project.maven_group
 
+fabricApi {
+    configureDataGeneration() {
+        client = true
+        modId = "archers"
+    }
+}
+
 repositories {
     maven { url 'https://jitpack.io' }
     maven { url 'https://maven.kosmx.dev/' }

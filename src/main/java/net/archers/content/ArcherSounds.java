@@ -1,4 +1,4 @@
-package net.archers.util;
+package net.archers.content;
 
 import net.archers.ArchersMod;
 import net.archers.block.ArcherWorkbenchBlock;

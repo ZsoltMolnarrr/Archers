@@ -38,7 +38,7 @@ public class ArcherEffects {
             new EffectConfig(List.of(
                     new AttributeModifier(
                             SpellEngineAttributes.DAMAGE_TAKEN.id.toString(),
-                            0.15F,
+                            0.1F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))

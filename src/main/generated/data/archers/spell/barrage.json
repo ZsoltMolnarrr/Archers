@@ -1,10 +1,10 @@
 {
-  "school": "PHYSICAL_RANGED",
-  "range": 0,
-  "learn": {
-    "tier": 3
-  },
+  "school": "spell_power:physical_ranged",
+  "range": 0.0,
+  "tier": 3,
+  "learn": {},
   "active": {
+    "scroll": {},
     "cast": {
       "duration": 0.5,
       "animation": "spell_engine:archery_pull",
@@ -16,6 +16,10 @@
   },
   "release": {
     "animation": "spell_engine:archery_release"
+  },
+  "target": {
+    "type": "AIM",
+    "aim": {}
   },
   "deliver": {
     "type": "SHOOT_ARROW",
@@ -32,12 +36,12 @@
     "knockback": 0.5
   },
   "cost": {
+    "cooldown": {
+      "duration": 10.0
+    },
     "item": {
       "id": "arrow",
       "consume": false
-    },
-    "cooldown": {
-      "duration": 10
     }
   }
 }

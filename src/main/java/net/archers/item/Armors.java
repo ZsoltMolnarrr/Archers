@@ -2,7 +2,7 @@ package net.archers.item;
 
 import net.archers.ArchersMod;
 import net.archers.item.armor.ArcherArmor;
-import net.archers.util.ArcherSounds;
+import net.archers.content.ArcherSounds;
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;

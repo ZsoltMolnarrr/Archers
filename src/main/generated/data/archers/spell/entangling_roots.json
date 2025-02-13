@@ -1,0 +1,72 @@
+{
+  "school": "spell_power:physical_ranged",
+  "range": 0.0,
+  "tier": 2,
+  "learn": {},
+  "active": {
+    "scroll": {}
+  },
+  "release": {
+    "animation": "spell_engine:one_handed_area_release"
+  },
+  "deliver": {
+    "type": "CLOUD",
+    "clouds": [
+      {
+        "volume": {
+          "radius": 3.5,
+          "area": {
+            "vertical_range_multiplier": 0.3
+          },
+          "sound": {
+            "id": "archers:entangling_roots"
+          }
+        },
+        "time_to_live_seconds": 8.0,
+        "impact_tick_interval": 15,
+        "client_data": {
+          "particles": [
+            {
+              "particle_id": "spell_engine:roots",
+              "origin": "FEET",
+              "shape": "PILLAR",
+              "count": 2.0,
+              "max_speed": 0.0
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "archers:entangling_roots",
+          "duration": 1.0,
+          "apply_mode": "ADD",
+          "apply_limit": {
+            "health_base": 50.0,
+            "spell_power_multiplier": 5.0
+          }
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "falling_spore_blossom",
+          "shape": "SPHERE",
+          "count": 2.0,
+          "min_speed": 0.1,
+          "max_speed": 0.2
+        }
+      ]
+    }
+  ],
+  "cost": {
+    "exhaust": 0.2,
+    "cooldown": {
+      "duration": 18.0
+    }
+  }
+}

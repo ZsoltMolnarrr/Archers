@@ -1,60 +1,60 @@
 {
-  "school": "PHYSICAL_RANGED",
-  "range": 64,
-  "learn": {
-    "tier": 4
-  },
+  "school": "spell_power:physical_ranged",
+  "range": 64.0,
+  "tier": 4,
+  "learn": {},
   "active": {
+    "scroll": {},
     "cast": {
-      "duration": 1,
+      "duration": 1.0,
       "animation": "spell_engine:archery_pull",
       "animates_ranged_weapon": true,
-      "particles": [
-        {
-          "particle_id": "spell_engine:nature_spark_mini",
-          "shape": "SPHERE",
-          "origin": "LAUNCH_POINT",
-          "count": 4,
-          "min_speed": 0.02,
-          "max_speed": 0.1,
-          "pre_spawn_travel": 14,
-          "invert": true
-        }
-      ],
       "sound": {
         "id": "spell_engine:generic_wind_charging"
-      }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:magic_nature_spark_float",
+          "origin": "LAUNCH_POINT",
+          "shape": "SPHERE",
+          "count": 4.0,
+          "min_speed": 0.02,
+          "max_speed": 0.1,
+          "pre_spawn_travel": 14.0,
+          "invert": true
+        }
+      ]
     }
   },
   "release": {
     "animation": "spell_engine:archery_release",
-    "sound": {
-      "id": "archers:magic_arrow_release"
-    },
     "particles": [
       {
-        "particle_id": "spell_engine:nature_spark_mini_slowing",
+        "particle_id": "spell_engine:magic_nature_spark_decelerate",
+        "origin": "LAUNCH_POINT",
         "shape": "CIRCLE",
         "rotation": "LOOK",
-        "origin": "LAUNCH_POINT",
-        "count": 50,
+        "count": 50.0,
         "min_speed": 0.18,
         "max_speed": 0.2
       },
       {
-        "particle_id": "spell_engine:nature_spark_mini_slowing",
+        "particle_id": "spell_engine:magic_nature_spark_decelerate",
+        "origin": "LAUNCH_POINT",
         "shape": "CIRCLE",
         "rotation": "LOOK",
-        "origin": "LAUNCH_POINT",
-        "count": 25,
+        "count": 25.0,
         "min_speed": 0.28,
         "max_speed": 0.3
       }
-    ]
+    ],
+    "sound": {
+      "id": "archers:magic_arrow_release"
+    }
   },
   "target": {
     "type": "AIM",
-    "aim": { }
+    "aim": {}
   },
   "deliver": {
     "type": "PROJECTILE",
@@ -68,25 +68,24 @@
           "pierce": 99999
         },
         "client_data": {
+          "light_level": 10,
           "travel_particles": [
             {
-              "particle_id": "spell_engine:nature_spark_mini_slowing",
+              "particle_id": "spell_engine:magic_nature_spark_decelerate",
               "shape": "LINE",
-              "origin": "CENTER",
               "rotation": "LOOK",
-              "roll": 18,
-              "count": 5,
+              "roll": 18.0,
+              "count": 5.0,
               "min_speed": 0.14,
               "max_speed": 0.15
             },
             {
-              "particle_id": "spell_engine:nature_spark_mini_slowing",
+              "particle_id": "spell_engine:magic_nature_spark_decelerate",
               "shape": "LINE",
-              "origin": "CENTER",
               "rotation": "LOOK",
-              "roll": 18,
-              "roll_offset": 180,
-              "count": 5,
+              "roll": 18.0,
+              "roll_offset": 180.0,
+              "count": 5.0,
               "min_speed": 0.14,
               "max_speed": 0.15
             },
@@ -94,48 +93,42 @@
               "particle_id": "firework",
               "shape": "CIRCLE",
               "rotation": "LOOK",
-              "origin": "CENTER",
-              "count": 2,
-              "min_speed": 0,
+              "count": 2.0,
               "max_speed": 0.05
             },
             {
-              "particle_id": "spell_engine:nature_spark_mini",
+              "particle_id": "spell_engine:magic_nature_spark_decelerate",
               "shape": "CIRCLE",
               "rotation": "LOOK",
-              "origin": "CENTER",
-              "count": 10,
-              "min_speed": 0,
+              "count": 10.0,
               "max_speed": 0.05
             }
           ],
           "model": {
             "model_id": "archers:projectile/magic_arrow",
             "light_emission": "RADIATE",
-            "scale": 1.2,
-            "light_level": 10
+            "scale": 1.2
           }
         }
       }
     }
   },
-  "impact": [
+  "impacts": [
     {
       "action": {
         "type": "DAMAGE",
         "damage": {
           "spell_power_coefficient": 1.2,
-          "knockback": 2
+          "knockback": 2.0
         }
       },
       "particles": [
         {
-          "particle_id": "spell_engine:nature_spark_mini_slowing",
+          "particle_id": "spell_engine:magic_nature_spark_burst",
           "shape": "SPHERE",
-          "origin": "CENTER",
           "count": 25.0,
-          "min_speed": 0.2,
-          "max_speed": 0.6
+          "min_speed": 1.2,
+          "max_speed": 1.8
         }
       ],
       "sound": {
@@ -144,11 +137,11 @@
     }
   ],
   "cost": {
+    "cooldown": {
+      "duration": 8.0
+    },
     "item": {
       "id": "arrow"
-    },
-    "cooldown": {
-      "duration": 8
     }
   }
 }
