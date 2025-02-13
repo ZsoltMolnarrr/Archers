@@ -2,7 +2,7 @@ package net.archers.item;
 
 import net.archers.ArchersMod;
 import net.archers.item.armor.ArcherArmor;
-import net.archers.util.SoundHelper;
+import net.archers.util.ArcherSounds;
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
@@ -44,19 +44,19 @@ public class Armors {
             "archer_armor",
             2, 3, 3, 2,
             9,
-            SoundHelper.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.LEATHER); });
+            ArcherSounds.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.LEATHER); });
 
     public static RegistryEntry<ArmorMaterial> material_t2 = material(
             "ranger_armor",
             2, 3, 3, 2,
             10,
-            SoundHelper.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.TURTLE_SCUTE); });
+            ArcherSounds.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.TURTLE_SCUTE); });
 
     public static RegistryEntry<ArmorMaterial> material_t3 = material(
             "netherite_ranger_armor",
             2, 3, 3, 2,
             15,
-            SoundHelper.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            ArcherSounds.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();

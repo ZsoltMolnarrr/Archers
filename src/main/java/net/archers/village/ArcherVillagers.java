@@ -5,19 +5,17 @@ import net.archers.ArchersMod;
 import net.archers.block.ArcherBlocks;
 import net.archers.item.Weapons;
 import net.archers.item.Armors;
-import net.archers.util.SoundHelper;
+import net.archers.util.ArcherSounds;
 import net.fabric_extras.structure_pool.api.StructurePoolAPI;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.village.TradeOffer;
 import net.minecraft.village.TradeOffers;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.poi.PointOfInterestType;
@@ -45,7 +43,7 @@ public class ArcherVillagers {
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
-                SoundHelper.WORKBENCH.sound())
+                ArcherSounds.WORKBENCH.soundEvent())
         );
     }
 

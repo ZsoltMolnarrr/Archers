@@ -9,7 +9,7 @@ import net.archers.item.Group;
 import net.archers.item.Weapons;
 import net.archers.item.Armors;
 import net.archers.item.misc.Misc;
-import net.archers.util.SoundHelper;
+import net.archers.util.ArcherSounds;
 import net.archers.village.ArcherVillagers;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.fabricmc.api.ModInitializer;
@@ -61,10 +61,10 @@ public class ArchersMod implements ModInitializer {
     @Override
     public void onInitialize() {
         tweaksConfig.refresh();
+        ArcherSounds.register();
         registerEffects();
         registerItemGroup();
         registerItems();
-        SoundHelper.registerSounds();
         registerVillages();
         subscribeEvents();
 
