@@ -55,6 +55,7 @@
       "particles": [
         {
           "particle_id": "falling_spore_blossom",
+          "origin": "CENTER",
           "shape": "SPHERE",
           "count": 2.0,
           "min_speed": 0.1,

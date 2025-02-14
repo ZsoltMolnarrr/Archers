@@ -1,6 +1,7 @@
 {
   "school": "spell_power:physical_ranged",
   "range": 0.0,
+  "tier": 1,
   "learn": {},
   "active": {
     "scroll": {}
@@ -49,6 +50,7 @@
       "particles": [
         {
           "particle_id": "firework",
+          "origin": "CENTER",
           "shape": "PILLAR",
           "count": 3.0,
           "min_speed": 0.01,

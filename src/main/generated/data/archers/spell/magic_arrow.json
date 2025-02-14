@@ -72,6 +72,7 @@
           "travel_particles": [
             {
               "particle_id": "spell_engine:magic_nature_spark_decelerate",
+              "origin": "CENTER",
               "shape": "LINE",
               "rotation": "LOOK",
               "roll": 18.0,
@@ -81,6 +82,7 @@
             },
             {
               "particle_id": "spell_engine:magic_nature_spark_decelerate",
+              "origin": "CENTER",
               "shape": "LINE",
               "rotation": "LOOK",
               "roll": 18.0,
@@ -91,6 +93,7 @@
             },
             {
               "particle_id": "firework",
+              "origin": "CENTER",
               "shape": "CIRCLE",
               "rotation": "LOOK",
               "count": 2.0,
@@ -98,6 +101,7 @@
             },
             {
               "particle_id": "spell_engine:magic_nature_spark_decelerate",
+              "origin": "CENTER",
               "shape": "CIRCLE",
               "rotation": "LOOK",
               "count": 10.0,
@@ -125,6 +129,7 @@
       "particles": [
         {
           "particle_id": "spell_engine:magic_nature_spark_burst",
+          "origin": "CENTER",
           "shape": "SPHERE",
           "count": 25.0,
           "min_speed": 1.2,
