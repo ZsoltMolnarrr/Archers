@@ -12,18 +12,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArcherSounds {
-    public record Entry(Identifier id, SoundEvent soundEvent, RegistryEntry<SoundEvent> entry) {
+    public static class Entry {
+        private final Identifier id;
+        private final SoundEvent soundEvent;
+        private RegistryEntry<SoundEvent> entry;
+        private int variants = 1;
+
+        public Entry(Identifier id, SoundEvent soundEvent) {
+            this.id = id;
+            this.soundEvent = soundEvent;
+        }
+
         public Entry(String name) {
             this(Identifier.of(ArchersMod.ID, name));
         }
+
         public Entry(Identifier id) {
             this(id, SoundEvent.of(id));
         }
+
         public Entry travelDistance(float distance) {
             return new Entry(id, SoundEvent.of(id, distance));
         }
-        public Entry(Identifier id, SoundEvent soundEvent) {
-            this(id, soundEvent, Registry.registerReference(Registries.SOUND_EVENT, id, soundEvent));
+
+        public Entry variants(int variants) {
+            this.variants = variants;
+            return this;
+        }
+
+        public Identifier id() {
+            return id;
+        }
+
+        public SoundEvent soundEvent() {
+            return soundEvent;
+        }
+
+        public RegistryEntry<SoundEvent> entry() {
+            return entry;
+        }
+
+        public int variants() {
+            return variants;
         }
     }
     public static final List<Entry> entries = new ArrayList<>();
@@ -31,15 +61,6 @@ public class ArcherSounds {
         entries.add(entry);
         return entry;
     }
-
-    public static List<String> soundKeys = List.of(
-        "marker_shot",
-        "entangling_roots",
-        "bow_pull",
-        "magic_arrow_impact",
-        "magic_arrow_release",
-        "magic_arrow_start"
-    );
 
     public static final Entry MARKER_SHOT = add(new Entry("marker_shot"));
     public static final Entry ENTANGLING_ROOTS = add(new Entry("entangling_roots"));
@@ -52,7 +73,7 @@ public class ArcherSounds {
 
     public static void register() {
         for (var entry: entries) {
-            Registry.register(Registries.SOUND_EVENT, entry.id(), entry.soundEvent());
+            entry.entry = Registry.registerReference(Registries.SOUND_EVENT, entry.id(), entry.soundEvent());
         }
     }
 }

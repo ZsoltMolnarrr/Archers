@@ -1,3 +1,7 @@
+# 2.4.1
+
+- Fix sound related issues, and crashes upon disconnects
+
 # 2.4.0
 
 - Add Quiver (can store 4x64 arrows)
