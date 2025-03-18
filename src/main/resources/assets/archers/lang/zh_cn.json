@@ -54,7 +54,7 @@
   "item.archers.ruby_heavy_crossbow": "红宝石重型弩",
   "item.archers.aether_longbow": "雅典卫城银弓",
   "item.archers.aether_rapid_crossbow": "天空弩",
-  "item.archers.aether_heavy_crossbow": "女武重型弩",
+  "item.archers.aether_heavy_crossbow": "女武神弩炮",
 
   "item.archers.archer_spell_book": "弓术手册",
   "item.archers.archer.spell_scroll": "弓术卷轴",
@@ -71,7 +71,7 @@
   "effect.archers.entangling_roots": "纠缠根须",
   "effect.archers.entangling_roots.description": "降低移速",
 
-  "spell.archers.barrage.name": "连珠飞箭",
+  "spell.archers.barrage.name": "弹幕射击",
   "spell.archers.barrage.description": "快速连续发射多根箭。",
 
   "spell.archers.magic_arrow.name": "魔法箭",
@@ -87,5 +87,5 @@
   "advancements.rpg_series.spell_master_archer.description": "完成整本弓术手册",
 
   "advancements.rpg_series.obtain_arrow.title": "弓手之道",
-  "advancements.rpg_series.obtain_arrow.description": "拥有一把箭"
+  "advancements.rpg_series.obtain_arrow.description": "获得一支箭"
 }
