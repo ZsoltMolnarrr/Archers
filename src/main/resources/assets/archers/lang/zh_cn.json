@@ -10,12 +10,19 @@
   "entity.minecraft.villager.archers:archery_artisan": "弓匠",
 
   "item.archers.auto_fire_hook": "自动发射钩",
+  "item.archers.small_quiver": "小箭袋",
+  "item.archers.medium_quiver": "狩猎箭袋",
+  "item.archers.large_quiver": "战斗箭袋",
+  "item.archers.quiver.hint": "装备箭袋时提供弓箭。",
 
   "item.archers.flint_spear": "燧石长枪",
   "item.archers.iron_spear": "铁长枪",
   "item.archers.golden_spear": "金长枪",
   "item.archers.diamond_spear": "钻石长枪",
   "item.archers.netherite_spear": "下界合金长枪",
+  "item.archers.aeternium_spear": "永恒长枪",
+  "item.archers.ruby_spear": "红宝石长枪",
+  "item.archers.aether_spear": "神圣长枪",
 
   "item.archers.archer_armor_head": "弓箭手兜帽",
   "item.archers.archer_armor_chest": "弓箭手外套",
@@ -27,6 +34,11 @@
   "item.archers.ranger_armor_legs": "游侠护腿",
   "item.archers.ranger_armor_feet": "游侠靴子",
 
+  "item.archers.netherite_ranger_armor_head": "下界合金游侠兜帽",
+  "item.archers.netherite_ranger_armor_chest": "下界合金游侠外套",
+  "item.archers.netherite_ranger_armor_legs": "下界合金游侠护腿",
+  "item.archers.netherite_ranger_armor_feet": "下界合金游侠靴子",
+
   "item.archers.composite_longbow": "复合长弓",
   "item.archers.mechanic_shortbow": "机械短弓",
   "item.archers.royal_longbow": "皇家长弓",
@@ -34,27 +46,46 @@
   "item.archers.heavy_crossbow": "重型弩",
   "item.archers.netherite_shortbow": "下界合金短弓",
   "item.archers.netherite_longbow": "下界合金长弓",
-  "item.archers.netherite_rapid_crossbow": "轻型下界合金弩",
-  "item.archers.netherite_heavy_crossbow": "重型下界合金弩",
+  "item.archers.netherite_rapid_crossbow": "下界合金轻型弩",
+  "item.archers.netherite_heavy_crossbow": "下界合金重型弩",
+  "item.archers.crystal_shortbow": "水晶短弓",
+  "item.archers.crystal_longbow": "水晶长弓",
+  "item.archers.ruby_rapid_crossbow": "红宝石轻型弩",
+  "item.archers.ruby_heavy_crossbow": "红宝石重型弩",
+  "item.archers.aether_longbow": "雅典卫城银弓",
+  "item.archers.aether_rapid_crossbow": "天空弩",
+  "item.archers.aether_heavy_crossbow": "女武神弩炮",
 
   "item.archers.archer_spell_book": "弓术手册",
+  "item.archers.archer.spell_scroll": "弓术卷轴",
 
   "spell.archers.power_shot.name": "强劲射击",
   "spell.archers.power_shot.description": "发射有力的箭，射击目标并附加其持续{effect_duration}秒的“猎人标记”，使其受到{damage_taken}的易伤，可堆叠{effect_amplifier}层。",
+  "effect.archers.hunters_mark_stash": "强劲射击",
+  "effect.archers.hunters_mark_stash.description": "下一次射击施加猎人标记",
   "effect.archers.hunters_mark": "猎人标记",
-  "effect.archers.hunters_mark.description": "额外受到5%%所有种类的伤害",
+  "effect.archers.hunters_mark.description": "额外受到所有种类的伤害",
 
   "spell.archers.entangling_roots.name": "纠缠根须",
   "spell.archers.entangling_roots.description": "召唤根须在周围出芽破土，使敌人减速{cloud_duration}秒。",
   "effect.archers.entangling_roots": "纠缠根须",
   "effect.archers.entangling_roots.description": "降低移速",
 
-
-  "spell.archers.barrage.name": "连珠飞箭",
+  "spell.archers.barrage.name": "弹幕射击",
   "spell.archers.barrage.description": "快速连续发射多根箭。",
 
-  "advancements.rpg_series.obtain_arrow.title": "弓手之道",
-  "advancements.rpg_series.obtain_arrow.description": "拥有一把箭",
+  "spell.archers.magic_arrow.name": "魔法箭",
+  "spell.archers.magic_arrow.description": "射出一支魔法箭，穿透路径上的所有敌人，对每个目标造成{damage}伤害。",
+
+  "advancements.rpg_series.path_choose_archer.title": "弓术之道",
+  "advancements.rpg_series.path_choose_archer.description": "制作弓术手册",
+
+  "advancements.rpg_series.spell_novice_archer.title": "致命射击",
+  "advancements.rpg_series.spell_novice_archer.description": "获得第一个弓术技能",
+
   "advancements.rpg_series.spell_master_archer.title": "箭道专家",
-  "advancements.rpg_series.spell_master_archer.description": "完成整本弓术手册"
+  "advancements.rpg_series.spell_master_archer.description": "完成整本弓术手册",
+
+  "advancements.rpg_series.obtain_arrow.title": "弓手之道",
+  "advancements.rpg_series.obtain_arrow.description": "获得一支箭"
 }
