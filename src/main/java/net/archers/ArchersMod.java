@@ -16,6 +16,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.EnchantmentEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.util.TriState;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
@@ -61,6 +62,10 @@ public class ArchersMod implements ModInitializer {
     @Override
     public void onInitialize() {
         tweaksConfig.refresh();
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            // Make sure items are enabled for datagen
+            tweaksConfig.value.ignore_items_required_mods = true;
+        }
         ArcherSounds.register();
         registerEffects();
         registerItemGroup();

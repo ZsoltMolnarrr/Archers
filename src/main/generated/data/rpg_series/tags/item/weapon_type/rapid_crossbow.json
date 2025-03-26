@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "archers:rapid_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_rapid_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:ruby_rapid_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:aether_rapid_crossbow",
+      "required": false
+    }
+  ]
+}

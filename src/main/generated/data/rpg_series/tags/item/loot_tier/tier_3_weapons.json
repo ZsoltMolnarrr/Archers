@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "archers:netherite_spear",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_rapid_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_heavy_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_shortbow",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_longbow",
+      "required": false
+    }
+  ]
+}

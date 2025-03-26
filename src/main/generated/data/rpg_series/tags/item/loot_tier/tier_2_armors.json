@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "archers:ranger_armor_head",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_chest",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_legs",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_feet",
+      "required": false
+    }
+  ]
+}

@@ -16,6 +16,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
+import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
 
 import java.util.ArrayList;
@@ -60,13 +61,15 @@ public class Armors {
 
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults) {
+    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
         var entry = Armor.Entry.create(
                 material,
                 id,
                 durability,
                 factory,
-                defaults);
+                defaults,
+                Equipment.LootProperties.of(tier)
+        );
         entries.add(entry);
         return entry;
     }
@@ -105,7 +108,8 @@ public class Armors {
                             .add(damageMultiplier(damage_T1)),
                     new ArmorSetConfig.Piece(2)
                             .add(damageMultiplier(damage_T1))
-            ))
+            ),
+            1)
             .armorSet();
 
     public static final Armor.Set archerArmorSet_T2 = create(
@@ -126,7 +130,8 @@ public class Armors {
                     new ArmorSetConfig.Piece(2)
                             .add(damageMultiplier(damage_T2))
                             .add(hasteMultiplier(haste_T2))
-            ))
+            ),
+            2)
             .armorSet();
 
     public static final Armor.Set archerArmorSet_T3 = create(
@@ -147,7 +152,8 @@ public class Armors {
                     new ArmorSetConfig.Piece(2)
                             .add(damageMultiplier(damage_T3))
                             .add(hasteMultiplier(haste_T3))
-            ))
+            )
+            , 3)
             .armorSet();
 
     public static void register(Map<String, ArmorSetConfig> configs) {

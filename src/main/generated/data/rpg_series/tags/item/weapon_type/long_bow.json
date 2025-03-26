@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "archers:composite_longbow",
+      "required": false
+    },
+    {
+      "id": "archers:royal_longbow",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_longbow",
+      "required": false
+    },
+    {
+      "id": "archers:crystal_longbow",
+      "required": false
+    },
+    {
+      "id": "archers:aether_longbow",
+      "required": false
+    }
+  ]
+}

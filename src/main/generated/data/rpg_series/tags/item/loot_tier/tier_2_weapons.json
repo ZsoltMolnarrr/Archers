@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "archers:diamond_spear",
+      "required": false
+    },
+    {
+      "id": "archers:royal_longbow",
+      "required": false
+    },
+    {
+      "id": "archers:heavy_crossbow",
+      "required": false
+    },
+    {
+      "id": "archers:mechanic_shortbow",
+      "required": false
+    },
+    {
+      "id": "archers:rapid_crossbow",
+      "required": false
+    }
+  ]
+}

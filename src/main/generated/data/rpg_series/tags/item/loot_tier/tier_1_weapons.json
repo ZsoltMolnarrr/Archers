@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "archers:iron_spear",
+      "required": false
+    },
+    {
+      "id": "archers:composite_longbow",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "archers:mechanic_shortbow",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_shortbow",
+      "required": false
+    },
+    {
+      "id": "archers:crystal_shortbow",
+      "required": false
+    }
+  ]
+}

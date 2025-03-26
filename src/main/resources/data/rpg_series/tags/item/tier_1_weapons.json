@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "minecraft:crossbow",
-    "archers:composite_longbow",
-    "archers:iron_spear"
-  ]
-}
