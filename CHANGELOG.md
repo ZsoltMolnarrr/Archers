@@ -1,3 +1,10 @@
+# 2.4.3
+
+- Add Archery Range trade advancement
+- Archery Range chests now may contain Lapis Lazuli
+- Change repair material for Ranger Armor pieces
+- Add smelting recipes for disassembling archer weapons and armor pieces
+
 # 2.4.2
 
 - Update to Spell Engine 1.6.0

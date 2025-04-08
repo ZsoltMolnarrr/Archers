@@ -51,7 +51,7 @@ public class Armors {
             "ranger_armor",
             2, 3, 3, 2,
             10,
-            ArcherSounds.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.TURTLE_SCUTE); });
+            ArcherSounds.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.RABBIT_HIDE); });
 
     public static RegistryEntry<ArmorMaterial> material_t3 = material(
             "netherite_ranger_armor",
