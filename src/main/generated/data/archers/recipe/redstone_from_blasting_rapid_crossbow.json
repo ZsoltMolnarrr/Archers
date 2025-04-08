@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "blocks",
+  "cookingtime": 150,
+  "experience": 0.1,
+  "group": "disassemble",
+  "ingredient": {
+    "item": "archers:rapid_crossbow"
+  },
+  "result": {
+    "id": "minecraft:redstone"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ranger_armor_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "archers:ranger_armor_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:turtle_scute_from_blasting_ranger_armor_chest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ranger_armor_chest"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:turtle_scute_from_blasting_ranger_armor_chest"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_archer_armor_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "archers:archer_armor_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:leather_from_smelting_archer_armor_chest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_archer_armor_chest"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:leather_from_smelting_archer_armor_chest"
+    ]
+  }
+}
