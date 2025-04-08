@@ -100,17 +100,17 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
                     Weapons.meleeEntries.stream()
                             .filter(entry -> entry.id().getPath().contains("gold"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.IRON_NUGGET);
+                    Items.GOLD_NUGGET);
             disassemble(exporter,
                     Weapons.meleeEntries.stream()
                             .filter(entry -> entry.id().getPath().contains("iron"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.GOLD_NUGGET);
-            disassemble(exporter,
-                    Weapons.meleeEntries.stream()
-                            .filter(entry -> entry.id().getPath().contains("diamond"))
-                            .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.DIAMOND);
+                    Items.IRON_NUGGET);
+//            disassemble(exporter,
+//                    Weapons.meleeEntries.stream()
+//                            .filter(entry -> entry.id().getPath().contains("diamond"))
+//                            .map(entry -> (ItemConvertible) entry.item()).toList(),
+//                    Items.DIAMOND);
             disassemble(exporter,
                     Weapons.meleeEntries.stream()
                             .filter(entry -> entry.id().getPath().contains("netherite"))

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_golden_spear": {
+    "has_iron_spear": {
       "conditions": {
         "items": [
           {
-            "items": "archers:golden_spear"
+            "items": "archers:iron_spear"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:iron_nugget_from_blasting_golden_spear"
+        "recipe": "minecraft:iron_nugget_from_smelting_iron_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_golden_spear"
+      "has_iron_spear"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:iron_nugget_from_blasting_golden_spear"
+      "minecraft:iron_nugget_from_smelting_iron_spear"
     ]
   }
 }

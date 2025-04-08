@@ -1,13 +1,13 @@
 {
-  "type": "minecraft:blasting",
+  "type": "minecraft:smelting",
   "category": "misc",
-  "cookingtime": 150,
+  "cookingtime": 300,
   "experience": 0.1,
   "group": "disassemble",
   "ingredient": {
     "item": "archers:golden_spear"
   },
   "result": {
-    "id": "minecraft:iron_nugget"
+    "id": "minecraft:gold_nugget"
   }
 }

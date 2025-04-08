@@ -1,3 +1,7 @@
+# 2.4.4
+
+- Fix some smelting recipes
+
 # 2.4.3
 
 - Add Archery Range trade advancement
