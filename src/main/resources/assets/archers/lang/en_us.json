@@ -89,6 +89,9 @@
   "advancements.rpg_series.obtain_arrow.title": "Path of Archer",
   "advancements.rpg_series.obtain_arrow.description": "Obtain an Arrow",
 
+  "advancements.rpg_series.spell_cast_archer_book.title": "Archery Training",
+  "advancements.rpg_series.spell_cast_archer_book.description": "Use a skill from the Archery Manual",
+
   "advancements.rpg_series.trade_with_archery_artisan.title": "Archery Sale",
   "advancements.rpg_series.trade_with_archery_artisan.description": "Purchase an item from an Archery Artisan Villager"
 }

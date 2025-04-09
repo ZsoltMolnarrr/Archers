@@ -8,9 +8,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "VillagerData": {
-                "profession": "archers:archery_artisan"
-              }
+              "nbt": "{VillagerData:{profession:\"archers:archery_artisan\"}}"
             }
           }
         ]
