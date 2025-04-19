@@ -1,3 +1,7 @@
+# 2.4.6
+
+- Add archer scroll texture
+
 # 2.4.5
 
 - Fix trade advancement
