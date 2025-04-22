@@ -1,3 +1,7 @@
+# 2.4.8
+
+- Fix some of the Archery Artisan villager trades
+
 # 2.4.7
 
 - Fix and rebalance some of the Archery Artisan villager trades

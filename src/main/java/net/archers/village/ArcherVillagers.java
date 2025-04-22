@@ -104,16 +104,16 @@ public class ArcherVillagers {
         ));
         trades.put(2, List.of(
                 new TradeOffers.SellItemFactory(Weapons.composite_longbow.item(), 6, 1, 16),
-                new TradeOffers.SellItemFactory(Armors.archerArmorSet_T1.head, 15, 12, 18),
+                new TradeOffers.SellItemFactory(Armors.archerArmorSet_T1.head, 15, 1, 18),
                 new TradeOffers.BuyItemFactory(Items.STRING, 6, 12, 8, 3)
         ));
         trades.put(3, List.of(
-                new TradeOffers.SellItemFactory(Armors.archerArmorSet_T1.feet, 15, 12, 18),
+                new TradeOffers.SellItemFactory(Armors.archerArmorSet_T1.feet, 15, 1, 18),
                 new TradeOffers.BuyItemFactory(Items.REDSTONE, 12, 12, 5, 8),
-                new TradeOffers.SellItemFactory(Armors.archerArmorSet_T1.legs, 15, 12, 18)
+                new TradeOffers.SellItemFactory(Armors.archerArmorSet_T1.legs, 15, 1, 18)
         ));
         trades.put(4, List.of(
-                new TradeOffers.SellItemFactory(Armors.archerArmorSet_T1.chest, 15, 12, 18),
+                new TradeOffers.SellItemFactory(Armors.archerArmorSet_T1.chest, 15, 1, 18),
                 new TradeOffers.SellItemFactory(Items.TURTLE_SCUTE, 20, 12, 10)
         ));
 
