@@ -1,3 +1,8 @@
+# 2.4.9
+
+- Fix compat issue with Universal Enchants (by Fuzs) #59
+- AzureLibArmor now has version requirement in Fabric mod json
+
 # 2.4.8
 
 - Fix some of the Archery Artisan villager trades
