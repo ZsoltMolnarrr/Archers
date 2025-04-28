@@ -16,8 +16,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
     private int timeHoldingCharged = 0;
+    private boolean autoFiring = false;
     @Inject(method = "tickItemStackUsage", at = @At("HEAD"))
-    private void asd(ItemStack stack, CallbackInfo ci) {
+    private void autoFireHookRelease(ItemStack stack, CallbackInfo ci) {
+        if (autoFiring) {
+            return;
+        }
         var entity = (LivingEntity) (Object) this;
         var charged = false;
         if (entity.getWorld().isClient()) {
@@ -33,9 +37,11 @@ public class LivingEntityMixin {
                             // 1 Extra tick to avoid releaseing earlier than server agrees on being charged
                             if (timeHoldingCharged > 1) {
                                 // Set weapon charged (in a synchronized way)
+                                autoFiring = true;
                                 MinecraftClient.getInstance().interactionManager.stopUsingItem(player);
                                 // Wait a little before firing (to make sure the server has time to process the packet)
                                 ((ItemUseDelay) MinecraftClient.getInstance()).imposeItemUseCD_Archers(2);
+                                autoFiring = false;
                             }
                         }
                     }
