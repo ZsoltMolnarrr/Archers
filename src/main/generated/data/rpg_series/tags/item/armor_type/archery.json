@@ -1,0 +1,52 @@
+{
+  "values": [
+    {
+      "id": "archers:archer_armor_head",
+      "required": false
+    },
+    {
+      "id": "archers:archer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "archers:archer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "archers:archer_armor_feet",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_head",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_chest",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_legs",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_feet",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_ranger_armor_head",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_ranger_armor_chest",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_ranger_armor_legs",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_ranger_armor_feet",
+      "required": false
+    }
+  ]
+}

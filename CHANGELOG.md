@@ -1,3 +1,8 @@
+# 2.4.10
+
+- Add armor meta type tags
+- Update translations
+
 # 2.4.9
 
 - Fix compat issue with Universal Enchants (by Fuzs) #59
