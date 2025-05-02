@@ -75,7 +75,7 @@
   "spell.archers.barrage.description": "Dispara múltiples flechas en rápida sucesión.",
 
   "spell.archers.magic_arrow.name": "Flecha Mágica",
-  "spell.archers.magic_arrow.description": "Dispara una flecha mágica que atraviesa a todos los enemigos en su camino, infligiendo {daño} de daño a cada uno.",
+  "spell.archers.magic_arrow.description": "Dispara una flecha mágica que atraviesa a todos los enemigos en su camino, infligiendo {damage} de daño a cada uno.",
 
   "advancements.rpg_series.path_choose_archer.title": "Camino de la Arquería",
   "advancements.rpg_series.path_choose_archer.description": "Creá un Manual de Arquería",
