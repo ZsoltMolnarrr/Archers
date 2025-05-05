@@ -1,5 +1,5 @@
 {
-  "itemGroup.archers.general": "Arquería",
+  "itemGroup.archers.general": "Archers",
   "item.archers.auto_fire_hook.description_1": "Dispara automáticamente la flecha cargada.",
   "item.archers.auto_fire_hook.description_2": "Se puede aplicar a armas a distancia, usando un Yunque.",
   "item.ranged_weapon.pull_time": "%1$s seg de tiempo de carga",
