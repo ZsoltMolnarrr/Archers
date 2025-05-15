@@ -106,7 +106,7 @@ public class ArcherSpells {
         spell.deliver.stash_effect = stash;
 
         var debuff = createEffectImpact(ArcherEffects.HUNTERS_MARK.id, 12);
-        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
         debuff.action.status_effect.amplifier = 2;
         debuff.particles = new ParticleBatch[]{
                 new ParticleBatch("firework",
@@ -148,7 +148,7 @@ public class ArcherSpells {
         spell.deliver.clouds = List.of(cloud);
 
         var debuff = createEffectImpact(ArcherEffects.ENTANGLING_ROOTS.id, 1);
-        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
         debuff.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
         debuff.action.status_effect.apply_limit.health_base = 50;
         debuff.action.status_effect.apply_limit.spell_power_multiplier = 5;

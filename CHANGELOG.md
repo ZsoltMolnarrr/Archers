@@ -1,3 +1,7 @@
+# 2.4.11
+
+- Update to latest Spell Engine
+
 # 2.4.10
 
 - Add armor meta type tags

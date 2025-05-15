@@ -43,8 +43,7 @@
         "status_effect": {
           "effect_id": "archers:hunters_mark",
           "duration": 12.0,
-          "amplifier": 2,
-          "apply_mode": "ADD"
+          "amplifier": 2
         }
       },
       "particles": [
