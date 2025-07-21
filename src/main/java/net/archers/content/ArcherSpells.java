@@ -9,6 +9,7 @@ import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
+import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.fx.SpellEngineSounds;
 import org.jetbrains.annotations.Nullable;
@@ -86,12 +87,12 @@ public class ArcherSpells {
 
         spell.release.sound = Sound.withVolume(ArcherSounds.MARKER_SHOT.id(), 0.5F);
         spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.getMagicParticleVariant(
-                        SpellEngineParticles.RAGE,
-                        SpellEngineParticles.MagicParticleFamily.Shape.STRIPE,
-                        SpellEngineParticles.MagicParticleFamily.Motion.FLOAT).id().toString(),
+                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
+                        SpellEngineParticles.MagicParticles.Shape.STRIPE,
+                        SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
                         ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
                         10, 0.01F, 0.1F)
+                        .color(Color.RAGE.toRGBA())
         };
 
         spell.deliver.type = Spell.Delivery.Type.STASH_EFFECT;
@@ -106,8 +107,9 @@ public class ArcherSpells {
         spell.deliver.stash_effect = stash;
 
         var debuff = createEffectImpact(ArcherEffects.HUNTERS_MARK.id, 12);
-        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
-        debuff.action.status_effect.amplifier = 2;
+        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+        debuff.action.status_effect.amplifier = 1;
+        debuff.action.status_effect.amplifier_cap = 2;
         debuff.particles = new ParticleBatch[]{
                 new ParticleBatch("firework",
                         ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.CENTER,
@@ -213,14 +215,14 @@ public class ArcherSpells {
         spell.active.cast.animates_ranged_weapon = true;
         spell.active.cast.particles = new ParticleBatch[]{
                 new ParticleBatch(
-                        SpellEngineParticles.getMagicParticleVariant(
-                                SpellEngineParticles.NATURE,
-                                SpellEngineParticles.MagicParticleFamily.Shape.SPARK,
-                                SpellEngineParticles.MagicParticleFamily.Motion.FLOAT).id().toString(),
+                        SpellEngineParticles.MagicParticles.get(
+                                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                                SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.LAUNCH_POINT,
                         4, 0.02F, 0.1F)
                         .invert()
                         .preSpawnTravel(14)
+                        .color(Color.NATURE.toRGBA())
         };
         spell.active.cast.sound = new Sound(SpellEngineSounds.GENERIC_WIND_CHARGING.id());
 
@@ -228,19 +230,19 @@ public class ArcherSpells {
         spell.release.sound = new Sound(ArcherSounds.MAGIC_ARROW_RELEASE.id());
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(
-                        SpellEngineParticles.getMagicParticleVariant(
-                                SpellEngineParticles.NATURE,
-                                SpellEngineParticles.MagicParticleFamily.Shape.SPARK,
-                                SpellEngineParticles.MagicParticleFamily.Motion.DECELERATE).id().toString(),
+                        SpellEngineParticles.MagicParticles.get(
+                                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.LAUNCH_POINT,
-                        ParticleBatch.Rotation.LOOK, 50,0.18F,0.2F, 0),
+                        ParticleBatch.Rotation.LOOK, 50,0.18F,0.2F, 0)
+                        .color(Color.NATURE.toRGBA()),
                 new ParticleBatch(
-                        SpellEngineParticles.getMagicParticleVariant(
-                                SpellEngineParticles.NATURE,
-                                SpellEngineParticles.MagicParticleFamily.Shape.SPARK,
-                                SpellEngineParticles.MagicParticleFamily.Motion.DECELERATE).id().toString(),
+                        SpellEngineParticles.MagicParticles.get(
+                                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.LAUNCH_POINT,
-                        ParticleBatch.Rotation.LOOK, 25,0.28F,0.3F, 0),
+                        ParticleBatch.Rotation.LOOK, 25,0.28F,0.3F, 0)
+                        .color(Color.NATURE.toRGBA())
         };
 
         spell.target.type = Spell.Target.Type.AIM;
@@ -255,30 +257,30 @@ public class ArcherSpells {
         projectile.client_data = new Spell.ProjectileData.Client();
         projectile.client_data.travel_particles = new ParticleBatch[]{
                 new ParticleBatch(
-                        SpellEngineParticles.getMagicParticleVariant(
-                                SpellEngineParticles.NATURE,
-                                SpellEngineParticles.MagicParticleFamily.Shape.SPARK,
-                                SpellEngineParticles.MagicParticleFamily.Motion.DECELERATE).id().toString(),
+                        SpellEngineParticles.MagicParticles.get(
+                                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
                         ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
-                        ParticleBatch.Rotation.LOOK, 5,0.14F,0.15F, 0).roll(18),
+                        ParticleBatch.Rotation.LOOK, 5,0.14F,0.15F, 0)
+                        .roll(18).color(Color.NATURE.toRGBA()),
                 new ParticleBatch(
-                        SpellEngineParticles.getMagicParticleVariant(
-                                SpellEngineParticles.NATURE,
-                                SpellEngineParticles.MagicParticleFamily.Shape.SPARK,
-                                SpellEngineParticles.MagicParticleFamily.Motion.DECELERATE).id().toString(),
+                        SpellEngineParticles.MagicParticles.get(
+                                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
                         ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
-                        ParticleBatch.Rotation.LOOK, 5,0.14F,0.15F, 0).rollOffset(180).roll(18),
+                        ParticleBatch.Rotation.LOOK, 5,0.14F,0.15F, 0).rollOffset(180)
+                        .roll(18).color(Color.NATURE.toRGBA()),
                 new ParticleBatch(
                         "firework",
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
                         ParticleBatch.Rotation.LOOK, 2,0F,0.05F, 0),
                 new ParticleBatch(
-                        SpellEngineParticles.getMagicParticleVariant(
-                                SpellEngineParticles.NATURE,
-                                SpellEngineParticles.MagicParticleFamily.Shape.SPARK,
-                                SpellEngineParticles.MagicParticleFamily.Motion.DECELERATE).id().toString(),
+                        SpellEngineParticles.MagicParticles.get(
+                                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
                         ParticleBatch.Rotation.LOOK, 10,0F,0.05F, 0)
+                        .color(Color.NATURE.toRGBA())
         };
         projectile.client_data.light_level = 10;
         projectile.client_data.model = new Spell.ProjectileModel();
@@ -291,12 +293,12 @@ public class ArcherSpells {
         var damage = damage(1.2F, 2);
         damage.particles = new ParticleBatch[]{
                 new ParticleBatch(
-                        SpellEngineParticles.getMagicParticleVariant(
-                                SpellEngineParticles.NATURE,
-                                SpellEngineParticles.MagicParticleFamily.Shape.SPARK,
-                                SpellEngineParticles.MagicParticleFamily.Motion.BURST).id().toString(),
+                        SpellEngineParticles.MagicParticles.get(
+                                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                                SpellEngineParticles.MagicParticles.Motion.BURST).id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         25, 1.2F, 1.8F)
+                        .color(Color.NATURE.toRGBA())
         };
         damage.sound = new Sound(ArcherSounds.MAGIC_ARROW_IMPACT.id());
 

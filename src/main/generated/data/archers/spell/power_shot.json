@@ -9,12 +9,13 @@
   "release": {
     "particles": [
       {
-        "particle_id": "spell_engine:magic_rage_stripe_float",
+        "particle_id": "spell_engine:magic_stripe_float",
         "origin": "FEET",
         "shape": "WIDE_PIPE",
         "count": 10.0,
         "min_speed": 0.01,
-        "max_speed": 0.1
+        "max_speed": 0.1,
+        "color_rgba": 3208659199
       }
     ],
     "sound": {
@@ -43,7 +44,9 @@
         "status_effect": {
           "effect_id": "archers:hunters_mark",
           "duration": 12.0,
-          "amplifier": 2
+          "amplifier": 1,
+          "amplifier_cap": 2,
+          "apply_mode": "ADD"
         }
       },
       "particles": [

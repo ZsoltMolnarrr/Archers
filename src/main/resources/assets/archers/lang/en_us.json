@@ -60,7 +60,7 @@
   "item.archers.archer.spell_scroll": "Archery Scroll",
 
   "spell.archers.power_shot.name": "Power Shot",
-  "spell.archers.power_shot.description": "Your next {effect_amplifier} arrows inflict the target with Hunter's Mark for {effect_duration} seconds, increasing its damage taken by {damage_taken}, stacking up to {effect_amplifier} times.",
+  "spell.archers.power_shot.description": "Your next {effect_amplifier_cap} arrows inflict the target with Hunter's Mark for {effect_duration} seconds, increasing its damage taken by {damage_taken}, stacking up to {effect_amplifier_cap} times.",
   "effect.archers.hunters_mark_stash": "Power Shot",
   "effect.archers.hunters_mark_stash.description": "Next shot applies Hunter's Mark",
   "effect.archers.hunters_mark": "Marked",
