@@ -1,3 +1,11 @@
+# 2.5.1
+
+- Fix ranged weapon config loading #65
+
+# 2.5.0
+
+- Update to latest Spell Engine
+
 # 2.4.11
 
 - Update to latest Spell Engine
