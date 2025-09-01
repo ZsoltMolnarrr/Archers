@@ -1,3 +1,7 @@
+# 2.5.2
+
+- Auto Fire Hook now supports all RPG Series ranged weapons
+
 # 2.5.1
 
 - Fix ranged weapon config loading #65

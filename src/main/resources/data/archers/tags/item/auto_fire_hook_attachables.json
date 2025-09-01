@@ -3,6 +3,7 @@
     "minecraft:bow",
     "minecraft:crossbow",
     "#archers:bows",
-    "#archers:crossbows"
+    "#archers:crossbows",
+    "#rpg_series:archetype/ranged_damage_weapon"
   ]
 }
