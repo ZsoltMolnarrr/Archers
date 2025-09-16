@@ -1,3 +1,7 @@
+# 2.6.0
+
+- Migrate to Architectury
+
 # 2.5.2
 
 - Auto Fire Hook now supports all RPG Series ranged weapons

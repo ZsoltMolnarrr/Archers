@@ -10,7 +10,6 @@ import net.archers.client.effect.RootsRenderer;
 import net.archers.client.util.ArchersTooltip;
 import net.archers.effect.ArcherEffects;
 import net.archers.item.Armors;
-import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
@@ -22,9 +21,8 @@ import net.spell_engine.client.gui.SpellTooltip;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class ArchersClientMod implements ClientModInitializer {
-    @Override
-    public void onInitializeClient() {
+public class ArchersClientMod {
+    public static void init() {
         BlockRenderLayerMap.INSTANCE.putBlock(ArcherBlocks.WORKBENCH.block(), RenderLayer.getCutout());
 
         CustomModels.registerModelIds(List.of(

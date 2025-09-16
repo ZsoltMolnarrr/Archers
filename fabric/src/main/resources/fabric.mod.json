@@ -15,17 +15,17 @@
     "issues": "https://github.com/ZsoltMolnarrr/Archers/issues"
   },
   "license": "All Rights Reserved",
-  "icon": "assets/archers/icon.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "net.archers.client.ArchersClientMod"
+      "net.archers.fabric.client.FabricClientMod"
     ],
     "main": [
-      "net.archers.ArchersMod"
+      "net.archers.fabric.FabricMod"
     ],
     "modmenu": [
-      "net.spell_engine.client.compatibility.ModMenuCompatibility"
+      "net.spell_engine.fabric.client.compat.ModMenuCompatibility"
     ],
     "fabric-datagen": [
       "net.archers.datagen.ArchersDataGenerator"

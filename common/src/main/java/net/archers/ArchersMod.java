@@ -27,9 +27,9 @@ import net.minecraft.util.Identifier;
 import net.spell_engine.api.config.ConfigFile;
 import net.spell_engine.api.item.SpellBooks;
 import net.spell_engine.api.spell.container.SpellContainer;
-import net.tinyconfig.ConfigManager;
+import net.tiny_config.ConfigManager;
 
-public class ArchersMod implements ModInitializer {
+public class ArchersMod {
     public static final String ID = "archers";
 
     public static ConfigManager<ArchersItemConfig> itemConfig = new ConfigManager<ArchersItemConfig>
@@ -59,8 +59,7 @@ public class ArchersMod implements ModInitializer {
             .sanitize(true)
             .build();
 
-    @Override
-    public void onInitialize() {
+    public static void init() {
         tweaksConfig.refresh();
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             // Make sure items are enabled for datagen
@@ -68,10 +67,10 @@ public class ArchersMod implements ModInitializer {
         }
         ArcherSounds.register();
         registerEffects();
+        registerBlocks();
         registerItemGroup();
         registerItems();
         registerVillages();
-        subscribeEvents();
 
         // Apply some of the tweaks
         if (tweaksConfig.value.enable_infinity_for_crossbows) {
@@ -85,7 +84,7 @@ public class ArchersMod implements ModInitializer {
         }
     }
 
-    private void registerItemGroup() {
+    private static void registerItemGroup() {
         Group.ARCHERS = FabricItemGroup.builder()
                 .icon(() -> new ItemStack(Armors.archerArmorSet_T2.head.asItem()))
                 .displayName(Text.translatable("itemGroup." + ID + ".general"))
@@ -93,27 +92,27 @@ public class ArchersMod implements ModInitializer {
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS);
     }
 
-    private void registerItems() {
+    private static void registerBlocks() {
+        ArcherBlocks.register();
+    }
+
+    private static void registerItems() {
         itemConfig.refresh();
         SpellBooks.createAndRegister(Identifier.of(ID, "archer"), SpellContainer.ContentType.ARCHERY, Group.KEY);
-        ArcherBlocks.register();
         Misc.register();
         Weapons.register(itemConfig.value.ranged_weapons, itemConfig.value.melee_weapons);
         Armors.register(itemConfig.value.armor_sets);
         itemConfig.save();
     }
 
-    private void registerVillages() {
+    private static void registerVillages() {
         villagesConfig.refresh();
         ArcherVillagers.register();
     }
 
-    private void registerEffects() {
+    private static void registerEffects() {
         effectsConfig.refresh();
         ArcherEffects.register(effectsConfig.value);
         effectsConfig.save();
-    }
-
-    private void subscribeEvents() {
     }
 }

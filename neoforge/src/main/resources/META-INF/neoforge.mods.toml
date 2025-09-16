@@ -1,0 +1,46 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+issueTrackerURL = "https://github.com/ZsoltMolnarrr/Archers/issues"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "archers"
+version = "${version}"
+displayName = "Archers (RPG Series)"
+authors = "Daedelus"
+description = '''
+Draw, Release, Conquer - Master the art of Archery!
+'''
+logoFile = "assets/archers/icon.png"
+
+[[dependencies.archers]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${neoforge_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraft_compat_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers]]
+modId = "forgified_fabric_api"
+type = "required"
+versionRange = "[${forgified_fabric_api_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+# Temporarily disabled bundle API due to version issues
+# [[dependencies.archers]]
+# modId = "bundleapi"
+# type = "required"
+# versionRange = "[${bundle_api_version},)"
+# ordering = "NONE"
+# side = "BOTH"
+
+[[mixins]]
+config = "archers.mixins.json"
