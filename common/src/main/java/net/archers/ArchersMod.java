@@ -12,7 +12,6 @@ import net.archers.item.misc.Misc;
 import net.archers.content.ArcherSounds;
 import net.archers.village.ArcherVillagers;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.EnchantmentEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.util.TriState;
@@ -65,12 +64,6 @@ public class ArchersMod {
             // Make sure items are enabled for datagen
             tweaksConfig.value.ignore_items_required_mods = true;
         }
-        ArcherSounds.register();
-        registerEffects();
-        registerBlocks();
-        registerItemGroup();
-        registerItems();
-        registerVillages();
 
         // Apply some of the tweaks
         if (tweaksConfig.value.enable_infinity_for_crossbows) {
@@ -84,20 +77,21 @@ public class ArchersMod {
         }
     }
 
-    private static void registerItemGroup() {
+    public static void registerSounds() {
+        ArcherSounds.register();
+    }
+
+    public static void registerBlocks() {
+        ArcherBlocks.register();
+    }
+
+    public static void registerItems() {
+        itemConfig.refresh();
         Group.ARCHERS = FabricItemGroup.builder()
                 .icon(() -> new ItemStack(Armors.archerArmorSet_T2.head.asItem()))
                 .displayName(Text.translatable("itemGroup." + ID + ".general"))
                 .build();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS);
-    }
-
-    private static void registerBlocks() {
-        ArcherBlocks.register();
-    }
-
-    private static void registerItems() {
-        itemConfig.refresh();
         SpellBooks.createAndRegister(Identifier.of(ID, "archer"), SpellContainer.ContentType.ARCHERY, Group.KEY);
         Misc.register();
         Weapons.register(itemConfig.value.ranged_weapons, itemConfig.value.melee_weapons);
@@ -105,14 +99,18 @@ public class ArchersMod {
         itemConfig.save();
     }
 
-    private static void registerVillages() {
-        villagesConfig.refresh();
-        ArcherVillagers.register();
-    }
-
-    private static void registerEffects() {
+    public static void registerEffects() {
         effectsConfig.refresh();
         ArcherEffects.register(effectsConfig.value);
         effectsConfig.save();
+    }
+
+    public static void registerPOI() {
+        ArcherVillagers.registerPOI();
+    }
+
+    public static void registerVillagers() {
+        villagesConfig.refresh();
+        ArcherVillagers.registerVillagers();
     }
 }

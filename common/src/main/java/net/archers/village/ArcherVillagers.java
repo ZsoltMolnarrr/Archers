@@ -25,10 +25,11 @@ import java.util.List;
 
 public class ArcherVillagers {
     public static final String ARCHERY_ARTISAN = "archery_artisan";
+    public static final Identifier POI_ID = Identifier.of(ArchersMod.ID, ARCHERY_ARTISAN);
 
-    public static PointOfInterestType registerPOI(String name, Block block) {
-        return PointOfInterestHelper.register(Identifier.of(ArchersMod.ID, name),
-                1, 10, ImmutableSet.copyOf(block.getStateManager().getStates()));
+    public static void registerPOI() {
+        var blockStates = ImmutableSet.copyOf(ArcherBlocks.WORKBENCH.block().getStateManager().getStates());
+        PointOfInterestHelper.register(POI_ID, 1, 10, blockStates);
     }
 
     public static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> workStation) {
@@ -73,15 +74,14 @@ public class ArcherVillagers {
 //        }
 //    }
 
-    public static void register() {
+    public static void registerVillagers() {
         if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
             // Only inject the village if the Lithostitched is not present
             StructurePoolAPI.injectAll(ArchersMod.villagesConfig.value);
         }
-        var poi = registerPOI(ARCHERY_ARTISAN, ArcherBlocks.WORKBENCH.block());
         var profession = registerProfession(
                 ARCHERY_ARTISAN,
-                RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), Identifier.of(ArchersMod.ID, ARCHERY_ARTISAN)));
+                RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID));
 
 //        List<Offer> offers = List.of(
 //                Offer.sell(1, new ItemStack(Items.ARROW, 8), 2, 128, 1, 0.01f),

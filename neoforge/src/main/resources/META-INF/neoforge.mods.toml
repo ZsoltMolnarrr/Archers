@@ -11,7 +11,7 @@ authors = "Daedelus"
 description = '''
 Draw, Release, Conquer - Master the art of Archery!
 '''
-logoFile = "assets/archers/icon.png"
+logoFile = "icon.png"
 
 [[dependencies.archers]]
 modId = "neoforge"
@@ -28,9 +28,9 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.archers]]
-modId = "forgified_fabric_api"
+modId = "fabric_api_base"
 type = "required"
-versionRange = "[${forgified_fabric_api_version},)"
+versionRange = "*"
 ordering = "NONE"
 side = "BOTH"
 
