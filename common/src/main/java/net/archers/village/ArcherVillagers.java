@@ -75,10 +75,6 @@ public class ArcherVillagers {
 //    }
 
     public static void registerVillagers() {
-        if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
-            // Only inject the village if the Lithostitched is not present
-            StructurePoolAPI.injectAll(ArchersMod.villagesConfig.value);
-        }
         var profession = registerProfession(
                 ARCHERY_ARTISAN,
                 RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID));

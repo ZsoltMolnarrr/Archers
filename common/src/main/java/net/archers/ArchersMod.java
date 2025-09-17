@@ -11,6 +11,7 @@ import net.archers.item.Armors;
 import net.archers.item.misc.Misc;
 import net.archers.content.ArcherSounds;
 import net.archers.village.ArcherVillagers;
+import net.fabric_extras.structure_pool.api.StructurePoolAPI;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.fabricmc.fabric.api.item.v1.EnchantmentEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -63,6 +64,10 @@ public class ArchersMod {
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             // Make sure items are enabled for datagen
             tweaksConfig.value.ignore_items_required_mods = true;
+        }
+        if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
+            // Only inject the village if the Lithostitched is not present
+            StructurePoolAPI.injectAll(ArchersMod.villagesConfig.value);
         }
 
         // Apply some of the tweaks

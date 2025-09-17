@@ -28,19 +28,25 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.archers]]
-modId = "fabric_api_base"
+modId = "azurelibarmor"
 type = "required"
-versionRange = "*"
+versionRange = "[${azure_lib_version},)"
 ordering = "NONE"
 side = "BOTH"
 
-# Temporarily disabled bundle API due to version issues
-# [[dependencies.archers]]
-# modId = "bundleapi"
-# type = "required"
-# versionRange = "[${bundle_api_version},)"
-# ordering = "NONE"
-# side = "BOTH"
+[[dependencies.archers]]
+modId = "spell_engine"
+type = "required"
+versionRange = "[${spell_engine_version},)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.archers]]
+modId = "bundleapi"
+type = "required"
+versionRange = "[${bundle_api_version},)"
+ordering = "NONE"
+side = "BOTH"
 
 [[mixins]]
 config = "archers.mixins.json"
