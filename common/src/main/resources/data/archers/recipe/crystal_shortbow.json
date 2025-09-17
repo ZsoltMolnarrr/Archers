@@ -9,6 +9,12 @@
       ]
     }
   ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "betterend"
+    }
+  ],
   "key": {
     "M": {
       "item": "betterend:aeternium_ingot"
