@@ -38,7 +38,7 @@ side = "BOTH"
 modId = "spell_engine"
 type = "required"
 versionRange = "[${spell_engine_version},)"
-ordering = "AFTER"
+ordering = "BEFORE"
 side = "BOTH"
 
 [[dependencies.archers]]
