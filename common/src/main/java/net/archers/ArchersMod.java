@@ -91,7 +91,6 @@ public class ArchersMod {
     }
 
     public static void registerItems() {
-        tweaksConfig.refresh();
         itemConfig.refresh();
         Group.ARCHERS = FabricItemGroup.builder()
                 .icon(() -> new ItemStack(Armors.archerArmorSet_T2.head.asItem()))
