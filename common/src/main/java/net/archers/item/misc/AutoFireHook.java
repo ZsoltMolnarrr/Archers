@@ -23,6 +23,9 @@ public class AutoFireHook {
     public static void apply(ItemStack itemStack) {
         itemStack.set(ArcherComponents.AUTO_FIRE, true);
     }
+    public static void remove(ItemStack itemStack) {
+        itemStack.remove(ArcherComponents.AUTO_FIRE);
+    }
 
     public static boolean isApplicable(ItemStack itemStack) {
         if (itemStack == null || itemStack.isEmpty()) { return false; }

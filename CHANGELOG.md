@@ -1,6 +1,7 @@
 # 2.6.0
 
 - Migrate to Architectury
+- Auto Fire Hook can now be removed on Grindstone
 
 # 2.5.2
 
