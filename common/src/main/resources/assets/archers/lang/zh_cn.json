@@ -7,6 +7,7 @@
   "block.archers.archers_workbench": "弓匠台",
   "block.archers.archers_workbench.hint": "弓匠村民的工作台。",
   "entity.minecraft.villager.archery_artisan": "弓匠",
+  "entity.minecraft.villager.archers.archery_artisan": "弓匠",
   "entity.minecraft.villager.archers:archery_artisan": "弓匠",
 
   "item.archers.auto_fire_hook": "自动发射钩",

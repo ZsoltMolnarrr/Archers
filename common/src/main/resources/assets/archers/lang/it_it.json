@@ -7,6 +7,7 @@
   "block.archers.archers_workbench": "Banco da arcieria",
   "block.archers.archers_workbench.hint": "Postazione da lavoro per i villici.",
   "entity.minecraft.villager.archery_artisan": "Fabbricante d'archi",
+  "entity.minecraft.villager.archers.archery_artisan": "Fabbricante d'archi",
   "entity.minecraft.villager.archers:archery_artisan": "Fabbricante d'archi",
 
   "item.archers.auto_fire_hook": "Colpo automatico",

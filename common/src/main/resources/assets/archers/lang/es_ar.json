@@ -7,6 +7,7 @@
   "block.archers.archers_workbench": "Mesa de Artesano Arquero",
   "block.archers.archers_workbench.hint": "Banco de trabajo para aldeanos artesanos de arquería.",
   "entity.minecraft.villager.archery_artisan": "Artesano Arquero",
+  "entity.minecraft.villager.archers.archery_artisan": "Artesano Arquero",
   "entity.minecraft.villager.archers:archery_artisan": "Artesano Arquero",
 
   "item.archers.auto_fire_hook": "Gancho de Disparo Automático",

@@ -7,6 +7,7 @@
   "block.archers.archers_workbench": "Table d'artisan d'archerie",
   "block.archers.archers_workbench.hint": "Établi pour les villageois artisans d'archerie.",
   "entity.minecraft.villager.archery_artisan": "Artisan d'archerie",
+  "entity.minecraft.villager.archers.archery_artisan": "Artisan d'archerie",
   "entity.minecraft.villager.archers:archery_artisan": "Artisan d'archerie",
 
   "item.archers.auto_fire_hook": "Crochet de tir automatique",
