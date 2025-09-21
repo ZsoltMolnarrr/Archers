@@ -48,5 +48,12 @@ versionRange = "[${bundle_api_version},)"
 ordering = "NONE"
 side = "BOTH"
 
+[[dependencies.archers]]
+modId = "ranged_weapon_api"
+type = "required"
+versionRange = "[${ranged_weapon_api_version},)"
+ordering = "NONE"
+side = "BOTH"
+
 [[mixins]]
 config = "archers.mixins.json"

@@ -1,3 +1,7 @@
+# 2.6.1
+
+- Fix dependency declarations
+
 # 2.6.0
 
 - Migrate to Architectury
