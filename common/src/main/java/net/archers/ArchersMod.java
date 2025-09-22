@@ -93,7 +93,7 @@ public class ArchersMod {
     public static void registerItems() {
         itemConfig.refresh();
         Group.ARCHERS = FabricItemGroup.builder()
-                .icon(() -> new ItemStack(Armors.archerArmorSet_T2.head.asItem()))
+                .icon(() -> new ItemStack(Armors.archerArmorSet_T2.head))
                 .displayName(Text.translatable("itemGroup." + ID + ".general"))
                 .build();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS);

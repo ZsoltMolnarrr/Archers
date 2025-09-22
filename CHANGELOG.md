@@ -1,3 +1,7 @@
+# 2.6.2
+
+- Fix mapping related crashes
+
 # 2.6.1
 
 - Fix dependency declarations
