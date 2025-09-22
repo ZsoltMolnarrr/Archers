@@ -48,49 +48,10 @@ public class ArcherVillagers {
         );
     }
 
-//    private static class Offer {
-//        int level;
-//        ItemStack input;
-//        ItemStack output;
-//        int maxUses;
-//        int experience;
-//        float priceMultiplier;
-//
-//        public Offer(int level, ItemStack input, ItemStack output, int maxUses, int experience, float priceMultiplier) {
-//            this.level = level;
-//            this.input = input;
-//            this.output = output;
-//            this.maxUses = maxUses;
-//            this.experience = experience;
-//            this.priceMultiplier = priceMultiplier;
-//        }
-//
-//        public static Offer buy(int level, ItemStack component, int price, int maxUses, int experience, float priceMultiplier) {
-//            return new Offer(level, component, new ItemStack(Items.EMERALD, price), maxUses, experience, priceMultiplier);
-//        }
-//
-//        public static Offer sell(int level, ItemStack component, int price, int maxUses, int experience, float priceMultiplier) {
-//            return new Offer(level, new ItemStack(Items.EMERALD, price), component, maxUses, experience, priceMultiplier);
-//        }
-//    }
-
     public static void registerVillagers() {
         var profession = registerProfession(
                 ARCHERY_ARTISAN,
                 RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID));
-
-//        List<Offer> offers = List.of(
-//                Offer.sell(1, new ItemStack(Items.ARROW, 8), 2, 128, 1, 0.01f),
-//                Offer.buy(1, new ItemStack(Items.LEATHER, 8), 5, 12, 4, 0.01f),
-//                Offer.sell(2, Weapons.composite_longbow.component().getDefaultStack(), 12, 12, 10, 0.1f),
-//                Offer.sell(2, Armors.archerArmorSet_T1.head.getDefaultStack(), 15, 12, 13, 0.05f),
-//                Offer.buy(2, new ItemStack(Items.STRING, 5), 3, 12, 4, 0.01f),
-//                Offer.sell(3, Armors.archerArmorSet_T1.feet.getDefaultStack(), 15, 12, 13, 0.05f),
-//                Offer.buy(3, new ItemStack(Items.REDSTONE, 12), 3, 12, 5, 0.01f),
-//                Offer.sell(3, Armors.archerArmorSet_T1.legs.getDefaultStack(), 15, 12, 13, 0.05f),
-//                Offer.sell(4, Armors.archerArmorSet_T1.chest.getDefaultStack(), 15, 12, 13, 0.05f),
-//                Offer.sell(4, new ItemStack(Items.TURTLE_SCUTE, 3), 20, 12, 5, 0.01f)
-//            );
 
         LinkedHashMap<Integer, List<TradeOffers.Factory>> trades = new LinkedHashMap<>();
 

@@ -1,3 +1,7 @@
+# 2.6.3
+
+- Fix rare launch sequence crash
+
 # 2.6.2
 
 - Fix mapping related crashes

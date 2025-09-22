@@ -61,6 +61,9 @@ public class ArchersMod {
 
     public static void init() {
         tweaksConfig.refresh();
+        itemConfig.refresh();
+        effectsConfig.refresh();
+        villagesConfig.refresh();
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             // Make sure items are enabled for datagen
             tweaksConfig.value.ignore_items_required_mods = true;
@@ -91,7 +94,6 @@ public class ArchersMod {
     }
 
     public static void registerItems() {
-        itemConfig.refresh();
         Group.ARCHERS = FabricItemGroup.builder()
                 .icon(() -> new ItemStack(Armors.archerArmorSet_T2.head))
                 .displayName(Text.translatable("itemGroup." + ID + ".general"))
@@ -105,7 +107,6 @@ public class ArchersMod {
     }
 
     public static void registerEffects() {
-        effectsConfig.refresh();
         ArcherEffects.register(effectsConfig.value);
         effectsConfig.save();
     }
@@ -115,7 +116,6 @@ public class ArchersMod {
     }
 
     public static void registerVillagers() {
-        villagesConfig.refresh();
         ArcherVillagers.registerVillagers();
     }
 }
