@@ -1,3 +1,7 @@
+# 2.6.4
+
+- Entangling roots can now be casted using melee weapons 
+
 # 2.6.3
 
 - Fix rare launch sequence crash
