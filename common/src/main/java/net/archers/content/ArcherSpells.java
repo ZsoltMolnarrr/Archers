@@ -127,7 +127,8 @@ public class ArcherSpells {
     private static Entry entangling_roots() {
         var id = Identifier.of(ArchersMod.ID, "entangling_roots");
         var spell = activeSpellBase();
-        spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
+        spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
+        spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
         spell.range = 0;
         spell.tier = 2;
 
