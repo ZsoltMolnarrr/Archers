@@ -1,3 +1,7 @@
+# 2.6.5
+
+- Add simplified Chinese translation #68 thanks to Star234Des
+
 # 2.6.4
 
 - Entangling roots can now be casted using melee weapons 
