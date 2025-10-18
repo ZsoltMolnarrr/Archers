@@ -25,8 +25,8 @@ public class HuntersMarkRenderer implements CustomModelStatusEffect.Renderer {
         var direction = camera.getPos().subtract(livingEntity.getPos()).normalize().multiply(livingEntity.getWidth() * 0.5F);
 
         matrixStack.push();
-
-        matrixStack.translate(direction.x, direction.y + livingEntity.getHeight() * 0.75F, direction.z);
+        var verticalOffset = (livingEntity.getHeight() / livingEntity.getScale()) * 0.75F;
+        matrixStack.translate(direction.x, verticalOffset, direction.z);
 
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180F + (float)Math.toDegrees(Math.atan2(direction.x, direction.z)) ));
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(camera.getPitch()));
