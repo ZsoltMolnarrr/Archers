@@ -3,8 +3,8 @@ package net.archers.datagen;
 import net.archers.ArchersMod;
 import net.archers.content.ArcherSounds;
 import net.archers.content.ArcherSpells;
-import net.archers.item.Armors;
-import net.archers.item.Weapons;
+import net.archers.item.ArcherArmors;
+import net.archers.item.ArcherWeapons;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -41,12 +41,12 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-            generateWeaponTags(Weapons.meleeEntries);
-            var bowEntries = Weapons.rangedEntries.stream().map(entry ->
+            generateWeaponTags(ArcherWeapons.meleeEntries);
+            var bowEntries = ArcherWeapons.rangedEntries.stream().map(entry ->
                     new RPGSeriesDataGen.BowEntry(entry.id(), entry.weaponType, entry.lootProperties)
             ).toList();
             generateBowTags(bowEntries);
-            generateArmorTags(Armors.entries, RPGSeriesItemTags.ArmorMetaType.ARCHERY);
+            generateArmorTags(ArcherArmors.entries, RPGSeriesItemTags.ArmorMetaType.ARCHERY);
         }
     }
 
@@ -88,22 +88,22 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         public void generate(RecipeExporter exporter) {
-            disassembleArmor(exporter, Armors.archerArmorSet_T1, Items.LEATHER);
-            disassembleArmor(exporter, Armors.archerArmorSet_T2, Items.TURTLE_SCUTE);
-            disassembleArmor(exporter, Armors.archerArmorSet_T3, Items.NETHERITE_SCRAP);
+            disassembleArmor(exporter, ArcherArmors.archerArmorSet_T1, Items.LEATHER);
+            disassembleArmor(exporter, ArcherArmors.archerArmorSet_T2, Items.TURTLE_SCUTE);
+            disassembleArmor(exporter, ArcherArmors.archerArmorSet_T3, Items.NETHERITE_SCRAP);
 
             disassemble(exporter,
-                    Weapons.meleeEntries.stream()
+                    ArcherWeapons.meleeEntries.stream()
                             .filter(entry -> entry.id().getPath().contains("flint"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
                     Items.FLINT);
             disassemble(exporter,
-                    Weapons.meleeEntries.stream()
+                    ArcherWeapons.meleeEntries.stream()
                             .filter(entry -> entry.id().getPath().contains("gold"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
                     Items.GOLD_NUGGET);
             disassemble(exporter,
-                    Weapons.meleeEntries.stream()
+                    ArcherWeapons.meleeEntries.stream()
                             .filter(entry -> entry.id().getPath().contains("iron"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
                     Items.IRON_NUGGET);
@@ -113,22 +113,22 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
 //                            .map(entry -> (ItemConvertible) entry.item()).toList(),
 //                    Items.DIAMOND);
             disassemble(exporter,
-                    Weapons.meleeEntries.stream()
+                    ArcherWeapons.meleeEntries.stream()
                             .filter(entry -> entry.id().getPath().contains("netherite"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
                     Items.NETHERITE_SCRAP);
 
             disassemble(exporter,
-                    List.of(Weapons.mechanic_shortbow.item(), Weapons.rapid_crossbow.item()),
+                    List.of(ArcherWeapons.mechanic_shortbow.item(), ArcherWeapons.rapid_crossbow.item()),
                     Items.REDSTONE);
             disassemble(exporter,
-                    List.of(Weapons.royal_longbow.item()),
+                    List.of(ArcherWeapons.royal_longbow.item()),
                     Items.GOLD_NUGGET);
             disassemble(exporter,
-                    List.of(Weapons.heavy_crossbow.item()),
+                    List.of(ArcherWeapons.heavy_crossbow.item()),
                     Items.IRON_NUGGET);
             disassemble(exporter,
-                    Weapons.rangedEntries.stream()
+                    ArcherWeapons.rangedEntries.stream()
                             .filter(entry -> entry.id().getPath().contains("netherite"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
                     Items.NETHERITE_SCRAP);

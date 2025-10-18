@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class Weapons {
+public class ArcherWeapons {
     public static final ArrayList<RangedEntry> rangedEntries = new ArrayList<>();
     public static final ArrayList<Weapon.Entry> meleeEntries = new ArrayList<>();
 

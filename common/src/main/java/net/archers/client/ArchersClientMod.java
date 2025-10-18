@@ -3,13 +3,12 @@ package net.archers.client;
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererRegistry;
 import net.archers.ArchersMod;
-import net.archers.block.ArcherBlocks;
 import net.archers.client.armor.ArcherArmorRenderer;
 import net.archers.client.effect.HuntersMarkRenderer;
 import net.archers.client.effect.RootsRenderer;
 import net.archers.client.util.ArchersTooltip;
 import net.archers.effect.ArcherEffects;
-import net.archers.item.Armors;
+import net.archers.item.ArcherArmors;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.item.armor.Armor;
@@ -38,9 +37,9 @@ public class ArchersClientMod {
             return description;
         });
 
-        registerArmorRenderer(Armors.archerArmorSet_T1, ArcherArmorRenderer::archer);
-        registerArmorRenderer(Armors.archerArmorSet_T2, ArcherArmorRenderer::ranger);
-        registerArmorRenderer(Armors.archerArmorSet_T3, ArcherArmorRenderer::netheriteRanger);
+        registerArmorRenderer(ArcherArmors.archerArmorSet_T1, ArcherArmorRenderer::archer);
+        registerArmorRenderer(ArcherArmors.archerArmorSet_T2, ArcherArmorRenderer::ranger);
+        registerArmorRenderer(ArcherArmors.archerArmorSet_T3, ArcherArmorRenderer::netheriteRanger);
     }
 
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {

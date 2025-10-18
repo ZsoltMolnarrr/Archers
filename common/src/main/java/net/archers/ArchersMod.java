@@ -6,8 +6,8 @@ import net.archers.config.Default;
 import net.archers.config.TweaksConfig;
 import net.archers.effect.ArcherEffects;
 import net.archers.item.Group;
-import net.archers.item.Weapons;
-import net.archers.item.Armors;
+import net.archers.item.ArcherWeapons;
+import net.archers.item.ArcherArmors;
 import net.archers.item.misc.Misc;
 import net.archers.content.ArcherSounds;
 import net.archers.village.ArcherVillagers;
@@ -95,14 +95,14 @@ public class ArchersMod {
 
     public static void registerItems() {
         Group.ARCHERS = FabricItemGroup.builder()
-                .icon(() -> new ItemStack(Armors.archerArmorSet_T2.head))
+                .icon(() -> new ItemStack(ArcherArmors.archerArmorSet_T2.head))
                 .displayName(Text.translatable("itemGroup." + ID + ".general"))
                 .build();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS);
         SpellBooks.createAndRegister(Identifier.of(ID, "archer"), SpellContainer.ContentType.ARCHERY, Group.KEY);
         Misc.register();
-        Weapons.register(itemConfig.value.ranged_weapons, itemConfig.value.melee_weapons);
-        Armors.register(itemConfig.value.armor_sets);
+        ArcherWeapons.register(itemConfig.value.ranged_weapons, itemConfig.value.melee_weapons);
+        ArcherArmors.register(itemConfig.value.armor_sets);
         itemConfig.save();
     }
 
