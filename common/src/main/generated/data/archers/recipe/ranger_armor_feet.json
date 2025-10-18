@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "R": {
+      "item": "minecraft:rabbit_hide"
+    }
+  },
+  "pattern": [
+    "R R",
+    "L L"
+  ],
+  "result": {
+    "count": 1,
+    "id": "archers:ranger_armor_feet"
+  }
+}

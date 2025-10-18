@@ -32,6 +32,7 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(SpellGen::new);
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(UnsmeltGenerator::new);
+        pack.addProvider(ArcherRecipes::new);
     }
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {

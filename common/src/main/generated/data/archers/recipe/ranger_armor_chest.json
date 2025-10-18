@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "R": {
+      "item": "minecraft:rabbit_hide"
+    },
+    "S": {
+      "item": "minecraft:turtle_scute"
+    }
+  },
+  "pattern": [
+    "R R",
+    "LSL",
+    "LLL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "archers:ranger_armor_chest"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "L L",
+    "L L"
+  ],
+  "result": {
+    "count": 1,
+    "id": "archers:archer_armor_legs"
+  }
+}

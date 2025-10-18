@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "c:wood_sticks"
+    },
+    "B": {
+      "item": "minecraft:bone"
+    },
+    "X": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    " #X",
+    "B X",
+    " #X"
+  ],
+  "result": {
+    "count": 1,
+    "id": "archers:composite_longbow"
+  }
+}
