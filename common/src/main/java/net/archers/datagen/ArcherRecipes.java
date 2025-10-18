@@ -12,11 +12,8 @@ import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.item.weapon.Weapon;
 
@@ -27,8 +24,6 @@ import java.util.concurrent.CompletableFuture;
  * Conditional recipes (BetterEnd/BetterNether) are kept as hand-written JSONs.
  */
 public class ArcherRecipes extends FabricRecipeProvider {
-
-    private static final TagKey<Item> WOOD_STICKS = TagKey.of(Registries.ITEM.getKey(), Identifier.of("c", "wood_sticks"));
 
     public ArcherRecipes(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
@@ -64,7 +59,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .pattern(" # ")
                 .pattern("#  ")
                 .input('P', tipMaterial)
-                .input('#', WOOD_STICKS)
+                .input('#', Items.STICK)
                 .criterion(hasItem(tipMaterial), conditionsFromItem(tipMaterial))
                 .offerTo(exporter);
     }
@@ -79,7 +74,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .pattern(" #X")
                 .pattern("B X")
                 .pattern(" #X")
-                .input('#', WOOD_STICKS)
+                .input('#', Items.STICK)
                 .input('B', Items.BONE)
                 .input('X', Items.STRING)
                 .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
