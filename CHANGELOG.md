@@ -1,6 +1,7 @@
 # 2.6.5
 
 - Add vanilla recipe book support (fully datagen recipes)
+- Add spell book descriptions
 - Add simplified Chinese translation #68 thanks to Star234Des
 
 # 2.6.4

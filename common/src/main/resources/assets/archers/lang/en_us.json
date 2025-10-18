@@ -58,6 +58,7 @@
   "item.archers.aether_heavy_crossbow": "Valkyrie Ballista",
 
   "item.archers.archer_spell_book": "Archery Manual",
+  "item.archers.archer_spell_book.spell_binding.description": "Spell Book of Archers, using ranged weapons and archery skills to defeat enemies from afar\n- Strengths: Dealing high damage at range and maintaining mobility\n- Weaknesses: Heavily armored enemies\n- Equipment: Moderately armored",
   "item.archers.archer.spell_scroll": "Archery Scroll",
 
   "spell.archers.power_shot.name": "Power Shot",
