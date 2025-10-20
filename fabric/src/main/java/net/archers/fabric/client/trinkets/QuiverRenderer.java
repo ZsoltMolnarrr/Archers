@@ -19,7 +19,12 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class QuiverRenderer implements TrinketRenderer {
-    public static final Identifier modelId = Identifier.of(ArchersMod.ID, "quiver/quiver");
+    private final Identifier modelId;
+
+    public QuiverRenderer(String modelPath) {
+        this.modelId = Identifier.of(ArchersMod.ID, modelPath);
+    }
+
     @Override
     public void render(ItemStack itemStack,
                        SlotReference slotReference,
@@ -37,7 +42,7 @@ public class QuiverRenderer implements TrinketRenderer {
 
             TrinketRenderer.followBodyRotations(player, playerModel); //Don´t know if it makes any difference but might as well leave it here
             TrinketRenderer.translateToChest(matrixStack, playerModel, player);
-            matrixStack.translate(-0.825F, 0.25F ,0.65F); //Position
+            matrixStack.translate(-0.825F, 0.25F ,0.7F); //Position
             matrixStack.multiply(rotation);
         }
         var buffer = vertexConsumerProvider.getBuffer(RenderLayers.getItemLayer(itemStack, true));

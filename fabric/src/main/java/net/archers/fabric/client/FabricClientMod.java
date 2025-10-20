@@ -18,7 +18,8 @@ public final class FabricClientMod implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ArcherBlocks.WORKBENCH.block(), RenderLayer.getCutout());
 
         for (var entry: Quivers.entries) {
-            TrinketRendererRegistry.registerRenderer(entry.item(), new QuiverRenderer());
+            String modelName = entry.id().getPath();
+            TrinketRendererRegistry.registerRenderer(entry.item(), new QuiverRenderer("quiver/" + modelName));
         }
     }
 }
