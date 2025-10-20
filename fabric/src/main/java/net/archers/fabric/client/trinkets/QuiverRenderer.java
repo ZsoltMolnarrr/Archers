@@ -19,7 +19,12 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class QuiverRenderer implements TrinketRenderer {
-    public static final Identifier modelId = Identifier.of(ArchersMod.ID, "quiver/quiver");
+    private final Identifier modelId;
+
+    public QuiverRenderer(String modelPath) {
+        this.modelId = Identifier.of(ArchersMod.ID, modelPath);
+    }
+
     @Override
     public void render(ItemStack itemStack,
                        SlotReference slotReference,
