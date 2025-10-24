@@ -1,3 +1,7 @@
+# 2.6.6
+
+- Add basic armor trim support for all archer armor pieces
+
 # 2.6.5
 
 - Add vanilla recipe book support (fully datagen recipes)
