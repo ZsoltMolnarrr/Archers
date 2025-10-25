@@ -15,9 +15,16 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.spell_engine.mixin.client.render.ItemRendererAccessor;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class QuiverRenderer implements TrinketRenderer {
-    public static final Identifier modelId = Identifier.of(ArchersMod.ID, "quiver/quiver");
+    private final Identifier modelId;
+
+    public QuiverRenderer(String modelPath) {
+        this.modelId = Identifier.of(ArchersMod.ID, modelPath);
+    }
+
     @Override
     public void render(ItemStack itemStack,
                        SlotReference slotReference,
@@ -30,7 +37,13 @@ public class QuiverRenderer implements TrinketRenderer {
         var manager = client.getBakedModelManager();
         var model = manager.getModel(modelId);
         if (livingEntity instanceof AbstractClientPlayerEntity player && entityModel instanceof PlayerEntityModel playerModel) {
-            TrinketRenderer.translateToRightLeg(matrixStack, playerModel, player);
+            Quaternionf rotation = new Quaternionf().rotationAxis((float) Math.toRadians(-140), //Degrees of rotation
+                    new Vector3f(1,0,0)); //Rotate around the X axis
+
+            TrinketRenderer.followBodyRotations(player, playerModel); //Don´t know if it makes any difference but might as well leave it here
+            TrinketRenderer.translateToChest(matrixStack, playerModel, player);
+            matrixStack.translate(-0.825F, 0.25F ,0.7F); //Position
+            matrixStack.multiply(rotation);
         }
         var buffer = vertexConsumerProvider.getBuffer(RenderLayers.getItemLayer(itemStack, true));
         ((ItemRendererAccessor)client.getItemRenderer()).SpellEngine_renderBakedItemModel(model, ItemStack.EMPTY, light, OverlayTexture.DEFAULT_UV, matrixStack, buffer);
