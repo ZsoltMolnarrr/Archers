@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -19,10 +20,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class Quivers {
     public static final List<Entry> entries = new ArrayList<>();
     public record Entry(Identifier id, int capacity, Item item) {  }
+    public record Args(TagKey<Item> tag, Item.Settings settings) { }
+    public static Function<Args, Item> factory = args -> new CustomBundleItem(args.tag, args.settings);
     public static Entry entry(String name, int capacity, @Nullable Rarity rarity) {
         var settings = new Item.Settings()
                 .maxCount(1)
@@ -40,7 +44,7 @@ public class Quivers {
         if (rarity != null) {
             settings.rarity(rarity);
         }
-        var bundle = new CustomBundleItem(ItemTags.ARROWS, settings);
+        var bundle = factory.apply(new Args(ItemTags.ARROWS, settings));
         var id = Identifier.of(ArchersMod.ID, name);
         var entry = new Entry(id, capacity, bundle);
         entries.add(entry);
