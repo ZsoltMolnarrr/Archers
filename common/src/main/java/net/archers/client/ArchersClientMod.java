@@ -9,6 +9,7 @@ import net.archers.client.effect.RootsRenderer;
 import net.archers.client.util.ArchersTooltip;
 import net.archers.effect.ArcherEffects;
 import net.archers.item.ArcherArmors;
+import net.archers.item.Quivers;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.item.armor.Armor;
@@ -40,6 +41,11 @@ public class ArchersClientMod {
         registerArmorRenderer(ArcherArmors.archerArmorSet_T1, ArcherArmorRenderer::archer);
         registerArmorRenderer(ArcherArmors.archerArmorSet_T2, ArcherArmorRenderer::ranger);
         registerArmorRenderer(ArcherArmors.archerArmorSet_T3, ArcherArmorRenderer::netheriteRanger);
+
+        List<Identifier> quiverModels = Quivers.entries.stream()
+                .map(entry -> Identifier.of(ArchersMod.ID, "item/quiver/" + entry.id().getPath()))
+                .toList();
+        CustomModels.registerModelIds(quiverModels);
     }
 
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {

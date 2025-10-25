@@ -18,11 +18,11 @@ import net.spell_engine.mixin.client.render.ItemRendererAccessor;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class QuiverRenderer implements TrinketRenderer {
+public class TrinketsQuiverRenderer implements TrinketRenderer {
     private final Identifier modelId;
 
-    public QuiverRenderer(String modelPath) {
-        this.modelId = Identifier.of(ArchersMod.ID, modelPath);
+    public TrinketsQuiverRenderer(String modelName) {
+        this.modelId = Identifier.of(ArchersMod.ID, "item/quiver/" + modelName);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class QuiverRenderer implements TrinketRenderer {
                        float limbAngle, float limbDistance, float animationProgress, float customAngle, float headYaw, float headPitch) {
         var client = MinecraftClient.getInstance();
         var manager = client.getBakedModelManager();
-        var model = manager.getModel(modelId);
+        var model = manager.getModel(this.modelId);
         if (livingEntity instanceof AbstractClientPlayerEntity player && entityModel instanceof PlayerEntityModel playerModel) {
             Quaternionf rotation = new Quaternionf().rotationAxis((float) Math.toRadians(-140), //Degrees of rotation
                     new Vector3f(1,0,0)); //Rotate around the X axis
