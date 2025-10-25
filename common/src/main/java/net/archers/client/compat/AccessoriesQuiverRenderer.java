@@ -27,9 +27,9 @@ public class AccessoriesQuiverRenderer implements AccessoryRenderer {
     public AccessoriesQuiverRenderer(String modelName) {
         var id = Identifier.of(ArchersMod.ID, "item/quiver/" + modelName);
         this.modelId = id;
-//        if (Platform.NeoForge) { // Not outsourcing to Platform, to avoid dedicated server issues
-//            this.modelIdentifier = new ModelIdentifier(id, "standalone");
-//        }
+        if (!Platform.Fabric) {
+            this.modelIdentifier = new ModelIdentifier(modelId, "standalone");
+        }
     }
 
     @Override
@@ -42,10 +42,10 @@ public class AccessoriesQuiverRenderer implements AccessoryRenderer {
         var client = MinecraftClient.getInstance();
         var manager = client.getBakedModelManager();
         BakedModel model;
-        if (modelIdentifier == null) { // Not outsourcing to Platform, to avoid dedicated server issues
-            model = manager.getModel(modelId);
-        } else {
+        if (modelIdentifier != null) {
             model = manager.getModel(modelIdentifier);
+        } else {
+            model = manager.getModel(modelId);
         }
         if (entityModel instanceof PlayerEntityModel playerModel) {
             Quaternionf rotation = new Quaternionf().rotationAxis((float) Math.toRadians(-140), //Degrees of rotation
