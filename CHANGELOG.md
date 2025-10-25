@@ -1,6 +1,7 @@
 # 2.6.6
 
 - Add basic armor trim support for all archer armor pieces
+- Add Quiver renderers, thanks to @Rulft44
 
 # 2.6.5
 

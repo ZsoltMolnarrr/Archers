@@ -48,11 +48,12 @@ public class AccessoriesQuiverRenderer implements AccessoryRenderer {
             model = manager.getModel(modelId);
         }
         if (entityModel instanceof PlayerEntityModel playerModel) {
-            Quaternionf rotation = new Quaternionf().rotationAxis((float) Math.toRadians(-140), //Degrees of rotation
-                    new Vector3f(1,0,0)); //Rotate around the X axis
-
             AccessoryRenderer.transformToModelPart(matrixStack, playerModel.body);
-            matrixStack.translate(-0.825F, -0.5F ,0.7F); //Position
+            matrixStack.translate(-1.65F, -0.5F ,-1.2F); //Position
+            matrixStack.scale(2F, 2F, 2F);
+
+            Quaternionf rotation = new Quaternionf().rotationAxis((float) Math.toRadians(40), //Degrees of rotation
+                    new Vector3f(1,0,0)); //Rotate around the X axis
             matrixStack.multiply(rotation);
         }
         var buffer = vertexConsumerProvider.getBuffer(RenderLayers.getItemLayer(itemStack, true));
