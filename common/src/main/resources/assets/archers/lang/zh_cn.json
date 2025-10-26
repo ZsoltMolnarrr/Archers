@@ -58,6 +58,7 @@
   "item.archers.aether_heavy_crossbow": "女武神弩炮",
 
   "item.archers.archer_spell_book": "弓术手册",
+  "item.archers.archer_spell_book.spell_binding.description": "弓箭手的法术书，利用远程武器和射箭技巧从远处击败敌人\n- 优势：在远距离造成高额伤害并保持机动性\n- 劣势：重装甲敌人\n- 职业套装：中等盔甲值",
   "item.archers.archer.spell_scroll": "弓术卷轴",
 
   "spell.archers.power_shot.name": "强劲射击",
