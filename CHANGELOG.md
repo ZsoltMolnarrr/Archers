@@ -1,3 +1,7 @@
+# 2.6.7
+
+- Update AzureLib Armor
+
 # 2.6.6
 
 - Add basic armor trim support for all archer armor pieces

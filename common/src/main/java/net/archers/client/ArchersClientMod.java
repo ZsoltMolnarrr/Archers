@@ -1,7 +1,7 @@
 package net.archers.client;
 
-import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
-import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererRegistry;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
 import net.archers.ArchersMod;
 import net.archers.client.armor.ArcherArmorRenderer;
 import net.archers.client.effect.HuntersMarkRenderer;
