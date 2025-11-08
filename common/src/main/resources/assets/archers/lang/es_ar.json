@@ -58,6 +58,7 @@
   "item.archers.aether_heavy_crossbow": "Balista de Valquiria",
 
   "item.archers.archer_spell_book": "Manual de Arquería",
+  "item.archers.archer_spell_book.spell_binding.description": "Libro de Hechizos de los Arqueros, que usan armas a distancia y habilidades de tiro con arco para derrotar enemigos desde lejos\n- Fortalezas: Alto daño a distancia y buena movilidad\n- Debilidades: Enemigos con armadura pesada\n- Equipo: Armadura media"
   "item.archers.archer.spell_scroll": "Pergamino de Arquería",
 
   "spell.archers.power_shot.name": "Disparo Potente",
