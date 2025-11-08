@@ -91,8 +91,8 @@ public class ArcherArmors {
     public static final float damage_T1 = 0.05F;
     public static final float haste_T2 = 0.03F;
     public static final float damage_T2 = 0.08F;
-    public static final float haste_T3 = 0.05F;
-    public static final float damage_T3 = 0.1F;
+    public static final float haste_T3 = 0.04F;
+    public static final float damage_T3 = 0.09F;
 
     public static final Armor.Set archerArmorSet_T1 = create(
             material_t1,

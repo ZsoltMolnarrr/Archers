@@ -1,3 +1,8 @@
+# 2.6.8
+
+- Update default armor stats
+- Update some translations
+
 # 2.6.7
 
 - Update AzureLib Armor
