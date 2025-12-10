@@ -72,5 +72,26 @@
   "advancements.rpg_series.spell_master_archer.description": "궁술 교범을 완성하세요",
 
   "advancements.rpg_series.obtain_arrow.title": "궁수의 길",
-  "advancements.rpg_series.obtain_arrow.description": "화살을 얻으세요"
+  "advancements.rpg_series.obtain_arrow.description": "화살을 얻으세요",
+
+  "item.archers.small_quiver": "화살통",
+  "item.archers.medium_quiver": "사냥꾼의 화살통",
+  "item.archers.large_quiver": "전투용 화살통",
+  "item.archers.quiver.hint": "장착 시, 활쏘기를 위한 화살을 제공합니다.",
+  "item.archers.aether_spear": "성스러운 창",
+  "item.archers.netherite_ranger_armor_head": "네더라이트 레인저 후드",
+  "item.archers.netherite_ranger_armor_chest": "네더라이트 레인저 튜닉",
+  "item.archers.netherite_ranger_armor_legs": "네더라이트 레인저 바지",
+  "item.archers.netherite_ranger_armor_feet": "네더라이트 레인저 부츠",
+  "item.archers.aether_longbow": "아크로폴리스의 은빛 활",
+  "item.archers.aether_rapid_crossbow": "하늘의 쇠뇌",
+  "item.archers.aether_heavy_crossbow": "발키리 발리스타",
+  "item.archers.archer_spell_book.spell_binding.description": "궁수의 교범. 원거리 무기와 궁술 기술을 사용해 멀리서 적을 제압합니다.\n- 강점: 원거리에서 높은 피해를 입히고 기동성을 유지\n- 약점: 중무장한 적\n- 장비: 보통 수준의 방어구",
+  "item.archers.archer.spell_scroll": "궁술 주문서",
+  "effect.archers.hunters_mark_stash": "강력한 사격",
+  "effect.archers.hunters_mark_stash.description": "다음 사격에 사냥꾼의 표식이 적용됩니다",
+  "advancements.rpg_series.spell_cast_archer_book.title": "궁술 훈련",
+  "advancements.rpg_series.spell_cast_archer_book.description": "궁술 교범에서 기술 사용하기",
+  "advancements.rpg_series.trade_with_archery_artisan.title": "궁술 판매",
+  "advancements.rpg_series.trade_with_archery_artisan.description": "궁수 장인 주민에게서 아이템 구매하기"
 }
