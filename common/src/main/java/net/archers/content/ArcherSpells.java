@@ -6,6 +6,7 @@ import net.minecraft.util.Identifier;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
+import net.spell_engine.api.spell.fx.PlayerAnimation;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
@@ -18,8 +19,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArcherSpells {
+    public enum Book { ARCHER }
     public record Entry(Identifier id, Spell spell, String title, String description,
-                        @Nullable SpellTooltip.DescriptionMutator mutator) { }
+                        @Nullable SpellTooltip.DescriptionMutator mutator,
+                        @Nullable List<Object> weaponGroups,
+                        @Nullable Book book) {
+        public Entry(Identifier id, Spell spell, String title, String description) {
+            this(id, spell, title, description, null, List.of(), null);
+        }
+        public Entry book(Book book) {
+            return new Entry(id, spell, title, description, mutator, weaponGroups, book);
+        }
+    }
     public static final List<Entry> entries = new ArrayList<>();
     private static Entry add(Entry entry) {
         entries.add(entry);
@@ -35,7 +46,6 @@ public class ArcherSpells {
         spell.active.cast = new Spell.Active.Cast();
 
         spell.learn = new Spell.Learn();
-        spell.active.scroll = new Spell.Active.Scroll();
 
         return spell;
     }
@@ -76,13 +86,13 @@ public class ArcherSpells {
         return impact;
     }
 
-    public static final Entry power_shot = add(power_shot());
+    public static final Entry power_shot = add(power_shot().book(Book.ARCHER));
     private static Entry power_shot() {
         var id = Identifier.of(ArchersMod.ID, "power_shot");
         var spell = activeSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 0;
-        spell.tier = 1;
+        spell.tier = 2;
 
 
         spell.release.sound = Sound.withVolume(ArcherSounds.MARKER_SHOT.id(), 0.5F);
@@ -120,19 +130,19 @@ public class ArcherSpells {
         spell.arrow_perks.bypass_iframes = true;
 
         configureCooldown(spell, 8);
-        return new Entry(id, spell, "Power Shot", "", null);
+        return new Entry(id, spell, "Power Shot", "");
     }
 
-    public static final Entry entangling_roots = add(entangling_roots());
+    public static final Entry entangling_roots = add(entangling_roots().book(Book.ARCHER));
     private static Entry entangling_roots() {
         var id = Identifier.of(ArchersMod.ID, "entangling_roots");
         var spell = activeSpellBase();
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
         spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
         spell.range = 0;
-        spell.tier = 2;
+        spell.tier = 3;
 
-        spell.release.animation = "spell_engine:one_handed_area_release";
+        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
 
         spell.deliver.type = Spell.Delivery.Type.CLOUD;
         var cloud = new Spell.Delivery.Cloud();
@@ -165,10 +175,10 @@ public class ArcherSpells {
         configureCooldown(spell, 18);
         spell.cost.exhaust = 0.2F;
 
-        return new Entry(id, spell, "Entangling Roots", "", null);
+        return new Entry(id, spell, "Entangling Roots", "");
     }
 
-    public static final Entry barrage = add(barrage());
+    public static final Entry barrage = add(barrage().book(Book.ARCHER));
     private static Entry barrage() {
         var id = Identifier.of(ArchersMod.ID, "barrage");
         var spell = activeSpellBase();
@@ -177,11 +187,11 @@ public class ArcherSpells {
         spell.tier = 3;
 
         spell.active.cast.duration = 0.5F;
-        spell.active.cast.animation = "spell_engine:archery_pull";
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
         spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
-        spell.release.animation = "spell_engine:archery_release";
+        spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
@@ -200,10 +210,10 @@ public class ArcherSpells {
         configureArrowCost(spell);
         spell.cost.item.consume = false;
 
-        return new Entry(id, spell, "Barrage", "", null);
+        return new Entry(id, spell, "Barrage", "");
     }
 
-    public static final Entry magic_arrow = add(magic_arrow());
+    public static final Entry magic_arrow = add(magic_arrow().book(Book.ARCHER));
     private static Entry magic_arrow() {
         var id = Identifier.of(ArchersMod.ID, "magic_arrow");
         var spell = activeSpellBase();
@@ -212,7 +222,7 @@ public class ArcherSpells {
         spell.tier = 4;
 
         spell.active.cast.duration = 1F;
-        spell.active.cast.animation = "spell_engine:archery_pull";
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
         spell.active.cast.particles = new ParticleBatch[]{
                 new ParticleBatch(
@@ -227,7 +237,7 @@ public class ArcherSpells {
         };
         spell.active.cast.sound = new Sound(SpellEngineSounds.GENERIC_WIND_CHARGING.id());
 
-        spell.release.animation = "spell_engine:archery_release";
+        spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
         spell.release.sound = new Sound(ArcherSounds.MAGIC_ARROW_RELEASE.id());
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(
@@ -285,7 +295,7 @@ public class ArcherSpells {
         };
         projectile.client_data.light_level = 10;
         projectile.client_data.model = new Spell.ProjectileModel();
-        projectile.client_data.model.model_id = "archers:projectile/magic_arrow";
+        projectile.client_data.model.model_id = "archers:spell_projectile/magic_arrow";
         projectile.client_data.model.light_emission = LightEmission.RADIATE;
         projectile.client_data.model.scale = 1.2F;
         shoot.projectile = projectile;
@@ -308,6 +318,6 @@ public class ArcherSpells {
         configureCooldown(spell, 8);
         configureArrowCost(spell);
 
-        return new Entry(id, spell, "Magic Arrow", "", null);
+        return new Entry(id, spell, "Magic Arrow", "");
     }
 }

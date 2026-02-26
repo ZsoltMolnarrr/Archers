@@ -44,7 +44,7 @@
   "item.archers.ruby_rapid_crossbow": "루비 빠른 쇠뇌",
   "item.archers.ruby_heavy_crossbow": "루비 무거운 쇠뇌",
 
-  "item.archers.archer_spell_book": "궁술 교범",
+  "item.archers.spell_book/archer": "궁술 교범",
 
   "spell.archers.power_shot.name": "강력한 사격",
   "spell.archers.power_shot.description": "패시브 기술: 화살이 {effect_duration}초 동안 대상에게 사냥꾼의 표식을 부여하여 받는 피해를 {damage_taken} 증가시키고, 최대 {effect_amplifier}번까지 중첩됩니다.",
@@ -86,8 +86,8 @@
   "item.archers.aether_longbow": "아크로폴리스의 은빛 활",
   "item.archers.aether_rapid_crossbow": "하늘의 쇠뇌",
   "item.archers.aether_heavy_crossbow": "발키리 발리스타",
-  "item.archers.archer_spell_book.spell_binding.description": "궁수의 교범. 원거리 무기와 궁술 기술을 사용해 멀리서 적을 제압합니다.\n- 강점: 원거리에서 높은 피해를 입히고 기동성을 유지\n- 약점: 중무장한 적\n- 장비: 보통 수준의 방어구",
-  "item.archers.archer.spell_scroll": "궁술 주문서",
+  "item.archers.spell_book/archer.spell_binding.description": "궁수의 교범. 원거리 무기와 궁술 기술을 사용해 멀리서 적을 제압합니다.\n- 강점: 원거리에서 높은 피해를 입히고 기동성을 유지\n- 약점: 중무장한 적\n- 장비: 보통 수준의 방어구",
+  "item.archers.spell_scroll/archer": "궁술 주문서",
   "effect.archers.hunters_mark_stash": "강력한 사격",
   "effect.archers.hunters_mark_stash.description": "다음 사격에 사냥꾼의 표식이 적용됩니다",
   "advancements.rpg_series.spell_cast_archer_book.title": "궁술 훈련",

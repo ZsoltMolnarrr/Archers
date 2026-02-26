@@ -57,9 +57,9 @@
   "item.archers.aether_rapid_crossbow": "Arbalète céleste",
   "item.archers.aether_heavy_crossbow": "Baliste des Valkyries",
 
-  "item.archers.archer_spell_book": "Manuel d’archerie",
-  "item.archers.archer_spell_book.spell_binding.description": "Grimoire des archers, utilisant les armes à distance et les compétences d’archerie pour vaincre les ennemis à longue portée\n- Forces : Dégâts élevés à distance et grande mobilité\n- Faiblesses : Ennemis lourdement blindés\n- Équipement : Armure moyenne",
-  "item.archers.archer.spell_scroll": "Parchemin d’archerie",
+  "item.archers.spell_book/archer": "Manuel d’archerie",
+  "item.archers.spell_book/archer.spell_binding.description": "Grimoire des archers, utilisant les armes à distance et les compétences d’archerie pour vaincre les ennemis à longue portée\n- Forces : Dégâts élevés à distance et grande mobilité\n- Faiblesses : Ennemis lourdement blindés\n- Équipement : Armure moyenne",
+  "item.archers.spell_scroll/archer": "Parchemin d’archerie",
 
   "spell.archers.power_shot.name": "Tir puissant",
   "spell.archers.power_shot.description": "Vos {effect_amplifier_cap} prochaines flèches marquent la cible avec la Marque du chasseur pendant {effect_duration} secondes, augmentant les dégâts subis de {damage_taken}, cumulable jusqu’à {effect_amplifier_cap} fois.",

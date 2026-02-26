@@ -1,3 +1,7 @@
+# 2.7.0
+
+- Update to use Spell Engine 1.9.0
+
 # 2.6.8
 
 - Update default armor stats

@@ -2,13 +2,13 @@
   "school": "spell_power:physical_melee",
   "secondary_archetype": "ANY",
   "range": 0.0,
-  "tier": 2,
+  "tier": 3,
   "learn": {},
-  "active": {
-    "scroll": {}
-  },
+  "active": {},
   "release": {
-    "animation": "spell_engine:one_handed_area_release"
+    "animation": {
+      "id": "spell_engine:one_handed_area_release"
+    }
   },
   "deliver": {
     "type": "CLOUD",

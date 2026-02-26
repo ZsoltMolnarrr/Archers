@@ -12,9 +12,9 @@ import net.archers.item.ArcherArmors;
 import net.archers.item.Quivers;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
-import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.render.CustomModels;
 import net.spell_engine.client.gui.SpellTooltip;
+import net.spell_engine.rpg_series.item.Armor;
 
 import java.util.List;
 import java.util.function.Supplier;

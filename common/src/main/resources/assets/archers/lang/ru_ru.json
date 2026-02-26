@@ -49,7 +49,7 @@
 "item.archers.ruby_rapid_crossbow": "Рубиновый скоростной арбалет",
 "item.archers.ruby_heavy_crossbow": "Рубиновый шквальный арбалет",
 
-"item.archers.archer_spell_book": "Пособие лучника",
+"item.archers.spell_book/archer": "Пособие лучника",
 
 "spell.archers.power_shot.name": "Мощный выстрел",
 "spell.archers.power_shot.description": "Пассивный навык: стрелы наносят повышенный урон по цели с Меткой охотника на {damage_taken} ед. в течение {effect_duration} секунд, суммируясь до {effect_amplifier} раз.",

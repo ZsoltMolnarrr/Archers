@@ -57,9 +57,9 @@
   "item.archers.aether_rapid_crossbow": "Ballesta del Cielo",
   "item.archers.aether_heavy_crossbow": "Balista de Valquiria",
 
-  "item.archers.archer_spell_book": "Manual de Arquería",
-  "item.archers.archer_spell_book.spell_binding.description": "Libro de Hechizos de los Arqueros, que usan armas a distancia y habilidades de tiro con arco para derrotar enemigos desde lejos\n- Fortalezas: Alto daño a distancia y buena movilidad\n- Debilidades: Enemigos con armadura pesada\n- Equipo: Armadura media"
-  "item.archers.archer.spell_scroll": "Pergamino de Arquería",
+  "item.archers.spell_book/archer": "Manual de Arquería",
+  "item.archers.spell_book/archer.spell_binding.description": "Libro de Hechizos de los Arqueros, que usan armas a distancia y habilidades de tiro con arco para derrotar enemigos desde lejos\n- Fortalezas: Alto daño a distancia y buena movilidad\n- Debilidades: Enemigos con armadura pesada\n- Equipo: Armadura media"
+  "item.archers.spell_scroll/archer": "Pergamino de Arquería",
 
   "spell.archers.power_shot.name": "Disparo Potente",
   "spell.archers.power_shot.description": "Tus próximas {effect_amplifier} flechas marcan al objetivo con Marca del Cazador durante {effect_duration} segundos, aumentando el daño que recibe en {damage_taken}, acumulándose hasta {effect_amplifier} veces.",

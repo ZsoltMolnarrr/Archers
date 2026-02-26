@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "id": "archers:archer_spell_book"
+      "id": "spell_engine:spell_book",
+      "components": { "spell_engine:item_model": "archers:item/spell_book/archer" }
     },
     "title": {
       "translate": "advancements.rpg_series.path_choose_archer.title"
@@ -19,7 +20,7 @@
     "book": {
       "trigger": "spell_engine:spell_book_creation",
       "conditions": {
-        "spell_pool": "archers:archer"
+        "spell_pool": "archers:spell_book/archer"
       }
     }
   },

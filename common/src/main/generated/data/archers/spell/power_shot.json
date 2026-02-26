@@ -1,11 +1,9 @@
 {
   "school": "spell_power:physical_ranged",
   "range": 0.0,
-  "tier": 1,
+  "tier": 2,
   "learn": {},
-  "active": {
-    "scroll": {}
-  },
+  "active": {},
   "release": {
     "particles": [
       {

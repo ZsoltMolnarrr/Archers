@@ -25,8 +25,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.config.ConfigFile;
-import net.spell_engine.api.item.SpellBooks;
-import net.spell_engine.api.spell.container.SpellContainer;
 import net.tiny_config.ConfigManager;
 
 public class ArchersMod {
@@ -99,7 +97,6 @@ public class ArchersMod {
                 .displayName(Text.translatable("itemGroup." + ID + ".general"))
                 .build();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS);
-        SpellBooks.createAndRegister(Identifier.of(ID, "archer"), SpellContainer.ContentType.ARCHERY, Group.KEY);
         Misc.register();
         ArcherWeapons.register(itemConfig.value.ranged_weapons, itemConfig.value.melee_weapons);
         ArcherArmors.register(itemConfig.value.armor_sets);

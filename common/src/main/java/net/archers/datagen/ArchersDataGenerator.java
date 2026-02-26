@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -17,7 +18,10 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
-import net.spell_engine.api.item.armor.Armor;
+import net.spell_engine.api.spell.Spell;
+import net.spell_engine.api.spell.registry.SpellRegistry;
+import net.spell_engine.api.tags.SpellTags;
+import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
@@ -30,6 +34,7 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(SoundGen::new);
         pack.addProvider(SpellGen::new);
+        pack.addProvider(SpellTagGenerator::new);
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(UnsmeltGenerator::new);
         pack.addProvider(ArcherRecipes::new);
@@ -44,7 +49,7 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             generateWeaponTags(ArcherWeapons.meleeEntries);
             var bowEntries = ArcherWeapons.rangedEntries.stream().map(entry ->
-                    new RPGSeriesDataGen.BowEntry(entry.id(), entry.weaponType, entry.lootProperties)
+                    new RPGSeriesDataGen.BowEntry(entry.id(), entry.category, entry.lootProperties)
             ).toList();
             generateBowTags(bowEntries);
             generateArmorTags(ArcherArmors.entries, RPGSeriesItemTags.ArmorMetaType.ARCHERY);
@@ -61,6 +66,25 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
             for (var entry: ArcherSpells.entries) {
                 builder.add(entry.id(), entry.spell());
             }
+        }
+    }
+
+    public static class SpellTagGenerator extends FabricTagProvider<Spell> {
+        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, SpellRegistry.KEY, registriesFuture);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            var namespace = ArchersMod.ID;
+            ArcherSpells.entries.forEach(entry -> {
+                if (entry.book() != null) {
+                    var bookTagKey = SpellTags.spellBook(namespace, entry.book().toString().toLowerCase());
+                    getOrCreateTagBuilder(bookTagKey).addOptional(entry.id());
+                    var scrollTagKey = SpellTags.spellScroll(namespace, entry.book().toString().toLowerCase());
+                    getOrCreateTagBuilder(scrollTagKey).addOptional(entry.id());
+                }
+            });
         }
     }
 

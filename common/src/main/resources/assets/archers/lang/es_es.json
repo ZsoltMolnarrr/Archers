@@ -42,7 +42,7 @@
   "item.archers.ruby_rapid_crossbow": "Ballesta Rápida de Rubí",
   "item.archers.ruby_heavy_crossbow": "Ballesta Pesada de Rubí",
 
-  "item.archers.archer_spell_book": "Manual de Arquería",
+  "item.archers.spell_book/archer": "Manual de Arquería",
 
   "spell.archers.power_shot.name": "Disparo Potente",
   "spell.archers.power_shot.description": "Las flechas infligen la Marca del Cazador al objetivo durante {effect_duration} segundos, aumentando el daño recibido en un {damage_taken}, acumulándose hasta {effect_amplifier} veces.",

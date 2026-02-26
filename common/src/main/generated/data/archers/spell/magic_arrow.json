@@ -4,10 +4,11 @@
   "tier": 4,
   "learn": {},
   "active": {
-    "scroll": {},
     "cast": {
       "duration": 1.0,
-      "animation": "spell_engine:archery_pull",
+      "animation": {
+        "id": "spell_engine:archery_pull"
+      },
       "animates_ranged_weapon": true,
       "sound": {
         "id": "spell_engine:generic_wind_charging"
@@ -28,7 +29,9 @@
     }
   },
   "release": {
-    "animation": "spell_engine:archery_release",
+    "animation": {
+      "id": "spell_engine:archery_release"
+    },
     "particles": [
       {
         "particle_id": "spell_engine:magic_spark_decelerate",
@@ -115,7 +118,7 @@
             }
           ],
           "model": {
-            "model_id": "archers:projectile/magic_arrow",
+            "model_id": "archers:spell_projectile/magic_arrow",
             "light_emission": "RADIATE",
             "scale": 1.2
           }

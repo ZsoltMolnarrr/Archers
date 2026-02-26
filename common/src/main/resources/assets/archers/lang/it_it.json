@@ -44,7 +44,7 @@
   "item.archers.ruby_rapid_crossbow": "Balestra leggera di rubino",
   "item.archers.ruby_heavy_crossbow": "Balestra pesante di rubino",  
 
-  "item.archers.archer_spell_book": "Manuale di tiro",
+  "item.archers.spell_book/archer": "Manuale di tiro",
 
   "spell.archers.power_shot.name": "Colpo potente",
   "spell.archers.power_shot.description": "Scocca una potente freccia e infligge al bersaglio il Marchio del cacciatore per {effect_duration} secondi, aumentandone i danni subiti del 5%, accumulandosi fino a {effect_amplifier} volte.",

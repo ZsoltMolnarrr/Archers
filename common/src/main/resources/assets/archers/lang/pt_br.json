@@ -49,7 +49,7 @@
   "item.archers.ruby_rapid_crossbow": "Besta rápida de rubi",
   "item.archers.ruby_heavy_crossbow": "Besta pesada de rubi",
 
-  "item.archers.archer_spell_book": "Manual de arqueria",
+  "item.archers.spell_book/archer": "Manual de arqueria",
 
   "spell.archers.power_shot.name": "Tiro poderoso",
   "spell.archers.power_shot.description": "Habilidade passiva: flechas aplicam a Marca do Caçador no alvo por {effect_duration} segundos, aumentando o dano recebido em {damage_taken}, acumulando até {effect_amplifier} vezes.",

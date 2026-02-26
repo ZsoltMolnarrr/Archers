@@ -1,6 +1,5 @@
 package net.archers.datagen;
 
-import net.archers.ArchersMod;
 import net.archers.block.ArcherBlocks;
 import net.archers.item.ArcherArmors;
 import net.archers.item.ArcherWeapons;
@@ -14,8 +13,8 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
-import net.spell_engine.api.item.armor.Armor;
-import net.spell_engine.api.item.weapon.Weapon;
+import net.spell_engine.rpg_series.item.Armor;
+import net.spell_engine.rpg_series.item.Weapon;
 
 import java.util.concurrent.CompletableFuture;
 

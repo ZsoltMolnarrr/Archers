@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "archers:power_shot",
+      "required": false
+    },
+    {
+      "id": "archers:entangling_roots",
+      "required": false
+    },
+    {
+      "id": "archers:barrage",
+      "required": false
+    },
+    {
+      "id": "archers:magic_arrow",
+      "required": false
+    }
+  ]
+}
