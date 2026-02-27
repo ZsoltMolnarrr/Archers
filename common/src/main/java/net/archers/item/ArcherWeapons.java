@@ -107,10 +107,11 @@ public class ArcherWeapons {
         }
         if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(AETHER)) {
             var aetherRepair = ingredient("aether:ambrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
-            addMelee(Weapons.spearWithSkill(NAMESPACE, "aether_spear", Equipment.Tier.TIER_4, aetherRepair).lootTheme("aether"));
-            addRanged(RangedWeapons.longBow(NAMESPACE, "aether_longbow", Equipment.Tier.TIER_4, aetherRepair).lootTheme("aether"));
-            addRanged(RangedWeapons.rapidCrossbow(NAMESPACE, "aether_rapid_crossbow", Equipment.Tier.TIER_4, aetherRepair).lootTheme("aether"));
-            addRanged(RangedWeapons.heavyCrossbow(NAMESPACE, "aether_heavy_crossbow", Equipment.Tier.TIER_4, aetherRepair).lootTheme("aether"));
+            addMelee(Weapons.spearWithSkill(NAMESPACE, "aether_spear", Equipment.Tier.TIER_4, aetherRepair)
+                    .loot(Equipment.LootProperties.of("aether")));
+            addRanged(RangedWeapons.longBow(NAMESPACE, "aether_longbow", Equipment.Tier.TIER_4, aetherRepair).loot(-1, "aether"));
+            addRanged(RangedWeapons.rapidCrossbow(NAMESPACE, "aether_rapid_crossbow", Equipment.Tier.TIER_4, aetherRepair).loot(-1, "aether"));
+            addRanged(RangedWeapons.heavyCrossbow(NAMESPACE, "aether_heavy_crossbow", Equipment.Tier.TIER_4, aetherRepair).loot(-1, "aether"));
         }
 
         Weapon.register(meleeConfig, meleeEntries, Group.KEY);

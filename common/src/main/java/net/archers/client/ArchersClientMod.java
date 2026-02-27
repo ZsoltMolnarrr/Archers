@@ -21,11 +21,6 @@ import java.util.function.Supplier;
 
 public class ArchersClientMod {
     public static void init() {
-        CustomModels.registerModelIds(List.of(
-                HuntersMarkRenderer.modelId,
-                RootsRenderer.modelId,
-                Identifier.of(ArchersMod.ID, "projectile/magic_arrow")
-        ));
         CustomModelStatusEffect.register(ArcherEffects.HUNTERS_MARK.effect, new HuntersMarkRenderer());
         CustomModelStatusEffect.register(ArcherEffects.ENTANGLING_ROOTS.effect, new RootsRenderer());
 

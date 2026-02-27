@@ -14,7 +14,7 @@ public class RootsRenderer implements CustomModelStatusEffect.Renderer {
 
     // MARK: Renderer
 
-    public static final Identifier modelId = Identifier.of(ArchersMod.ID, "effect/entangling_roots");
+    public static final Identifier modelId = Identifier.of(ArchersMod.ID, "spell_effect/entangling_roots");
     @Override
     public void renderEffect(int amplifier, LivingEntity livingEntity, float delta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light) {
         matrixStack.push();

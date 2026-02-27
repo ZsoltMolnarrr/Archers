@@ -13,7 +13,7 @@ import net.spell_engine.api.render.CustomModels;
 import net.spell_engine.api.render.LightEmission;
 
 public class HuntersMarkRenderer implements CustomModelStatusEffect.Renderer {
-    public static final Identifier modelId = Identifier.of(ArchersMod.ID, "effect/hunters_mark");
+    public static final Identifier modelId = Identifier.of(ArchersMod.ID, "spell_effect/hunters_mark");
     private static final RenderLayer GLOWING_RENDER_LAYER = CustomLayers.spellEffect(LightEmission.GLOW, false);
     //TexturedRenderLayers.getEntityCutout();
 
