@@ -3,6 +3,8 @@
 DISCLAIMER: All spell books and spell scrolls will be reset, due to major API changes. Some (looted) weapons with custom spell containers become non-functional, and need to be re-obtained. Apologies for the inconvenience.
 
 - Update to use Spell Engine 1.9.0
+- Archery manual now offers 3 spells only, to match other classes
+- Entangling Roots spell is now a spell book choice
 
 # 2.6.8
 
