@@ -16,8 +16,8 @@
       {
         "amount": {
           "type": "minecraft:linear",
-          "base": 0.15,
-          "per_level_above_first": 0.15
+          "base": 0.1,
+          "per_level_above_first": 0.1
         },
         "attribute": "ranged_weapon:haste",
         "id": "minecraft:enchantment.haste",
