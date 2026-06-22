@@ -54,40 +54,54 @@ public class ArcherWeapons {
     // MARK: Spears
 
     public static final Weapon.Entry flint_spear = addMelee(Weapons.spearWithSkill(
-            NAMESPACE, "flint_spear", Equipment.Tier.TIER_0, () -> Ingredient.ofItems(Items.FLINT)));
+            NAMESPACE, "flint_spear", Equipment.Tier.TIER_0, () -> Ingredient.ofItems(Items.FLINT))
+            .translatedName("Flint Spear"));
     public static final Weapon.Entry iron_spear = addMelee(Weapons.spearWithSkill(
-            NAMESPACE, "iron_spear", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT)));
+            NAMESPACE, "iron_spear", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT))
+            .translatedName("Iron Spear"));
     public static final Weapon.Entry golden_spear = addMelee(Weapons.spearWithSkill(
             NAMESPACE, "golden_spear", Equipment.Tier.GOLDEN, () -> Ingredient.ofItems(Items.GOLD_INGOT))
-            .loot(Equipment.LootProperties.of("golden_weapon")));
+            .loot(Equipment.LootProperties.of("golden_weapon"))
+            .translatedName("Golden Spear"));
     public static final Weapon.Entry diamond_spear = addMelee(Weapons.spearWithSkill(
-            NAMESPACE, "diamond_spear", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)));
+            NAMESPACE, "diamond_spear", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND))
+            .translatedName("Diamond Spear"));
     public static final Weapon.Entry netherite_spear = addMelee(Weapons.spearWithSkill(
-            NAMESPACE, "netherite_spear", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)));
+            NAMESPACE, "netherite_spear", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT))
+            .translatedName("Netherite Spear"));
 
     // MARK: Bows
 
     public static final RangedWeapon.Entry composite_longbow = addRanged(RangedWeapons.longBow(
-            NAMESPACE, "composite_longbow", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.BONE)));
+            NAMESPACE, "composite_longbow", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.BONE))
+            .translatedName("Composite Longbow"));
     public static final RangedWeapon.Entry mechanic_shortbow = addRanged(RangedWeapons.shortBow(
-            NAMESPACE, "mechanic_shortbow", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.REDSTONE)));
+            NAMESPACE, "mechanic_shortbow", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.REDSTONE))
+            .translatedName("Mechanical Shortbow"));
     public static final RangedWeapon.Entry royal_longbow = addRanged(RangedWeapons.longBow(
-            NAMESPACE, "royal_longbow", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.GOLD_INGOT)));
+            NAMESPACE, "royal_longbow", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.GOLD_INGOT))
+            .translatedName("Royal Longbow"));
     public static final RangedWeapon.Entry netherite_shortbow = addRanged(RangedWeapons.shortBow(
-            NAMESPACE, "netherite_shortbow", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)));
+            NAMESPACE, "netherite_shortbow", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT))
+            .translatedName("Netherite Shortbow"));
     public static final RangedWeapon.Entry netherite_longbow = addRanged(RangedWeapons.longBow(
-            NAMESPACE, "netherite_longbow", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)));
+            NAMESPACE, "netherite_longbow", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT))
+            .translatedName("Netherite Longbow"));
 
     // MARK: Crossbows
 
     public static final RangedWeapon.Entry rapid_crossbow = addRanged(RangedWeapons.rapidCrossbow(
-            NAMESPACE, "rapid_crossbow", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.REDSTONE)));
+            NAMESPACE, "rapid_crossbow", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.REDSTONE))
+            .translatedName("Rapid Crossbow"));
     public static final RangedWeapon.Entry heavy_crossbow = addRanged(RangedWeapons.heavyCrossbow(
-            NAMESPACE, "heavy_crossbow", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)));
+            NAMESPACE, "heavy_crossbow", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND))
+            .translatedName("Heavy Crossbow"));
     public static final RangedWeapon.Entry netherite_rapid_crossbow = addRanged(RangedWeapons.rapidCrossbow(
-            NAMESPACE, "netherite_rapid_crossbow", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)));
+            NAMESPACE, "netherite_rapid_crossbow", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT))
+            .translatedName("Netherite Rapid Crossbow"));
     public static final RangedWeapon.Entry netherite_heavy_crossbow = addRanged(RangedWeapons.heavyCrossbow(
-            NAMESPACE, "netherite_heavy_crossbow", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)));
+            NAMESPACE, "netherite_heavy_crossbow", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT))
+            .translatedName("Netherite Heavy Crossbow"));
 
     // MARK: Register
 

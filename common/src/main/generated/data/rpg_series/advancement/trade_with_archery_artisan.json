@@ -20,19 +20,18 @@
     "description": {
       "translate": "advancements.rpg_series.trade_with_archery_artisan.description"
     },
+    "hidden": true,
     "icon": {
       "count": 1,
       "id": "minecraft:arrow"
     },
     "title": {
       "translate": "advancements.rpg_series.trade_with_archery_artisan.title"
-    },
-    "hidden": true
+    }
   },
   "requirements": [
     [
       "trade_with_archery_artisan"
     ]
-  ],
-  "sends_telemetry_event": false
+  ]
 }

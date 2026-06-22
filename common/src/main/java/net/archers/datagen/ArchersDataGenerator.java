@@ -3,11 +3,13 @@ package net.archers.datagen;
 import net.archers.ArchersMod;
 import net.archers.content.ArcherSounds;
 import net.archers.content.ArcherSpells;
+import net.archers.effect.ArcherEffects;
 import net.archers.item.ArcherArmors;
 import net.archers.item.ArcherWeapons;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
@@ -16,6 +18,8 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
+import net.spell_engine.api.datagen.NamespacedLangGenerator;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
 import net.spell_engine.api.datagen.WeaponAttributeGenerator;
@@ -41,6 +45,8 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(UnsmeltGenerator::new);
         pack.addProvider(ArcherRecipes::new);
         pack.addProvider(WeaponGen::new);
+        pack.addProvider(ArchersAdvancements::new);
+        pack.addProvider(LangGen::new);
     }
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
@@ -223,6 +229,112 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
                     builder.entries.add(new Entry(entry.id(), entry.weaponAttributesPreset));
                 }
             });
+        }
+    }
+
+    /**
+     * Generates the {@code en_us.json} language file from the in-code content definitions
+     * (spells, status effects, weapons, armor, spell books) plus the advancement tree and a number of
+     * ad-hoc strings (creative tab, quivers, auto-fire hook, workbench, villager) that have no dedicated
+     * content entry.
+     */
+    public static class LangGen extends NamespacedLangGenerator {
+        public LangGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+            super(dataOutput, registryLookup, ArchersMod.ID);
+        }
+
+        @Override
+        public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, FabricLanguageProvider.TranslationBuilder builder) {
+            var namespace = ArchersMod.ID;
+
+            // Creative tab
+            builder.add("itemGroup." + namespace + ".general", "Archers");
+
+            // Spell books & scrolls (one generated item per book)
+            for (var book : ArcherSpells.Book.values()) {
+                var key = book.name().toLowerCase();
+                builder.add("item." + namespace + ".spell_book/" + key, book.bookName);
+                builder.add("item." + namespace + ".spell_scroll/" + key, book.scrollName);
+                builder.add("item." + namespace + ".spell_book/" + key + ".spell_binding.description", book.bindingDescription);
+            }
+
+            // Spells (only those given a display name in code)
+            for (var entry : ArcherSpells.entries) {
+                if (entry.title() == null || entry.title().isEmpty()) {
+                    continue;
+                }
+                var path = entry.id().getPath();
+                builder.add("spell." + namespace + "." + path + ".name", entry.title());
+                builder.add("spell." + namespace + "." + path + ".description", entry.description());
+            }
+
+            // Status effects
+            for (var entry : ArcherEffects.entries) {
+                var path = entry.id.getPath();
+                builder.add("effect." + namespace + "." + path, entry.title);
+                builder.add("effect." + namespace + "." + path + ".description", entry.description);
+            }
+
+            // Weapons (melee spears + ranged bows/crossbows) — code-sourced display names
+            ArcherWeapons.meleeEntries.forEach(entry -> addItemName(builder, entry.id(), entry.translatedName()));
+            ArcherWeapons.rangedEntries.forEach(entry -> addItemName(builder, entry.id(), entry.translatedName()));
+            // Conditional weapons are only registered when their host mod is present, so they are absent
+            // from the weapon lists at data-gen time. Their names are provided directly.
+            builder.add("item." + namespace + ".aeternium_spear", "Aeternium Spear");
+            builder.add("item." + namespace + ".ruby_spear", "Ruby Spear");
+            builder.add("item." + namespace + ".aether_spear", "Holy Spear");
+            builder.add("item." + namespace + ".crystal_shortbow", "Crystal Shortbow");
+            builder.add("item." + namespace + ".crystal_longbow", "Crystal Longbow");
+            builder.add("item." + namespace + ".ruby_rapid_crossbow", "Ruby Rapid Crossbow");
+            builder.add("item." + namespace + ".ruby_heavy_crossbow", "Ruby Heavy Crossbow");
+            builder.add("item." + namespace + ".aether_longbow", "Silver Bow of the Acropolis");
+            builder.add("item." + namespace + ".aether_rapid_crossbow", "Sky Crossbow");
+            builder.add("item." + namespace + ".aether_heavy_crossbow", "Valkyrie Ballista");
+
+            // Armor sets (per piece)
+            for (var entry : ArcherArmors.entries) {
+                var set = entry.armorSet();
+                addItemName(builder, set.idOf(set.head), set.headTranslation);
+                addItemName(builder, set.idOf(set.chest), set.chestTranslation);
+                addItemName(builder, set.idOf(set.legs), set.legsTranslation);
+                addItemName(builder, set.idOf(set.feet), set.feetTranslation);
+            }
+
+            // Quivers, auto-fire hook and workbench (miscellaneous items with no content-entry abstraction)
+            builder.add("item." + namespace + ".small_quiver", "Quiver");
+            builder.add("item." + namespace + ".medium_quiver", "Hunting Quiver");
+            builder.add("item." + namespace + ".large_quiver", "Battle Quiver");
+            builder.add("item." + namespace + ".quiver.hint", "Provides arrows for archery, when equipped.");
+            builder.add("item." + namespace + ".auto_fire_hook", "Auto-Fire Hook");
+            builder.add("item." + namespace + ".auto_fire_hook.description_1", "Automatically releases charged arrow.");
+            builder.add("item." + namespace + ".auto_fire_hook.description_2", "Can be applied to ranged weapons, on an Anvil.");
+            builder.add("block." + namespace + ".archers_workbench", "Archery Artisan Table");
+            builder.add("block." + namespace + ".archers_workbench.hint", "Workbench for Archery Artisan Villagers.");
+
+            // Ranged Weapon API tooltip (this key lives in the ranged_weapon namespace)
+            builder.add("item.ranged_weapon.pull_time", "%1$s sec Pull Time");
+
+            // Archery Artisan villager (several key formats are referenced across versions)
+            builder.add("entity.minecraft.villager.archery_artisan", "Archery Artisan");
+            builder.add("entity.minecraft.villager." + namespace + ".archery_artisan", "Archery Artisan");
+            builder.add("entity.minecraft.villager." + namespace + ":archery_artisan", "Archery Artisan");
+
+            // Advancements (generated alongside the rpg_series advancement JSONs)
+            for (var advancement : ArchersAdvancements.entries()) {
+                builder.add(advancement.titleKey(), advancement.title());
+                builder.add(advancement.descriptionKey(), advancement.description());
+            }
+            // Advancement whose definition is provided elsewhere in the RPG Series, but whose
+            // translation historically ships with Archers.
+            builder.add("advancements.rpg_series.obtain_arrow.title", "Path of Archer");
+            builder.add("advancements.rpg_series.obtain_arrow.description", "Obtain an Arrow");
+        }
+
+        private static void addItemName(FabricLanguageProvider.TranslationBuilder builder, Identifier id, String name) {
+            if (name == null || name.isEmpty()) {
+                return;
+            }
+            builder.add("item." + id.getNamespace() + "." + id.getPath(), name);
         }
     }
 }

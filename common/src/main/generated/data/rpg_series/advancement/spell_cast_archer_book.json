@@ -1,0 +1,33 @@
+{
+  "parent": "rpg_series:spell_novice_archer",
+  "criteria": {
+    "cast": {
+      "conditions": {
+        "spell": "#archers:spell_book/archer"
+      },
+      "trigger": "spell_engine:spell_cast"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.rpg_series.spell_cast_archer_book.description"
+    },
+    "icon": {
+      "components": {
+        "spell_engine:item_model": "archers:item/spell_book/archer"
+      },
+      "count": 1,
+      "id": "spell_engine:spell_book"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.rpg_series.spell_cast_archer_book.title"
+    }
+  },
+  "requirements": [
+    [
+      "cast"
+    ]
+  ]
+}

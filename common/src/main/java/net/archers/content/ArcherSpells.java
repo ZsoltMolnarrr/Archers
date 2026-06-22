@@ -19,7 +19,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArcherSpells {
-    public enum Book { ARCHER }
+    public enum Book {
+        ARCHER("Archery Manual", "Archery Scroll",
+                "Spell Book of Archers, using ranged weapons and archery skills to defeat enemies from afar\n- Strengths: Dealing high damage at range and maintaining mobility\n- Weaknesses: Heavily armored enemies\n- Equipment: Moderately armored");
+
+        /** Display name of the generated spell book item. Source for {@code item.archers.spell_book/<book>}. */
+        public final String bookName;
+        /** Display name of the generated spell scroll item. Source for {@code item.archers.spell_scroll/<book>}. */
+        public final String scrollName;
+        /** Spell binding tooltip. Source for {@code item.archers.spell_book/<book>.spell_binding.description}. */
+        public final String bindingDescription;
+        Book(String bookName, String scrollName, String bindingDescription) {
+            this.bookName = bookName;
+            this.scrollName = scrollName;
+            this.bindingDescription = bindingDescription;
+        }
+    }
     public record Entry(Identifier id, Spell spell, String title, String description,
                         @Nullable SpellTooltip.DescriptionMutator mutator,
                         @Nullable List<Object> weaponGroups,
@@ -89,6 +104,8 @@ public class ArcherSpells {
     public static final Entry power_shot = add(power_shot().book(Book.ARCHER));
     private static Entry power_shot() {
         var id = Identifier.of(ArchersMod.ID, "power_shot");
+        var name = "Power Shot";
+        var description = "Your next {effect_amplifier_cap} arrows inflict the target with Hunter's Mark for {effect_duration} seconds, increasing its damage taken by {damage_taken}, stacking up to {effect_amplifier_cap} times.";
         var spell = activeSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 0;
@@ -130,12 +147,14 @@ public class ArcherSpells {
         spell.arrow_perks.bypass_iframes = true;
 
         configureCooldown(spell, 8);
-        return new Entry(id, spell, "Power Shot", "");
+        return new Entry(id, spell, name, description);
     }
 
     public static final Entry entangling_roots = add(entangling_roots().book(Book.ARCHER));
     private static Entry entangling_roots() {
         var id = Identifier.of(ArchersMod.ID, "entangling_roots");
+        var name = "Entangling Roots";
+        var description = "Conjures roots to sprout from the ground in the nearby area, slowing down enemies for {cloud_duration} seconds.";
         var spell = activeSpellBase();
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
         spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
@@ -175,12 +194,14 @@ public class ArcherSpells {
         configureCooldown(spell, 18);
         spell.cost.exhaust = 0.2F;
 
-        return new Entry(id, spell, "Entangling Roots", "");
+        return new Entry(id, spell, name, description);
     }
 
     public static final Entry barrage = add(barrage().book(Book.ARCHER));
     private static Entry barrage() {
         var id = Identifier.of(ArchersMod.ID, "barrage");
+        var name = "Barrage";
+        var description = "Fires multiple arrows in quick succession.";
         var spell = activeSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 0;
@@ -210,12 +231,14 @@ public class ArcherSpells {
         configureArrowCost(spell);
         spell.cost.item.consume = false;
 
-        return new Entry(id, spell, "Barrage", "");
+        return new Entry(id, spell, name, description);
     }
 
     public static final Entry magic_arrow = add(magic_arrow().book(Book.ARCHER));
     private static Entry magic_arrow() {
         var id = Identifier.of(ArchersMod.ID, "magic_arrow");
+        var name = "Magic Arrow";
+        var description = "Shoots a magical arrow piercing thru all enemies in its path, dealing {damage} damage to each target.";
         var spell = activeSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 64;
@@ -318,6 +341,6 @@ public class ArcherSpells {
         configureCooldown(spell, 8);
         configureArrowCost(spell);
 
-        return new Entry(id, spell, "Magic Arrow", "");
+        return new Entry(id, spell, name, description);
     }
 }

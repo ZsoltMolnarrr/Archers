@@ -110,6 +110,7 @@ public class ArcherArmors {
                             .add(damageMultiplier(damage_T1))
             ),
             1)
+            .translatedName("Archer Hood", "Archer Tunic", "Archer Leggings", "Archer Boots")
             .armorSet();
 
     public static final Armor.Set archerArmorSet_T2 = create(
@@ -132,6 +133,7 @@ public class ArcherArmors {
                             .add(hasteMultiplier(haste_T2))
             ),
             2)
+            .translatedName("Ranger Hood", "Ranger Tunic", "Ranger Leggings", "Ranger Boots")
             .armorSet();
 
     public static final Armor.Set archerArmorSet_T3 = create(
@@ -154,6 +156,7 @@ public class ArcherArmors {
                             .add(hasteMultiplier(haste_T3))
             )
             , 3)
+            .translatedName("Netherite Ranger Hood", "Netherite Ranger Tunic", "Netherite Ranger Leggings", "Netherite Ranger Boots")
             .armorSet();
 
     public static void register(Map<String, ArmorSetConfig> configs) {

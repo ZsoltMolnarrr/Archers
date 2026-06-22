@@ -26,14 +26,14 @@ public class ArcherEffects {
     public static Effects.Entry HUNTERS_MARK_STASH = add(new Effects.Entry(
             Identifier.of(ArchersMod.ID, "hunters_mark_stash"),
             "Power Shot",
-            "Will mark the target",
+            "Next shot applies Hunter's Mark",
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xff0000)
     ));
 
     public static Effects.Entry HUNTERS_MARK = add(new Effects.Entry(
             Identifier.of(ArchersMod.ID, "hunters_mark"),
-            "Hunters Mark",
-            "The target is marked",
+            "Marked",
+            "Increases damage taken from all sources",
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0xff0000),
             new EffectConfig(List.of(
                     new AttributeModifier(
@@ -47,7 +47,7 @@ public class ArcherEffects {
     public static final Effects.Entry ENTANGLING_ROOTS = add(new Effects.Entry(
             Identifier.of(ArchersMod.ID, "entangling_roots"),
             "Entangling Roots",
-            "Reduces Movement",
+            "Reduces movement speed",
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x993333),
             new EffectConfig(List.of(
                     new AttributeModifier(
