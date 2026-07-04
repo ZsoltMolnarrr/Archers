@@ -1,0 +1,141 @@
+{
+  "school": "spell_power:physical_ranged",
+  "range": 16.0,
+  "tier": 4,
+  "order": 2,
+  "learn": {},
+  "active": {},
+  "release": {
+    "animation": {
+      "id": "spell_engine:one_handed_healing_release"
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "SUMMON",
+        "summon": {
+          "entity_type_id": "archers:spirit_wolf",
+          "behaviour": {
+            "spawn_fx": {
+              "particles": [
+                {
+                  "particle_id": "soul",
+                  "origin": "FEET",
+                  "shape": "PILLAR",
+                  "count": 40.0,
+                  "min_speed": 0.05,
+                  "max_speed": 0.3,
+                  "extent": 0.5
+                }
+              ],
+              "model_fx": []
+            },
+            "movement": {
+              "follow": {
+                "teleport_after_distance": 32.0
+              }
+            },
+            "targeting": {
+              "automatic_targeting": "HOSTILE"
+            },
+            "lifespan": {
+              "spawn_ticks": 20,
+              "active_seconds": 30,
+              "despawn_ticks": 20
+            },
+            "sounds": {
+              "spawn": "minecraft:entity.wolf.howl",
+              "despawn": "minecraft:entity.wolf.whine",
+              "hurt": "minecraft:entity.wolf.hurt",
+              "death": "minecraft:entity.wolf.death",
+              "ambient": "minecraft:entity.wolf.pant",
+              "step": "minecraft:entity.wolf.step"
+            },
+            "actions": [
+              {
+                "type": "MELEE_ATTACK",
+                "melee_attack": {
+                  "speed": 2.5,
+                  "movement_speed": 1.2,
+                  "duration": 8,
+                  "swing_sound": "minecraft:entity.wolf.growl",
+                  "impact_sound": "minecraft:entity.player.attack.strong"
+                }
+              }
+            ]
+          },
+          "attribute_scaling": {
+            "entries": [
+              {
+                "attribute_id": "minecraft:generic.max_health",
+                "modifiers": [
+                  {
+                    "attribute_id": "ranged_weapon:damage",
+                    "operation": "ADD_VALUE",
+                    "base": 0.0,
+                    "coefficient": 2.0
+                  }
+                ]
+              },
+              {
+                "attribute_id": "minecraft:generic.armor",
+                "modifiers": [
+                  {
+                    "attribute_id": "ranged_weapon:damage",
+                    "operation": "ADD_VALUE",
+                    "base": 10.0,
+                    "coefficient": 0.1
+                  }
+                ]
+              },
+              {
+                "attribute_id": "minecraft:generic.attack_damage",
+                "modifiers": [
+                  {
+                    "attribute_id": "ranged_weapon:damage",
+                    "operation": "ADD_VALUE",
+                    "base": 0.0,
+                    "coefficient": 0.5
+                  }
+                ]
+              },
+              {
+                "attribute_id": "minecraft:generic.attack_knockback",
+                "modifiers": [
+                  {
+                    "attribute_id": "ranged_weapon:damage",
+                    "operation": "ADD_VALUE",
+                    "base": 0.0,
+                    "coefficient": 0.1
+                  }
+                ]
+              },
+              {
+                "attribute_id": "minecraft:generic.knockback_resistance",
+                "modifiers": [
+                  {
+                    "attribute_id": "ranged_weapon:damage",
+                    "operation": "ADD_VALUE",
+                    "base": 5.0,
+                    "coefficient": 0.05
+                  }
+                ]
+              }
+            ]
+          },
+          "placements": [
+            {
+              "location_offset_by_look": 2.0
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "cost": {
+    "cooldown": {
+      "duration": 30.0
+    }
+  }
+}

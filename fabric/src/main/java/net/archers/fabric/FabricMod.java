@@ -8,6 +8,7 @@ public final class FabricMod implements ModInitializer {
     public void onInitialize() {
         // Run our common setup.
         ArchersMod.init();
+        ArchersMod.registerEntities();
         ArchersMod.registerSounds();
         ArchersMod.registerBlocks();
         ArchersMod.registerItems();

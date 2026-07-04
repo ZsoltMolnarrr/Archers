@@ -13,7 +13,15 @@
       "required": false
     },
     {
+      "id": "archers:rain_of_arrows",
+      "required": false
+    },
+    {
       "id": "archers:magic_arrow",
+      "required": false
+    },
+    {
+      "id": "archers:spirit_wolf",
       "required": false
     }
   ]

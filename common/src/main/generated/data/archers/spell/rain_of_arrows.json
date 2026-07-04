@@ -1,0 +1,91 @@
+{
+  "school": "spell_power:physical_ranged",
+  "range": 32.0,
+  "tier": 4,
+  "order": 2,
+  "learn": {},
+  "active": {
+    "cast": {
+      "duration": 0.5,
+      "animation": {
+        "id": "spell_engine:archery_pull"
+      },
+      "animates_ranged_weapon": true,
+      "sound": {
+        "id": "archers:bow_pull"
+      }
+    }
+  },
+  "release": {
+    "animation": {
+      "id": "spell_engine:archery_release"
+    }
+  },
+  "target": {
+    "type": "AIM",
+    "aim": {
+      "sticky": true
+    }
+  },
+  "deliver": {
+    "type": "METEOR",
+    "meteor": {
+      "launch_radius": 2.0,
+      "launch_properties": {
+        "velocity": 1.5,
+        "extra_launch_count": 20,
+        "extra_launch_delay": 5
+      },
+      "projectile": {
+        "client_data": {
+          "travel_particles": [
+            {
+              "particle_id": "crit",
+              "origin": "CENTER",
+              "shape": "CIRCLE",
+              "rotation": "LOOK",
+              "count": 1.0,
+              "max_speed": 0.05
+            }
+          ],
+          "composite_model": {
+            "models": [
+              {
+                "fx": {
+                  "model_id": "archers:spell_projectile/magic_arrow"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.4,
+          "knockback": 0.25
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "crit",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 8.0,
+          "min_speed": 0.2,
+          "max_speed": 0.4
+        }
+      ]
+    }
+  ],
+  "area_impact": {},
+  "cost": {
+    "cooldown": {
+      "duration": 15.0
+    }
+  }
+}

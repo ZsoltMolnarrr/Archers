@@ -19,6 +19,7 @@ public final class NeoForgeMod {
             ArchersMod.registerSounds();
         });
         event.register(RegistryKeys.ITEM, reg -> {
+            ArchersMod.registerEntities();
             ArchersMod.registerItems();
         });
         event.register(RegistryKeys.BLOCK, reg -> {

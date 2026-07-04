@@ -2,7 +2,9 @@ package net.archers.content;
 
 import net.archers.ArchersMod;
 import net.archers.effect.ArcherEffects;
+import net.archers.entity.ArcherSummons;
 import net.minecraft.util.Identifier;
+import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
@@ -159,7 +161,7 @@ public class ArcherSpells {
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
         spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
         spell.range = 0;
-        spell.tier = 3;
+        spell.tier = 2;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
 
@@ -231,6 +233,61 @@ public class ArcherSpells {
         configureArrowCost(spell);
         spell.cost.item.consume = false;
 
+        return new Entry(id, spell, name, description);
+    }
+
+    public static final Entry rain_of_arrows = add(rain_of_arrows().book(Book.ARCHER));
+    private static Entry rain_of_arrows() {
+        var id = Identifier.of(ArchersMod.ID, "rain_of_arrows");
+        var name = "Rain of Arrows";
+        var description = "Rains arrows over the targeted area for 5 seconds, each dealing {damage} damage to enemies within {impact_range} blocks.";
+        var spell = activeSpellBase();
+        spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
+        spell.range = 32;
+        spell.tier = 4;
+        spell.order = 2;
+
+        spell.active.cast.duration = 0.5F;
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
+        spell.active.cast.animates_ranged_weapon = true;
+        spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
+
+        spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
+
+        spell.target.type = Spell.Target.Type.AIM;
+        spell.target.aim = new Spell.Target.Aim();
+        spell.target.aim.sticky = true;
+
+        spell.deliver.type = Spell.Delivery.Type.METEOR;
+        spell.deliver.meteor = new Spell.Delivery.Meteor();
+        spell.deliver.meteor.launch_height = 10;
+        spell.deliver.meteor.launch_radius = 2;
+        spell.deliver.meteor.launch_properties.velocity = 1.5F;
+        spell.deliver.meteor.launch_properties.extra_launch_count = 20;
+        spell.deliver.meteor.launch_properties.extra_launch_delay = 5;
+
+        var projectile = new Spell.ProjectileData();
+        projectile.client_data = new Spell.ProjectileData.Client();
+        projectile.client_data.travel_particles = new ParticleBatch[]{
+                new ParticleBatch("crit",
+                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
+                        ParticleBatch.Rotation.LOOK, 1, 0, 0.05F, 0)
+        };
+        projectile.client_data.composite_model = SpellBuilder.ProjectileModels.single("archers:spell_projectile/magic_arrow");
+        spell.deliver.meteor.projectile = projectile;
+
+        var damage = damage(0.4F, 0.25F);
+        damage.particles = new ParticleBatch[]{
+                new ParticleBatch("crit",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        8, 0.2F, 0.4F)
+        };
+        spell.impacts = List.of(damage);
+
+        spell.area_impact = new Spell.AreaImpact();
+        spell.area_impact.radius = 1;
+
+        configureCooldown(spell, 15);
         return new Entry(id, spell, name, description);
     }
 
@@ -317,10 +374,7 @@ public class ArcherSpells {
                         .color(Color.NATURE.toRGBA())
         };
         projectile.client_data.light_level = 10;
-        projectile.client_data.model = new Spell.ProjectileModel();
-        projectile.client_data.model.model_id = "archers:spell_projectile/magic_arrow";
-        projectile.client_data.model.light_emission = LightEmission.RADIATE;
-        projectile.client_data.model.scale = 1.2F;
+        projectile.client_data.composite_model = SpellBuilder.ProjectileModels.single("archers:spell_projectile/magic_arrow", 1.2F, LightEmission.RADIATE);
         shoot.projectile = projectile;
         spell.deliver.projectile = shoot;
 
@@ -341,6 +395,29 @@ public class ArcherSpells {
         configureCooldown(spell, 8);
         configureArrowCost(spell);
 
+        return new Entry(id, spell, name, description);
+    }
+
+    public static final Entry spirit_wolf = add(spirit_wolf().book(Book.ARCHER));
+    private static Entry spirit_wolf() {
+        var id = Identifier.of(ArchersMod.ID, "spirit_wolf");
+        var name = "Spirit Wolf";
+        var description = "Summons a Spirit Wolf to fight by your side for " + SpellTooltip.placeholder(SpellTooltip.summonDurationToken) + " sec, empowered by your Ranged Damage.";
+        var spell = activeSpellBase();
+        spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
+        spell.range = 16;
+        spell.tier = 4;
+        spell.order = 2;
+
+        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_healing_release");
+
+        var impact = new Spell.Impact();
+        impact.action = new Spell.Impact.Action();
+        impact.action.type = Spell.Impact.Action.Type.SUMMON;
+        impact.action.summon = ArcherSummons.spiritWolf();
+        spell.impacts = List.of(impact);
+
+        configureCooldown(spell, 30);
         return new Entry(id, spell, name, description);
     }
 }

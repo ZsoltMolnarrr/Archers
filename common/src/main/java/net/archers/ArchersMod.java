@@ -5,6 +5,7 @@ import net.archers.config.ArchersItemConfig;
 import net.archers.config.Default;
 import net.archers.config.TweaksConfig;
 import net.archers.effect.ArcherEffects;
+import net.archers.entity.ArcherEntities;
 import net.archers.item.Group;
 import net.archers.item.ArcherWeapons;
 import net.archers.item.ArcherArmors;
@@ -81,6 +82,12 @@ public class ArchersMod {
                 return TriState.DEFAULT;
             });
         }
+    }
+
+    public static void registerEntities() {
+        // Each entity's base attributes are registered alongside its type build inside register(),
+        // sourced from SpellEngine's central summoned-entity config.
+        ArcherEntities.register();
     }
 
     public static void registerSounds() {

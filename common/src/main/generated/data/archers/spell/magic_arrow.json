@@ -117,10 +117,16 @@
               "color_rgba": 1728014079
             }
           ],
-          "model": {
-            "model_id": "archers:spell_projectile/magic_arrow",
-            "light_emission": "RADIATE",
-            "scale": 1.2
+          "composite_model": {
+            "models": [
+              {
+                "fx": {
+                  "model_id": "archers:spell_projectile/magic_arrow",
+                  "light_emission": "RADIATE",
+                  "scale": 1.2
+                }
+              }
+            ]
           }
         }
       }
