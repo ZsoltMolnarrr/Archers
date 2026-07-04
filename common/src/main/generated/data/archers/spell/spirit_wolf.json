@@ -1,7 +1,7 @@
 {
   "school": "spell_power:physical_ranged",
   "range": 16.0,
-  "tier": 4,
+  "tier": 3,
   "order": 2,
   "learn": {},
   "active": {},

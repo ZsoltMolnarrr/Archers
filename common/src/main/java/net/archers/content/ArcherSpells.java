@@ -406,7 +406,7 @@ public class ArcherSpells {
         var spell = activeSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 16;
-        spell.tier = 4;
+        spell.tier = 3;
         spell.order = 2;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_healing_release");

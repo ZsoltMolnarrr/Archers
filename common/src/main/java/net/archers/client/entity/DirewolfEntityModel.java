@@ -1,10 +1,20 @@
+package net.archers.client.entity;
+
+import net.archers.ArchersMod;
+import net.archers.entity.SpiritWolfEntity;
+import net.minecraft.client.model.*;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.SinglePartEntityModel;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
+
 // Made with Blockbench 5.1.4
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
-
-package net.archers.client.entity;
-   
-public class DirewolfEntity extends EntityModel<Entity> {
+public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity> {
 	private final ModelPart root;
 	private final ModelPart right_back_leg;
 	private final ModelPart left_back_leg;
@@ -16,18 +26,19 @@ public class DirewolfEntity extends EntityModel<Entity> {
 	private final ModelPart right_front_leg;
 	private final ModelPart left_front_leg;
 	private final ModelPart tail;
-	public DirewolfEntity(ModelPart root) {
+
+	public DirewolfEntityModel(ModelPart root) {
 		this.root = root.getChild("root");
-		this.right_back_leg = root.getChild("right_back_leg");
-		this.left_back_leg = root.getChild("left_back_leg");
-		this.body = root.getChild("body");
-		this.head = root.getChild("head");
-		this.mouith = root.getChild("mouith");
-		this.right_ear = root.getChild("right_ear");
-		this.left_ear = root.getChild("left_ear");
-		this.right_front_leg = root.getChild("right_front_leg");
-		this.left_front_leg = root.getChild("left_front_leg");
-		this.tail = root.getChild("tail");
+		this.right_back_leg = this.root.getChild("right_back_leg");
+		this.left_back_leg = this.root.getChild("left_back_leg");
+		this.body = this.root.getChild("body");
+		this.head = this.body.getChild("head");
+		this.mouith = this.head.getChild("mouith");
+		this.right_ear = this.head.getChild("right_ear");
+		this.left_ear = this.head.getChild("left_ear");
+		this.right_front_leg = this.body.getChild("right_front_leg");
+		this.left_front_leg = this.body.getChild("left_front_leg");
+		this.tail = this.body.getChild("tail");
 	}
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
@@ -66,11 +77,60 @@ public class DirewolfEntity extends EntityModel<Entity> {
 		ModelPartData tail = body.addChild("tail", ModelPartBuilder.create().uv(28, 9).cuboid(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 12.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -2.5F, 4.0F));
 		return TexturedModelData.of(modelData, 64, 64);
 	}
-	@Override
-	public void setAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
+	// HAND-WRITTEN CODE
+
+	// Basic render features
+
+	public static final EntityModelLayer TEXTURE = new EntityModelLayer(Identifier.of(ArchersMod.ID, "direwolf"), "main");
+
+	private void setHeadAngles(float headYaw, float headPitch) {
+		headYaw = MathHelper.clamp(headYaw, -60, 60);
+		headPitch = MathHelper.clamp(headPitch, -60, 60);
+		head.yaw = headYaw * 0.017453292F;
+		head.pitch = headPitch * 0.017453292F;
 	}
+
 	@Override
-	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		root.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+	public ModelPart getPart() {
+		return root;
+	}
+
+	@Override
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+		root.render(matrices, vertices, light, overlay, color);
+	}
+
+	// Animations
+
+	@Override
+	public void setAngles(SpiritWolfEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float netHeadPitch) {
+		this.getPart().traverse().forEach(ModelPart::resetTransform);
+		this.setHeadAngles(netHeadYaw, netHeadPitch);
+		this.animateMovement(DirewolfEntityAnimations.run, limbSwing, limbSwingAmount, 1F, 1F);
+		// No dedicated spawn animation yet — idle stands in (despawn plays it reversed)
+		this.updateAnimation(entity.spawnAnimationState,   DirewolfEntityAnimations.idle, ageInTicks, 1F);
+		this.updateAnimation(entity.despawnAnimationState, DirewolfEntityAnimations.idle, ageInTicks, -1F);
+
+		var anyAction = false;
+		// Attack animation
+		if (entity.attackAnimationState.isRunning()) {
+			Animation attackAnim = attackAnimationFor(entity.getAttackVariant());
+			float attackSpeed = entity.getAttackAnimationSpeed(attackAnim.lengthInSeconds() * 20F);
+			this.updateAnimation(entity.attackAnimationState, attackAnim, ageInTicks, attackSpeed);
+			anyAction = true;
+		}
+		// Idle animation (only if not doing any other action)
+		if (!anyAction) {
+			this.updateAnimation(entity.idleAnimationState, DirewolfEntityAnimations.idle, ageInTicks, 1F);
+		}
+	}
+
+	// Maps a behaviour-defined attack variant number to one of this model's attack animations.
+	// Unknown variants fall back to the variant-1 default.
+	private static Animation attackAnimationFor(int variant) {
+		return switch (variant) {
+			default -> DirewolfEntityAnimations.bite;
+		};
 	}
 }
