@@ -39,6 +39,7 @@ public class ArcherSummons {
         // speed instead of compressing it; cadence = max(duration, 20 / speed) ≈ 14
         // ticks, still ~40% faster than the Frost Elemental's 20-tick swings.
         var attack = new SummonBehaviour.Action.MeleeAttack();
+        attack.max_range = 0; // no engagement cap — chase any acquired target (default 3 blocks no-chase)
         attack.speed = 1.5F;
         attack.duration = 14;
         attack.windup = 0.5F;
