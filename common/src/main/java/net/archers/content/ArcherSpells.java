@@ -253,6 +253,11 @@ public class ArcherSpells {
         spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
         spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
+        spell.release.particles = new ParticleBatch[]{
+                new ParticleBatch("firework",
+                        ParticleBatch.Shape.LINE_VERTICAL, ParticleBatch.Origin.CENTER,
+                        4, 0.6F, 0.9F)
+        };
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
@@ -271,7 +276,12 @@ public class ArcherSpells {
         projectile.client_data.travel_particles = new ParticleBatch[]{
                 new ParticleBatch("crit",
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        ParticleBatch.Rotation.LOOK, 1, 0, 0.05F, 0)
+                        ParticleBatch.Rotation.LOOK, 1, 0, 0.05F, 0),
+                // Streams along the travel direction (LOOK-rotated LINE): forward while
+                // launched, downward once falling
+                new ParticleBatch("firework",
+                        ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
+                        ParticleBatch.Rotation.LOOK, 0.25F, 0.1F, 0.2F, 0)
         };
         projectile.client_data.composite_model = SpellBuilder.ProjectileModels.single("archers:spell_projectile/magic_arrow");
         spell.deliver.meteor.projectile = projectile;
@@ -285,7 +295,19 @@ public class ArcherSpells {
         spell.impacts = List.of(damage);
 
         spell.area_impact = new Spell.AreaImpact();
-        spell.area_impact.radius = 1;
+        var impactRadius = 1.5F;
+        spell.area_impact.radius = impactRadius;
+        spell.area_impact.particles = new ParticleBatch[]{
+                SpellBuilder.Particles.area(SpellEngineParticles.area_effect_658.id())
+                        .scale(impactRadius)
+                        .color(Color.from(0xceb15c).toRGBA()),
+                new ParticleBatch("crit",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        20, 0.25F, 0.5F),
+                new ParticleBatch("poof",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        5, 0.02F, 0.1F)
+        };
 
         configureCooldown(spell, 15);
         return new Entry(id, spell, name, description);

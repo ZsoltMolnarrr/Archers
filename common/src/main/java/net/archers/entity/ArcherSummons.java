@@ -9,6 +9,8 @@ import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.api.spell.fx.VFX;
 import net.spell_engine.api.spell.summon.AttributeScaling;
 import net.spell_engine.api.spell.summon.SummonBehaviour;
+import net.spell_engine.client.util.Color;
+import net.spell_engine.fx.SpellEngineParticles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,13 +58,20 @@ public class ArcherSummons {
         b.sounds.ambient = "minecraft:entity.wolf.pant";
         b.sounds.step = "minecraft:entity.wolf.step";
 
-        // Spawn FX: a column of soul wisps as the spirit takes form
+        // Spawn FX: a column of soul wisps as the spirit takes form, ringed by a burst of
+        // spectral sparks rushing outward from a pipe around the spawn point
         b.spawn_fx = new VFX();
         b.spawn_fx.particles = new ParticleBatch[] {
                 new ParticleBatch("soul",
                         ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
                         40, 0.05F, 0.3F)
-                        .extent(0.5F)
+                        .extent(0.5F),
+                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
+                        SpellEngineParticles.MagicParticles.Shape.SPARK,
+                        SpellEngineParticles.MagicParticles.Motion.BURST).id().toString(),
+                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
+                        40, 0.15F, 0.35F)
+                        .color(Color.FROST.toRGBA())
         };
 
         // Placement: 2 blocks ahead of the caster, snapped to the ground, keeping its own facing.
