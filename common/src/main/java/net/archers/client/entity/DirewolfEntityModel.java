@@ -29,6 +29,7 @@ public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity>
 	private final ModelPart tail;
 
 	public DirewolfEntityModel(ModelPart root) {
+		super(RenderLayer::getEntityTranslucentEmissive);
 		this.root = root.getChild("root");
 		this.right_back_leg = this.root.getChild("right_back_leg");
 		this.left_back_leg = this.root.getChild("left_back_leg");

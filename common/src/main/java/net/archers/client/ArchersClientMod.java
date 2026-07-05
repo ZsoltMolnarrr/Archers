@@ -4,7 +4,6 @@ import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
 import net.archers.ArchersMod;
 import net.archers.client.armor.ArcherArmorRenderer;
-import net.archers.client.entity.DirewolfEntityRenderer;
 import net.archers.client.effect.HuntersMarkRenderer;
 import net.archers.client.effect.RootsRenderer;
 import net.archers.client.util.ArchersTooltip;
@@ -24,8 +23,6 @@ public class ArchersClientMod {
     public static void init() {
         CustomModelStatusEffect.register(ArcherEffects.HUNTERS_MARK.effect, new HuntersMarkRenderer());
         CustomModelStatusEffect.register(ArcherEffects.ENTANGLING_ROOTS.effect, new RootsRenderer());
-
-        DirewolfEntityRenderer.setup();
 
         ArchersTooltip.init();
 
