@@ -6,12 +6,14 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.spell_engine.client.compatibility.ShaderCompatibility;
+import org.joml.Vector3f;
 
 // Made with Blockbench 5.1.4
 // Exported for Minecraft version 1.17+ for Yarn
@@ -112,6 +114,8 @@ public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity>
 
 	// Animations
 
+	private static final Vector3f TEMP = new Vector3f();
+
 	@Override
 	public void setAngles(SpiritWolfEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float netHeadPitch) {
 		this.getPart().traverse().forEach(ModelPart::resetTransform);
@@ -130,10 +134,15 @@ public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity>
 			this.updateAnimation(entity.attackAnimationState, attackAnim, ageInTicks, attackSpeed);
 			anyAction = true;
 		}
-		// Idle animation (only if not doing any other action and no movement animation is
-		// needed — while running, idle would stack onto the run cycle on the same bones)
-		if (!anyAction && limbSwingAmount < 0.05F) {
-			this.updateAnimation(entity.idleAnimationState, DirewolfEntityAnimations.idle, ageInTicks, 1F);
+		// Idle animation: crossfaded against movement. The run animation already scales with
+		// limbSwingAmount (via animateMovement), so idle fades out over the same signal instead
+		// of cutting off — full at standstill, gone by limbSwingAmount 0.33. The state clock
+		// always advances so fading back in resumes the loop in phase instead of snapping.
+		entity.idleAnimationState.update(ageInTicks, 1F);
+		float idleWeight = anyAction ? 0F : MathHelper.clamp(1F - limbSwingAmount * 3F, 0F, 1F);
+		if (idleWeight > 0F) {
+			entity.idleAnimationState.run(state ->
+					AnimationHelper.animate(this, DirewolfEntityAnimations.idle, state.getTimeRunning(), idleWeight, TEMP));
 		}
 	}
 
