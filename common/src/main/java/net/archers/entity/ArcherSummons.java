@@ -34,11 +34,13 @@ public class ArcherSummons {
         b.targeting.revenge = true;
         b.targeting.automatic_targeting = SummonBehaviour.Targeting.AutoTarget.HOSTILE;
 
-        // Single action: fast melee bites, no spells. Swing cooldown is
-        // max(duration, 20 / speed), so duration is lowered to let `speed` actually apply.
+        // Single action: fast melee bites, no spells. `duration` matches the bite
+        // animation's authored length (0.7s = 14 ticks) so the client plays it at 1x
+        // speed instead of compressing it; cadence = max(duration, 20 / speed) ≈ 14
+        // ticks, still ~40% faster than the Frost Elemental's 20-tick swings.
         var attack = new SummonBehaviour.Action.MeleeAttack();
-        attack.speed = 2.5F;
-        attack.duration = 8;
+        attack.speed = 1.5F;
+        attack.duration = 14;
         attack.windup = 0.5F;
         attack.movement_speed = 1.2F;
         attack.swing_sound = "minecraft:entity.wolf.growl";

@@ -3,6 +3,7 @@ package net.archers.client.entity;
 import net.archers.ArchersMod;
 import net.archers.entity.SpiritWolfEntity;
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
