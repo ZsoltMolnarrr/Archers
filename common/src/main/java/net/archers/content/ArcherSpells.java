@@ -162,6 +162,7 @@ public class ArcherSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
         spell.range = 0;
         spell.tier = 2;
+        spell.order = 2;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
 
@@ -245,7 +246,6 @@ public class ArcherSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 32;
         spell.tier = 4;
-        spell.order = 2;
 
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -300,6 +300,7 @@ public class ArcherSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 64;
         spell.tier = 4;
+        spell.order = 2;
 
         spell.active.cast.duration = 1F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");

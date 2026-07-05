@@ -3,6 +3,7 @@
   "secondary_archetype": "ANY",
   "range": 0.0,
   "tier": 2,
+  "order": 2,
   "learn": {},
   "active": {},
   "release": {

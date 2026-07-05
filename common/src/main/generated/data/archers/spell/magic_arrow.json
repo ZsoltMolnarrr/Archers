@@ -2,6 +2,7 @@
   "school": "spell_power:physical_ranged",
   "range": 64.0,
   "tier": 4,
+  "order": 2,
   "learn": {},
   "active": {
     "cast": {
