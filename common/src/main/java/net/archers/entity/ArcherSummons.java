@@ -62,16 +62,24 @@ public class ArcherSummons {
         // spectral sparks rushing outward from a pipe around the spawn point
         b.spawn_fx = new VFX();
         b.spawn_fx.particles = new ParticleBatch[] {
-                new ParticleBatch("soul",
-                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                        40, 0.05F, 0.3F)
-                        .extent(0.5F),
+//                new ParticleBatch("soul",
+//                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
+//                        40, 0.05F, 0.3F)
+//                        .extent(0.5F),
                 new ParticleBatch(SpellEngineParticles.MagicParticles.get(
                         SpellEngineParticles.MagicParticles.Shape.SPARK,
-                        SpellEngineParticles.MagicParticles.Motion.BURST).id().toString(),
+                        SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
                         ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
-                        40, 0.15F, 0.35F)
-                        .color(Color.FROST.toRGBA())
+                        20, 0.15F, 0.35F)
+                        .extent(0.5F)
+                        .color(Color.NATURE.toRGBA()),
+                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
+                        SpellEngineParticles.MagicParticles.Shape.SPARK,
+                        SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        20, 0.15F, 0.35F)
+                        .extent(0.5F)
+                        .color(Color.NATURE.toRGBA())
         };
 
         // Placement: 2 blocks ahead of the caster, snapped to the ground, keeping its own facing.

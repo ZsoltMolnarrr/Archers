@@ -20,22 +20,24 @@
             "spawn_fx": {
               "particles": [
                 {
-                  "particle_id": "soul",
-                  "origin": "FEET",
-                  "shape": "PILLAR",
-                  "count": 40.0,
-                  "min_speed": 0.05,
-                  "max_speed": 0.3,
-                  "extent": 0.5
-                },
-                {
-                  "particle_id": "spell_engine:magic_spark_burst",
+                  "particle_id": "spell_engine:magic_spark_decelerate",
                   "origin": "FEET",
                   "shape": "WIDE_PIPE",
-                  "count": 40.0,
+                  "count": 20.0,
                   "min_speed": 0.15,
                   "max_speed": 0.35,
-                  "color_rgba": 1724710911
+                  "extent": 0.5,
+                  "color_rgba": 1728014079
+                },
+                {
+                  "particle_id": "spell_engine:magic_spark_decelerate",
+                  "origin": "CENTER",
+                  "shape": "SPHERE",
+                  "count": 20.0,
+                  "min_speed": 0.15,
+                  "max_speed": 0.35,
+                  "extent": 0.5,
+                  "color_rgba": 1728014079
                 }
               ],
               "model_fx": []

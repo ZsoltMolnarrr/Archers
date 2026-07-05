@@ -118,8 +118,9 @@ public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity>
 		this.setHeadAngles(netHeadYaw, netHeadPitch);
 		this.animateMovement(DirewolfEntityAnimations.run, limbSwing, limbSwingAmount, 1F, 1F);
 		// No dedicated spawn animation yet — idle stands in (despawn plays it reversed)
-		this.updateAnimation(entity.spawnAnimationState,   DirewolfEntityAnimations.idle, ageInTicks, 1F);
-		this.updateAnimation(entity.despawnAnimationState, DirewolfEntityAnimations.idle, ageInTicks, -1F);
+		// double playback speed due to long animation
+		this.updateAnimation(entity.spawnAnimationState,   DirewolfEntityAnimations.spawn, ageInTicks, 2F);
+		this.updateAnimation(entity.despawnAnimationState, DirewolfEntityAnimations.spawn, ageInTicks, -2F);
 
 		var anyAction = false;
 		// Attack animation
@@ -129,8 +130,9 @@ public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity>
 			this.updateAnimation(entity.attackAnimationState, attackAnim, ageInTicks, attackSpeed);
 			anyAction = true;
 		}
-		// Idle animation (only if not doing any other action)
-		if (!anyAction) {
+		// Idle animation (only if not doing any other action and no movement animation is
+		// needed — while running, idle would stack onto the run cycle on the same bones)
+		if (!anyAction && limbSwingAmount < 0.05F) {
 			this.updateAnimation(entity.idleAnimationState, DirewolfEntityAnimations.idle, ageInTicks, 1F);
 		}
 	}
