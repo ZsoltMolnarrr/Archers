@@ -11,6 +11,7 @@ import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.spell_engine.client.compatibility.ShaderCompatibility;
 
 // Made with Blockbench 5.1.4
 // Exported for Minecraft version 1.17+ for Yarn
@@ -29,7 +30,13 @@ public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity>
 	private final ModelPart tail;
 
 	public DirewolfEntityModel(ModelPart root) {
-		super(RenderLayer::getEntityTranslucentEmissive);
+		// Emissive looks right with vanilla rendering, but shaderpacks tag fullbright geometry
+		// for bloom and blow it out — with shaders active, fall back to the lightmap-respecting
+		// translucent layer (visibility in darkness is restored via the renderer's block-light
+		// boost). Evaluated per frame, so toggling shaders in-game switches immediately.
+		super(texture -> ShaderCompatibility.isShaderPackInUse()
+				? RenderLayer.getEntityTranslucent(texture)
+				: RenderLayer.getEntityTranslucentEmissive(texture));
 		this.root = root.getChild("root");
 		this.right_back_leg = this.root.getChild("right_back_leg");
 		this.left_back_leg = this.root.getChild("left_back_leg");
