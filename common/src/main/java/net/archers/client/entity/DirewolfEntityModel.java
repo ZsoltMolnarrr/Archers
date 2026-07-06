@@ -13,6 +13,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.spell_engine.client.compatibility.ShaderCompatibility;
+import net.spell_engine.entity.ModelAnimations;
 import org.joml.Vector3f;
 
 // Made with Blockbench 5.1.4
@@ -120,7 +121,12 @@ public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity>
 	public void setAngles(SpiritWolfEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float netHeadPitch) {
 		this.getPart().traverse().forEach(ModelPart::resetTransform);
 		this.setHeadAngles(netHeadYaw, netHeadPitch);
-		this.animateMovement(DirewolfEntityAnimations.run, limbSwing, limbSwingAmount, 1F, 1F);
+		// Same time/amplitude mapping as animateMovement (limbSwing → time, limbSwingAmount → scale),
+		// but routed through LoopingAnimationHelper so the run clip's loop seam is interpolated with
+		// wrapped catmull-rom neighbours instead of vanilla's clamped ones — removing the per-cycle hitch.
+		long runTime = (long) (limbSwing * 50F);
+		float runAmount = Math.min(limbSwingAmount, 1F);
+		ModelAnimations.seamlessLoop(this, DirewolfEntityAnimations.run, runTime, runAmount, TEMP);
 		// No dedicated spawn animation yet — idle stands in (despawn plays it reversed)
 		// double playback speed due to long animation
 		this.updateAnimation(entity.spawnAnimationState,   DirewolfEntityAnimations.spawn, ageInTicks, 2F);
