@@ -1,11 +1,13 @@
 package net.archers.entity;
 
+import net.archers.content.ArcherSounds;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.spell_engine.api.datagen.SpellBuilder.Placements;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell.Impact.Action.Summon;
 import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.api.spell.fx.VFX;
 import net.spell_engine.api.spell.summon.AttributeScaling;
 import net.spell_engine.api.spell.summon.SummonBehaviour;
@@ -51,7 +53,7 @@ public class ArcherSummons {
         b.actions = List.of(SummonBehaviour.Action.attack(attack));
 
         // Lifecycle sounds: vanilla wolf set
-        b.sounds.spawn = "minecraft:entity.wolf.howl";
+        b.sounds.spawn = ArcherSounds.SPIRIT_WOLF_SPAWN.id().toString();
         b.sounds.despawn = "minecraft:entity.wolf.whine";
         b.sounds.hurt = "minecraft:entity.wolf.hurt";
         b.sounds.death = "minecraft:entity.wolf.death";

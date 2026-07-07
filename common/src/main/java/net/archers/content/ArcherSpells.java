@@ -435,6 +435,7 @@ public class ArcherSpells {
         spell.order = 2;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_healing_release");
+        spell.release.sound = new Sound(ArcherSounds.SPIRIT_WOLF_SUMMON.id());
 
         var impact = new Spell.Impact();
         impact.action = new Spell.Impact.Action();
