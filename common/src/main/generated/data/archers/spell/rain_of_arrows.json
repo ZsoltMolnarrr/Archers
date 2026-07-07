@@ -7,7 +7,7 @@
     "cast": {
       "duration": 0.5,
       "animation": {
-        "id": "spell_engine:archery_pull"
+        "id": "spell_engine:archery_upwards_pull"
       },
       "animates_ranged_weapon": true,
       "sound": {
@@ -17,7 +17,7 @@
   },
   "release": {
     "animation": {
-      "id": "spell_engine:archery_release"
+      "id": "spell_engine:archery_upwards_release"
     },
     "particles": [
       {
@@ -28,7 +28,10 @@
         "min_speed": 0.6,
         "max_speed": 0.9
       }
-    ]
+    ],
+    "sound": {
+      "id": "archers:rain_of_arrows_release"
+    }
   },
   "target": {
     "type": "AIM",
@@ -128,7 +131,10 @@
         "min_speed": 0.02,
         "max_speed": 0.1
       }
-    ]
+    ],
+    "sound": {
+      "id": "archers:rain_of_arrows_impact"
+    }
   },
   "cost": {
     "cooldown": {

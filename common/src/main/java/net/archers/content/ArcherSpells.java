@@ -248,16 +248,17 @@ public class ArcherSpells {
         spell.tier = 4;
 
         spell.active.cast.duration = 0.5F;
-        spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_upwards_pull");
         spell.active.cast.animates_ranged_weapon = true;
         spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
+        spell.release.animation = PlayerAnimation.of("spell_engine:archery_upwards_release");
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch("firework",
                         ParticleBatch.Shape.LINE_VERTICAL, ParticleBatch.Origin.CENTER,
                         4, 0.6F, 0.9F)
         };
+        spell.release.sound = new Sound(ArcherSounds.RAIN_OF_ARROWS_RELEASE.id());
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
@@ -308,6 +309,7 @@ public class ArcherSpells {
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         5, 0.02F, 0.1F)
         };
+        spell.area_impact.sound = new Sound(ArcherSounds.RAIN_OF_ARROWS_IMPACT.id());
 
         configureCooldown(spell, 15);
         return new Entry(id, spell, name, description);

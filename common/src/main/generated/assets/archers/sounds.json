@@ -38,5 +38,15 @@
     "sounds": [
       "archers:marker_shot"
     ]
+  },
+  "rain_of_arrows_impact": {
+    "sounds": [
+      "archers:rain_of_arrows_impact"
+    ]
+  },
+  "rain_of_arrows_release": {
+    "sounds": [
+      "archers:rain_of_arrows_release"
+    ]
   }
 }
