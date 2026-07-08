@@ -284,7 +284,8 @@ public class ArcherSpells {
                         ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
                         ParticleBatch.Rotation.LOOK, 0.25F, 0.1F, 0.2F, 0)
         };
-        projectile.client_data.composite_model = SpellBuilder.ProjectileModels.single("archers:spell_projectile/arrow_volley");
+        projectile.client_data.composite_model = SpellBuilder.ProjectileModels.single("archers:spell_projectile/volley_arrow");
+        projectile.client_data.composite_model.models.forEach(model -> model.light_emission = LightEmission.RADIATE);
         spell.deliver.meteor.projectile = projectile;
 
         var damage = damage(0.4F, 0.25F);

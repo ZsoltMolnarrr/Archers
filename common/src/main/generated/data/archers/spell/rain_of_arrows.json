@@ -73,7 +73,7 @@
             "models": [
               {
                 "fx": {
-                  "model_id": "archers:spell_projectile/arrow_volley"
+                  "model_id": "archers:spell_projectile/volley_arrow"
                 }
               }
             ]
