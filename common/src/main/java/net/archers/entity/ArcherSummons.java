@@ -85,7 +85,7 @@ public class ArcherSummons {
         };
 
         // Placement: 2 blocks ahead of the caster, snapped to the ground, keeping its own facing.
-        var placement = Placements.point(2F, 0F, 0);
+        var placement = Placements.pointAtAngle(2F, 0F, 0);
         placement.apply_yaw = false;
 
         var summon = new Summon(SpiritWolfEntity.ID.toString(), b, List.of(placement), 1);
