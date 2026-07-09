@@ -16,7 +16,7 @@ public class RootsRenderer implements CustomModelStatusEffect.Renderer {
 
     public static final Identifier modelId = Identifier.of(ArchersMod.ID, "spell_effect/entangling_roots");
     @Override
-    public void renderEffect(int appliedAtAge, int amplifier, LivingEntity livingEntity, float delta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light) {
+    public void renderEffect(long appliedAtWorldTime, int amplifier, LivingEntity livingEntity, float delta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light) {
         matrixStack.push();
         matrixStack.translate(0, 0.5, 0);
         CustomModels.render(TexturedRenderLayers.getEntityCutout(), MinecraftClient.getInstance().getItemRenderer(), modelId,
