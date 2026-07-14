@@ -2,7 +2,7 @@
   "school": "spell_power:physical_ranged",
   "range": 16.0,
   "tier": 3,
-  "order": 2,
+  "group": "archer_nature",
   "learn": {},
   "active": {},
   "release": {

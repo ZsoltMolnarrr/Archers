@@ -2,6 +2,7 @@
   "school": "spell_power:physical_ranged",
   "range": 32.0,
   "tier": 4,
+  "group": "archer_marksman",
   "learn": {},
   "active": {
     "cast": {

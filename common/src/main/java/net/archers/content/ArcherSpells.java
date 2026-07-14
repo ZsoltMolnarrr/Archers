@@ -54,7 +54,13 @@ public class ArcherSpells {
         return entry;
     }
 
-    private static final String PRIMARY_GROUP = "primary";
+    // MARK: Spell groups
+    // Prefixed by the book they belong to, since a group is only ever read alongside the groups of
+    // other mods, where a bare `nature` would say nothing about whose nature it is.
+
+    public static final String MARKSMAN = "archer_marksman";
+    public static final String NATURE = "archer_nature";
+
 
     private static Spell activeSpellBase() {
         var spell = new Spell();
@@ -112,6 +118,7 @@ public class ArcherSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 0;
         spell.tier = 2;
+        spell.group = MARKSMAN;
 
 
         spell.release.sound = Sound.withVolume(ArcherSounds.MARKER_SHOT.id(), 0.5F);
@@ -162,7 +169,7 @@ public class ArcherSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
         spell.range = 0;
         spell.tier = 2;
-        spell.order = 2;
+        spell.group = NATURE;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
 
@@ -209,6 +216,7 @@ public class ArcherSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 0;
         spell.tier = 3;
+        spell.group = MARKSMAN;
 
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -246,6 +254,7 @@ public class ArcherSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 32;
         spell.tier = 4;
+        spell.group = MARKSMAN;
 
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_upwards_pull");
@@ -324,7 +333,7 @@ public class ArcherSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 64;
         spell.tier = 4;
-        spell.order = 2;
+        spell.group = NATURE;
 
         spell.active.cast.duration = 1F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -432,7 +441,7 @@ public class ArcherSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 16;
         spell.tier = 3;
-        spell.order = 2;
+        spell.group = NATURE;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_healing_release");
         spell.release.sound = new Sound(ArcherSounds.SPIRIT_WOLF_SUMMON.id());
