@@ -1,3 +1,9 @@
+# 3.0.0
+
+Archery manual now offers 6 spells (2 choices across 3 tiers).
+
+- New spells: Rain of Arrows, Spirit Wolf
+
 # 2.7.0
 
 DISCLAIMER: All spell books and spell scrolls will be reset, due to major API changes. Some (looted) weapons with custom spell containers become non-functional, and need to be re-obtained. Apologies for the inconvenience.
