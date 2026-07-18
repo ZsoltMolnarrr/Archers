@@ -84,6 +84,18 @@ public class ArcherSummons {
                         .color(Color.NATURE.toRGBA())
         };
 
+        // Despawn FX: the spirit dissolves upward — a rising pillar of ascending spectral sparks.
+        b.despawn_fx = new VFX();
+        b.despawn_fx.particles = new ParticleBatch[] {
+                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
+                        SpellEngineParticles.MagicParticles.Shape.SPARK,
+                        SpellEngineParticles.MagicParticles.Motion.ASCEND).id().toString(),
+                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
+                        20, 0.15F, 0.35F)
+                        .extent(0.5F)
+                        .color(Color.NATURE.toRGBA())
+        };
+
         // Placement: a tight ring around the caster — front, right, left, back, each 1 block out,
         // ground-snapped and facing the caster's yaw, staggered 5 ticks apart (mirrors the Fire
         // Hydra formation). With spawn_count = 2 the loop fills the first two slots: front, right.
