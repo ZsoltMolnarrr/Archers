@@ -89,7 +89,7 @@
                     "attribute_id": "ranged_weapon:damage",
                     "operation": "ADD_VALUE",
                     "base": 0.0,
-                    "coefficient": 2.0
+                    "coefficient": 1.0
                   }
                 ]
               },
@@ -111,7 +111,7 @@
                     "attribute_id": "ranged_weapon:damage",
                     "operation": "ADD_VALUE",
                     "base": 0.0,
-                    "coefficient": 0.5
+                    "coefficient": 0.3
                   }
                 ]
               },
@@ -141,16 +141,36 @@
           },
           "placements": [
             {
-              "location_offset_by_look": 2.0
+              "location_offset_by_look": 1.0,
+              "apply_yaw": true
+            },
+            {
+              "delay_ticks": 5,
+              "location_offset_by_look": 1.0,
+              "location_yaw_offset": 90.0,
+              "apply_yaw": true
+            },
+            {
+              "delay_ticks": 10,
+              "location_offset_by_look": 1.0,
+              "location_yaw_offset": 270.0,
+              "apply_yaw": true
+            },
+            {
+              "delay_ticks": 15,
+              "location_offset_by_look": 1.0,
+              "location_yaw_offset": 180.0,
+              "apply_yaw": true
             }
-          ]
+          ],
+          "spawn_count": 2
         }
       }
     }
   ],
   "cost": {
     "cooldown": {
-      "duration": 30.0
+      "duration": 40.0
     }
   }
 }

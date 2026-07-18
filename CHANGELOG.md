@@ -2,7 +2,7 @@
 
 Archery manual now offers 6 spells (2 choices across 3 tiers).
 
-- New spells: Rain of Arrows, Spirit Wolf
+- New spells: Rain of Arrows, Spirit Wolf Pack
 
 # 2.7.0
 

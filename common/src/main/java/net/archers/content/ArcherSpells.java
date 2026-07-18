@@ -435,8 +435,8 @@ public class ArcherSpells {
     public static final Entry spirit_wolf = add(spirit_wolf().book(Book.ARCHER));
     private static Entry spirit_wolf() {
         var id = Identifier.of(ArchersMod.ID, "spirit_wolf");
-        var name = "Spirit Wolf";
-        var description = "Summons a Spirit Wolf to fight by your side for " + SpellTooltip.placeholder(SpellTooltip.summonDurationToken) + " sec, empowered by your Ranged Damage.";
+        var name = "Spirit Wolf Pack";
+        var description = "Summons a pack of " + SpellTooltip.placeholder(SpellTooltip.summonCountToken) + " Spirit Wolves to fight by your side for " + SpellTooltip.placeholder(SpellTooltip.summonDurationToken) + " sec, empowered by your Ranged Damage.";
         var spell = activeSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 16;
@@ -452,7 +452,7 @@ public class ArcherSpells {
         impact.action.summon = ArcherSummons.spiritWolf();
         spell.impacts = List.of(impact);
 
-        configureCooldown(spell, 30);
+        configureCooldown(spell, 40);
         return new Entry(id, spell, name, description);
     }
 }

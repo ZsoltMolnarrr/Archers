@@ -84,26 +84,35 @@ public class ArcherSummons {
                         .color(Color.NATURE.toRGBA())
         };
 
-        // Placement: 2 blocks ahead of the caster, snapped to the ground, keeping its own facing.
-        var placement = Placements.pointAtAngle(2F, 0F, 0);
-        placement.apply_yaw = false;
+        // Placement: a tight ring around the caster — front, right, left, back, each 1 block out,
+        // ground-snapped and facing the caster's yaw, staggered 5 ticks apart (mirrors the Fire
+        // Hydra formation). With spawn_count = 2 the loop fills the first two slots: front, right.
+        float d = 1F;
+        var placements = List.of(
+                Placements.pointAtAngle(d, 0F, 0),    // front
+                Placements.pointAtAngle(d, 90F, 5),   // right
+                Placements.pointAtAngle(d, 270F, 10), // left
+                Placements.pointAtAngle(d, 180F, 15)  // back
+        );
 
-        var summon = new Summon(SpiritWolfEntity.ID.toString(), b, List.of(placement), 1);
+        var summon = new Summon(SpiritWolfEntity.ID.toString(), b, placements, 2);
         summon.attribute_scaling.entries = rangedCombatScaling();
         return summon;
     }
 
     // MARK: Scaling helpers
 
-    /// The standard owner-scaled combat stat block, scaling off the owner's ranged damage
-    /// attribute (physical ranged school): health, armor, attack damage, attack knockback
-    /// and knockback resistance.
+    /// Per-wolf owner-scaled combat stat block, scaling off the owner's ranged damage attribute
+    /// (physical ranged school): health, armor, attack damage, attack knockback and knockback
+    /// resistance. Health and attack-damage coefficients are tuned down from a lone-summon block
+    /// (health 2.0 → 1.0, damage 0.5 → 0.3) so the two-wolf pack lands near a single wolf's
+    /// former aggregate rather than doubling it.
     private static List<AttributeScaling.Entry> rangedCombatScaling() {
         var s = ExternalSpellSchools.PHYSICAL_RANGED.attributeEntry.getIdAsString();
         var entries = new ArrayList<AttributeScaling.Entry>();
-        entries.add(scalingEntry(EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString(), s, 0, 2.0));
+        entries.add(scalingEntry(EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString(), s, 0, 1.0));
         entries.add(scalingEntry(EntityAttributes.GENERIC_ARMOR.getIdAsString(), s, 10, 0.1));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(), s, 0, 0.5));
+        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(), s, 0, 0.3));
         entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_KNOCKBACK.getIdAsString(), s, 0, 0.1));
         entries.add(scalingEntry(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(), s, 5, 0.05));
         return entries;

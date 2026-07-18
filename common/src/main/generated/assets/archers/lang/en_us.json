@@ -80,6 +80,6 @@
   "spell.archers.power_shot.name": "Power Shot",
   "spell.archers.rain_of_arrows.description": "Rains arrows over the targeted area for 5 seconds, each dealing {damage} damage to enemies within {impact_range} blocks.",
   "spell.archers.rain_of_arrows.name": "Rain of Arrows",
-  "spell.archers.spirit_wolf.description": "Summons a Spirit Wolf to fight by your side for {summon_duration} sec, empowered by your Ranged Damage.",
-  "spell.archers.spirit_wolf.name": "Spirit Wolf"
+  "spell.archers.spirit_wolf.description": "Summons a pack of {summon_count} Spirit Wolves to fight by your side for {summon_duration} sec, empowered by your Ranged Damage.",
+  "spell.archers.spirit_wolf.name": "Spirit Wolf Pack"
 }
