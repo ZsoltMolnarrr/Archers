@@ -452,7 +452,7 @@ public class ArcherSpells {
         impact.action.summon = ArcherSummons.spiritWolf();
         spell.impacts = List.of(impact);
 
-        configureCooldown(spell, 40);
+        configureCooldown(spell, 45);
         return new Entry(id, spell, name, description);
     }
 }
