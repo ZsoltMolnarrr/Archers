@@ -1,3 +1,7 @@
+# 3.0.1
+
+- Spirit Wolf Pack cooldown is no longer reduced by spell haste
+
 # 3.0.0
 
 SPELL EXPANSION! - Archery manual now offers 6 spells (2 choices across 3 tiers).
