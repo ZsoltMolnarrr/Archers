@@ -453,6 +453,7 @@ public class ArcherSpells {
         spell.impacts = List.of(impact);
 
         configureCooldown(spell, 45);
+        spell.cost.cooldown.haste_affected = false; // summon uptime shouldn't scale with haste
         return new Entry(id, spell, name, description);
     }
 }
