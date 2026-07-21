@@ -48,17 +48,19 @@ public class ArcherSummons {
         attack.duration = 14;
         attack.windup = 0.5F;
         attack.movement_speed = 1.2F;
-        attack.swing_sound = "minecraft:entity.wolf.growl";
-        attack.impact_sound = "minecraft:entity.player.attack.strong";
+        // Sounds at 0.75 volume (id, volume, pitch, randomness); the growl stays at 0.5 — full
+        // volume was too loud.
+        attack.swing_sound = new Sound("minecraft:entity.wolf.growl", 0.5F, 1F, 0.1F);
+        attack.impact_sound = new Sound("minecraft:entity.player.attack.strong", 0.75F, 1F, 0.1F);
         b.actions = List.of(SummonBehaviour.Action.attack(attack));
 
         // Lifecycle sounds: vanilla wolf set
-        b.sounds.spawn = ArcherSounds.SPIRIT_WOLF_SPAWN.id().toString();
-        b.sounds.despawn = "minecraft:entity.wolf.whine";
-        b.sounds.hurt = "minecraft:entity.wolf.hurt";
-        b.sounds.death = "minecraft:entity.wolf.death";
-        b.sounds.ambient = "minecraft:entity.wolf.pant";
-        b.sounds.step = "minecraft:entity.wolf.step";
+        b.sounds.spawn = Sound.withVolume(ArcherSounds.SPIRIT_WOLF_SPAWN.id(), 0.75F);
+        b.sounds.despawn = new Sound("minecraft:entity.wolf.whine", 0.75F, 1F, 0.1F);
+        b.sounds.hurt = new Sound("minecraft:entity.wolf.hurt", 0.75F, 1F, 0.1F);
+        b.sounds.death = new Sound("minecraft:entity.wolf.death", 0.75F, 1F, 0.1F);
+        b.sounds.ambient = new Sound("minecraft:entity.wolf.pant", 0.75F, 1F, 0.1F);
+        b.sounds.step = new Sound("minecraft:entity.wolf.step", 0.75F, 1F, 0.1F);
 
         // Spawn FX: a column of soul wisps as the spirit takes form, ringed by a burst of
         // spectral sparks rushing outward from a pipe around the spawn point

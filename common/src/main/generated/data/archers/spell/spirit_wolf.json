@@ -74,12 +74,30 @@
               "despawn_ticks": 20
             },
             "sounds": {
-              "spawn": "archers:spirit_wolf_spawn",
-              "despawn": "minecraft:entity.wolf.whine",
-              "hurt": "minecraft:entity.wolf.hurt",
-              "death": "minecraft:entity.wolf.death",
-              "ambient": "minecraft:entity.wolf.pant",
-              "step": "minecraft:entity.wolf.step"
+              "spawn": {
+                "id": "archers:spirit_wolf_spawn",
+                "volume": 0.75
+              },
+              "despawn": {
+                "id": "minecraft:entity.wolf.whine",
+                "volume": 0.75
+              },
+              "hurt": {
+                "id": "minecraft:entity.wolf.hurt",
+                "volume": 0.75
+              },
+              "death": {
+                "id": "minecraft:entity.wolf.death",
+                "volume": 0.75
+              },
+              "ambient": {
+                "id": "minecraft:entity.wolf.pant",
+                "volume": 0.75
+              },
+              "step": {
+                "id": "minecraft:entity.wolf.step",
+                "volume": 0.75
+              }
             },
             "actions": [
               {
@@ -89,8 +107,14 @@
                   "speed": 1.5,
                   "movement_speed": 1.2,
                   "duration": 14,
-                  "swing_sound": "minecraft:entity.wolf.growl",
-                  "impact_sound": "minecraft:entity.player.attack.strong"
+                  "swing_sound": {
+                    "id": "minecraft:entity.wolf.growl",
+                    "volume": 0.5
+                  },
+                  "impact_sound": {
+                    "id": "minecraft:entity.player.attack.strong",
+                    "volume": 0.75
+                  }
                 }
               }
             ]
