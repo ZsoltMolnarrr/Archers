@@ -19,6 +19,7 @@
   "effect.archers.hunters_mark.description": "Increases damage taken from all sources",
   "effect.archers.hunters_mark_stash": "Power Shot",
   "effect.archers.hunters_mark_stash.description": "Next shot applies Hunter's Mark",
+  "entity.archers.spirit_wolf": "Spirit Wolf",
   "entity.minecraft.villager.archers.archery_artisan": "Archery Artisan",
   "entity.minecraft.villager.archers:archery_artisan": "Archery Artisan",
   "entity.minecraft.villager.archery_artisan": "Archery Artisan",

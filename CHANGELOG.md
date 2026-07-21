@@ -1,3 +1,7 @@
+# 3.0.2
+
+- Fix entity name translations
+
 # 3.0.1
 
 - Spirit Wolf Pack cooldown is no longer reduced by spell haste

@@ -5,7 +5,7 @@ import net.archers.client.ArchersClientMod;
 import net.archers.client.compat.AccessoriesRenderCompat;
 import net.archers.client.entity.DirewolfEntityModel;
 import net.archers.client.entity.DirewolfEntityRenderer;
-import net.archers.entity.SpiritWolfEntity;
+import net.archers.entity.ArcherEntities;
 import net.archers.fabric.client.trinkets.TrinketsRenderCompat;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -23,7 +23,7 @@ public final class FabricClientMod implements ClientModInitializer {
 
         // Entity model layers + renderers
         EntityModelLayerRegistry.registerModelLayer(DirewolfEntityModel.TEXTURE, DirewolfEntityModel::getTexturedModelData);
-        EntityRendererRegistry.register(SpiritWolfEntity.TYPE, DirewolfEntityRenderer::new);
+        EntityRendererRegistry.register(ArcherEntities.SPIRIT_WOLF.type, DirewolfEntityRenderer::new);
 
         // Fabric-specific render layer registration
         BlockRenderLayerMap.INSTANCE.putBlock(ArcherBlocks.WORKBENCH.block(), RenderLayer.getCutout());

@@ -107,7 +107,7 @@ public class ArcherSummons {
                 Placements.pointAtAngle(d, 180F, 15)  // back
         );
 
-        var summon = new Summon(SpiritWolfEntity.ID.toString(), b, placements, 2);
+        var summon = new Summon(ArcherEntities.SPIRIT_WOLF.id.toString(), b, placements, 2);
         summon.attribute_scaling.entries = rangedCombatScaling();
         return summon;
     }

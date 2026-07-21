@@ -4,6 +4,7 @@ import net.archers.ArchersMod;
 import net.archers.content.ArcherSounds;
 import net.archers.content.ArcherSpells;
 import net.archers.effect.ArcherEffects;
+import net.archers.entity.ArcherEntities;
 import net.archers.item.ArcherArmors;
 import net.archers.item.ArcherWeapons;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -313,6 +314,11 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
 
             // Ranged Weapon API tooltip (this key lives in the ranged_weapon namespace)
             builder.add("item.ranged_weapon.pull_time", "%1$s sec Pull Time");
+
+            // Custom entities — code-sourced display names (paired with the type in ArcherEntities.Entry)
+            for (var entry : ArcherEntities.entries) {
+                builder.add("entity." + namespace + "." + entry.id.getPath(), entry.name);
+            }
 
             // Archery Artisan villager (several key formats are referenced across versions)
             builder.add("entity.minecraft.villager.archery_artisan", "Archery Artisan");

@@ -5,7 +5,7 @@ import net.archers.client.ArchersClientMod;
 import net.archers.client.compat.AccessoriesRenderCompat;
 import net.archers.client.entity.DirewolfEntityModel;
 import net.archers.client.entity.DirewolfEntityRenderer;
-import net.archers.entity.SpiritWolfEntity;
+import net.archers.entity.ArcherEntities;
 import net.fabricmc.loader.api.FabricLoader;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -35,6 +35,6 @@ public class NeoForgeClientMod {
 
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(SpiritWolfEntity.TYPE, DirewolfEntityRenderer::new);
+        event.registerEntityRenderer(ArcherEntities.SPIRIT_WOLF.type, DirewolfEntityRenderer::new);
     }
 }
