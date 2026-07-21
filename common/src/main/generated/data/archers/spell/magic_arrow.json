@@ -1,12 +1,18 @@
 {
   "school": "spell_power:physical_ranged",
-  "range": 64.0,
+  "range": 16.0,
   "tier": 4,
   "group": "archer_nature",
   "learn": {},
   "active": {
     "cast": {
       "duration": 1.0,
+      "type": "CHARGE",
+      "charge": {
+        "bonus": {
+          "range_add": 48.0
+        }
+      },
       "animation": {
         "id": "spell_engine:archery_pull"
       },

@@ -328,14 +328,19 @@ public class ArcherSpells {
     private static Entry magic_arrow() {
         var id = Identifier.of(ArchersMod.ID, "magic_arrow");
         var name = "Magic Arrow";
-        var description = "Shoots a magical arrow piercing thru all enemies in its path, dealing {damage} damage to each target.";
+        var description = "Shoots a magical arrow piercing thru all enemies in its path, dealing {damage} damage to each target. The longer the cast is held, the harder it hits and the further the arrow flies.";
         var spell = activeSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
-        spell.range = 64;
+        // Base range 32, plus up to +32 from the charge bonus below -> the same 64 total at full charge.
+        spell.range = 16;
         spell.tier = 4;
         spell.group = NATURE;
 
-        spell.active.cast.duration = 1F;
+        // Charged cast: hold to charge. CHARGE scales the innate output (damage) by default; the charge
+        // bonus additionally extends how far the arrow flies, scaled by the curved release ratio.
+        var charge = SpellBuilder.Casting.charge(spell, 1F);
+        charge.bonus.range_add = 48F;
+
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
         spell.active.cast.particles = new ParticleBatch[]{

@@ -1,6 +1,8 @@
 # 3.0.2
 
 - Fix entity name translations
+- Reduce Spirit Wolf sound volume
+- Magic Arrow spell is now charged instead casted
 
 # 3.0.1
 

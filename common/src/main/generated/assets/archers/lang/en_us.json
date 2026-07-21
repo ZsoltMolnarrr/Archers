@@ -75,7 +75,7 @@
   "spell.archers.barrage.name": "Barrage",
   "spell.archers.entangling_roots.description": "Conjures roots to sprout from the ground in the nearby area, slowing down enemies for {cloud_duration} seconds.",
   "spell.archers.entangling_roots.name": "Entangling Roots",
-  "spell.archers.magic_arrow.description": "Shoots a magical arrow piercing thru all enemies in its path, dealing {damage} damage to each target.",
+  "spell.archers.magic_arrow.description": "Shoots a magical arrow piercing thru all enemies in its path, dealing {damage} damage to each target. The longer the cast is held, the harder it hits and the further the arrow flies.",
   "spell.archers.magic_arrow.name": "Magic Arrow",
   "spell.archers.power_shot.description": "Your next {effect_amplifier_cap} arrows inflict the target with Hunter's Mark for {effect_duration} seconds, increasing its damage taken by {damage_taken}, stacking up to {effect_amplifier_cap} times.",
   "spell.archers.power_shot.name": "Power Shot",
