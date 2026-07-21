@@ -50,6 +50,10 @@ repositories {
     maven {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
+        // Only consulted for Trinkets (dev.emi). Without this filter Gradle also probes TerraformersMC
+        // for maven.modrinth artifacts (e.g. tiny-config); a TerraformersMC outage (502) then disables
+        // the repo and aborts those resolutions, even though they resolve fine from the Modrinth repo.
+        content { includeGroup 'dev.emi' }
     }
     maven {
         name = "Ladysnake Libs"
@@ -78,7 +82,7 @@ dependencies {
     if (System.getenv("CI")) {
         modCompileOnly("maven.modrinth:trinkets:${project.trinkets_version}")
     } else {
-        modCompileOnly("dev.emi:trinkets:${project.trinkets_version}")
+        modImplementation("dev.emi:trinkets:${project.trinkets_version}")
     }
 
     modImplementation "maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}"
