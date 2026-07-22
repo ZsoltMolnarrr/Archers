@@ -50,14 +50,6 @@ repositories {
         }
     }
     maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-        // Only consulted for Trinkets (dev.emi). Without this filter Gradle also probes TerraformersMC
-        // for maven.modrinth artifacts (e.g. tiny-config); a TerraformersMC outage (502) then disables
-        // the repo and aborts those resolutions, even though they resolve fine from the Modrinth repo.
-        content { includeGroup 'dev.emi' }
-    }
-    maven {
         name = "Ladysnake Libs"
         url = 'https://maven.ladysnake.org/releases'
     }
@@ -99,7 +91,7 @@ dependencies {
     modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
 //    modImplementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
     modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
-    // modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
+//    modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
 }
 
 processResources {
