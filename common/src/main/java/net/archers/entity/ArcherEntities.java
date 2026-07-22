@@ -11,6 +11,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.summon.SummonedEntities;
 import net.spell_engine.api.spell.summon.SummonedEntityConfig;
+import net.tiny_config.ConfigManager;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class ArcherEntities {
         /// English display name, emitted as {@code entity.<namespace>.<path>} by lang datagen.
         public final String name;
         public final EntityType<T> type;
-        /// Attribute defaults for summoned entities (seeded into config/spell_engine/summoned_entities.json).
+        /// Attribute defaults for summoned entities (seeded into Archers' own config/archers/summoned_entities.json).
         /// Null for entities that aren't spell-power-scaled summons.
         @Nullable public final SummonedEntityConfig.Entry summonConfig;
 
@@ -60,8 +61,9 @@ public class ArcherEntities {
                     .build(),
             spiritWolfDefaults()));
 
-    // Default base attributes per summon — seeded into the central SpellEngine config
-    // (config/spell_engine/summoned_entities.json) via SummonedEntities.registerAttributes.
+    // Default base attributes per summon — seeded into Archers' OWN config file
+    // (config/archers/summoned_entities.json), versioned independently. The live values are read back
+    // through summonConfig at registration time.
 
     public static SummonedEntityConfig.Entry spiritWolfDefaults() {
         var e = new SummonedEntityConfig.Entry();
@@ -75,14 +77,37 @@ public class ArcherEntities {
         return e;
     }
 
+    /// Archers' own summoned-entity config file, seeded from the per-entity defaults above and versioned
+    /// independently (bump `schemaVersion` to reset users' files after a defaults change). Declared after
+    /// the entity constants so {@link #entries} is fully populated when the defaults are collected.
+    public static final ConfigManager<SummonedEntityConfig> summonConfig = new ConfigManager<>
+            ("summoned_entities", seededDefaults())
+            .builder()
+            .setDirectory(ArchersMod.ID)
+            .schemaVersion(1)
+            .sanitize(true)
+            .build();
+
+    private static SummonedEntityConfig seededDefaults() {
+        var config = new SummonedEntityConfig();
+        for (var entry : entries) {
+            if (entry.summonConfig != null) {
+                config.entries.put(entry.id.toString(), entry.summonConfig);
+            }
+        }
+        return config;
+    }
+
     public static void register() {
+        summonConfig.refresh(); // load (or write) Archers' own config file before reading values from it
         for (var entry : entries) {
             Registry.register(Registries.ENTITY_TYPE, entry.id, entry.type);
             if (entry.summonConfig != null) {
                 // Only summoned (living) entities carry a config; safe by construction.
                 @SuppressWarnings("unchecked")
                 var livingType = (EntityType<? extends LivingEntity>) entry.type;
-                SummonedEntities.registerAttributes(entry.id, livingType, entry.summonConfig);
+                // Inject Archers' config as the attribute source — a plain Function<Identifier, Entry>.
+                SummonedEntities.registerAttributes(entry.id, livingType, summonConfig.value::entryFor);
             }
         }
     }
