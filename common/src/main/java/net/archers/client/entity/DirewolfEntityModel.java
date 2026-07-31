@@ -1,6 +1,7 @@
 package net.archers.client.entity;
 
 import net.archers.ArchersMod;
+import net.archers.client.render.ArcherRenderLayers;
 import net.archers.entity.SpiritWolfEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
@@ -37,9 +38,14 @@ public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity>
 		// for bloom and blow it out — with shaders active, fall back to the lightmap-respecting
 		// translucent layer (visibility in darkness is restored via the renderer's block-light
 		// boost). Evaluated per frame, so toggling shaders in-game switches immediately.
+		//
+		// Both branches must write depth, or the spirit sinks behind water and behind its own
+		// drop shadow. `getEntityTranslucent` already does (it leaves the write mask at its
+		// `ALL_MASK` default); vanilla's emissive layer does not, hence the local copy — see
+		// ArcherRenderLayers#spirit.
 		super(texture -> ShaderCompatibility.isShaderPackInUse()
 				? RenderLayer.getEntityTranslucent(texture)
-				: RenderLayer.getEntityTranslucentEmissive(texture));
+				: ArcherRenderLayers.spirit(texture));
 		this.root = root.getChild("root");
 		this.right_back_leg = this.root.getChild("right_back_leg");
 		this.left_back_leg = this.root.getChild("left_back_leg");

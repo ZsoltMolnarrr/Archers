@@ -1,3 +1,7 @@
+# 3.0.3
+
+- Fix Spirit Wolf render transparency
+
 # 3.0.2
 
 - Fix entity name translations
