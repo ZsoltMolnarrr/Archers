@@ -20,16 +20,21 @@
     "animation": {
       "id": "spell_engine:archery_upwards_release"
     },
-    "particles": [
-      {
-        "particle_id": "firework",
-        "origin": "CENTER",
-        "shape": "LINE_VERTICAL",
-        "count": 4.0,
-        "min_speed": 0.6,
-        "max_speed": 0.9
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "firework",
+          "appearance": {},
+          "batch": {
+            "count": 4.0,
+            "shape": "LINE_VERTICAL",
+            "anchor": "ENTITY",
+            "min_speed": 0.6,
+            "max_speed": 0.9
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "archers:rain_of_arrows_release"
     }
@@ -53,21 +58,27 @@
         "client_data": {
           "travel_particles": [
             {
-              "particle_id": "crit",
-              "origin": "CENTER",
-              "shape": "CIRCLE",
-              "rotation": "LOOK",
-              "count": 1.0,
-              "max_speed": 0.05
+              "id": "crit",
+              "appearance": {},
+              "batch": {
+                "count": 1.0,
+                "shape": "CIRCLE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "max_speed": 0.05
+              }
             },
             {
-              "particle_id": "firework",
-              "origin": "CENTER",
-              "shape": "LINE",
-              "rotation": "LOOK",
-              "count": 0.25,
-              "min_speed": 0.1,
-              "max_speed": 0.2
+              "id": "firework",
+              "appearance": {},
+              "batch": {
+                "count": 0.25,
+                "shape": "LINE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "min_speed": 0.1,
+                "max_speed": 0.2
+              }
             }
           ],
           "composite_model": {
@@ -92,47 +103,64 @@
           "knockback": 0.25
         }
       },
-      "particles": [
-        {
-          "particle_id": "crit",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 8.0,
-          "min_speed": 0.2,
-          "max_speed": 0.4
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "crit",
+            "appearance": {},
+            "batch": {
+              "count": 8.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.2,
+              "max_speed": 0.4
+            }
+          }
+        ]
+      }
     }
   ],
   "area_impact": {
     "radius": 1.5,
-    "particles": [
-      {
-        "particle_id": "spell_engine:area_effect_658",
-        "origin": "GROUND",
-        "shape": "SPHERE",
-        "count": 1.0,
-        "max_speed": 0.0,
-        "color_rgba": 3467730175,
-        "scale": 1.5
-      },
-      {
-        "particle_id": "crit",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 20.0,
-        "min_speed": 0.25,
-        "max_speed": 0.5
-      },
-      {
-        "particle_id": "poof",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 5.0,
-        "min_speed": 0.02,
-        "max_speed": 0.1
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:area_effect_658",
+          "appearance": {
+            "color": 3467730175,
+            "scale": 1.5,
+            "facing": "GROUND"
+          },
+          "batch": {
+            "count": 1.0,
+            "shape": "NONE",
+            "anchor": "GROUND"
+          }
+        },
+        {
+          "id": "crit",
+          "appearance": {},
+          "batch": {
+            "count": 20.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY",
+            "min_speed": 0.25,
+            "max_speed": 0.5
+          }
+        },
+        {
+          "id": "poof",
+          "appearance": {},
+          "batch": {
+            "count": 5.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY",
+            "min_speed": 0.02,
+            "max_speed": 0.1
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "archers:rain_of_arrows_impact"
     }

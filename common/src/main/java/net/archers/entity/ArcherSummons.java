@@ -6,9 +6,11 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.spell_engine.api.datagen.SpellBuilder.Placements;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell.Impact.Action.Summon;
-import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.Fx;
+import net.spell_engine.api.spell.fx.ParticleGroup;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder.Batches;
 import net.spell_engine.api.spell.fx.Sound;
-import net.spell_engine.api.spell.fx.VFX;
 import net.spell_engine.api.spell.summon.AttributeScaling;
 import net.spell_engine.api.spell.summon.SummonBehaviour;
 import net.spell_engine.client.util.Color;
@@ -62,41 +64,25 @@ public class ArcherSummons {
         b.sounds.ambient = new Sound("minecraft:entity.wolf.pant", 0.75F, 1F, 0.1F);
         b.sounds.step = new Sound("minecraft:entity.wolf.step", 0.75F, 1F, 0.1F);
 
-        // Spawn FX: a column of soul wisps as the spirit takes form, ringed by a burst of
-        // spectral sparks rushing outward from a pipe around the spawn point
-        b.spawn_fx = new VFX();
-        b.spawn_fx.particles = new ParticleBatch[] {
-//                new ParticleBatch("soul",
-//                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-//                        40, 0.05F, 0.3F)
-//                        .extent(0.5F),
-                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
-                        SpellEngineParticles.MagicParticles.Shape.SPARK,
-                        SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
-                        20, 0.15F, 0.35F)
-                        .extent(0.5F)
-                        .color(Color.NATURE.toRGBA()),
-                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
-                        SpellEngineParticles.MagicParticles.Shape.SPARK,
-                        SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        20, 0.15F, 0.35F)
-                        .extent(0.5F)
-                        .color(Color.NATURE.toRGBA())
-        };
+        // Spawn FX: a burst of spectral sparks rushing outward from a pipe around the spawn point,
+        // wrapped in a sphere of the same sparks as the spirit takes form
+        b.spawn_fx = Fx.Visuals.of(
+                natureSpark(ParticleGroup.Motion.DECELERATE)
+                        .batch(b2 -> b2.shape(ParticleGroup.Shape.PIPE).widthFactor(2F)
+                                .count(20).speed(0.15F, 0.35F)
+                                .verticalOrigin(Batches.FEET).extent(0.5F)),
+                natureSpark(ParticleGroup.Motion.DECELERATE)
+                        .batch(b2 -> b2.shape(ParticleGroup.Shape.SPHERE)
+                                .count(20).speed(0.15F, 0.35F).extent(0.5F))
+        );
 
         // Despawn FX: the spirit dissolves upward — a rising pillar of ascending spectral sparks.
-        b.despawn_fx = new VFX();
-        b.despawn_fx.particles = new ParticleBatch[] {
-                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
-                        SpellEngineParticles.MagicParticles.Shape.SPARK,
-                        SpellEngineParticles.MagicParticles.Motion.ASCEND).id().toString(),
-                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                        20, 0.15F, 0.35F)
-                        .extent(0.5F)
-                        .color(Color.NATURE.toRGBA())
-        };
+        b.despawn_fx = Fx.Visuals.of(
+                natureSpark(ParticleGroup.Motion.ASCEND)
+                        .batch(b2 -> b2.shape(ParticleGroup.Shape.PILLAR)
+                                .count(20).speed(0.15F, 0.35F)
+                                .verticalOrigin(Batches.FEET).extent(0.5F))
+        );
 
         // Placement: a tight ring around the caster — front, right, left, back, each 1 block out,
         // ground-snapped and facing the caster's yaw, staggered 5 ticks apart (mirrors the Fire
@@ -112,6 +98,13 @@ public class ArcherSummons {
         var summon = new Summon(ArcherEntities.SPIRIT_WOLF.id.toString(), b, placements, 2);
         summon.attribute_scaling.entries = rangedCombatScaling();
         return summon;
+    }
+
+    // MARK: FX helpers
+
+    /// A nature-tinted spark, motion picked per use — the spirit-wolf palette.
+    private static ParticleGroupBuilder natureSpark(ParticleGroup.Motion motion) {
+        return ParticleGroupBuilder.magic(SpellEngineParticles.magic_spark, motion, Color.NATURE);
     }
 
     // MARK: Scaling helpers

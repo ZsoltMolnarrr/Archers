@@ -6,17 +6,26 @@
   "learn": {},
   "active": {},
   "release": {
-    "particles": [
-      {
-        "particle_id": "spell_engine:magic_stripe_float",
-        "origin": "FEET",
-        "shape": "WIDE_PIPE",
-        "count": 10.0,
-        "min_speed": 0.01,
-        "max_speed": 0.1,
-        "color_rgba": 3208659199
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:magic_stripe",
+          "appearance": {
+            "color": 3208659199,
+            "motion": "FLOAT"
+          },
+          "batch": {
+            "count": 10.0,
+            "shape": "PIPE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.01,
+            "max_speed": 0.1,
+            "width_factor": 2.0
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "archers:marker_shot",
       "volume": 0.5
@@ -48,16 +57,21 @@
           "apply_mode": "ADD"
         }
       },
-      "particles": [
-        {
-          "particle_id": "firework",
-          "origin": "CENTER",
-          "shape": "PILLAR",
-          "count": 3.0,
-          "min_speed": 0.01,
-          "max_speed": 0.1
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "firework",
+            "appearance": {},
+            "batch": {
+              "count": 3.0,
+              "shape": "PILLAR",
+              "anchor": "ENTITY",
+              "min_speed": 0.01,
+              "max_speed": 0.1
+            }
+          }
+        ]
+      }
     }
   ],
   "arrow_perks": {

@@ -8,8 +8,11 @@ import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
+import net.spell_engine.api.spell.fx.Fx;
 import net.spell_engine.api.spell.fx.PlayerAnimation;
-import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.ParticleGroup;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder.Batches;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.client.util.Color;
@@ -60,6 +63,15 @@ public class ArcherSpells {
 
     public static final String MARKSMAN = "archer_marksman";
     public static final String NATURE = "archer_nature";
+
+    // MARK: Shared particle effects
+    // Motion is chosen per effect rather than baked into the particle id, so the one registered
+    // `magic_spark` texture covers every spectral-spark use below.
+
+    /// A nature-tinted spark, motion picked per use — the Magic Arrow / spirit palette.
+    private static ParticleGroupBuilder natureSpark(ParticleGroup.Motion motion) {
+        return ParticleGroupBuilder.magic(SpellEngineParticles.magic_spark, motion, Color.NATURE);
+    }
 
 
     private static Spell activeSpellBase() {
@@ -122,14 +134,10 @@ public class ArcherSpells {
 
 
         spell.release.sound = Sound.withVolume(ArcherSounds.MARKER_SHOT.id(), 0.5F);
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
-                        SpellEngineParticles.MagicParticles.Shape.STRIPE,
-                        SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
-                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
-                        10, 0.01F, 0.1F)
-                        .color(Color.RAGE.toRGBA())
-        };
+        spell.release.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.magic(SpellEngineParticles.magic_stripe, ParticleGroup.Motion.FLOAT, Color.RAGE)
+                        .batch(Batches.casting(10, 0.1F).andThen(b -> b.speed(0.01F, 0.1F)))
+        );
 
         spell.deliver.type = Spell.Delivery.Type.STASH_EFFECT;
         var stash = new Spell.Delivery.StashEffect();
@@ -146,11 +154,10 @@ public class ArcherSpells {
         debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
         debuff.action.status_effect.amplifier = 1;
         debuff.action.status_effect.amplifier_cap = 2;
-        debuff.particles = new ParticleBatch[]{
-                new ParticleBatch("firework",
-                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.CENTER,
-                        3, 0.01F, 0.1F)
-        };
+        debuff.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of("firework")
+                        .batch(b -> b.shape(ParticleGroup.Shape.PILLAR).count(3).speed(0.01F, 0.1F))
+        );
         spell.impacts = List.of(debuff);
         spell.arrow_perks = new Spell.ArrowPerks();
         spell.arrow_perks.bypass_iframes = true;
@@ -181,12 +188,11 @@ public class ArcherSpells {
         cloud.impact_tick_interval = 15;
         cloud.time_to_live_seconds = 8;
         cloud.client_data = new Spell.Delivery.Cloud.ClientData();
-        cloud.client_data.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.roots.id().toString(),
-                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                        2, 0, 0)
-        };
+        cloud.client_data.particles = List.of(
+                ParticleGroupBuilder.of(SpellEngineParticles.roots)
+                        .batch(b -> b.shape(ParticleGroup.Shape.PILLAR).count(2)
+                                .verticalOrigin(Batches.FEET))
+        );
         spell.deliver.clouds = List.of(cloud);
 
         var debuff = createEffectImpact(ArcherEffects.ENTANGLING_ROOTS.id, 1);
@@ -194,11 +200,10 @@ public class ArcherSpells {
         debuff.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
         debuff.action.status_effect.apply_limit.health_base = 50;
         debuff.action.status_effect.apply_limit.spell_power_multiplier = 5;
-        debuff.particles = new ParticleBatch[]{
-                new ParticleBatch("falling_spore_blossom",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        2, 0.1F, 0.2F)
-        };
+        debuff.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of("falling_spore_blossom")
+                        .batch(Batches.impact(2, 0.2F).andThen(b -> b.speed(0.1F, 0.2F)))
+        );
         spell.impacts = List.of(debuff);
 
         configureCooldown(spell, 18);
@@ -262,11 +267,10 @@ public class ArcherSpells {
         spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
         spell.release.animation = PlayerAnimation.of("spell_engine:archery_upwards_release");
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch("firework",
-                        ParticleBatch.Shape.LINE_VERTICAL, ParticleBatch.Origin.CENTER,
-                        4, 0.6F, 0.9F)
-        };
+        spell.release.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of("firework")
+                        .batch(b -> b.shape(ParticleGroup.Shape.LINE_VERTICAL).count(4).speed(0.6F, 0.9F))
+        );
         spell.release.sound = new Sound(ArcherSounds.RAIN_OF_ARROWS_RELEASE.id());
 
         spell.target.type = Spell.Target.Type.AIM;
@@ -283,41 +287,36 @@ public class ArcherSpells {
 
         var projectile = new Spell.ProjectileData();
         projectile.client_data = new Spell.ProjectileData.Client();
-        projectile.client_data.travel_particles = new ParticleBatch[]{
-                new ParticleBatch("crit",
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        ParticleBatch.Rotation.LOOK, 1, 0, 0.05F, 0),
-                // Streams along the travel direction (LOOK-rotated LINE): forward while
+        projectile.client_data.travel_particles = List.of(
+                ParticleGroupBuilder.of("crit")
+                        .batch(Batches.travel(1, 0.05F).andThen(b -> b.speed(0, 0.05F))),
+                // Streams along the travel direction (LOOK-aligned LINE): forward while
                 // launched, downward once falling
-                new ParticleBatch("firework",
-                        ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
-                        ParticleBatch.Rotation.LOOK, 0.25F, 0.1F, 0.2F, 0)
-        };
+                ParticleGroupBuilder.of("firework")
+                        .batch(b -> b.shape(ParticleGroup.Shape.LINE).count(0.25F).speed(0.1F, 0.2F)
+                                .alignment(ParticleGroup.Alignment.LOOK))
+        );
         projectile.client_data.composite_model = SpellBuilder.ProjectileModels.single("archers:spell_projectile/volley_arrow", 1F, LightEmission.GLOW);
         spell.deliver.meteor.projectile = projectile;
 
         var damage = damage(0.4F, 0.25F);
-        damage.particles = new ParticleBatch[]{
-                new ParticleBatch("crit",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        8, 0.2F, 0.4F)
-        };
+        damage.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of("crit")
+                        .batch(Batches.impact(8, 0.4F))
+        );
         spell.impacts = List.of(damage);
 
         spell.area_impact = new Spell.AreaImpact();
         var impactRadius = 1.5F;
         spell.area_impact.radius = impactRadius;
-        spell.area_impact.particles = new ParticleBatch[]{
+        spell.area_impact.visuals = Fx.Visuals.of(
                 SpellBuilder.Particles.area(SpellEngineParticles.area_effect_658.id())
-                        .scale(impactRadius)
-                        .color(Color.from(0xceb15c).toRGBA()),
-                new ParticleBatch("crit",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        20, 0.25F, 0.5F),
-                new ParticleBatch("poof",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        5, 0.02F, 0.1F)
-        };
+                        .appearance(a -> a.scale(impactRadius).color(Color.from(0xceb15c).toRGBA())),
+                ParticleGroupBuilder.of("crit")
+                        .batch(Batches.impact(20, 0.5F).andThen(b -> b.speed(0.25F, 0.5F))),
+                ParticleGroupBuilder.of("poof")
+                        .batch(Batches.impact(5, 0.1F).andThen(b -> b.speed(0.02F, 0.1F)))
+        );
         spell.area_impact.sound = new Sound(ArcherSounds.RAIN_OF_ARROWS_IMPACT.id());
 
         configureCooldown(spell, 15);
@@ -343,37 +342,26 @@ public class ArcherSpells {
 
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
-        spell.active.cast.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.LAUNCH_POINT,
-                        4, 0.02F, 0.1F)
-                        .invert()
-                        .preSpawnTravel(14)
-                        .color(Color.NATURE.toRGBA())
-        };
+        spell.active.cast.particles = List.of(
+                natureSpark(ParticleGroup.Motion.FLOAT)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(4).speed(0.02F, 0.1F)
+                                .anchor(ParticleGroup.Anchor.LAUNCH_POINT)
+                                .invert(true).preTravel(14))
+        );
         spell.active.cast.sound = new Sound(SpellEngineSounds.GENERIC_WIND_CHARGING.id());
 
         spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
         spell.release.sound = new Sound(ArcherSounds.MAGIC_ARROW_RELEASE.id());
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.LAUNCH_POINT,
-                        ParticleBatch.Rotation.LOOK, 50,0.18F,0.2F, 0)
-                        .color(Color.NATURE.toRGBA()),
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.LAUNCH_POINT,
-                        ParticleBatch.Rotation.LOOK, 25,0.28F,0.3F, 0)
-                        .color(Color.NATURE.toRGBA())
-        };
+        spell.release.visuals = Fx.Visuals.of(
+                natureSpark(ParticleGroup.Motion.DECELERATE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE).count(50).speed(0.18F, 0.2F)
+                                .anchor(ParticleGroup.Anchor.LAUNCH_POINT)
+                                .alignment(ParticleGroup.Alignment.LOOK)),
+                natureSpark(ParticleGroup.Motion.DECELERATE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE).count(25).speed(0.28F, 0.3F)
+                                .anchor(ParticleGroup.Anchor.LAUNCH_POINT)
+                                .alignment(ParticleGroup.Alignment.LOOK))
+        );
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
@@ -385,48 +373,29 @@ public class ArcherSpells {
         projectile.homing_angle = 2;
         projectile.perks.pierce = 99999;
         projectile.client_data = new Spell.ProjectileData.Client();
-        projectile.client_data.travel_particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
-                        ParticleBatch.Rotation.LOOK, 5,0.14F,0.15F, 0)
-                        .roll(18).color(Color.NATURE.toRGBA()),
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
-                        ParticleBatch.Rotation.LOOK, 5,0.14F,0.15F, 0).rollOffset(180)
-                        .roll(18).color(Color.NATURE.toRGBA()),
-                new ParticleBatch(
-                        "firework",
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        ParticleBatch.Rotation.LOOK, 2,0F,0.05F, 0),
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        ParticleBatch.Rotation.LOOK, 10,0F,0.05F, 0)
-                        .color(Color.NATURE.toRGBA())
-        };
+        // Double helix around the flight path: two LINE strands 180 degrees apart, swept around the
+        // travel axis by the roll rate every tick. `Batches.helix` is this pattern; the speeds are
+        // spelled out because this wake is tighter than the preset's default spread.
+        projectile.client_data.travel_particles = List.of(
+                natureSpark(ParticleGroup.Motion.DECELERATE)
+                        .batch(Batches.helix(5, 0.15F, 18, 0).andThen(b -> b.speed(0.14F, 0.15F))),
+                natureSpark(ParticleGroup.Motion.DECELERATE)
+                        .batch(Batches.helix(5, 0.15F, 18, 180).andThen(b -> b.speed(0.14F, 0.15F))),
+                ParticleGroupBuilder.of("firework")
+                        .batch(Batches.travel(2, 0.05F).andThen(b -> b.speed(0, 0.05F))),
+                natureSpark(ParticleGroup.Motion.DECELERATE)
+                        .batch(Batches.travel(10, 0.05F).andThen(b -> b.speed(0, 0.05F)))
+        );
         projectile.client_data.light_level = 10;
         projectile.client_data.composite_model = SpellBuilder.ProjectileModels.single("archers:spell_projectile/magic_arrow", 1.2F, LightEmission.RADIATE);
         shoot.projectile = projectile;
         spell.deliver.projectile = shoot;
 
         var damage = damage(1.2F, 2);
-        damage.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                SpellEngineParticles.MagicParticles.Motion.BURST).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 1.2F, 1.8F)
-                        .color(Color.NATURE.toRGBA())
-        };
+        damage.visuals = Fx.Visuals.of(
+                natureSpark(ParticleGroup.Motion.BURST)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(25).speed(1.2F, 1.8F))
+        );
         damage.sound = new Sound(ArcherSounds.MAGIC_ARROW_IMPACT.id());
 
         spell.impacts = List.of(damage);

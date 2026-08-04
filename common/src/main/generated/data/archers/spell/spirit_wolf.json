@@ -23,42 +23,58 @@
             "spawn_fx": {
               "particles": [
                 {
-                  "particle_id": "spell_engine:magic_spark_decelerate",
-                  "origin": "FEET",
-                  "shape": "WIDE_PIPE",
-                  "count": 20.0,
-                  "min_speed": 0.15,
-                  "max_speed": 0.35,
-                  "extent": 0.5,
-                  "color_rgba": 1728014079
+                  "id": "spell_engine:magic_spark",
+                  "appearance": {
+                    "color": 1728014079,
+                    "motion": "DECELERATE"
+                  },
+                  "batch": {
+                    "count": 20.0,
+                    "shape": "PIPE",
+                    "anchor": "ENTITY",
+                    "vertical_origin": 0.1,
+                    "min_speed": 0.15,
+                    "max_speed": 0.35,
+                    "extent": 0.5,
+                    "width_factor": 2.0
+                  }
                 },
                 {
-                  "particle_id": "spell_engine:magic_spark_decelerate",
-                  "origin": "CENTER",
-                  "shape": "SPHERE",
-                  "count": 20.0,
-                  "min_speed": 0.15,
-                  "max_speed": 0.35,
-                  "extent": 0.5,
-                  "color_rgba": 1728014079
+                  "id": "spell_engine:magic_spark",
+                  "appearance": {
+                    "color": 1728014079,
+                    "motion": "DECELERATE"
+                  },
+                  "batch": {
+                    "count": 20.0,
+                    "shape": "SPHERE",
+                    "anchor": "ENTITY",
+                    "min_speed": 0.15,
+                    "max_speed": 0.35,
+                    "extent": 0.5
+                  }
                 }
-              ],
-              "model_fx": []
+              ]
             },
             "despawn_fx": {
               "particles": [
                 {
-                  "particle_id": "spell_engine:magic_spark_ascend",
-                  "origin": "FEET",
-                  "shape": "PILLAR",
-                  "count": 20.0,
-                  "min_speed": 0.15,
-                  "max_speed": 0.35,
-                  "extent": 0.5,
-                  "color_rgba": 1728014079
+                  "id": "spell_engine:magic_spark",
+                  "appearance": {
+                    "color": 1728014079,
+                    "motion": "ASCEND"
+                  },
+                  "batch": {
+                    "count": 20.0,
+                    "shape": "PILLAR",
+                    "anchor": "ENTITY",
+                    "vertical_origin": 0.1,
+                    "min_speed": 0.15,
+                    "max_speed": 0.35,
+                    "extent": 0.5
+                  }
                 }
-              ],
-              "model_fx": []
+              ]
             },
             "movement": {
               "follow": {
