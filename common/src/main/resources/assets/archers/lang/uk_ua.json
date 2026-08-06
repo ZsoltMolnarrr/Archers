@@ -77,7 +77,7 @@
   "spell.archers.entangling_roots.name": "Оплітаючі корені",
   "spell.archers.magic_arrow.description": "Випускає магічну стрілу, що пробиває всіх ворогів на своєму шляху, завдаючи {damage} шкоди кожній цілі. Чим довше утримується заклинання, тим сильніший удар і тим далі летить стріла.",
   "spell.archers.magic_arrow.name": "Магічна стріла",
-  "spell.archers.power_shot.description": "Ваші наступні {effect_amplifier_cap} стріл накладають на ціль Мітку мисливця на {effect_duration} секунд, збільшуючи отримувану нею шкоду на {damage_taken}. Сумується до {effect_amplifier_cap} разів.",
+  "spell.archers.power_shot.description": "Ваші наступні {effect_amplifier_cap} стріл накладають на ціль Мітку мисливця на {effect_duration} секунд, збільшуючи отримувану нею шкоду на {effect|archers:hunters_mark}. Сумується до {effect_amplifier_cap} разів.",
   "spell.archers.power_shot.name": "Потужний постріл",
   "spell.archers.rain_of_arrows.description": "Проливає дощ зі стріл над обраною областю протягом 5 секунд. Кожна стріла завдає {damage} шкоди ворогам у радіусі {impact_range} блоків.",
   "spell.archers.rain_of_arrows.name": "Дощ зі стріл",

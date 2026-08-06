@@ -52,7 +52,7 @@
 "item.archers.spell_book/archer": "Пособие лучника",
 
 "spell.archers.power_shot.name": "Мощный выстрел",
-"spell.archers.power_shot.description": "Пассивный навык: стрелы наносят повышенный урон по цели с Меткой охотника на {damage_taken} ед. в течение {effect_duration} секунд, суммируясь до {effect_amplifier} раз.",
+"spell.archers.power_shot.description": "Пассивный навык: стрелы наносят повышенный урон по цели с Меткой охотника на {effect|archers:hunters_mark} ед. в течение {effect_duration} секунд, суммируясь до {effect_amplifier} раз.",
 "effect.archers.hunters_mark": "Помеченный",
 "effect.archers.hunters_mark.description": "Повышает урон, получаемый со всех источников.",
 

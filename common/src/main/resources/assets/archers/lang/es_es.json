@@ -45,7 +45,7 @@
   "item.archers.spell_book/archer": "Manual de Arquería",
 
   "spell.archers.power_shot.name": "Disparo Potente",
-  "spell.archers.power_shot.description": "Las flechas infligen la Marca del Cazador al objetivo durante {effect_duration} segundos, aumentando el daño recibido en un {damage_taken}, acumulándose hasta {effect_amplifier} veces.",
+  "spell.archers.power_shot.description": "Las flechas infligen la Marca del Cazador al objetivo durante {effect_duration} segundos, aumentando el daño recibido en un {effect|archers:hunters_mark}, acumulándose hasta {effect_amplifier} veces.",
   "effect.archers.hunters_mark": "Marcado",
   "effect.archers.hunters_mark.description": "Aumenta el daño recibido de todas las fuentes en un 5%%",
 

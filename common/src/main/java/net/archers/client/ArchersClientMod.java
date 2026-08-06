@@ -13,7 +13,6 @@ import net.archers.item.Quivers;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.render.CustomModels;
-import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.rpg_series.item.Armor;
 
 import java.util.List;
@@ -25,13 +24,6 @@ public class ArchersClientMod {
         CustomModelStatusEffect.register(ArcherEffects.ENTANGLING_ROOTS.effect, new RootsRenderer());
 
         ArchersTooltip.init();
-
-        SpellTooltip.addDescriptionMutator(Identifier.of(ArchersMod.ID, "power_shot"), (args) -> {
-            var description = args.description();
-            var huntersMarkPercent = SpellTooltip.percent(ArcherEffects.HUNTERS_MARK.config().firstModifier().value);
-            description = description.replace(SpellTooltip.placeholder("damage_taken"), huntersMarkPercent);
-            return description;
-        });
 
         registerArmorRenderer(ArcherArmors.archerArmorSet_T1, ArcherArmorRenderer::archer);
         registerArmorRenderer(ArcherArmors.archerArmorSet_T2, ArcherArmorRenderer::ranger);

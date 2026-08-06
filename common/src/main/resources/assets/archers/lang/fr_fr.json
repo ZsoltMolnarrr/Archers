@@ -62,7 +62,7 @@
   "item.archers.spell_scroll/archer": "Parchemin d’archerie",
 
   "spell.archers.power_shot.name": "Tir puissant",
-  "spell.archers.power_shot.description": "Vos {effect_amplifier_cap} prochaines flèches marquent la cible avec la Marque du chasseur pendant {effect_duration} secondes, augmentant les dégâts subis de {damage_taken}, cumulable jusqu’à {effect_amplifier_cap} fois.",
+  "spell.archers.power_shot.description": "Vos {effect_amplifier_cap} prochaines flèches marquent la cible avec la Marque du chasseur pendant {effect_duration} secondes, augmentant les dégâts subis de {effect|archers:hunters_mark}, cumulable jusqu’à {effect_amplifier_cap} fois.",
   "effect.archers.hunters_mark_stash": "Tir puissant",
   "effect.archers.hunters_mark_stash.description": "Le prochain tir applique la Marque du chasseur",
   "effect.archers.hunters_mark": "Marqué",

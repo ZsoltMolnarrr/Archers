@@ -76,7 +76,7 @@
   "spell.archers.entangling_roots.name": "Raíces Enredadoras",
   "spell.archers.magic_arrow.description": "Dispara una flecha mágica que atraviesa a todos los enemigos en su camino, infligiendo {damage} de daño a cada uno.",
   "spell.archers.magic_arrow.name": "Flecha Mágica",
-  "spell.archers.power_shot.description": "Tus próximas {effect_amplifier} flechas marcan al objetivo con Marca del Cazador durante {effect_duration} segundos, aumentando el daño que recibe en {damage_taken}, acumulándose hasta {effect_amplifier} veces.",
+  "spell.archers.power_shot.description": "Tus próximas {effect_amplifier} flechas marcan al objetivo con Marca del Cazador durante {effect_duration} segundos, aumentando el daño que recibe en {effect|archers:hunters_mark}, acumulándose hasta {effect_amplifier} veces.",
   "spell.archers.power_shot.name": "Disparo Potente",
   "spell.archers.rain_of_arrows.description": "Hace llover flechas sobre el área objetivo durante 5 segundos, infligiendo {damage} de daño a cada enemigo dentro de {impact_range} bloques.",
   "spell.archers.rain_of_arrows.name": "Lluvia de Flechas",

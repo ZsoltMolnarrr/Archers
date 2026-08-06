@@ -53,7 +53,7 @@
   "item.archers.spell_book/archer.spell_binding.description": "Manual dos Arqueiros, que usam armas de longo alcance e habilidades de arqueria para derrotar inimigos à distância\n- Pontos fortes: Causar alto dano à distância e manter a mobilidade\n- Pontos fracos: Inimigos com armadura pesada\n- Equipamento: Armadura moderada",
   "item.archers.spell_scroll/archer": "Pergaminho de Arqueria",
   "spell.archers.power_shot.name": "Tiro poderoso",
-  "spell.archers.power_shot.description": "Suas próximas {effect_amplifier_cap} flechas aplicam a Marca do Caçador no alvo por {effect_duration} segundos, aumentando o dano recebido em {damage_taken}, acumulando até {effect_amplifier_cap} vezes.",
+  "spell.archers.power_shot.description": "Suas próximas {effect_amplifier_cap} flechas aplicam a Marca do Caçador no alvo por {effect_duration} segundos, aumentando o dano recebido em {effect|archers:hunters_mark}, acumulando até {effect_amplifier_cap} vezes.",
   "effect.archers.hunters_mark_stash": "Tiro Poderoso",
   "effect.archers.hunters_mark_stash.description": "O próximo tiro aplica a Marca do Caçador",
   "effect.archers.hunters_mark": "Marcado",

@@ -62,7 +62,7 @@
   "item.archers.spell_scroll/archer": "弓术卷轴",
 
   "spell.archers.power_shot.name": "强劲射击",
-  "spell.archers.power_shot.description": "你的下{effect_amplifier_cap}支箭会对目标施加{effect_duration}秒的猎人标记，使其受到的伤害增加{damage_taken}，可堆叠{effect_amplifier_cap}层。",
+  "spell.archers.power_shot.description": "你的下{effect_amplifier_cap}支箭会对目标施加{effect_duration}秒的猎人标记，使其受到的伤害增加{effect|archers:hunters_mark}，可堆叠{effect_amplifier_cap}层。",
   "effect.archers.hunters_mark_stash": "强劲射击",
   "effect.archers.hunters_mark_stash.description": "下一次射击施加猎人标记",
   "effect.archers.hunters_mark": "猎人标记",

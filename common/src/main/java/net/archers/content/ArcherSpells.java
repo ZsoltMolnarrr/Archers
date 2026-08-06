@@ -14,7 +14,7 @@ import net.spell_engine.api.spell.fx.ParticleGroup;
 import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
 import net.spell_engine.api.spell.fx.ParticleGroupBuilder.Batches;
 import net.spell_engine.api.spell.fx.Sound;
-import net.spell_engine.client.gui.SpellTooltip;
+import net.spell_engine.api.spell.tooltip.TooltipTokens;
 import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.fx.SpellEngineSounds;
@@ -41,14 +41,13 @@ public class ArcherSpells {
         }
     }
     public record Entry(Identifier id, Spell spell, String title, String description,
-                        @Nullable SpellTooltip.DescriptionMutator mutator,
                         @Nullable List<Object> weaponGroups,
                         @Nullable Book book) {
         public Entry(Identifier id, Spell spell, String title, String description) {
-            this(id, spell, title, description, null, List.of(), null);
+            this(id, spell, title, description, List.of(), null);
         }
         public Entry book(Book book) {
-            return new Entry(id, spell, title, description, mutator, weaponGroups, book);
+            return new Entry(id, spell, title, description, weaponGroups, book);
         }
     }
     public static final List<Entry> entries = new ArrayList<>();
@@ -125,7 +124,9 @@ public class ArcherSpells {
     private static Entry power_shot() {
         var id = Identifier.of(ArchersMod.ID, "power_shot");
         var name = "Power Shot";
-        var description = "Your next {effect_amplifier_cap} arrows inflict the target with Hunter's Mark for {effect_duration} seconds, increasing its damage taken by {damage_taken}, stacking up to {effect_amplifier_cap} times.";
+        var description = "Your next {effect_amplifier_cap} arrows inflict the target with Hunter's Mark for {effect_duration} seconds, increasing its damage taken by "
+                + TooltipTokens.effect(ArcherEffects.HUNTERS_MARK.id)
+                + ", stacking up to {effect_amplifier_cap} times.";
         var spell = activeSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 0;
@@ -410,7 +411,7 @@ public class ArcherSpells {
     private static Entry spirit_wolf() {
         var id = Identifier.of(ArchersMod.ID, "spirit_wolf");
         var name = "Spirit Wolf Pack";
-        var description = "Summons a pack of " + SpellTooltip.placeholder(SpellTooltip.summonCountToken) + " Spirit Wolves to fight by your side for " + SpellTooltip.placeholder(SpellTooltip.summonDurationToken) + " sec, empowered by your Ranged Damage.";
+        var description = "Summons a pack of " + TooltipTokens.placeholder(TooltipTokens.summonCountToken) + " Spirit Wolves to fight by your side for " + TooltipTokens.placeholder(TooltipTokens.summonDurationToken) + " sec, empowered by your Ranged Damage.";
         var spell = activeSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 16;

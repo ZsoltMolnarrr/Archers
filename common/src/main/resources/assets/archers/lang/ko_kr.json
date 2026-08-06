@@ -47,7 +47,7 @@
   "item.archers.spell_book/archer": "궁술 교범",
 
   "spell.archers.power_shot.name": "강력한 사격",
-  "spell.archers.power_shot.description": "패시브 기술: 화살이 {effect_duration}초 동안 대상에게 사냥꾼의 표식을 부여하여 받는 피해를 {damage_taken} 증가시키고, 최대 {effect_amplifier}번까지 중첩됩니다.",
+  "spell.archers.power_shot.description": "패시브 기술: 화살이 {effect_duration}초 동안 대상에게 사냥꾼의 표식을 부여하여 받는 피해를 {effect|archers:hunters_mark} 증가시키고, 최대 {effect_amplifier}번까지 중첩됩니다.",
   "effect.archers.hunters_mark": "표식됨",
   "effect.archers.hunters_mark.description": "모든 원천으로부터 받는 피해를 5%% 증가시킵니다.",
 
