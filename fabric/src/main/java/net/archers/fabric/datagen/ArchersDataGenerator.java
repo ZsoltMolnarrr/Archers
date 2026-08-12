@@ -1,4 +1,4 @@
-package net.archers.datagen;
+package net.archers.fabric.datagen;
 
 import net.archers.ArchersMod;
 import net.archers.content.ArcherSounds;

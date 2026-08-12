@@ -6,7 +6,6 @@ import net.archers.ArchersMod;
 import net.archers.client.armor.ArcherArmorRenderer;
 import net.archers.client.effect.HuntersMarkRenderer;
 import net.archers.client.effect.RootsRenderer;
-import net.archers.client.util.ArchersTooltip;
 import net.archers.effect.ArcherEffects;
 import net.archers.item.ArcherArmors;
 import net.archers.item.Quivers;
@@ -23,7 +22,8 @@ public class ArchersClientMod {
         CustomModelStatusEffect.register(ArcherEffects.HUNTERS_MARK.effect, new HuntersMarkRenderer());
         CustomModelStatusEffect.register(ArcherEffects.ENTANGLING_ROOTS.effect, new RootsRenderer());
 
-        ArchersTooltip.init();
+        // Archers' custom tooltip lines (ArchersTooltip.addLines) are wired per-platform from each client
+        // entrypoint's native tooltip event (Fabric ItemTooltipCallback / NeoForge ItemTooltipEvent).
 
         registerArmorRenderer(ArcherArmors.archerArmorSet_T1, ArcherArmorRenderer::archer);
         registerArmorRenderer(ArcherArmors.archerArmorSet_T2, ArcherArmorRenderer::ranger);

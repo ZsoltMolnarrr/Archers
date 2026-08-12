@@ -1,19 +1,19 @@
 package net.archers.item.misc;
 
-import net.archers.item.Group;
 import net.archers.item.Quivers;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.spell_engine.Platform;
 
 import java.util.ArrayList;
 
 public class Misc {
     public record Entry(Identifier id, Item item) { }
-    private static final ArrayList<Entry> ENTRIES = new ArrayList<>();
+    /// Public so each loader's entrypoint can add these to the Archers creative tab (see the per-platform
+    /// BuildCreativeModeTabContentsEvent / ItemGroupEvents registration).
+    public static final ArrayList<Entry> ENTRIES = new ArrayList<>();
     private static Entry add(Identifier id, Item item) {
         var entry = new Entry(id, item);
         ENTRIES.add(entry);
@@ -25,12 +25,8 @@ public class Misc {
         for (var entry: ENTRIES) {
             Registry.register(Registries.ITEM, entry.id, entry.item);
         }
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-            for (var entry: ENTRIES) {
-                content.add(entry.item);
-            }
-        });
-        if (FabricLoader.getInstance().isModLoaded("bundleapi")) {
+        // Creative-tab placement is registered per-platform from each loader's entrypoint.
+        if (Platform.util().isModLoaded("bundleapi")) {
             Quivers.register();
         }
     }

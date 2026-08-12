@@ -1,4 +1,4 @@
-package net.archers.datagen;
+package net.archers.fabric.datagen;
 
 import net.archers.block.ArcherBlocks;
 import net.archers.item.ArcherArmors;

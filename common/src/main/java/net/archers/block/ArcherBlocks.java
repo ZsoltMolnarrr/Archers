@@ -1,8 +1,6 @@
 package net.archers.block;
 
 import net.archers.ArchersMod;
-import net.archers.item.Group;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
@@ -46,10 +44,7 @@ public class ArcherBlocks {
             Registry.register(Registries.BLOCK, Identifier.of(ArchersMod.ID, entry.name), entry.block);
             Registry.register(Registries.ITEM, Identifier.of(ArchersMod.ID, entry.name), entry.item());
         }
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-            for (var entry : all) {
-                content.add(entry.item());
-            }
-        });
+        // Creative-tab placement (into the Archers group) is registered per-platform from each loader's
+        // entrypoint, iterating ArcherBlocks.all — no Fabric API ItemGroupEvents in common.
     }
 }

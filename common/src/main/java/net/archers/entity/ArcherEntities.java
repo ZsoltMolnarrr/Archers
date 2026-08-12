@@ -58,7 +58,9 @@ public class ArcherEntities {
                     .dimensions(0.8F, 0.925F)
                     .maxTrackingRange(64)
                     .trackingTickInterval(3)
-                    .build(),
+                    // Vanilla build(String id) — the no-arg build() is a Fabric API interface-injected
+                    // default (FabricEntityType.Builder) absent on NeoForge at runtime.
+                    .build("spirit_wolf"),
             spiritWolfDefaults()));
 
     // Default base attributes per summon — seeded into Archers' OWN config file

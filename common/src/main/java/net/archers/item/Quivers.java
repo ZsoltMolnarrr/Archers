@@ -4,7 +4,6 @@ import com.github.theredbrain.bundleapi.BundleAPI;
 import com.github.theredbrain.bundleapi.component.type.CustomBundleContentsComponent;
 import com.github.theredbrain.bundleapi.item.CustomBundleItem;
 import net.archers.ArchersMod;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.LoreComponent;
 import net.minecraft.item.Item;
@@ -59,10 +58,7 @@ public class Quivers {
         for(var entry: entries) {
             Registry.register(Registries.ITEM, entry.id(), entry.item());
         }
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
-            for(var entry: entries) {
-                content.add(entry.item());
-            }
-        });
+        // Creative-tab placement (COMBAT/Archers group) is registered per-platform from each loader's
+        // entrypoint, iterating Quivers.entries (guarded by the bundleapi check) — no Fabric API here.
     }
 }

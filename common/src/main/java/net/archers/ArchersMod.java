@@ -14,18 +14,18 @@ import net.archers.content.ArcherSounds;
 import net.archers.village.ArcherVillagers;
 import net.fabric_extras.structure_pool.api.StructurePoolAPI;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
-import net.fabricmc.fabric.api.item.v1.EnchantmentEvents;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.util.TriState;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.CrossbowItem;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.spell_engine.Platform;
+import net.spell_engine.PlatformEvents;
 import net.spell_engine.api.config.ConfigFile;
+import net.spell_engine.api.util.TriState;
 import net.tiny_config.ConfigManager;
 
 public class ArchersMod {
@@ -63,23 +63,25 @@ public class ArchersMod {
         itemConfig.refresh();
         effectsConfig.refresh();
         villagesConfig.refresh();
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        if (Platform.util().isDevelopmentEnvironment()) {
             // Make sure items are enabled for datagen
             tweaksConfig.value.ignore_items_required_mods = true;
         }
-        if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
+        if (!Platform.util().isModLoaded("lithostitched")) {
             // Only inject the village if the Lithostitched is not present
             StructurePoolAPI.injectAll(ArchersMod.villagesConfig.value);
         }
 
-        // Apply some of the tweaks
+        // Apply some of the tweaks. Enchant-allow is routed through SpellEngine's loader-neutral
+        // PlatformEvents.onAllowEnchanting (Fabric: EnchantmentEvents; NeoForge: IItemExtension mixin),
+        // using SpellEngine's TriState — no Fabric API EnchantmentEvents in common.
         if (tweaksConfig.value.enable_infinity_for_crossbows) {
-            EnchantmentEvents.ALLOW_ENCHANTING.register((enchantment, target, enchantingContext) -> {
+            PlatformEvents.onAllowEnchanting((enchantment, target) -> {
                 if (target.getItem() instanceof CrossbowItem &&
                         enchantment.getKey().get().getValue().equals(Enchantments.INFINITY.getValue())) {
-                    return TriState.TRUE;
+                    return TriState.ALLOW;
                 }
-                return TriState.DEFAULT;
+                return TriState.PASS;
             });
         }
     }
@@ -99,7 +101,7 @@ public class ArchersMod {
     }
 
     public static void registerItems() {
-        Group.ARCHERS = FabricItemGroup.builder()
+        Group.ARCHERS = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
                 .icon(() -> new ItemStack(ArcherArmors.archerArmorSet_T2.head))
                 .displayName(Text.translatable("itemGroup." + ID + ".general"))
                 .build();
@@ -113,10 +115,6 @@ public class ArchersMod {
     public static void registerEffects() {
         ArcherEffects.register(effectsConfig.value);
         effectsConfig.save();
-    }
-
-    public static void registerPOI() {
-        ArcherVillagers.registerPOI();
     }
 
     public static void registerVillagers() {

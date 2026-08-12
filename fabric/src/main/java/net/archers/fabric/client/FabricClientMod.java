@@ -5,10 +5,12 @@ import net.archers.client.ArchersClientMod;
 import net.archers.client.compat.AccessoriesRenderCompat;
 import net.archers.client.entity.DirewolfEntityModel;
 import net.archers.client.entity.DirewolfEntityRenderer;
+import net.archers.client.util.ArchersTooltip;
 import net.archers.entity.ArcherEntities;
 import net.archers.fabric.client.trinkets.TrinketsRenderCompat;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.RenderLayer;
@@ -27,6 +29,10 @@ public final class FabricClientMod implements ClientModInitializer {
 
         // Fabric-specific render layer registration
         BlockRenderLayerMap.INSTANCE.putBlock(ArcherBlocks.WORKBENCH.block(), RenderLayer.getCutout());
+
+        // Archers' custom tooltip lines — Fabric API (loader-specific; NeoForge uses ItemTooltipEvent).
+        ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, lines) ->
+                ArchersTooltip.addLines(stack, lines));
 
         var slotCompat = FabricCompatFeatures.initSlotCompat();
         if (Objects.equals(slotCompat, "trinkets")) {

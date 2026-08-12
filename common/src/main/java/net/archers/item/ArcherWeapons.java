@@ -2,7 +2,7 @@ package net.archers.item;
 
 import net.archers.ArchersMod;
 import net.fabric_extras.ranged_weapon.api.RangedConfig;
-import net.fabricmc.loader.api.FabricLoader;
+import net.spell_engine.Platform;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -106,21 +106,21 @@ public class ArcherWeapons {
     // MARK: Register
 
     public static void register(Map<String, RangedConfig> rangedConfig, Map<String, WeaponConfig> meleeConfig) {
-        if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_END)) {
-            var aeterniumRepair = ingredient("betterend:aeternium_ingot", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
-            var crystalRepair = ingredient("betterend:crystal_shards", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
+        if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(BETTER_END)) {
+            var aeterniumRepair = ingredient("betterend:aeternium_ingot", Platform.util().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
+            var crystalRepair = ingredient("betterend:crystal_shards", Platform.util().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
             addMelee(Weapons.spearWithSkill(NAMESPACE, "aeternium_spear", Equipment.Tier.TIER_4, aeterniumRepair));
             addRanged(RangedWeapons.shortBow(NAMESPACE, "crystal_shortbow", Equipment.Tier.TIER_4, crystalRepair));
             addRanged(RangedWeapons.longBow(NAMESPACE, "crystal_longbow", Equipment.Tier.TIER_4, crystalRepair));
         }
-        if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_NETHER)) {
-            var rubyRepair = ingredient("betternether:nether_ruby", FabricLoader.getInstance().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
+        if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(BETTER_NETHER)) {
+            var rubyRepair = ingredient("betternether:nether_ruby", Platform.util().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
             addMelee(Weapons.spearWithSkill(NAMESPACE, "ruby_spear", Equipment.Tier.TIER_4, rubyRepair));
             addRanged(RangedWeapons.rapidCrossbow(NAMESPACE, "ruby_rapid_crossbow", Equipment.Tier.TIER_4, rubyRepair));
             addRanged(RangedWeapons.heavyCrossbow(NAMESPACE, "ruby_heavy_crossbow", Equipment.Tier.TIER_4, rubyRepair));
         }
-        if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(AETHER)) {
-            var aetherRepair = ingredient("aether:ambrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
+        if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(AETHER)) {
+            var aetherRepair = ingredient("aether:ambrosium_shard", Platform.util().isModLoaded(AETHER), Items.NETHERITE_INGOT);
             addMelee(Weapons.spearWithSkill(NAMESPACE, "aether_spear", Equipment.Tier.TIER_4, aetherRepair)
                     .loot(Equipment.LootProperties.of("aether")));
             addRanged(RangedWeapons.longBow(NAMESPACE, "aether_longbow", Equipment.Tier.TIER_4, aetherRepair).loot(-1, "aether"));
