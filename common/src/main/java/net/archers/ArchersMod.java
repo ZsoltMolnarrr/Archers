@@ -24,7 +24,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.spell_engine.Platform;
 import net.spell_engine.PlatformEvents;
-import net.spell_engine.api.config.ConfigFile;
+import net.spell_engine.rpg_series.config.ConfigFile;
 import net.spell_engine.api.util.TriState;
 import net.tiny_config.ConfigManager;
 

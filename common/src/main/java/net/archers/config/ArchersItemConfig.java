@@ -1,8 +1,8 @@
 package net.archers.config;
 
 import net.fabric_extras.ranged_weapon.api.RangedConfig;
-import net.spell_engine.api.config.ArmorSetConfig;
-import net.spell_engine.api.config.WeaponConfig;
+import net.spell_engine.rpg_series.config.ArmorSetConfig;
+import net.spell_engine.rpg_series.config.WeaponConfig;
 
 import java.util.LinkedHashMap;
 
