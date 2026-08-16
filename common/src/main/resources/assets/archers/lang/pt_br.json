@@ -77,5 +77,10 @@
   "advancements.rpg_series.spell_cast_archer_book.title": "Treinamento de Arqueria",
   "advancements.rpg_series.spell_cast_archer_book.description": "Use uma habilidade do Manual de Arqueria",
   "advancements.rpg_series.trade_with_archery_artisan.title": "Venda de Arqueria",
-  "advancements.rpg_series.trade_with_archery_artisan.description": "Compre um item de um aldeão Artesão de Arqueria"
+  "advancements.rpg_series.trade_with_archery_artisan.description": "Compre um item de um aldeão Artesão de Arqueria",
+  "entity.archers.spirit_wolf": "Lobo Espiritual",
+  "spell.archers.rain_of_arrows.description": "Faz chover flechas sobre a área alvo por 5 segundos, cada uma causando {damage} de dano aos inimigos dentro de {impact_range} blocos.",
+  "spell.archers.rain_of_arrows.name": "Chuva de Flechas",
+  "spell.archers.spirit_wolf.description": "Invoca uma matilha de {summon_count} Lobos Espirituais para lutar ao seu lado por {summon_duration} seg, potencializados pelo seu Dano de Ataque à Distância.",
+  "spell.archers.spirit_wolf.name": "Matilha de Lobos Espirituais"
 }

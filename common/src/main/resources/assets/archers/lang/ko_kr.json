@@ -3,15 +3,12 @@
   "item.archers.auto_fire_hook.description_1": "자동으로 장전된 화살을 발사합니다.",
   "item.archers.auto_fire_hook.description_2": "모루에서 활 장비에 적용할 수 있습니다.",
   "item.ranged_weapon.pull_time": "%1$s초 당김 시간",
-
   "block.archers.archers_workbench": "궁수 작업대",
   "block.archers.archers_workbench.hint": "궁수 장인 주민을 위한 작업대입니다.",
   "entity.minecraft.villager.archery_artisan": "궁수 장인",
   "entity.minecraft.villager.archers.archery_artisan": "궁수 장인",
   "entity.minecraft.villager.archers:archery_artisan": "궁수 장인",
-
   "item.archers.auto_fire_hook": "자동 발사 갈고리",
-
   "item.archers.flint_spear": "부싯돌 창",
   "item.archers.iron_spear": "철 창",
   "item.archers.golden_spear": "금 창",
@@ -19,17 +16,14 @@
   "item.archers.netherite_spear": "네더라이트 창",
   "item.archers.aeternium_spear": "에테르늄 창",
   "item.archers.ruby_spear": "루비 창",
-
   "item.archers.archer_armor_head": "궁수 후드",
   "item.archers.archer_armor_chest": "궁수 조끼",
   "item.archers.archer_armor_legs": "궁수 바지",
   "item.archers.archer_armor_feet": "궁수 부츠",
-
   "item.archers.ranger_armor_head": "레인저 후드",
   "item.archers.ranger_armor_chest": "레인저 조끼",
   "item.archers.ranger_armor_legs": "레인저 바지",
   "item.archers.ranger_armor_feet": "레인저 부츠",
-
   "item.archers.composite_longbow": "복합 장궁",
   "item.archers.mechanic_shortbow": "기계식 단궁",
   "item.archers.royal_longbow": "왕의 장궁",
@@ -43,37 +37,27 @@
   "item.archers.crystal_longbow": "수정 장궁",
   "item.archers.ruby_rapid_crossbow": "루비 빠른 쇠뇌",
   "item.archers.ruby_heavy_crossbow": "루비 무거운 쇠뇌",
-
   "item.archers.spell_book/archer": "궁술 교범",
-
   "spell.archers.power_shot.name": "강력한 사격",
   "spell.archers.power_shot.description": "패시브 기술: 화살이 {effect_duration}초 동안 대상에게 사냥꾼의 표식을 부여하여 받는 피해를 {effect|archers:hunters_mark} 증가시키고, 최대 {effect_amplifier}번까지 중첩됩니다.",
   "effect.archers.hunters_mark": "표식됨",
   "effect.archers.hunters_mark.description": "모든 원천으로부터 받는 피해를 5%% 증가시킵니다.",
-
   "spell.archers.entangling_roots.name": "얽히는 뿌리",
   "spell.archers.entangling_roots.description": "주변 지역에 뿌리를 소환하여 {cloud_duration}초 동안 적의 이동 속도를 늦춥니다.",
   "effect.archers.entangling_roots": "얽히는 뿌리",
   "effect.archers.entangling_roots.description": "이동 속도를 감소시킵니다.",
-
   "spell.archers.barrage.name": "집중 사격",
   "spell.archers.barrage.description": "짧은 시간 안에 여러 화살을 발사합니다.",
-
   "spell.archers.magic_arrow.name": "마법 화살",
   "spell.archers.magic_arrow.description": "마법 화살을 발사하여 경로상의 모든 적을 관통하고 각 대상에게 {damage}의 피해를 줍니다.",
-
   "advancements.rpg_series.path_choose_archer.title": "궁술의 길",
   "advancements.rpg_series.path_choose_archer.description": "궁술 교범을 작성하세요",
-
   "advancements.rpg_series.spell_novice_archer.title": "치명적인 사격",
   "advancements.rpg_series.spell_novice_archer.description": "첫 번째 궁술 기술을 얻으세요",
-
   "advancements.rpg_series.spell_master_archer.title": "탄도 전문가",
   "advancements.rpg_series.spell_master_archer.description": "궁술 교범을 완성하세요",
-
   "advancements.rpg_series.obtain_arrow.title": "궁수의 길",
   "advancements.rpg_series.obtain_arrow.description": "화살을 얻으세요",
-
   "item.archers.small_quiver": "화살통",
   "item.archers.medium_quiver": "사냥꾼의 화살통",
   "item.archers.large_quiver": "전투용 화살통",
@@ -93,5 +77,10 @@
   "advancements.rpg_series.spell_cast_archer_book.title": "궁술 훈련",
   "advancements.rpg_series.spell_cast_archer_book.description": "궁술 교범에서 기술 사용하기",
   "advancements.rpg_series.trade_with_archery_artisan.title": "궁술 판매",
-  "advancements.rpg_series.trade_with_archery_artisan.description": "궁수 장인 주민에게서 아이템 구매하기"
+  "advancements.rpg_series.trade_with_archery_artisan.description": "궁수 장인 주민에게서 아이템 구매하기",
+  "entity.archers.spirit_wolf": "정령 늑대",
+  "spell.archers.rain_of_arrows.description": "지정한 지역에 5초 동안 화살의 비를 내려, {impact_range}블록 이내의 적에게 각각 {damage}의 피해를 입힙니다.",
+  "spell.archers.rain_of_arrows.name": "화살의 비",
+  "spell.archers.spirit_wolf.description": "{summon_count}마리의 정령 늑대 무리를 소환하여 {summon_duration}초 동안 함께 싸우며, 당신의 원거리 피해량에 비례해 강화됩니다.",
+  "spell.archers.spirit_wolf.name": "정령 늑대 무리"
 }

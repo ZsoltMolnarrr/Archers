@@ -18,7 +18,7 @@
   "effect.archers.hunters_mark": "Marcado",
   "effect.archers.hunters_mark.description": "Aumenta el daño recibido de todas las fuentes",
   "effect.archers.hunters_mark_stash": "Disparo Potente",
-  "effect.archers.hunters_mark_stash.description": "El próximo disparo aplica Marca del Cazador" ,
+  "effect.archers.hunters_mark_stash.description": "El próximo disparo aplica Marca del Cazador",
   "entity.minecraft.villager.archers.archery_artisan": "Artesano Arquero",
   "entity.minecraft.villager.archers:archery_artisan": "Artesano Arquero",
   "entity.minecraft.villager.archery_artisan": "Artesano Arquero",
@@ -81,5 +81,6 @@
   "spell.archers.rain_of_arrows.description": "Hace llover flechas sobre el área objetivo durante 5 segundos, infligiendo {damage} de daño a cada enemigo dentro de {impact_range} bloques.",
   "spell.archers.rain_of_arrows.name": "Lluvia de Flechas",
   "spell.archers.spirit_wolf.description": "Invoca una manada de {summon_count} Lobos Espirituales para luchar a tu lado durante {summon_duration} seg, potenciados por tu Daño a Distancia.",
-  "spell.archers.spirit_wolf.name": "Manada de Lobos Espirituales"
+  "spell.archers.spirit_wolf.name": "Manada de Lobos Espirituales",
+  "entity.archers.spirit_wolf": "Lobo Espiritual"
 }

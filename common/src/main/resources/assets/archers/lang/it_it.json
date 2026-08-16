@@ -3,33 +3,27 @@
   "item.archers.auto_fire_hook.description_1": "Rilascia automaticamente le frecce.",
   "item.archers.auto_fire_hook.description_2": "Può essere applicato alle armi a distanza.",
   "item.ranged_weapon.pull_time": "%1$s sec per caricare",
-
   "block.archers.archers_workbench": "Banco da arcieria",
   "block.archers.archers_workbench.hint": "Postazione da lavoro per i villici.",
   "entity.minecraft.villager.archery_artisan": "Fabbricante d'archi",
   "entity.minecraft.villager.archers.archery_artisan": "Fabbricante d'archi",
   "entity.minecraft.villager.archers:archery_artisan": "Fabbricante d'archi",
-
   "item.archers.auto_fire_hook": "Colpo automatico",
-
   "item.archers.flint_spear": "Lancia di selce",
   "item.archers.iron_spear": "Lancia di ferro",
   "item.archers.golden_spear": "Lancia d'oro",
   "item.archers.diamond_spear": "Lancia di diamante",
   "item.archers.netherite_spear": "Lancia di netherite",
-  "item.archers.aeternium_spear": "Lancia di aeternium",  
-  "item.archers.ruby_spear": "Lancia di rubino",  
-
+  "item.archers.aeternium_spear": "Lancia di aeternium",
+  "item.archers.ruby_spear": "Lancia di rubino",
   "item.archers.archer_armor_head": "Cappuccio da arciere",
   "item.archers.archer_armor_chest": "Tunica da arciere",
   "item.archers.archer_armor_legs": "Pantaloni da arciere",
   "item.archers.archer_armor_feet": "Stivali da arciere",
-
   "item.archers.ranger_armor_head": "Cappuccio da tiratore",
   "item.archers.ranger_armor_chest": "Tunica da tiratore",
   "item.archers.ranger_armor_legs": "Pantaloni da tiratore",
   "item.archers.ranger_armor_feet": "Stivali da tiratore",
-
   "item.archers.composite_longbow": "Arco composito",
   "item.archers.mechanic_shortbow": "Arco corto meccanico",
   "item.archers.royal_longbow": "Arco lungo raffinato",
@@ -42,35 +36,51 @@
   "item.archers.crystal_shortbow": "Arco corto di cristallo",
   "item.archers.crystal_longbow": "Arco lungo di cristallo",
   "item.archers.ruby_rapid_crossbow": "Balestra leggera di rubino",
-  "item.archers.ruby_heavy_crossbow": "Balestra pesante di rubino",  
-
+  "item.archers.ruby_heavy_crossbow": "Balestra pesante di rubino",
   "item.archers.spell_book/archer": "Manuale di tiro",
-
   "spell.archers.power_shot.name": "Colpo potente",
   "spell.archers.power_shot.description": "Scocca una potente freccia e infligge al bersaglio il Marchio del cacciatore per {effect_duration} secondi, aumentandone i danni subiti del 5%, accumulandosi fino a {effect_amplifier} volte.",
   "effect.archers.hunters_mark": "Marchiato",
-  "effect.archers.hunters_mark.description": "Aumenta i danni di qualsiasi tipo ricevuti del 5%%",  
-
+  "effect.archers.hunters_mark.description": "Aumenta i danni di qualsiasi tipo ricevuti del 5%%",
   "spell.archers.entangling_roots.name": "Radici",
   "spell.archers.entangling_roots.description": "Evoca radici che germogliano dal terreno nell'area vicina, rallentando i nemici per {cloud_duration} secondi.",
   "effect.archers.entangling_roots": "Impigliato",
-  "effect.archers.entangling_roots.description": "Riduce la velocità di movimento",  
-  
+  "effect.archers.entangling_roots.description": "Riduce la velocità di movimento",
   "spell.archers.barrage.name": "Sbarramento",
   "spell.archers.barrage.description": "Spara frecce multiple in rapida successione.",
-  
   "spell.archers.magic_arrow.name": "Freccia magica",
   "spell.archers.magic_arrow.description": "Scocca una freccia magica che trafigge tutti i nemici sul suo cammino, infliggendo {damage} danni a ciascun bersaglio.",
-
   "advancements.rpg_series.path_choose_archer.title": "Via dell'arciere",
   "advancements.rpg_series.path_choose_archer.description": "Crea un manuale di tiro",
-
   "advancements.rpg_series.spell_novice_archer.title": "Colpo letale",
   "advancements.rpg_series.spell_novice_archer.description": "Ottieni la tua prima abilità da arciere",
-
   "advancements.rpg_series.spell_master_archer.title": "Esperto balistico",
   "advancements.rpg_series.spell_master_archer.description": "Completa il manuale di tiro",
-
   "advancements.rpg_series.obtain_arrow.title": "Via della freccia",
-  "advancements.rpg_series.obtain_arrow.description": "Ottieni una freccia"
+  "advancements.rpg_series.obtain_arrow.description": "Ottieni una freccia",
+  "advancements.rpg_series.spell_cast_archer_book.description": "Usa un'abilità dal Manuale di tiro",
+  "advancements.rpg_series.spell_cast_archer_book.title": "Addestramento di tiro",
+  "advancements.rpg_series.trade_with_archery_artisan.description": "Acquista un oggetto da un Villico Fabbricante d'archi",
+  "advancements.rpg_series.trade_with_archery_artisan.title": "Saldi dell'arciere",
+  "effect.archers.hunters_mark_stash": "Colpo potente",
+  "effect.archers.hunters_mark_stash.description": "Il prossimo colpo applica il Marchio del cacciatore",
+  "entity.archers.spirit_wolf": "Lupo Spirituale",
+  "item.archers.aether_heavy_crossbow": "Ballista di Valkyrie",
+  "item.archers.aether_longbow": "Arco d'argento dell'Acropolis",
+  "item.archers.aether_rapid_crossbow": "Balestra Celeste",
+  "item.archers.aether_spear": "Lancia Sacra",
+  "item.archers.large_quiver": "Faretra da Battaglia",
+  "item.archers.medium_quiver": "Faretra da Caccia",
+  "item.archers.netherite_ranger_armor_chest": "Tunica da tiratore di netherite",
+  "item.archers.netherite_ranger_armor_feet": "Stivali da tiratore di netherite",
+  "item.archers.netherite_ranger_armor_head": "Cappuccio da tiratore di netherite",
+  "item.archers.netherite_ranger_armor_legs": "Pantaloni da tiratore di netherite",
+  "item.archers.quiver.hint": "Fornisce frecce per il tiro con l'arco, quando equipaggiata.",
+  "item.archers.small_quiver": "Faretra",
+  "item.archers.spell_book/archer.spell_binding.description": "Manuale di tiro degli arcieri, che utilizza armi a distanza e abilità di tiro con l'arco per sconfiggere i nemici da lontano\n- Punti di forza: infliggere danni elevati a distanza e mantenere la mobilità\n- Punti deboli: nemici pesantemente corazzati\n- Equipaggiamento: corazza moderata",
+  "item.archers.spell_scroll/archer": "Pergamena di tiro",
+  "spell.archers.rain_of_arrows.description": "Fa piovere frecce sull'area bersaglio per 5 secondi, infliggendo ciascuna {damage} danni ai nemici entro {impact_range} blocchi.",
+  "spell.archers.rain_of_arrows.name": "Pioggia di frecce",
+  "spell.archers.spirit_wolf.description": "Evoca un branco di {summon_count} Lupi Spirituali che combattono al tuo fianco per {summon_duration} sec, potenziati dal tuo Danno a Distanza.",
+  "spell.archers.spirit_wolf.name": "Branco di Lupi Spirituali"
 }

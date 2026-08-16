@@ -3,19 +3,16 @@
   "item.archers.auto_fire_hook.description_1": "Relâche automatiquement la flèche encochée.",
   "item.archers.auto_fire_hook.description_2": "Peut être appliqué aux armes à distance sur une enclume.",
   "item.ranged_weapon.pull_time": "Temps de charge : %1$s s",
-
   "block.archers.archers_workbench": "Table d’artisanat d’archerie",
   "block.archers.archers_workbench.hint": "Établi utilisé par les villageois artisans en archerie.",
   "entity.minecraft.villager.archery_artisan": "Artisan en archerie",
   "entity.minecraft.villager.archers.archery_artisan": "Artisan en archerie",
   "entity.minecraft.villager.archers:archery_artisan": "Artisan en archerie",
-
   "item.archers.auto_fire_hook": "Crochet de tir automatique",
   "item.archers.small_quiver": "Carquois",
   "item.archers.medium_quiver": "Carquois de chasse",
   "item.archers.large_quiver": "Carquois de bataille",
   "item.archers.quiver.hint": "Fournit des flèches pour l’archerie lorsqu’il est équipé.",
-
   "item.archers.flint_spear": "Lance en silex",
   "item.archers.iron_spear": "Lance en fer",
   "item.archers.golden_spear": "Lance en or",
@@ -24,22 +21,18 @@
   "item.archers.aeternium_spear": "Lance en Aeternium",
   "item.archers.ruby_spear": "Lance en rubis",
   "item.archers.aether_spear": "Lance sacrée",
-
   "item.archers.archer_armor_head": "Capuche d’archer",
   "item.archers.archer_armor_chest": "Tunique d’archer",
   "item.archers.archer_armor_legs": "Jambières d’archer",
   "item.archers.archer_armor_feet": "Bottes d’archer",
-
   "item.archers.ranger_armor_head": "Capuche de rôdeur",
   "item.archers.ranger_armor_chest": "Tunique de rôdeur",
   "item.archers.ranger_armor_legs": "Jambières de rôdeur",
   "item.archers.ranger_armor_feet": "Bottes de rôdeur",
-
   "item.archers.netherite_ranger_armor_head": "Capuche de rôdeur en Netherite",
   "item.archers.netherite_ranger_armor_chest": "Tunique de rôdeur en Netherite",
   "item.archers.netherite_ranger_armor_legs": "Jambières de rôdeur en Netherite",
   "item.archers.netherite_ranger_armor_feet": "Bottes de rôdeur en Netherite",
-
   "item.archers.composite_longbow": "Grand arc composite",
   "item.archers.mechanic_shortbow": "Arc court mécanique",
   "item.archers.royal_longbow": "Grand arc royal",
@@ -56,44 +49,38 @@
   "item.archers.aether_longbow": "Arc d’argent de l’Acropole",
   "item.archers.aether_rapid_crossbow": "Arbalète céleste",
   "item.archers.aether_heavy_crossbow": "Baliste des Valkyries",
-
   "item.archers.spell_book/archer": "Manuel d’archerie",
   "item.archers.spell_book/archer.spell_binding.description": "Grimoire des archers, utilisant les armes à distance et les compétences d’archerie pour vaincre les ennemis à longue portée\n- Forces : Dégâts élevés à distance et grande mobilité\n- Faiblesses : Ennemis lourdement blindés\n- Équipement : Armure moyenne",
   "item.archers.spell_scroll/archer": "Parchemin d’archerie",
-
   "spell.archers.power_shot.name": "Tir puissant",
   "spell.archers.power_shot.description": "Vos {effect_amplifier_cap} prochaines flèches marquent la cible avec la Marque du chasseur pendant {effect_duration} secondes, augmentant les dégâts subis de {effect|archers:hunters_mark}, cumulable jusqu’à {effect_amplifier_cap} fois.",
   "effect.archers.hunters_mark_stash": "Tir puissant",
   "effect.archers.hunters_mark_stash.description": "Le prochain tir applique la Marque du chasseur",
   "effect.archers.hunters_mark": "Marqué",
   "effect.archers.hunters_mark.description": "Augmente les dégâts subis de toutes les sources",
-
   "spell.archers.entangling_roots.name": "Racines entravantes",
   "spell.archers.entangling_roots.description": "Fait surgir des racines du sol dans la zone proche, ralentissant les ennemis pendant {cloud_duration} secondes.",
   "effect.archers.entangling_roots": "Racines entravantes",
   "effect.archers.entangling_roots.description": "Réduit la vitesse de déplacement",
-
   "spell.archers.barrage.name": "Tir en rafale",
   "spell.archers.barrage.description": "Tire plusieurs flèches en succession rapide.",
-
   "spell.archers.magic_arrow.name": "Flèche magique",
   "spell.archers.magic_arrow.description": "Tire une flèche magique qui transperce tous les ennemis sur sa trajectoire, infligeant {damage} dégâts à chaque cible.",
-
   "advancements.rpg_series.path_choose_archer.title": "Voie de l’archerie",
   "advancements.rpg_series.path_choose_archer.description": "Créer le manuel d’archerie",
-
   "advancements.rpg_series.spell_novice_archer.title": "Tirs létaux",
   "advancements.rpg_series.spell_novice_archer.description": "Obtenir votre première compétence d’archerie",
-
   "advancements.rpg_series.spell_master_archer.title": "Expert en balistique",
   "advancements.rpg_series.spell_master_archer.description": "Compléter le manuel d’archerie",
-
   "advancements.rpg_series.obtain_arrow.title": "Voie de l’archer",
   "advancements.rpg_series.obtain_arrow.description": "Obtenir une flèche",
-
   "advancements.rpg_series.spell_cast_archer_book.title": "Entraînement d’archerie",
   "advancements.rpg_series.spell_cast_archer_book.description": "Utiliser une compétence du manuel d’archerie",
-
   "advancements.rpg_series.trade_with_archery_artisan.title": "Commerce d’archerie",
-  "advancements.rpg_series.trade_with_archery_artisan.description": "Acheter un objet à un artisan en archerie"
+  "advancements.rpg_series.trade_with_archery_artisan.description": "Acheter un objet à un artisan en archerie",
+  "entity.archers.spirit_wolf": "Loup spirituel",
+  "spell.archers.rain_of_arrows.description": "Fait pleuvoir des flèches sur la zone ciblée pendant 5 secondes, chacune infligeant {damage} dégâts aux ennemis dans un rayon de {impact_range} blocs.",
+  "spell.archers.rain_of_arrows.name": "Pluie de flèches",
+  "spell.archers.spirit_wolf.description": "Invoque une meute de {summon_count} Loups spirituels pour combattre à vos côtés pendant {summon_duration} sec, renforcés par vos Dégâts à distance.",
+  "spell.archers.spirit_wolf.name": "Meute de loups spirituels"
 }
