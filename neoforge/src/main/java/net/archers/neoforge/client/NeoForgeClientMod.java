@@ -2,7 +2,7 @@ package net.archers.neoforge.client;
 
 import net.archers.ArchersMod;
 import net.archers.client.ArchersClientMod;
-import net.archers.client.compat.AccessoriesRenderCompat;
+import net.archers.neoforge.client.curios.CuriosRenderCompat;
 import net.archers.client.entity.DirewolfEntityModel;
 import net.archers.client.entity.DirewolfEntityRenderer;
 import net.archers.client.util.ArchersTooltip;
@@ -26,8 +26,8 @@ public class NeoForgeClientMod {
         ArchersClientMod.init();
         ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (modContainer, parent) -> new ConfigMenuScreen(parent));
 
-        if (ModList.get().isLoaded("accessories")) {
-            AccessoriesRenderCompat.init();
+        if (ModList.get().isLoaded("curios")) {
+            CuriosRenderCompat.init();
         }
 
         // Archers' custom tooltip lines — NeoForge game-bus event (replaces Fabric API's ItemTooltipCallback).

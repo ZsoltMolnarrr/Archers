@@ -2,7 +2,6 @@ package net.archers.fabric.client;
 
 import net.archers.block.ArcherBlocks;
 import net.archers.client.ArchersClientMod;
-import net.archers.client.compat.AccessoriesRenderCompat;
 import net.archers.client.entity.DirewolfEntityModel;
 import net.archers.client.entity.DirewolfEntityRenderer;
 import net.archers.client.util.ArchersTooltip;
@@ -37,8 +36,6 @@ public final class FabricClientMod implements ClientModInitializer {
         var slotCompat = FabricCompatFeatures.initSlotCompat();
         if (Objects.equals(slotCompat, "trinkets")) {
             TrinketsRenderCompat.init();
-        } else if (Objects.equals(slotCompat,"accessories")) {
-            AccessoriesRenderCompat.init();
         }
     }
 }

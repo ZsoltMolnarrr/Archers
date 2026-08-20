@@ -20,8 +20,7 @@ repositories {
         url = 'https://maven.ladysnake.org/releases'
     }
 
-    // For Accessories:
-    maven { url 'https://maven.wispforest.io/releases' }
+    // For Trinkets (Fabric) / Curios (NeoForge):
     maven { url 'https://maven.su5ed.dev/releases' }
     maven { url 'https://maven.fabricmc.net' }
 
@@ -55,6 +54,4 @@ dependencies {
 
     // Compatibility
     // Fabric specific
-    modCompileOnly "io.wispforest:owo-lib:${project.owo_version}" // Accessories needs this
-    modImplementation("io.wispforest:accessories-common:${project.accessories_version}")
 }

@@ -3,6 +3,9 @@
 - Adopt Spell Engine 1.10 changes
 - NeoForge version no longer depends on Forgified Fabric API
 - Fully translated content, now supporting 20 languages
+- Replaced armor rendering dependency AzureLibArmor with ArmorModelAPI
+- Removed Accessories support
+- Added Curious API support for quiver renderer
 
 # 3.0.3
 
