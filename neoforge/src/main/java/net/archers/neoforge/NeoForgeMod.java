@@ -4,6 +4,7 @@ import net.archers.ArchersMod;
 import net.archers.block.ArcherBlocks;
 import net.archers.item.Group;
 import net.archers.item.Quivers;
+import net.archers.neoforge.compat.curios.QuiverCurios;
 import net.archers.item.misc.Misc;
 import net.archers.village.ArcherVillagers;
 import net.minecraft.registry.Registries;
@@ -13,6 +14,7 @@ import net.minecraft.world.poi.PointOfInterestType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
@@ -28,6 +30,10 @@ public final class NeoForgeMod {
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, NeoForgeMod::buildTabContents);
         // Villager trades — game-bus event (fired per profession); replaces Fabric API's TradeOfferHelper.
         NeoForge.EVENT_BUS.addListener(VillagerTradesEvent.class, NeoForgeMod::onVillagerTrades);
+        // Quiver equip sound, via a Curios capability on the (third-party) bundle items.
+        if (ModList.get().isLoaded("curios")) {
+            modBus.addListener(RegisterCapabilitiesEvent.class, QuiverCurios::registerCapabilities);
+        }
     }
 
     public static void register(RegisterEvent event) {
