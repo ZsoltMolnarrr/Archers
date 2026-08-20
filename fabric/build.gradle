@@ -50,7 +50,6 @@ repositories {
         name = "Ladysnake Libs"
         url = 'https://maven.ladysnake.org/releases'
     }
-    maven { url 'https://maven.wispforest.io/releases' }
     maven {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
