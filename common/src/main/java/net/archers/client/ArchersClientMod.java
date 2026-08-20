@@ -1,7 +1,7 @@
 package net.archers.client;
 
-import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
-import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
+import net.rpg_foundation.armor_api.client.ArmorRenderers;
+import net.rpg_foundation.armor_api.client.GeoArmorRenderer;
 import net.archers.ArchersMod;
 import net.archers.client.armor.ArcherArmorRenderer;
 import net.archers.client.effect.HuntersMarkRenderer;
@@ -15,7 +15,6 @@ import net.spell_engine.api.render.CustomModels;
 import net.spell_engine.rpg_series.item.Armor;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public class ArchersClientMod {
     public static void init() {
@@ -25,9 +24,9 @@ public class ArchersClientMod {
         // Archers' custom tooltip lines (ArchersTooltip.addLines) are wired per-platform from each client
         // entrypoint's native tooltip event (Fabric ItemTooltipCallback / NeoForge ItemTooltipEvent).
 
-        registerArmorRenderer(ArcherArmors.archerArmorSet_T1, ArcherArmorRenderer::archer);
-        registerArmorRenderer(ArcherArmors.archerArmorSet_T2, ArcherArmorRenderer::ranger);
-        registerArmorRenderer(ArcherArmors.archerArmorSet_T3, ArcherArmorRenderer::netheriteRanger);
+        registerArmorRenderer(ArcherArmors.archerArmorSet_T1, ArcherArmorRenderer.archer());
+        registerArmorRenderer(ArcherArmors.archerArmorSet_T2, ArcherArmorRenderer.ranger());
+        registerArmorRenderer(ArcherArmors.archerArmorSet_T3, ArcherArmorRenderer.netheriteRanger());
 
         List<Identifier> quiverModels = Quivers.entries.stream()
                 .map(entry -> Identifier.of(ArchersMod.ID, "item/quiver/" + entry.id().getPath()))
@@ -35,7 +34,7 @@ public class ArchersClientMod {
         CustomModels.registerModelIds(quiverModels);
     }
 
-    private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {
-        AzArmorRendererRegistry.register(armorRendererSupplier, set.head, set.chest, set.legs, set.feet);
+    private static void registerArmorRenderer(Armor.Set set, GeoArmorRenderer renderer) {
+        ArmorRenderers.register(renderer, set.head, set.chest, set.legs, set.feet);
     }
 }
