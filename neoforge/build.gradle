@@ -41,7 +41,6 @@ repositories {
     }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
-    maven { url 'https://maven.azuredoom.com/mods' }
     maven {
         name = 'Modrinth'
         url = 'https://api.modrinth.com/maven'
@@ -69,7 +68,7 @@ dependencies {
 
     modImplementation("dev.kosmx.player-anim:player-animation-lib-forge:${project.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${project.cloth_config_version}")
-    modImplementation("mod.azure.azurelibarmor:azurelibarmor-neo-${project.azure_mc_version}:${project.azure_lib_version}")
+    modImplementation("net.rpg_foundation:armor_model_api-neoforge:${project.armor_model_api_version}")
     modImplementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
 
     // Accessories - https://docs.wispforest.io/accessories/developer/dev_setup
@@ -144,7 +143,7 @@ publishMods {
         client = true                    // >=1 of client/server REQUIRED by CurseForge (Error 1021)
         server = true
         changelogType = "markdown"
-        requires("azurelib-armor", "spell-engine", "ranged-weapon-api", "structure-pool-api")
+        requires("armor-model-api", "spell-engine", "ranged-weapon-api", "structure-pool-api")
     }
 
     modrinth {
@@ -152,7 +151,7 @@ publishMods {
         accessToken = providers.environmentVariable("MODRINTH_API_KEY")
         minecraftVersions.add(project.minecraft_version)
         minecraftVersions.add(project.minecraft_compat_version)
-        requires { slug = "azurelib-armor" }
+        requires { slug = "armor-model-api" }
         requires { slug = "spell-engine" }
         requires { slug = "ranged-weapon-api" }
         requires { slug = "structure-pool-api" }
