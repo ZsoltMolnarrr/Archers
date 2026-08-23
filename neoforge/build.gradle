@@ -41,13 +41,6 @@ repositories {
     }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
-    // CurseMaven - for Armor Model API
-    maven {
-        url = "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
     maven {
         name = 'Modrinth'
         url = 'https://api.modrinth.com/maven'
@@ -70,12 +63,11 @@ dependencies {
 
     modImplementation("dev.kosmx.player-anim:player-animation-lib-forge:${project.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${project.cloth_config_version}")
-    modImplementation("curse.maven:armor-model-api-1659764:${project.armor_model_api_neoforge_file}")
+    modImplementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}")
     modImplementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
 
     // Curios - https://docs.illusivesoulworks.com/category/curios
     modImplementation("top.theillusivec4.curios:curios-neoforge:${project.curios_version}")
-    forgeRuntimeLibrary("blue.endless:jankson:1.2.2")
 
     modImplementation "maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}"
 //    modImplementation("com.github.TheRedBrain:bundle-api-${platform}:${project.bundle_api_version}")
