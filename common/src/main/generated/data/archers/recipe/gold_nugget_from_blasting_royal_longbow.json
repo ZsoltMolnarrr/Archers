@@ -4,9 +4,7 @@
   "cookingtime": 150,
   "experience": 0.1,
   "group": "disassemble",
-  "ingredient": {
-    "item": "archers:royal_longbow"
-  },
+  "ingredient": "archers:royal_longbow",
   "result": {
     "id": "minecraft:gold_nugget"
   }

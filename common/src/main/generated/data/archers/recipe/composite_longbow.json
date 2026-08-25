@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "B": {
-      "item": "minecraft:bone"
-    },
-    "X": {
-      "item": "minecraft:string"
-    }
+    "#": "minecraft:stick",
+    "B": "minecraft:bone",
+    "X": "minecraft:string"
   },
   "pattern": [
     " #X",

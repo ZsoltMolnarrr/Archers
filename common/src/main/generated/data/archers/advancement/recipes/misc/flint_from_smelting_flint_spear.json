@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:flint_from_smelting_flint_spear"
+        "recipe": "archers:flint_from_smelting_flint_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:flint_from_smelting_flint_spear"
+      "archers:flint_from_smelting_flint_spear"
     ]
   }
 }

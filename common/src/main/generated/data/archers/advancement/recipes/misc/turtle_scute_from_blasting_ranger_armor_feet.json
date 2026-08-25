@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:turtle_scute_from_blasting_ranger_armor_feet"
+        "recipe": "archers:turtle_scute_from_blasting_ranger_armor_feet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:turtle_scute_from_blasting_ranger_armor_feet"
+      "archers:turtle_scute_from_blasting_ranger_armor_feet"
     ]
   }
 }

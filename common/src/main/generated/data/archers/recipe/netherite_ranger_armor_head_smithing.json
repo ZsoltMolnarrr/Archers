@@ -1,16 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "minecraft:netherite_ingot"
-  },
-  "base": {
-    "item": "archers:ranger_armor_head"
-  },
+  "addition": "#minecraft:netherite_tool_materials",
+  "base": "archers:ranger_armor_head",
   "result": {
-    "count": 1,
     "id": "archers:netherite_ranger_armor_head"
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

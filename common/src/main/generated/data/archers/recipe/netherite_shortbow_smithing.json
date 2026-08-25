@@ -1,16 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "minecraft:netherite_ingot"
-  },
-  "base": {
-    "item": "archers:mechanic_shortbow"
-  },
+  "addition": "#minecraft:netherite_tool_materials",
+  "base": "archers:mechanic_shortbow",
   "result": {
-    "count": 1,
     "id": "archers:netherite_shortbow"
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

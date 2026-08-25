@@ -4,9 +4,7 @@
   "cookingtime": 150,
   "experience": 0.1,
   "group": "disassemble",
-  "ingredient": {
-    "item": "archers:mechanic_shortbow"
-  },
+  "ingredient": "archers:mechanic_shortbow",
   "result": {
     "id": "minecraft:redstone"
   }

@@ -1,16 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "minecraft:netherite_ingot"
-  },
-  "base": {
-    "item": "archers:diamond_spear"
-  },
+  "addition": "#minecraft:netherite_tool_materials",
+  "base": "archers:diamond_spear",
   "result": {
-    "count": 1,
     "id": "archers:netherite_spear"
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

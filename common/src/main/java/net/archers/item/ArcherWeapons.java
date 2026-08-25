@@ -40,8 +40,10 @@ public class ArcherWeapons {
             return () -> Ingredient.ofItems(fallback);
         } else {
             return () -> {
+                // `Registries.ITEM` is a defaulted registry: a missing id yields AIR, never null,
+                // and `Ingredient.ofItems(AIR)` throws ("Ingredient can't contain air") since 1.21.2.
                 var item = Registries.ITEM.get(id);
-                var ingredient = item != null ? item : fallback;
+                var ingredient = (item != null && item != Items.AIR) ? item : fallback;
                 return Ingredient.ofItems(ingredient);
             };
         }

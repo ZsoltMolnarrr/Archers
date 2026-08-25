@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "minecraft:planks"
-    },
-    "A": {
-      "item": "minecraft:arrow"
-    },
-    "L": {
-      "item": "minecraft:leather"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "#": "#minecraft:planks",
+    "A": "minecraft:arrow",
+    "L": "minecraft:leather",
+    "S": "minecraft:string"
   },
   "pattern": [
     "SAL",

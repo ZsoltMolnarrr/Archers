@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
-      "item": "minecraft:leather"
-    },
-    "R": {
-      "item": "minecraft:rabbit_hide"
-    }
+    "L": "minecraft:leather",
+    "R": "minecraft:rabbit_hide"
   },
   "pattern": [
     "R R",

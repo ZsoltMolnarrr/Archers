@@ -4,9 +4,7 @@
   "cookingtime": 150,
   "experience": 0.1,
   "group": "disassemble",
-  "ingredient": {
-    "item": "archers:netherite_ranger_armor_feet"
-  },
+  "ingredient": "archers:netherite_ranger_armor_feet",
   "result": {
     "id": "minecraft:netherite_scrap"
   }

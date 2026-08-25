@@ -4,9 +4,7 @@
   "cookingtime": 300,
   "experience": 0.1,
   "group": "disassemble",
-  "ingredient": {
-    "item": "archers:netherite_shortbow"
-  },
+  "ingredient": "archers:netherite_shortbow",
   "result": {
     "id": "minecraft:netherite_scrap"
   }

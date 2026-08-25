@@ -4,9 +4,7 @@
   "cookingtime": 150,
   "experience": 0.1,
   "group": "disassemble",
-  "ingredient": {
-    "item": "archers:flint_spear"
-  },
+  "ingredient": "archers:flint_spear",
   "result": {
     "id": "minecraft:flint"
   }
