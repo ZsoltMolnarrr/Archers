@@ -2,8 +2,8 @@
   "sources": [
     {
       "type": "directory",
-      "source": "item/quiver",
-      "prefix": "item/quiver/"
+      "source": "quiver",
+      "prefix": "quiver/"
     }
   ]
 }

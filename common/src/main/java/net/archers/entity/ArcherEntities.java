@@ -88,7 +88,9 @@ public class ArcherEntities {
             ("summoned_entities", seededDefaults())
             .builder()
             .setDirectory(ArchersMod.ID)
-            .schemaVersion(1)
+            // 2: 1.21.11 dropped the `generic.` attribute-id prefix, so 1.21.1 files carry
+            //    unresolvable ids (`minecraft:generic.jump_strength`) — reset them.
+            .schemaVersion(2)
             .sanitize(true)
             .build();
 
