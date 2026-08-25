@@ -14,7 +14,7 @@
     },
     "icon": {
       "components": {
-        "spell_engine:item_model": "archers:item/spell_book/archer"
+        "minecraft:item_model": "archers:spell_book/archer"
       },
       "count": 1,
       "id": "spell_engine:spell_book"
