@@ -7,7 +7,7 @@ public class CuriosRenderCompat {
     public static void init() {
         for (var entry : Quivers.entries) {
             // Curios 14: `CuriosRendererRegistry` is deprecated for removal in favour of ICurioRenderer.register
-            ICurioRenderer.register(entry.item(), () -> new CuriosQuiverRenderer(entry.id().getPath()));
+            ICurioRenderer.register(entry.item(), CuriosQuiverRenderer::new);
         }
     }
 }
