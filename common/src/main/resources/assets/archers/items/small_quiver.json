@@ -1,19 +1,37 @@
 {
   "model": {
-    "type": "minecraft:range_dispatch",
-    "property": "bundleapi:custom_bundle/fullness",
-    "fallback": {
-      "type": "minecraft:model",
-      "model": "archers:item/small_quiver"
-    },
-    "entries": [
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
       {
-        "threshold": 0.000001,
+        "when": [
+          "gui",
+          "ground",
+          "fixed",
+          "on_shelf"
+        ],
         "model": {
-          "type": "minecraft:model",
-          "model": "archers:item/small_quiver_filled"
+          "type": "minecraft:range_dispatch",
+          "property": "bundleapi:custom_bundle/fullness",
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "archers:item/small_quiver"
+          },
+          "entries": [
+            {
+              "threshold": 0.000001,
+              "model": {
+                "type": "minecraft:model",
+                "model": "archers:item/small_quiver_filled"
+              }
+            }
+          ]
         }
       }
-    ]
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "archers:item/quiver/small_quiver"
+    }
   }
 }
