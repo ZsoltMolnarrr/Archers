@@ -101,6 +101,9 @@ shadowJar {
 
 remapJar {
     inputFile.set shadowJar.archiveFile
+    // Writes the `accessWidener` key into the packaged fabric.mod.json — without it the widener
+    // ships but is never applied (ArcherRenderLayers would fail at class-load in production).
+    injectAccessWidener = true
 }
 
 // Publishing is configured unconditionally: tasks only *run* when explicitly invoked
