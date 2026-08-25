@@ -51,12 +51,12 @@ public class ArcherEffects {
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x993333),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
                             -0.5F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(),
+                            EntityAttributes.JUMP_STRENGTH.getIdAsString(),
                             -0.5F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )

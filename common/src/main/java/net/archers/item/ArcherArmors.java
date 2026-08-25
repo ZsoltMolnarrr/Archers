@@ -5,13 +5,15 @@ import net.archers.item.armor.ArcherArmor;
 import net.archers.content.ArcherSounds;
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.item.Item;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentAsset;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
+import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.spell_engine.rpg_series.config.ArmorSetConfig;
@@ -25,43 +27,63 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class ArcherArmors {
-    public static RegistryEntry<ArmorMaterial> material(String name,
-                                                        int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
-                                                        int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredient) {
-        var material = new ArmorMaterial(
-                Map.of(
-                        ArmorItem.Type.HELMET, protectionHead,
-                        ArmorItem.Type.CHESTPLATE, protectionChest,
-                        ArmorItem.Type.LEGGINGS, protectionLegs,
-                        ArmorItem.Type.BOOTS, protectionFeet),
-                enchantability, equipSound, repairIngredient,
-                List.of(new ArmorMaterial.Layer(Identifier.of(ArchersMod.ID, name))),
-                0,0
-        );
-        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(ArchersMod.ID, name), material);
+    /// Item tag listing the items that repair this armor set (1.21.2+ replaced the
+    /// `Supplier<Ingredient>` repair ingredient with a `TagKey<Item>`).
+    public static TagKey<Item> repairTag(String name) {
+        return TagKey.of(RegistryKeys.ITEM, Identifier.of(ArchersMod.ID, "repairs_" + name));
     }
 
-    public static RegistryEntry<ArmorMaterial> material_t1 = material(
+    /// Equipment asset key of the vanilla armor layer. Archers armor is drawn by the Armor Model API
+    /// (geo model + own texture), so no `assets/archers/equipment/<name>.json` is shipped and the
+    /// vanilla layer resolves to `EquipmentModelLoader.EMPTY` — same net effect as the 1.21.1
+    /// `ArmorMaterial.Layer` that pointed at a texture we never shipped.
+    public static RegistryKey<EquipmentAsset> assetKey(String name) {
+        return RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, Identifier.of(ArchersMod.ID, name));
+    }
+
+    public static ArmorMaterial material(String name,
+                                         int durability,
+                                         int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
+                                         int enchantability, RegistryEntry<SoundEvent> equipSound) {
+        return new ArmorMaterial(
+                durability,
+                Map.of(
+                        EquipmentType.HELMET, protectionHead,
+                        EquipmentType.CHESTPLATE, protectionChest,
+                        EquipmentType.LEGGINGS, protectionLegs,
+                        EquipmentType.BOOTS, protectionFeet),
+                enchantability,
+                equipSound,
+                0F, 0F,
+                repairTag(name),
+                assetKey(name)
+        );
+    }
+
+    public static ArmorMaterial material_t1 = material(
             "archer_armor",
+            15,
             2, 3, 3, 2,
             9,
-            ArcherSounds.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.LEATHER); });
+            ArcherSounds.ARCHER_ARMOR_EQUIP.entry());
 
-    public static RegistryEntry<ArmorMaterial> material_t2 = material(
+    public static ArmorMaterial material_t2 = material(
             "ranger_armor",
+            25,
             2, 3, 3, 2,
             10,
-            ArcherSounds.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.RABBIT_HIDE); });
+            ArcherSounds.ARCHER_ARMOR_EQUIP.entry());
 
-    public static RegistryEntry<ArmorMaterial> material_t3 = material(
+    public static ArmorMaterial material_t3 = material(
             "netherite_ranger_armor",
+            35,
             2, 3, 3, 2,
             15,
-            ArcherSounds.ARCHER_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            ArcherSounds.ARCHER_ARMOR_EQUIP.entry());
 
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
+    private static Armor.Entry create(ArmorMaterial material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
         var entry = Armor.Entry.create(
                 material,
                 id,

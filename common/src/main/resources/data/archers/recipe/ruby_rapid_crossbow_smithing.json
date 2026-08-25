@@ -14,16 +14,10 @@
     }
   ],
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "betternether:nether_ruby"
-  },
-  "base": {
-    "item": "archers:netherite_rapid_crossbow"
-  },
+  "addition": "betternether:nether_ruby",
+  "base": "archers:netherite_rapid_crossbow",
   "result": {
     "id": "archers:ruby_rapid_crossbow"
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

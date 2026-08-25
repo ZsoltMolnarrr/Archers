@@ -8,6 +8,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.summon.SummonedEntities;
 import net.spell_engine.api.spell.summon.SummonedEntityConfig;
@@ -58,9 +60,9 @@ public class ArcherEntities {
                     .dimensions(0.8F, 0.925F)
                     .maxTrackingRange(64)
                     .trackingTickInterval(3)
-                    // Vanilla build(String id) — the no-arg build() is a Fabric API interface-injected
+                    // Vanilla build(RegistryKey) — the no-arg build() is a Fabric API interface-injected
                     // default (FabricEntityType.Builder) absent on NeoForge at runtime.
-                    .build("spirit_wolf"),
+                    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(ArchersMod.ID, "spirit_wolf"))),
             spiritWolfDefaults()));
 
     // Default base attributes per summon — seeded into Archers' OWN config file
@@ -73,9 +75,9 @@ public class ArcherEntities {
         e.common.follow_range = 32;
         // Flat +50% over the vanilla base values (jump 0.42, step 0.6) — agile like a wolf
         e.custom.add(new SummonedEntityConfig.CustomAttribute(
-                EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(), 0.63));
+                EntityAttributes.JUMP_STRENGTH.getIdAsString(), 0.63));
         e.custom.add(new SummonedEntityConfig.CustomAttribute(
-                EntityAttributes.GENERIC_STEP_HEIGHT.getIdAsString(), 0.9));
+                EntityAttributes.STEP_HEIGHT.getIdAsString(), 0.9));
         return e;
     }
 

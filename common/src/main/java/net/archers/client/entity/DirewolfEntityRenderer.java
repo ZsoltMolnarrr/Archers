@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.spell_engine.client.compatibility.ShaderCompatibility;
 
-public class DirewolfEntityRenderer extends MobEntityRenderer<SpiritWolfEntity, DirewolfEntityModel> {
+public class DirewolfEntityRenderer extends MobEntityRenderer<SpiritWolfEntity, SpiritWolfRenderState, DirewolfEntityModel> {
     public static final Identifier TEXTURE =
             Identifier.of(ArchersMod.ID, "textures/entity/direwolf_spell.png");
 
@@ -17,7 +17,26 @@ public class DirewolfEntityRenderer extends MobEntityRenderer<SpiritWolfEntity, 
     }
 
     @Override
-    public Identifier getTexture(SpiritWolfEntity entity) {
+    public SpiritWolfRenderState createRenderState() {
+        return new SpiritWolfRenderState();
+    }
+
+    @Override
+    public void updateRenderState(SpiritWolfEntity entity, SpiritWolfRenderState state, float tickProgress) {
+        super.updateRenderState(entity, state, tickProgress);
+        state.spawnAnimationState.copyFrom(entity.spawnAnimationState);
+        state.despawnAnimationState.copyFrom(entity.despawnAnimationState);
+        state.idleAnimationState.copyFrom(entity.idleAnimationState);
+        state.attackAnimationState.copyFrom(entity.attackAnimationState);
+        state.attackVariant = entity.getAttackVariant();
+        // Playback speed is derived from the clip length, so it must be resolved while the entity
+        // is still reachable (the model only sees the render state).
+        var attackAnimation = DirewolfEntityModel.attackAnimationFor(state.attackVariant);
+        state.attackAnimationSpeed = entity.getAttackAnimationSpeed(attackAnimation.lengthInSeconds() * 20F);
+    }
+
+    @Override
+    public Identifier getTexture(SpiritWolfRenderState state) {
         return TEXTURE;
     }
 

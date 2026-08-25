@@ -32,7 +32,7 @@ public class QuiverCurios {
             if (entity == null) {
                 return;
             }
-            var world = entity.getWorld();
+            var world = entity.getEntityWorld();
             if (world.isClient()                             // the server broadcast below reaches every nearby client
                     || entity.age <= 100                     // gear already worn when entering a world/dimension
                     || prevStack.isOf(this.stack.getItem())) // same quiver, only its contents changed

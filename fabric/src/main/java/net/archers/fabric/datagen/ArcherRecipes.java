@@ -6,8 +6,8 @@ import net.archers.item.ArcherWeapons;
 import net.archers.item.misc.Misc;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.recipe.RecipeExporter;
+import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -28,8 +28,21 @@ public class ArcherRecipes extends FabricRecipeProvider {
         super(output, registriesFuture);
     }
 
+    /// Since 1.21.2 the recipe provider only *builds* a {@link RecipeGenerator}; the recipe-building
+    /// helpers (`createShaped`, `hasItem`, `conditionsFromItem`, `offerNetheriteUpgradeRecipe`) are
+    /// instance members of the generator, which also holds the exporter.
     @Override
-    public void generate(RecipeExporter exporter) {
+    protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+        return new Generator(registries, exporter);
+    }
+
+    private static class Generator extends RecipeGenerator {
+        Generator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+            super(registries, exporter);
+        }
+
+    @Override
+    public void generate() {
         generateSpearRecipes(exporter);
         generateBowRecipes(exporter);
         generateCrossbowRecipes(exporter);
@@ -53,7 +66,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
      * Generate spear recipe with standard pattern
      */
     private void spear(RecipeExporter exporter, Weapon.Entry spearEntry, Item tipMaterial) {
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, spearEntry.item())
+        createShaped(RecipeCategory.COMBAT, spearEntry.item())
                 .pattern("  P")
                 .pattern(" # ")
                 .pattern("#  ")
@@ -69,7 +82,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
 
     private void generateBowRecipes(RecipeExporter exporter) {
         // Composite Longbow - bone + stick + string
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ArcherWeapons.composite_longbow.item())
+        createShaped(RecipeCategory.COMBAT, ArcherWeapons.composite_longbow.item())
                 .pattern(" #X")
                 .pattern("B X")
                 .pattern(" #X")
@@ -80,7 +93,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         // Mechanic Shortbow - iron + redstone + string
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ArcherWeapons.mechanic_shortbow.item())
+        createShaped(RecipeCategory.COMBAT, ArcherWeapons.mechanic_shortbow.item())
                 .pattern(" IX")
                 .pattern("R X")
                 .pattern(" IX")
@@ -91,7 +104,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         // Royal Longbow - gold + diamond + string
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ArcherWeapons.royal_longbow.item())
+        createShaped(RecipeCategory.COMBAT, ArcherWeapons.royal_longbow.item())
                 .pattern(" GX")
                 .pattern("D X")
                 .pattern(" GX")
@@ -108,7 +121,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
 
     private void generateCrossbowRecipes(RecipeExporter exporter) {
         // Rapid Crossbow - iron + redstone + string + tripwire_hook
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ArcherWeapons.rapid_crossbow.item())
+        createShaped(RecipeCategory.COMBAT, ArcherWeapons.rapid_crossbow.item())
                 .pattern("IRI")
                 .pattern("XTX")
                 .pattern(" I ")
@@ -120,7 +133,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         // Heavy Crossbow - iron + diamond + string + tripwire_hook
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ArcherWeapons.heavy_crossbow.item())
+        createShaped(RecipeCategory.COMBAT, ArcherWeapons.heavy_crossbow.item())
                 .pattern("IDI")
                 .pattern("XTX")
                 .pattern(" I ")
@@ -138,7 +151,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
 
     private void generateArmorRecipes(RecipeExporter exporter) {
         // Archer Armor (T1) - leather + chain
-        generateArcherArmorSet(exporter, ArcherArmors.archerArmorSet_T1, Items.LEATHER, Items.CHAIN);
+        generateArcherArmorSet(exporter, ArcherArmors.archerArmorSet_T1, Items.LEATHER, Items.IRON_CHAIN);
 
         // Ranger Armor (T2) - leather + rabbit_hide + turtle_scute
         generateRangerArmorSet(exporter, ArcherArmors.archerArmorSet_T2, Items.LEATHER, Items.RABBIT_HIDE, Items.TURTLE_SCUTE);
@@ -149,7 +162,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
      */
     private void generateArcherArmorSet(RecipeExporter exporter, Armor.Set armorSet, Item leather, Item chain) {
         // Helmet - pattern: "LLL" / "C C"
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.head)
+        createShaped(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("LLL")
                 .pattern("C C")
                 .input('L', leather)
@@ -158,7 +171,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         // Chestplate - pattern: "C C" / "LLL" / "LLL"
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.chest)
+        createShaped(RecipeCategory.COMBAT, armorSet.chest)
                 .pattern("C C")
                 .pattern("LLL")
                 .pattern("LLL")
@@ -168,7 +181,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         // Leggings - pattern: "CCC" / "L L" / "L L"
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.legs)
+        createShaped(RecipeCategory.COMBAT, armorSet.legs)
                 .pattern("CCC")
                 .pattern("L L")
                 .pattern("L L")
@@ -178,7 +191,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         // Boots - pattern: "C C" / "L L"
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.feet)
+        createShaped(RecipeCategory.COMBAT, armorSet.feet)
                 .pattern("C C")
                 .pattern("L L")
                 .input('L', leather)
@@ -192,7 +205,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
      */
     private void generateRangerArmorSet(RecipeExporter exporter, Armor.Set armorSet, Item leather, Item rabbitHide, Item turtleScute) {
         // Helmet - pattern: "SRS" / "L L"
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.head)
+        createShaped(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("SRS")
                 .pattern("L L")
                 .input('S', turtleScute)
@@ -202,7 +215,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         // Chestplate - pattern: "R R" / "LSL" / "LLL"
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.chest)
+        createShaped(RecipeCategory.COMBAT, armorSet.chest)
                 .pattern("R R")
                 .pattern("LSL")
                 .pattern("LLL")
@@ -213,7 +226,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         // Leggings - pattern: "SRS" / "L L" / "L L"
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.legs)
+        createShaped(RecipeCategory.COMBAT, armorSet.legs)
                 .pattern("SRS")
                 .pattern("L L")
                 .pattern("L L")
@@ -224,7 +237,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         // Boots - pattern: "R R" / "L L"
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.feet)
+        createShaped(RecipeCategory.COMBAT, armorSet.feet)
                 .pattern("R R")
                 .pattern("L L")
                 .input('L', leather)
@@ -239,7 +252,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
 
     private void generateOtherRecipes(RecipeExporter exporter) {
         // Archers Workbench
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ArcherBlocks.WORKBENCH.block())
+        createShaped(RecipeCategory.MISC, ArcherBlocks.WORKBENCH.block())
                 .pattern("SAL")
                 .pattern("###")
                 .input('S', Items.STRING)
@@ -250,7 +263,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         // Auto Fire Hook
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, Misc.autoFireHook.item())
+        createShaped(RecipeCategory.COMBAT, Misc.autoFireHook.item())
                 .pattern("C  ")
                 .pattern("C I")
                 .pattern(" R ")
@@ -267,17 +280,19 @@ public class ArcherRecipes extends FabricRecipeProvider {
 
     private void generateNetheriteUpgrades(RecipeExporter exporter) {
         // Weapon upgrades
-        offerNetheriteUpgradeRecipe(exporter, ArcherWeapons.diamond_spear.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_spear.item());
-        offerNetheriteUpgradeRecipe(exporter, ArcherWeapons.royal_longbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_longbow.item());
-        offerNetheriteUpgradeRecipe(exporter, ArcherWeapons.mechanic_shortbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_shortbow.item());
-        offerNetheriteUpgradeRecipe(exporter, ArcherWeapons.rapid_crossbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_rapid_crossbow.item());
-        offerNetheriteUpgradeRecipe(exporter, ArcherWeapons.heavy_crossbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_heavy_crossbow.item());
+        offerNetheriteUpgradeRecipe(ArcherWeapons.diamond_spear.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_spear.item());
+        offerNetheriteUpgradeRecipe(ArcherWeapons.royal_longbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_longbow.item());
+        offerNetheriteUpgradeRecipe(ArcherWeapons.mechanic_shortbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_shortbow.item());
+        offerNetheriteUpgradeRecipe(ArcherWeapons.rapid_crossbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_rapid_crossbow.item());
+        offerNetheriteUpgradeRecipe(ArcherWeapons.heavy_crossbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_heavy_crossbow.item());
 
         // Ranger armor upgrades (T2 -> T3)
-        offerNetheriteUpgradeRecipe(exporter, ArcherArmors.archerArmorSet_T2.head, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.head);
-        offerNetheriteUpgradeRecipe(exporter, ArcherArmors.archerArmorSet_T2.chest, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.chest);
-        offerNetheriteUpgradeRecipe(exporter, ArcherArmors.archerArmorSet_T2.legs, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.legs);
-        offerNetheriteUpgradeRecipe(exporter, ArcherArmors.archerArmorSet_T2.feet, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.feet);
+        offerNetheriteUpgradeRecipe(ArcherArmors.archerArmorSet_T2.head, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.head);
+        offerNetheriteUpgradeRecipe(ArcherArmors.archerArmorSet_T2.chest, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.chest);
+        offerNetheriteUpgradeRecipe(ArcherArmors.archerArmorSet_T2.legs, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.legs);
+        offerNetheriteUpgradeRecipe(ArcherArmors.archerArmorSet_T2.feet, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.feet);
+    }
+
     }
 
     @Override

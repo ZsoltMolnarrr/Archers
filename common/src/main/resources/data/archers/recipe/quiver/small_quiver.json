@@ -14,12 +14,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
-      "item": "minecraft:leather"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "L": "minecraft:leather",
+    "S": "minecraft:string"
   },
   "pattern": [
     " S ",

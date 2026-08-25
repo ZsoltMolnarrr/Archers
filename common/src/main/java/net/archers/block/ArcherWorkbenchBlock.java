@@ -3,21 +3,13 @@ package net.archers.block;
 import net.archers.ArchersMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
+import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class ArcherWorkbenchBlock extends Block {
     public static Identifier ID = Identifier.of(ArchersMod.ID, "archers_workbench");
@@ -25,15 +17,12 @@ public class ArcherWorkbenchBlock extends Block {
         super(settings);
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
-        super.appendTooltip(stack, context, tooltip, options);
-        tooltip.add(Text.translatable("block." + ID.getNamespace() + "." + ID.getPath() +".hint").formatted(Formatting.GRAY, Formatting.ITALIC));
-    }
+    // The block's `.hint` tooltip line is appended from `ArchersTooltip` (Block#appendTooltip was
+    // removed in 1.21.11; item tooltips of block items go through the per-platform tooltip event).
 
     // MARK: Facing
 
-    private static DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    private static EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
 
     @Nullable
     @Override
@@ -49,7 +38,8 @@ public class ArcherWorkbenchBlock extends Block {
 
     // MARK: Partial transparency
 
-    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+    @Override
+    protected boolean isTransparent(BlockState state) {
         return true;
     }
 }

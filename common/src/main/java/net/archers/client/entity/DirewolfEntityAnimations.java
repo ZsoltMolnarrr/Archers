@@ -1,6 +1,6 @@
 package net.archers.client.entity;
 
-import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.animation.AnimationDefinition;
 import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.animation.Keyframe;
 import net.minecraft.client.render.entity.animation.Transformation;
@@ -10,12 +10,12 @@ import net.minecraft.client.render.entity.animation.Transformation;
  * Converted from the Mojang-mappings export to Yarn.
  */
 public class DirewolfEntityAnimations {
-	public static final Animation idle = Animation.Builder.create(2.5F).looping()
+	public static final AnimationDefinition idle = AnimationDefinition.Builder.create(2.5F).looping()
 			.addBoneAnimation("root", new Transformation(Transformation.Targets.ROTATE,
 					new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("root", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("root", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -25,7 +25,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(1.55F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createRotationalVector(-2.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("body", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("body", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, -0.5F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createTranslationalVector(0.0F, -0.5F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -35,7 +35,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(1.55F, AnimationHelper.createRotationalVector(-42.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createRotationalVector(-47.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("tail", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("tail", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -43,7 +43,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -12.5F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -12.5F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("left_back_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("left_back_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -51,7 +51,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.0F, AnimationHelper.createRotationalVector(-0.1507F, -0.8548F, 19.9824F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createRotationalVector(-0.1507F, -0.8548F, 19.9824F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("right_back_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("right_back_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(-0.25F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createTranslationalVector(-0.25F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -61,7 +61,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(1.55F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -7.5F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createRotationalVector(2.5F, 0.0F, -7.5F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("left_front_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("left_front_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.9F, AnimationHelper.createTranslationalVector(0.0F, 0.5F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(1.55F, AnimationHelper.createTranslationalVector(0.0F, 0.5F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -73,7 +73,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(1.55F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 7.5F), Transformation.Interpolations.LINEAR),
 					new Keyframe(2.5F, AnimationHelper.createRotationalVector(2.5F, 0.0F, 7.5F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("right_front_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("right_front_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.9F, AnimationHelper.createTranslationalVector(0.0F, 0.5F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(1.55F, AnimationHelper.createTranslationalVector(0.0F, 0.5F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -99,8 +99,8 @@ public class DirewolfEntityAnimations {
 			))
 			.build();
 
-	public static final Animation run = Animation.Builder.create(0.65F).looping()
-			.addBoneAnimation("root", new Transformation(Transformation.Targets.TRANSLATE,
+	public static final AnimationDefinition run = AnimationDefinition.Builder.create(0.65F).looping()
+			.addBoneAnimation("root", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 1.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createTranslationalVector(0.0F, 1.94F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.35F, AnimationHelper.createTranslationalVector(0.0F, -0.39F, 0.0F), Transformation.Interpolations.CUBIC),
@@ -127,7 +127,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.45F, AnimationHelper.createRotationalVector(-46.96F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.65F, AnimationHelper.createRotationalVector(-45.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("left_back_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("left_back_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.3F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 1.0F), Transformation.Interpolations.LINEAR),
@@ -141,7 +141,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.5F, AnimationHelper.createRotationalVector(-46.96F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.65F, AnimationHelper.createRotationalVector(-45.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("right_back_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("right_back_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.2F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.35F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 1.0F), Transformation.Interpolations.LINEAR),
@@ -155,7 +155,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.5F, AnimationHelper.createRotationalVector(34.9744F, -1.4336F, 2.0483F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.65F, AnimationHelper.createRotationalVector(22.4229F, -1.9113F, 4.6211F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("left_front_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("left_front_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.3F, AnimationHelper.createTranslationalVector(0.0F, 0.25F, -1.0F), Transformation.Interpolations.LINEAR),
@@ -169,7 +169,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.5F, AnimationHelper.createRotationalVector(34.9744F, -1.4336F, 2.0483F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.65F, AnimationHelper.createRotationalVector(22.4229F, -1.9113F, 4.6211F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("right_front_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("right_front_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.3F, AnimationHelper.createTranslationalVector(-0.5F, -0.5F, -1.0F), Transformation.Interpolations.LINEAR),
@@ -182,7 +182,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.45F, AnimationHelper.createRotationalVector(8.6894F, 1.2702F, -2.0124F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.65F, AnimationHelper.createRotationalVector(-4.9811F, 0.4352F, 4.9811F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.25F, AnimationHelper.createTranslationalVector(0.0F, -0.25F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.65F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -202,13 +202,13 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.4F, AnimationHelper.createRotationalVector(42.5F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.65F, AnimationHelper.createRotationalVector(30.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("mouith", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("mouith", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
 			.build();
 
-	public static final Animation bite = Animation.Builder.create(1.0F)
+	public static final AnimationDefinition bite = AnimationDefinition.Builder.create(1.0F)
 			.addBoneAnimation("body", new Transformation(Transformation.Targets.ROTATE,
 					new Keyframe(0.0F, AnimationHelper.createRotationalVector(-2.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createRotationalVector(-10.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
@@ -217,7 +217,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.8F, AnimationHelper.createRotationalVector(7.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createRotationalVector(-2.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("body", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("body", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, -0.5F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, -0.5F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -228,7 +228,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.65F, AnimationHelper.createRotationalVector(-47.5F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(1.0F, AnimationHelper.createRotationalVector(-47.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("tail", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("tail", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -236,7 +236,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -12.5F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -12.5F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("left_back_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("left_back_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -244,7 +244,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.0F, AnimationHelper.createRotationalVector(-0.1507F, -0.8548F, 19.9824F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createRotationalVector(-0.1507F, -0.8548F, 19.9824F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("right_back_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("right_back_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(-0.25F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createTranslationalVector(-0.25F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -256,7 +256,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.8F, AnimationHelper.createRotationalVector(-42.5F, 0.0F, -7.5F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createRotationalVector(2.5F, 0.0F, -7.5F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("left_front_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("left_front_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -268,7 +268,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.8F, AnimationHelper.createRotationalVector(-37.5F, 0.0F, 7.5F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createRotationalVector(2.5F, 0.0F, 7.5F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("right_front_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("right_front_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -280,7 +280,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(0.8F, AnimationHelper.createRotationalVector(5.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(1.0F, AnimationHelper.createRotationalVector(10.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.35F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -298,12 +298,12 @@ public class DirewolfEntityAnimations {
 			))
 			.build();
 
-	public static final Animation spawn = Animation.Builder.create(2.3F)
+	public static final AnimationDefinition spawn = AnimationDefinition.Builder.create(2.3F)
 			.addBoneAnimation("root", new Transformation(Transformation.Targets.ROTATE,
 					new Keyframe(2.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(2.3F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("root", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("root", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.3F, AnimationHelper.createTranslationalVector(0.0F, -0.25F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, -0.25F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -328,7 +328,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(2.0F, AnimationHelper.createRotationalVector(-2.5F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(2.3F, AnimationHelper.createRotationalVector(-2.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("body", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("body", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(2.0F, AnimationHelper.createTranslationalVector(0.0F, -0.5F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(2.3F, AnimationHelper.createTranslationalVector(0.0F, -0.5F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -343,7 +343,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(1.9F, AnimationHelper.createRotationalVector(-47.5F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(2.2F, AnimationHelper.createRotationalVector(-47.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("tail", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("tail", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(1.9F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(2.2F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 			))
@@ -358,7 +358,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(2.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -12.5F), Transformation.Interpolations.CUBIC),
 					new Keyframe(2.3F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -12.5F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("left_back_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("left_back_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.3F, AnimationHelper.createTranslationalVector(1.0F, -0.25F, 0.0F), Transformation.Interpolations.CUBIC),
@@ -380,7 +380,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(2.0F, AnimationHelper.createRotationalVector(-0.1507F, -0.8548F, 19.9824F), Transformation.Interpolations.CUBIC),
 					new Keyframe(2.3F, AnimationHelper.createRotationalVector(-0.1507F, -0.8548F, 19.9824F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("right_back_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("right_back_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createTranslationalVector(-1.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.3F, AnimationHelper.createTranslationalVector(-1.0F, -0.25F, 0.0F), Transformation.Interpolations.CUBIC),
@@ -402,7 +402,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(2.0F, AnimationHelper.createRotationalVector(2.5F, 0.0F, -7.5F), Transformation.Interpolations.CUBIC),
 					new Keyframe(2.3F, AnimationHelper.createRotationalVector(2.5F, 0.0F, -7.5F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("left_front_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("left_front_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createTranslationalVector(2.0F, 4.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.3F, AnimationHelper.createTranslationalVector(2.0F, 4.0F, 0.0F), Transformation.Interpolations.CUBIC),
@@ -424,7 +424,7 @@ public class DirewolfEntityAnimations {
 					new Keyframe(2.0F, AnimationHelper.createRotationalVector(2.5F, 0.0F, 7.5F), Transformation.Interpolations.CUBIC),
 					new Keyframe(2.3F, AnimationHelper.createRotationalVector(2.5F, 0.0F, 7.5F), Transformation.Interpolations.LINEAR)
 			))
-			.addBoneAnimation("right_front_leg", new Transformation(Transformation.Targets.TRANSLATE,
+			.addBoneAnimation("right_front_leg", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 					new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 					new Keyframe(0.15F, AnimationHelper.createTranslationalVector(-1.0F, 4.0F, 0.0F), Transformation.Interpolations.CUBIC),
 					new Keyframe(0.3F, AnimationHelper.createTranslationalVector(-1.0F, 4.0F, 0.0F), Transformation.Interpolations.CUBIC),

@@ -5,6 +5,10 @@ plugins {
 
 def platform = project.name;
 
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+}
+
 architectury {
     platformSetupLoomIde()
     neoForge()
@@ -100,6 +104,7 @@ shadowJar {
 
 remapJar {
     inputFile.set shadowJar.archiveFile
+    atAccessWideners.add("archers.accesswidener")
 }
 
 // Publishing is configured unconditionally: tasks only *run* when explicitly invoked

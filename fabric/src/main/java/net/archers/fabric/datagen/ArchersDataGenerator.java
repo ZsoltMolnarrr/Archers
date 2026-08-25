@@ -13,11 +13,13 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.recipe.RecipeExporter;
+import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.datagen.NamespacedLangGenerator;
@@ -87,14 +89,16 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             var namespace = ArchersMod.ID;
-            var treasureTagBuilder = getOrCreateTagBuilder(SpellTags.TREASURE);
+            // 1.21.6 split the tag-provider API: `getOrCreateTagBuilder` → key-based `builder(TagKey)`
+            // (values are `RegistryKey`s) vs `valueLookupBuilder` for registry-object providers.
+            var treasureTagBuilder = builder(SpellTags.TREASURE);
             var processedBooks = new HashSet<ArcherSpells.Book>();
             ArcherSpells.entries.forEach(entry -> {
                 if (entry.book() != null) {
                     var bookTagKey = SpellTags.spellBook(namespace, entry.book().toString().toLowerCase());
-                    getOrCreateTagBuilder(bookTagKey).addOptional(entry.id());
+                    builder(bookTagKey).addOptional(RegistryKey.of(SpellRegistry.KEY, entry.id()));
                     var scrollTagKey = SpellTags.spellScroll(namespace, entry.book().toString().toLowerCase());
-                    getOrCreateTagBuilder(scrollTagKey).addOptional(entry.id());
+                    builder(scrollTagKey).addOptional(RegistryKey.of(SpellRegistry.KEY, entry.id()));
                     if (processedBooks.add(entry.book())) {
                         treasureTagBuilder.addOptionalTag(scrollTagKey);
                     }
@@ -127,7 +131,22 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
         public static int UNSMELT_TIME = 300;
 
         @Override
-        public void generate(RecipeExporter exporter) {
+        public String getName() {
+            return "Archer Unsmelting Recipes";
+        }
+
+        @Override
+        protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+            return new Generator(registries, exporter);
+        }
+
+        private static class Generator extends RecipeGenerator {
+            Generator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+                super(registries, exporter);
+            }
+
+        @Override
+        public void generate() {
             disassembleArmor(exporter, ArcherArmors.archerArmorSet_T1, Items.LEATHER);
             disassembleArmor(exporter, ArcherArmors.archerArmorSet_T2, Items.TURTLE_SCUTE);
             disassembleArmor(exporter, ArcherArmors.archerArmorSet_T3, Items.NETHERITE_SCRAP);
@@ -174,17 +193,22 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
                     Items.NETHERITE_SCRAP);
         }
 
-        private static void disassembleArmor(RecipeExporter exporter, Armor.Set armorSet, Item output) {
-            FabricRecipeProvider.offerSmelting(exporter,
-                    armorSet.pieces(),
+        @SuppressWarnings("unchecked")
+        private void disassembleArmor(RecipeExporter exporter, Armor.Set armorSet, Item output) {
+            disassemble(exporter, (List<ItemConvertible>) (List<?>) armorSet.pieces(), output);
+        }
+
+        private void disassemble(RecipeExporter exporter, List<ItemConvertible> items, Item output) {
+            offerSmelting(
+                    items,
                     RecipeCategory.MISC,
                     output,
                     0.1f,
                     UNSMELT_TIME,
                     "disassemble"
             );
-            FabricRecipeProvider.offerBlasting(exporter,
-                    armorSet.pieces(),
+            offerBlasting(
+                    items,
                     RecipeCategory.MISC,
                     output,
                     0.1f,
@@ -192,24 +216,6 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
                     "disassemble"
             );
         }
-
-        private static void disassemble(RecipeExporter exporter, List<ItemConvertible> items, Item output) {
-            FabricRecipeProvider.offerSmelting(exporter,
-                    items,
-                    RecipeCategory.MISC,
-                    output,
-                    0.1f,
-                    UNSMELT_TIME,
-                    "disassemble"
-            );
-            FabricRecipeProvider.offerBlasting(exporter,
-                    items,
-                    RecipeCategory.MISC,
-                    output,
-                    0.1f,
-                    UNSMELT_TIME / 2,
-                    "disassemble"
-            );
         }
     }
 

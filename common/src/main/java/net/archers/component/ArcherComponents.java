@@ -12,7 +12,7 @@ import java.util.function.UnaryOperator;
 
 public class ArcherComponents {
     public static final ComponentType<Boolean> AUTO_FIRE = register(
-            Identifier.of(ArchersMod.ID, "afh"), builder -> builder.codec(Codec.BOOL).packetCodec(PacketCodecs.BOOL)
+            Identifier.of(ArchersMod.ID, "afh"), builder -> builder.codec(Codec.BOOL).packetCodec(PacketCodecs.BOOLEAN)
     );
 
     private static <T> ComponentType<T> register(Identifier id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {

@@ -9,6 +9,8 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
@@ -18,7 +20,12 @@ public class ArcherBlocks {
 
     public record Entry(String name, Block block, BlockItem item) {
         public Entry(String name, Block block) {
-            this(name, block, new BlockItem(block, new Item.Settings()));
+            // Since 1.21.2 every `Item.Settings` must carry its registry key (the item crashes at
+            // construction otherwise), and a block item needs `useBlockPrefixedTranslationKey()` to keep
+            // its `block.<ns>.<path>` lang key.
+            this(name, block, new BlockItem(block, new Item.Settings()
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(ArchersMod.ID, name)))
+                    .useBlockPrefixedTranslationKey()));
         }
     }
 
@@ -32,6 +39,7 @@ public class ArcherBlocks {
 
     public static final Entry WORKBENCH = entry(ArcherWorkbenchBlock.ID.getPath(), new ArcherWorkbenchBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, ArcherWorkbenchBlock.ID))
                     .mapColor(MapColor.OAK_TAN)
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(2.5F)

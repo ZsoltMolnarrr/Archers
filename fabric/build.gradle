@@ -5,6 +5,10 @@ plugins {
 
 def platform = project.name;
 
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+}
+
 architectury {
     platformSetupLoomIde()
     fabric()

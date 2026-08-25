@@ -1,3 +1,7 @@
+loom {
+    accessWidenerPath = file("src/main/resources/archers.accesswidener")
+}
+
 architectury {
     common rootProject.enabled_platforms.split(',')
 }

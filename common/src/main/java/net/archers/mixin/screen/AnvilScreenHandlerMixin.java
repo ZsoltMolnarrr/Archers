@@ -4,6 +4,7 @@ import net.archers.item.misc.AutoFireHook;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.*;
+import net.minecraft.screen.slot.ForgingSlotsManager;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,8 +17,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     @Shadow @Final private Property levelCost;
 
-    public AnvilScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
-        super(type, syncId, playerInventory, context);
+    public AnvilScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context, ForgingSlotsManager slotsManager) {
+        super(type, syncId, playerInventory, context, slotsManager);
     }
 
     // Apply AutoFireHook

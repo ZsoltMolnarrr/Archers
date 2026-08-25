@@ -29,7 +29,7 @@ public final class FabricMod implements ModInitializer {
                 ArcherVillagers.poiBlockStates());
         ArchersMod.registerVillagers(); // registers the profession + builds ArcherVillagers.TRADES
         ArcherVillagers.TRADES.forEach((tier, factories) ->
-                TradeOfferHelper.registerVillagerOffers(ArcherVillagers.PROFESSION, tier,
+                TradeOfferHelper.registerVillagerOffers(ArcherVillagers.PROFESSION_KEY, tier,
                         list -> list.addAll(factories)));
 
         // Creative-tab placement (Archers group) — Fabric API.

@@ -117,11 +117,11 @@ public class ArcherSummons {
     private static List<AttributeScaling.Entry> rangedCombatScaling() {
         var s = ExternalSpellSchools.PHYSICAL_RANGED.attributeEntry.getIdAsString();
         var entries = new ArrayList<AttributeScaling.Entry>();
-        entries.add(scalingEntry(EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString(), s, 0, 1.0));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ARMOR.getIdAsString(), s, 10, 0.1));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(), s, 0, 0.3));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_KNOCKBACK.getIdAsString(), s, 0, 0.1));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(), s, 5, 0.05));
+        entries.add(scalingEntry(EntityAttributes.MAX_HEALTH.getIdAsString(), s, 0, 1.0));
+        entries.add(scalingEntry(EntityAttributes.ARMOR.getIdAsString(), s, 10, 0.1));
+        entries.add(scalingEntry(EntityAttributes.ATTACK_DAMAGE.getIdAsString(), s, 0, 0.3));
+        entries.add(scalingEntry(EntityAttributes.ATTACK_KNOCKBACK.getIdAsString(), s, 0, 0.1));
+        entries.add(scalingEntry(EntityAttributes.KNOCKBACK_RESISTANCE.getIdAsString(), s, 5, 0.05));
         return entries;
     }
 

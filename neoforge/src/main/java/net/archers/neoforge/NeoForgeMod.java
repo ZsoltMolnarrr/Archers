@@ -84,7 +84,7 @@ public final class NeoForgeMod {
     }
 
     private static void onVillagerTrades(VillagerTradesEvent event) {
-        if (event.getType() != ArcherVillagers.PROFESSION) {
+        if (event.getType() != ArcherVillagers.PROFESSION_KEY) {
             return;
         }
         ArcherVillagers.TRADES.forEach((tier, factories) -> {

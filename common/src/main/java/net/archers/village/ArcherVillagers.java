@@ -11,6 +11,8 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.TradeOffers;
 import net.minecraft.village.VillagerProfession;
@@ -38,14 +40,21 @@ public class ArcherVillagers {
     /// loader-specific trade-offer registration (Fabric `TradeOfferHelper` / NeoForge `VillagerTradesEvent`).
     public static VillagerProfession PROFESSION;
 
+    /// Registry key of {@link #PROFESSION} — the loader trade-registration APIs are keyed by it since 1.21.2.
+    public static final RegistryKey<VillagerProfession> PROFESSION_KEY =
+            RegistryKey.of(RegistryKeys.VILLAGER_PROFESSION, Identifier.of(ArchersMod.ID, ARCHERY_ARTISAN));
+
     /// Trade offers per merchant tier (1..5), populated by {@link #registerVillagers()}. Actual registration
     /// with the game is loader-specific and lives in each platform's entrypoint.
     public static final LinkedHashMap<Integer, List<TradeOffers.Factory>> TRADES = new LinkedHashMap<>();
 
     public static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> workStation) {
         var id = Identifier.of(ArchersMod.ID, name);
+        // `VillagerProfession.id` became a display `Text` in 1.21.11 (vanilla builds
+        // `entity.<ns>.villager.<path>`). Keep the key the existing translations already use:
+        // `entity.minecraft.villager.archers.archery_artisan`.
         return Registry.register(Registries.VILLAGER_PROFESSION, Identifier.of(ArchersMod.ID, name), new VillagerProfession(
-                id.toString(),
+                Text.translatable("entity.minecraft.villager." + id.getNamespace() + "." + id.getPath()),
                 (entry) -> {
                     return entry.matchesKey(workStation);
                 },
@@ -65,32 +74,28 @@ public class ArcherVillagers {
 
         TRADES.clear();
         TRADES.put(1, List.of(
-                new TradeOffers.SellItemFactory(Items.ARROW, 2, 8, 128, 3, 0.01f),
-                new TradeOffers.BuyItemFactory(Items.LEATHER, 8, 12, 6, 5)
+                new ArcherTrades.Sell(Items.ARROW, 2, 8, 128, 3, 0.01f),
+                new ArcherTrades.Buy(Items.LEATHER, 8, 12, 6, 5)
         ));
         TRADES.put(2, List.of(
-                new TradeOffers.SellItemFactory(ArcherWeapons.composite_longbow.item(), 6, 1, 16),
-                new TradeOffers.SellItemFactory(ArcherArmors.archerArmorSet_T1.head, 15, 1, 18),
-                new TradeOffers.BuyItemFactory(Items.STRING, 6, 12, 8, 3)
+                new ArcherTrades.Sell(ArcherWeapons.composite_longbow.item(), 6, 1, 16),
+                new ArcherTrades.Sell(ArcherArmors.archerArmorSet_T1.head, 15, 1, 18),
+                new ArcherTrades.Buy(Items.STRING, 6, 12, 8, 3)
         ));
         TRADES.put(3, List.of(
-                new TradeOffers.SellItemFactory(ArcherArmors.archerArmorSet_T1.feet, 15, 1, 18),
-                new TradeOffers.BuyItemFactory(Items.REDSTONE, 12, 12, 5, 8),
-                new TradeOffers.SellItemFactory(ArcherArmors.archerArmorSet_T1.legs, 15, 1, 18)
+                new ArcherTrades.Sell(ArcherArmors.archerArmorSet_T1.feet, 15, 1, 18),
+                new ArcherTrades.Buy(Items.REDSTONE, 12, 12, 5, 8),
+                new ArcherTrades.Sell(ArcherArmors.archerArmorSet_T1.legs, 15, 1, 18)
         ));
         TRADES.put(4, List.of(
-                new TradeOffers.SellItemFactory(ArcherArmors.archerArmorSet_T1.chest, 15, 1, 18),
-                new TradeOffers.SellItemFactory(Items.TURTLE_SCUTE, 20, 12, 10)
+                new ArcherTrades.Sell(ArcherArmors.archerArmorSet_T1.chest, 15, 1, 18),
+                new ArcherTrades.Sell(Items.TURTLE_SCUTE, 20, 12, 10)
         ));
         TRADES.put(5, List.of(
-                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        ArcherWeapons.royal_longbow.item(), 40, 3, 30, 0F).create(entity, random),
-                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        ArcherWeapons.mechanic_shortbow.item(), 40, 3, 30, 0F).create(entity, random),
-                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        ArcherWeapons.rapid_crossbow.item(), 40, 3, 30, 0F).create(entity, random),
-                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        ArcherWeapons.heavy_crossbow.item(), 40, 3, 30, 0F).create(entity, random)
+                new ArcherTrades.SellEnchanted(ArcherWeapons.royal_longbow.item(), 40, 3, 30, 0F),
+                new ArcherTrades.SellEnchanted(ArcherWeapons.mechanic_shortbow.item(), 40, 3, 30, 0F),
+                new ArcherTrades.SellEnchanted(ArcherWeapons.rapid_crossbow.item(), 40, 3, 30, 0F),
+                new ArcherTrades.SellEnchanted(ArcherWeapons.heavy_crossbow.item(), 40, 3, 30, 0F)
         ));
     }
 }

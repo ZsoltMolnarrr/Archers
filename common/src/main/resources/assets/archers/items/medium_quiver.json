@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "bundleapi:custom_bundle/fullness",
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "archers:item/medium_quiver"
+    },
+    "entries": [
+      {
+        "threshold": 0.000001,
+        "model": {
+          "type": "minecraft:model",
+          "model": "archers:item/medium_quiver_filled"
+        }
+      }
+    ]
+  }
+}

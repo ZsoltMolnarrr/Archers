@@ -16,15 +16,9 @@
     }
   ],
   "key": {
-    "M": {
-      "item": "betterend:aeternium_ingot"
-    },
-    "C": {
-      "item": "betterend:crystal_shards"
-    },
-    "X": {
-      "item": "minecraft:string"
-    }
+    "M": "betterend:aeternium_ingot",
+    "C": "betterend:crystal_shards",
+    "X": "minecraft:string"
   },
   "pattern": [
     " CX",

@@ -8,6 +8,8 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.LoreComponent;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
@@ -27,7 +29,10 @@ public class Quivers {
     public record Args(TagKey<Item> tag, Item.Settings settings) { }
     public static Function<Args, Item> factory = args -> new CustomBundleItem(args.tag, args.settings);
     public static Entry entry(String name, int capacity, @Nullable Rarity rarity) {
+        var id = Identifier.of(ArchersMod.ID, name);
+        // Since 1.21.2 every `Item.Settings` must carry its registry key or the item crashes at construction.
         var settings = new Item.Settings()
+                .registryKey(RegistryKey.of(RegistryKeys.ITEM, id))
                 .maxCount(1)
                 .component(
                         DataComponentTypes.LORE,
@@ -44,7 +49,6 @@ public class Quivers {
             settings.rarity(rarity);
         }
         var bundle = factory.apply(new Args(ItemTags.ARROWS, settings));
-        var id = Identifier.of(ArchersMod.ID, name);
         var entry = new Entry(id, capacity, bundle);
         entries.add(entry);
         return entry;

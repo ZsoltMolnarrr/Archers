@@ -14,15 +14,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
-      "item": "minecraft:rabbit_hide"
-    },
-    "S": {
-      "item": "minecraft:string"
-    },
-    "X": {
-      "item": "minecraft:gold_ingot"
-    }
+    "L": "minecraft:rabbit_hide",
+    "S": "minecraft:string",
+    "X": "minecraft:gold_ingot"
   },
   "pattern": [
     " S ",

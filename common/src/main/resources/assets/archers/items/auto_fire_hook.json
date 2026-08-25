@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "archers:item/auto_fire_hook"
+  }
+}
