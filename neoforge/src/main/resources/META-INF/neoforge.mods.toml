@@ -16,7 +16,7 @@ logoFile = "icon.png"
 [[dependencies.archers]]
 modId = "neoforge"
 type = "required"
-versionRange = "[${neoforge_version},)"
+versionRange = "[21.11,)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -58,6 +58,7 @@ side = "BOTH"
 [[dependencies.archers]]
 modId = "curios"
 type = "optional"
+versionRange = "[${curios_version},)"
 ordering = "AFTER"
 side = "BOTH"
 
