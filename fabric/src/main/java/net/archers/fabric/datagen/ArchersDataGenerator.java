@@ -312,6 +312,7 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
             builder.add("item." + namespace + ".medium_quiver", "Hunting Quiver");
             builder.add("item." + namespace + ".large_quiver", "Battle Quiver");
             builder.add("item." + namespace + ".quiver.hint", "Provides arrows for archery, when equipped.");
+            builder.add("item." + namespace + ".quiver.empty.description", "Can hold mixed stacks of arrows");
             builder.add("item." + namespace + ".auto_fire_hook", "Auto-Fire Hook");
             builder.add("item." + namespace + ".auto_fire_hook.description_1", "Automatically releases charged arrow.");
             builder.add("item." + namespace + ".auto_fire_hook.description_2", "Can be applied to ranged weapons, on an Anvil.");

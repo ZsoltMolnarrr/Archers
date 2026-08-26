@@ -55,6 +55,7 @@
   "item.archers.netherite_rapid_crossbow": "Netherite Rapid Crossbow",
   "item.archers.netherite_shortbow": "Netherite Shortbow",
   "item.archers.netherite_spear": "Netherite Spear",
+  "item.archers.quiver.empty.description": "Can hold mixed stacks of arrows",
   "item.archers.quiver.hint": "Provides arrows for archery, when equipped.",
   "item.archers.ranger_armor_chest": "Ranger Tunic",
   "item.archers.ranger_armor_feet": "Ranger Boots",

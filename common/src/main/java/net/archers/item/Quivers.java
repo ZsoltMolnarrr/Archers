@@ -26,8 +26,8 @@ import java.util.function.Function;
 public class Quivers {
     public static final List<Entry> entries = new ArrayList<>();
     public record Entry(Identifier id, int capacity, Item item) {  }
-    public record Args(TagKey<Item> tag, Item.Settings settings) { }
-    public static Function<Args, Item> factory = args -> new CustomBundleItem(args.tag, args.settings);
+    public record Args(TagKey<Item> tag, Text emptyDescription, Item.Settings settings) { }
+    public static Function<Args, Item> factory = args -> new CustomBundleItem(args.tag, args.emptyDescription, args.settings);
     public static Entry entry(String name, int capacity, @Nullable Rarity rarity) {
         var id = Identifier.of(ArchersMod.ID, name);
         // Since 1.21.2 every `Item.Settings` must carry its registry key or the item crashes at construction.
@@ -48,7 +48,7 @@ public class Quivers {
         if (rarity != null) {
             settings.rarity(rarity);
         }
-        var bundle = factory.apply(new Args(ItemTags.ARROWS, settings));
+        var bundle = factory.apply(new Args(ItemTags.ARROWS, Text.translatable("item.archers.quiver.empty.description"), settings));
         var entry = new Entry(id, capacity, bundle);
         entries.add(entry);
         return entry;
