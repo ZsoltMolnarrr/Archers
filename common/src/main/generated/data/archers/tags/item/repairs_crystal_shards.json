@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:netherite_ingot",
+    {
+      "id": "betterend:crystal_shards",
+      "required": false
+    }
+  ]
+}

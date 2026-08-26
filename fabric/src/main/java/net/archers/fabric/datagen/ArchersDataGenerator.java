@@ -6,6 +6,7 @@ import net.archers.content.ArcherSpells;
 import net.archers.effect.ArcherEffects;
 import net.archers.entity.ArcherEntities;
 import net.archers.item.ArcherArmors;
+import net.archers.item.ArcherItemTags;
 import net.archers.item.ArcherWeapons;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -20,6 +21,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.datagen.NamespacedLangGenerator;
@@ -65,6 +67,13 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
             ).toList();
             generateBowTags(bowEntries);
             generateArmorTags(ArcherArmors.entries, RPGSeriesItemTags.ArmorMetaType.ARCHERY);
+
+            // Anvil repair tags (`minecraft:repairable`), one per material
+            for (var repair: ArcherItemTags.REPAIR_TAGS) {
+                var tag = builder(repair.tag());
+                repair.required().forEach(id -> tag.add(RegistryKey.of(RegistryKeys.ITEM, id)));
+                repair.optional().forEach(id -> tag.addOptional(RegistryKey.of(RegistryKeys.ITEM, id)));
+            }
         }
     }
 
