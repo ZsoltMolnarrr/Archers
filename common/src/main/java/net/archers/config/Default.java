@@ -1,6 +1,6 @@
 package net.archers.config;
 
-import net.fabric_extras.structure_pool.api.StructurePoolConfig;
+import net.rpg_foundation.structure_pool_api.api.StructurePoolConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
