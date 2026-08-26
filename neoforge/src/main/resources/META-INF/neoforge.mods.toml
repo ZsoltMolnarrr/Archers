@@ -23,7 +23,7 @@ side = "BOTH"
 [[dependencies.archers]]
 modId = "minecraft"
 type = "required"
-versionRange = "[${minecraft_compat_version},)"
+versionRange = "[${minecraft_min_version},)"
 ordering = "NONE"
 side = "BOTH"
 
