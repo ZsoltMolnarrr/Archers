@@ -1,7 +1,7 @@
 package net.archers.item;
 
 import net.archers.ArchersMod;
-import net.fabric_extras.ranged_weapon.api.RangedConfig;
+import net.rpg_foundation.ranged_weapon.api.RangedConfig;
 import net.spell_engine.Platform;
 import net.minecraft.registry.tag.ItemTags;
 import net.spell_engine.rpg_series.config.WeaponConfig;

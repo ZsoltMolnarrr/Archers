@@ -2,7 +2,7 @@ package net.archers.mixin.client.autofire;
 
 import net.archers.client.util.ItemUseDelay;
 import net.archers.item.misc.AutoFireHook;
-import net.fabric_extras.ranged_weapon.api.RangedWeaponProperties;
+import net.rpg_foundation.ranged_weapon.api.RangedWeaponProperties;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.item.property.numeric.UseDurationProperty;
 import net.minecraft.entity.LivingEntity;

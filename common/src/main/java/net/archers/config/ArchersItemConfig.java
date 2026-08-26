@@ -1,6 +1,6 @@
 package net.archers.config;
 
-import net.fabric_extras.ranged_weapon.api.RangedConfig;
+import net.rpg_foundation.ranged_weapon.api.RangedConfig;
 import net.spell_engine.rpg_series.config.ArmorSetConfig;
 import net.spell_engine.rpg_series.config.WeaponConfig;
 
