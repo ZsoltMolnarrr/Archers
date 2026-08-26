@@ -2,20 +2,20 @@ package net.archers.fabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
-import net.minecraft.advancement.Advancement;
-import net.minecraft.advancement.AdvancementCriterion;
-import net.minecraft.advancement.AdvancementEntry;
-import net.minecraft.advancement.AdvancementFrame;
-import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.advancement.criterion.VillagerTradeCriterion;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.predicate.NbtPredicate;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.NbtPredicate;
+import net.minecraft.advancements.criterion.TradeTrigger;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemStack;
 import net.spell_engine.misc.criteria.SpellCastCriteria;
 import net.spell_engine.spellbinding.SpellBindingCriteria;
 import net.spell_engine.spellbinding.SpellBookCreationCriteria;
@@ -31,7 +31,7 @@ import java.util.function.Consumer;
  * <p>
  * The advancements live in the shared {@code rpg_series} namespace (they are part of the RPG Series
  * progression UI) but their content is provided by the Archers mod. {@link #entries()} is the single
- * source of truth: this provider exports each built {@link AdvancementEntry}, and
+ * source of truth: this provider exports each built {@link AdvancementHolder}, and
  * {@code ArchersDataGenerator.LangGen} reads the same list for the
  * {@code advancements.rpg_series.<path>.title/description} translation keys, which are derived from the
  * advancement id (see {@link #translationKey}). Every advancement id therefore matches its translation
@@ -40,19 +40,19 @@ import java.util.function.Consumer;
 public class ArchersAdvancements extends FabricAdvancementProvider {
     public static final String NAMESPACE = "rpg_series";
 
-    public ArchersAdvancements(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public ArchersAdvancements(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 
     @Override
-    public void generateAdvancement(RegistryWrapper.WrapperLookup registryLookup, Consumer<AdvancementEntry> consumer) {
+    public void generateAdvancement(HolderLookup.Provider registryLookup, Consumer<AdvancementHolder> consumer) {
         for (var entry : entries()) {
             consumer.accept(entry.entry());
         }
     }
 
     /** A generated advancement paired with the plain-text strings behind its (id-derived) translation keys. */
-    public record Entry(AdvancementEntry entry, String title, String description) {
+    public record Entry(AdvancementHolder entry, String title, String description) {
         public String titleKey() { return translationKey(entry.id(), "title"); }
         public String descriptionKey() { return translationKey(entry.id(), "description"); }
     }
@@ -105,47 +105,47 @@ public class ArchersAdvancements extends FabricAdvancementProvider {
 
     /** Visible task: toast + chat announcement on. */
     private static Entry task(String idPath, String parent, ItemStack icon,
-                              String criterionName, AdvancementCriterion<?> criterion, String title, String description) {
-        return advancement(idPath, parent, icon, AdvancementFrame.TASK, true, true, false, criterionName, criterion, title, description);
+                              String criterionName, Criterion<?> criterion, String title, String description) {
+        return advancement(idPath, parent, icon, AdvancementType.TASK, true, true, false, criterionName, criterion, title, description);
     }
 
     /** Challenge-framed task. */
     private static Entry challenge(String idPath, String parent, ItemStack icon,
-                                   String criterionName, AdvancementCriterion<?> criterion, String title, String description) {
-        return advancement(idPath, parent, icon, AdvancementFrame.CHALLENGE, true, true, false, criterionName, criterion, title, description);
+                                   String criterionName, Criterion<?> criterion, String title, String description) {
+        return advancement(idPath, parent, icon, AdvancementType.CHALLENGE, true, true, false, criterionName, criterion, title, description);
     }
 
     /** Task without toast or chat announcement. */
     private static Entry silent(String idPath, String parent, ItemStack icon,
-                                String criterionName, AdvancementCriterion<?> criterion, String title, String description) {
-        return advancement(idPath, parent, icon, AdvancementFrame.TASK, false, false, false, criterionName, criterion, title, description);
+                                String criterionName, Criterion<?> criterion, String title, String description) {
+        return advancement(idPath, parent, icon, AdvancementType.TASK, false, false, false, criterionName, criterion, title, description);
     }
 
     /** Hidden task: not shown in the tree until earned. */
     private static Entry secret(String idPath, String parent, ItemStack icon,
-                                String criterionName, AdvancementCriterion<?> criterion, String title, String description) {
-        return advancement(idPath, parent, icon, AdvancementFrame.TASK, true, true, true, criterionName, criterion, title, description);
+                                String criterionName, Criterion<?> criterion, String title, String description) {
+        return advancement(idPath, parent, icon, AdvancementType.TASK, true, true, true, criterionName, criterion, title, description);
     }
 
     @SuppressWarnings("deprecation") // Advancement.Builder.parent(Identifier) is the only way to reference parents built outside this provider.
-    private static Entry advancement(String idPath, String parent, ItemStack icon, AdvancementFrame frame,
+    private static Entry advancement(String idPath, String parent, ItemStack icon, AdvancementType frame,
                                      boolean showToast, boolean announceToChat, boolean hidden,
-                                     String criterionName, AdvancementCriterion<?> criterion, String title, String description) {
-        var id = Identifier.of(NAMESPACE, idPath);
+                                     String criterionName, Criterion<?> criterion, String title, String description) {
+        var id = Identifier.fromNamespaceAndPath(NAMESPACE, idPath);
         // The original data-pack advancements did not send telemetry events (vanilla default is off),
         // so keep them untelemetered rather than using the telemetered Advancement.Builder.create().
-        var entry = Advancement.Builder.createUntelemetered()
-                .parent(Identifier.of(parent))
+        var entry = Advancement.Builder.recipeAdvancement()
+                .parent(Identifier.parse(parent))
                 .display(
                         icon,
-                        Text.translatable(translationKey(id, "title")),
-                        Text.translatable(translationKey(id, "description")),
+                        Component.translatable(translationKey(id, "title")),
+                        Component.translatable(translationKey(id, "description")),
                         null,
                         frame,
                         showToast,
                         announceToChat,
                         hidden)
-                .criterion(criterionName, criterion)
+                .addCriterion(criterionName, criterion)
                 .build(id);
         return new Entry(entry, title, description);
     }
@@ -153,40 +153,40 @@ public class ArchersAdvancements extends FabricAdvancementProvider {
     // MARK: Icon helpers
 
     private static ItemStack item(String itemId) {
-        return new ItemStack(Registries.ITEM.get(Identifier.of(itemId)));
+        return new ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.parse(itemId)));
     }
 
     private static ItemStack spellBookIcon(String book) {
-        var stack = new ItemStack(Registries.ITEM.get(Identifier.of("spell_engine", "spell_book")));
-        stack.set(net.minecraft.component.DataComponentTypes.ITEM_MODEL, Identifier.of("archers", "spell_book/" + book)); // vanilla item-model definition = pool id (assets/archers/items/spell_book/<pool>.json)
+        var stack = new ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("spell_engine", "spell_book")));
+        stack.set(net.minecraft.core.component.DataComponents.ITEM_MODEL, Identifier.fromNamespaceAndPath("archers", "spell_book/" + book)); // vanilla item-model definition = pool id (assets/archers/items/spell_book/<pool>.json)
         return stack;
     }
 
     // MARK: Criterion helpers
 
-    private static AdvancementCriterion<?> spellBookCreation(String spellPool) {
-        return SpellBookCreationCriteria.INSTANCE.create(
+    private static Criterion<?> spellBookCreation(String spellPool) {
+        return SpellBookCreationCriteria.INSTANCE.createCriterion(
                 new SpellBookCreationCriteria.Condition(Optional.empty(), Optional.of(spellPool)));
     }
 
-    private static AdvancementCriterion<?> spellBinding(String spellPool, boolean complete) {
-        return SpellBindingCriteria.INSTANCE.create(
+    private static Criterion<?> spellBinding(String spellPool, boolean complete) {
+        return SpellBindingCriteria.INSTANCE.createCriterion(
                 new SpellBindingCriteria.Condition(Optional.empty(), Optional.of(spellPool), Optional.of(complete)));
     }
 
-    private static AdvancementCriterion<?> spellCast(String spell) {
-        return SpellCastCriteria.INSTANCE.create(
+    private static Criterion<?> spellCast(String spell) {
+        return SpellCastCriteria.INSTANCE.createCriterion(
                 new SpellCastCriteria.Condition(Optional.empty(), Optional.of(spell), Optional.empty()));
     }
 
-    private static AdvancementCriterion<?> villagerTrade(String profession) {
-        var villagerData = new NbtCompound();
+    private static Criterion<?> villagerTrade(String profession) {
+        var villagerData = new CompoundTag();
         villagerData.putString("profession", profession);
-        var nbt = new NbtCompound();
+        var nbt = new CompoundTag();
         nbt.put("VillagerData", villagerData);
-        var villager = EntityPredicate.contextPredicateFromEntityPredicate(
-                EntityPredicate.Builder.create().nbt(new NbtPredicate(nbt)));
-        return Criteria.VILLAGER_TRADE.create(
-                new VillagerTradeCriterion.Conditions(Optional.empty(), Optional.of(villager), Optional.empty()));
+        var villager = EntityPredicate.wrap(
+                EntityPredicate.Builder.entity().nbt(new NbtPredicate(nbt)));
+        return CriteriaTriggers.TRADE.createCriterion(
+                new TradeTrigger.TriggerInstance(Optional.empty(), Optional.of(villager), Optional.empty()));
     }
 }

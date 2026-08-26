@@ -2,21 +2,20 @@ package net.archers.client.entity;
 
 import net.archers.ArchersMod;
 import net.archers.client.render.ArcherRenderLayers;
-import net.minecraft.client.model.Dilation;
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
-import net.minecraft.client.render.entity.animation.Animation;
-import net.minecraft.client.render.entity.animation.AnimationDefinition;
-import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.animation.AnimationDefinition;
+import net.minecraft.client.animation.KeyframeAnimation;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import net.spell_engine.client.compatibility.ShaderCompatibility;
 import net.spell_engine.entity.ModelAnimations;
 import org.joml.Vector3f;
@@ -48,7 +47,7 @@ public class DirewolfEntityModel extends EntityModel<SpiritWolfRenderState> {
 		// `ALL_MASK` default); vanilla's emissive layer does not, hence the local copy — see
 		// ArcherRenderLayers#spirit.
 		super(root, texture -> ShaderCompatibility.isShaderPackInUse()
-				? RenderLayers.entityTranslucent(texture)
+				? RenderTypes.entityTranslucent(texture)
 				: ArcherRenderLayers.spirit(texture));
 		this.animationRoot = root.getChild("root");
 		this.right_back_leg = this.animationRoot.getChild("right_back_leg");
@@ -61,58 +60,58 @@ public class DirewolfEntityModel extends EntityModel<SpiritWolfRenderState> {
 		this.right_front_leg = this.body.getChild("right_front_leg");
 		this.left_front_leg = this.body.getChild("left_front_leg");
 		this.tail = this.body.getChild("tail");
-		this.spawnAnimation = DirewolfEntityAnimations.spawn.createAnimation(root);
-		this.biteAnimation = DirewolfEntityAnimations.bite.createAnimation(root);
+		this.spawnAnimation = DirewolfEntityAnimations.spawn.bake(root);
+		this.biteAnimation = DirewolfEntityAnimations.bite.bake(root);
 	}
-	public static TexturedModelData getTexturedModelData() {
-		ModelData modelData = new ModelData();
-		ModelPartData modelPartData = modelData.getRoot();
-		ModelPartData root = modelPartData.addChild("root", ModelPartBuilder.create(), ModelTransform.origin(0.0F, 16.0F, 0.0F));
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition modelData = new MeshDefinition();
+		PartDefinition modelPartData = modelData.getRoot();
+		PartDefinition root = modelPartData.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 16.0F, 0.0F));
 
-		ModelPartData right_back_leg = root.addChild("right_back_leg", ModelPartBuilder.create().uv(12, 42).mirrored().cuboid(-1.0F, -3.0F, -2.95F, 3.0F, 7.0F, 6.0F, new Dilation(0.0F)).mirrored(false)
-		.uv(0, 45).mirrored().cuboid(-1.0F, 1.0F, 3.05F, 3.0F, 9.0F, 3.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.origin(-4.0F, -2.0F, 6.0F));
+		PartDefinition right_back_leg = root.addOrReplaceChild("right_back_leg", CubeListBuilder.create().texOffs(12, 42).mirror().addBox(-1.0F, -3.0F, -2.95F, 3.0F, 7.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false)
+		.texOffs(0, 45).mirror().addBox(-1.0F, 1.0F, 3.05F, 3.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-4.0F, -2.0F, 6.0F));
 
-		ModelPartData left_back_leg = root.addChild("left_back_leg", ModelPartBuilder.create().uv(12, 42).cuboid(-2.0F, -3.0F, -2.95F, 3.0F, 7.0F, 6.0F, new Dilation(0.0F))
-		.uv(0, 45).cuboid(-2.0F, 1.0F, 3.05F, 3.0F, 9.0F, 3.0F, new Dilation(0.0F)), ModelTransform.origin(4.0F, -2.0F, 6.0F));
+		PartDefinition left_back_leg = root.addOrReplaceChild("left_back_leg", CubeListBuilder.create().texOffs(12, 42).addBox(-2.0F, -3.0F, -2.95F, 3.0F, 7.0F, 6.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 45).addBox(-2.0F, 1.0F, 3.05F, 3.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, -2.0F, 6.0F));
 
-		ModelPartData body = root.addChild("body", ModelPartBuilder.create().uv(28, 24).cuboid(-4.0F, -4.0F, -6.0F, 8.0F, 8.0F, 10.0F, new Dilation(0.0F))
-		.uv(0, 0).cuboid(-5.0F, -6.0F, -16.0F, 10.0F, 11.0F, 10.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, -4.0F, 5.0F));
+		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(28, 24).addBox(-4.0F, -4.0F, -6.0F, 8.0F, 8.0F, 10.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 0).addBox(-5.0F, -6.0F, -16.0F, 10.0F, 11.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -4.0F, 5.0F));
 
-		ModelPartData head = body.addChild("head", ModelPartBuilder.create().uv(0, 21).cuboid(-4.0F, -4.0F, -5.0F, 8.0F, 8.0F, 5.0F, new Dilation(0.0F))
-		.uv(0, 21).cuboid(-4.0F, -4.0F, -5.0F, 8.0F, 8.0F, 5.0F, new Dilation(0.0F))
-		.uv(0, 34).cuboid(-2.0F, -1.0F, -10.0F, 4.0F, 3.0F, 5.0F, new Dilation(0.0F))
-		.uv(11, 58).cuboid(-2.0F, 2.0F, -10.0F, 4.0F, 1.0F, 5.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, -2.0F, -16.0F));
+		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 21).addBox(-4.0F, -4.0F, -5.0F, 8.0F, 8.0F, 5.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 21).addBox(-4.0F, -4.0F, -5.0F, 8.0F, 8.0F, 5.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 34).addBox(-2.0F, -1.0F, -10.0F, 4.0F, 3.0F, 5.0F, new CubeDeformation(0.0F))
+		.texOffs(11, 58).addBox(-2.0F, 2.0F, -10.0F, 4.0F, 1.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, -16.0F));
 
-		ModelPartData cube_r1 = head.addChild("cube_r1", ModelPartBuilder.create().uv(47, 50).mirrored().cuboid(-5.0F, 0.0F, 0.0F, 5.0F, 10.0F, 0.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.of(-4.0F, -4.0F, -1.0F, 0.0F, 0.7854F, 0.0F));
+		PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(47, 50).mirror().addBox(-5.0F, 0.0F, 0.0F, 5.0F, 10.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-4.0F, -4.0F, -1.0F, 0.0F, 0.7854F, 0.0F));
 
-		ModelPartData cube_r2 = head.addChild("cube_r2", ModelPartBuilder.create().uv(47, 50).cuboid(0.0F, 0.0F, 0.0F, 5.0F, 10.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(4.0F, -4.0F, -1.0F, 0.0F, -0.7854F, 0.0F));
+		PartDefinition cube_r2 = head.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(47, 50).addBox(0.0F, 0.0F, 0.0F, 5.0F, 10.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.0F, -4.0F, -1.0F, 0.0F, -0.7854F, 0.0F));
 
-		ModelPartData mouith = head.addChild("mouith", ModelPartBuilder.create().uv(30, 42).cuboid(-1.5F, 0.0F, -4.0F, 3.0F, 2.0F, 4.0F, new Dilation(0.0F))
-		.uv(30, 48).cuboid(-1.5F, -1.0F, -4.0F, 3.0F, 1.0F, 4.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 2.0F, -5.0F));
+		PartDefinition mouith = head.addOrReplaceChild("mouith", CubeListBuilder.create().texOffs(30, 42).addBox(-1.5F, 0.0F, -4.0F, 3.0F, 2.0F, 4.0F, new CubeDeformation(0.0F))
+		.texOffs(30, 48).addBox(-1.5F, -1.0F, -4.0F, 3.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 2.0F, -5.0F));
 
-		ModelPartData right_ear = head.addChild("right_ear", ModelPartBuilder.create().uv(21, 22).mirrored().cuboid(-1.25F, -3.0F, -0.5F, 2.0F, 3.0F, 1.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.origin(-2.75F, -4.0F, -0.5F));
+		PartDefinition right_ear = head.addOrReplaceChild("right_ear", CubeListBuilder.create().texOffs(21, 22).mirror().addBox(-1.25F, -3.0F, -0.5F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-2.75F, -4.0F, -0.5F));
 
-		ModelPartData left_ear = head.addChild("left_ear", ModelPartBuilder.create().uv(21, 22).cuboid(-0.75F, -3.0F, -0.5F, 2.0F, 3.0F, 1.0F, new Dilation(0.0F)), ModelTransform.origin(2.75F, -4.0F, -0.5F));
+		PartDefinition left_ear = head.addOrReplaceChild("left_ear", CubeListBuilder.create().texOffs(21, 22).addBox(-0.75F, -3.0F, -0.5F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(2.75F, -4.0F, -0.5F));
 
-		ModelPartData right_front_leg = body.addChild("right_front_leg", ModelPartBuilder.create().uv(50, 3).mirrored().cuboid(-0.25F, -2.0F, -2.0F, 3.0F, 14.0F, 4.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.origin(-5.0F, 0.0F, -12.0F));
+		PartDefinition right_front_leg = body.addOrReplaceChild("right_front_leg", CubeListBuilder.create().texOffs(50, 3).mirror().addBox(-0.25F, -2.0F, -2.0F, 3.0F, 14.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-5.0F, 0.0F, -12.0F));
 
-		ModelPartData left_front_leg = body.addChild("left_front_leg", ModelPartBuilder.create().uv(50, 3).cuboid(-2.75F, -2.0F, -2.0F, 3.0F, 14.0F, 4.0F, new Dilation(0.0F)), ModelTransform.origin(5.0F, 0.0F, -12.0F));
+		PartDefinition left_front_leg = body.addOrReplaceChild("left_front_leg", CubeListBuilder.create().texOffs(50, 3).addBox(-2.75F, -2.0F, -2.0F, 3.0F, 14.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(5.0F, 0.0F, -12.0F));
 
-		ModelPartData tail = body.addChild("tail", ModelPartBuilder.create().uv(28, 9).cuboid(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 12.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, -2.5F, 4.0F));
-		return TexturedModelData.of(modelData, 64, 64);
+		PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(28, 9).addBox(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.5F, 4.0F));
+		return LayerDefinition.create(modelData, 64, 64);
 	}
 
 	// HAND-WRITTEN CODE
 
 	// Basic render features
 
-	public static final EntityModelLayer TEXTURE = new EntityModelLayer(Identifier.of(ArchersMod.ID, "direwolf"), "main");
+	public static final ModelLayerLocation TEXTURE = new ModelLayerLocation(Identifier.fromNamespaceAndPath(ArchersMod.ID, "direwolf"), "main");
 
 	private void setHeadAngles(float headYaw, float headPitch) {
-		headYaw = MathHelper.clamp(headYaw, -60, 60);
-		headPitch = MathHelper.clamp(headPitch, -60, 60);
-		head.yaw = headYaw * 0.017453292F;
-		head.pitch = headPitch * 0.017453292F;
+		headYaw = Mth.clamp(headYaw, -60, 60);
+		headPitch = Mth.clamp(headPitch, -60, 60);
+		head.yRot = headYaw * 0.017453292F;
+		head.xRot = headPitch * 0.017453292F;
 	}
 
 	// Animations
@@ -121,43 +120,43 @@ public class DirewolfEntityModel extends EntityModel<SpiritWolfRenderState> {
 
 	/// Since 1.21.2 a keyframe clip is bound to the model's parts once ([AnimationDefinition#createAnimation])
 	/// instead of being resolved per frame.
-	private final Animation spawnAnimation;
-	private final Animation biteAnimation;
+	private final KeyframeAnimation spawnAnimation;
+	private final KeyframeAnimation biteAnimation;
 
 	@Override
-	public void setAngles(SpiritWolfRenderState state) {
-		super.setAngles(state); // resets every part's transform
-		this.setHeadAngles(state.relativeHeadYaw, state.pitch);
+	public void setupAnim(SpiritWolfRenderState state) {
+		super.setupAnim(state); // resets every part's transform
+		this.setHeadAngles(state.yRot, state.xRot);
 		// Same time/amplitude mapping as Animation#applyWalking (limbSwing → time, limbSwingAmount → scale),
 		// but routed through ModelAnimations.seamlessLoop so the run clip's loop seam is interpolated with
 		// wrapped catmull-rom neighbours instead of vanilla's clamped ones — removing the per-cycle hitch.
-		long runTime = (long) (state.limbSwingAnimationProgress * 50F);
-		float runAmount = Math.min(state.limbSwingAmplitude, 1F);
+		long runTime = (long) (state.walkAnimationPos * 50F);
+		float runAmount = Math.min(state.walkAnimationSpeed, 1F);
 		ModelAnimations.seamlessLoop(this, DirewolfEntityAnimations.run, runTime, runAmount, TEMP);
 		// No dedicated spawn animation yet — idle stands in (despawn plays it reversed)
 		// double playback speed due to long animation
-		this.spawnAnimation.apply(state.spawnAnimationState,   state.age, 2F);
-		this.spawnAnimation.apply(state.despawnAnimationState, state.age, -2F);
+		this.spawnAnimation.apply(state.spawnAnimationState,   state.ageInTicks, 2F);
+		this.spawnAnimation.apply(state.despawnAnimationState, state.ageInTicks, -2F);
 
 		var anyAction = false;
 		// Attack animation
-		if (state.attackAnimationState.isRunning()) {
-			animationForAttackVariant(state.attackVariant).apply(state.attackAnimationState, state.age, state.attackAnimationSpeed);
+		if (state.attackAnimationState.isStarted()) {
+			animationForAttackVariant(state.attackVariant).apply(state.attackAnimationState, state.ageInTicks, state.attackAnimationSpeed);
 			anyAction = true;
 		}
 		// Idle animation: crossfaded against movement. The run animation already scales with
 		// limbSwingAmplitude, so idle fades out over the same signal instead of cutting off —
 		// full at standstill, gone by limbSwingAmplitude 0.33. The state clock always advances
 		// so fading back in resumes the loop in phase instead of snapping.
-		float idleWeight = anyAction ? 0F : MathHelper.clamp(1F - state.limbSwingAmplitude * 3F, 0F, 1F);
+		float idleWeight = anyAction ? 0F : Mth.clamp(1F - state.walkAnimationSpeed * 3F, 0F, 1F);
 		if (idleWeight > 0F) {
 			float weight = idleWeight;
-			state.idleAnimationState.run(running ->
-					ModelAnimations.seamlessLoop(this, DirewolfEntityAnimations.idle, running.getTimeInMilliseconds(state.age), weight, TEMP));
+			state.idleAnimationState.ifStarted(running ->
+					ModelAnimations.seamlessLoop(this, DirewolfEntityAnimations.idle, running.getTimeInMillis(state.ageInTicks), weight, TEMP));
 		}
 	}
 
-	private Animation animationForAttackVariant(int variant) {
+	private KeyframeAnimation animationForAttackVariant(int variant) {
 		return switch (variant) {
 			default -> this.biteAnimation;
 		};

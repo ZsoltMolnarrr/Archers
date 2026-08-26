@@ -3,10 +3,10 @@ package net.archers.client.render;
 import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import net.archers.ArchersMod;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderSetup;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.rendertype.RenderSetup;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
 import net.spell_engine.api.render.CustomLayers;
 
@@ -46,7 +46,7 @@ public final class ArcherRenderLayers {
     /// coplanar with opposite winding, and only SOUTH carries art. Cull, and the mane disappears from
     /// one side.
     private static final RenderPipeline SPIRIT_PIPELINE = RenderPipeline.builder(RenderPipelines.ENTITY_EMISSIVE_SNIPPET)
-            .withLocation(Identifier.of(ArchersMod.ID, "pipeline/spirit"))
+            .withLocation(Identifier.fromNamespaceAndPath(ArchersMod.ID, "pipeline/spirit"))
             .withShaderDefine("ALPHA_CUTOUT", 0.1F)
             .withShaderDefine("PER_FACE_LIGHTING")
             .withSampler("Sampler1")
@@ -55,19 +55,19 @@ public final class ArcherRenderLayers {
             .withDepthWrite(true)
             .build();
 
-    private static final Function<Identifier, RenderLayer> SPIRIT = Util.memoize(texture ->
+    private static final Function<Identifier, RenderType> SPIRIT = Util.memoize(texture ->
             CustomLayers.create("archers_spirit", RenderSetup.builder(SPIRIT_PIPELINE)
-                    .texture("Sampler0", texture)
+                    .withTexture("Sampler0", texture)
                     .useOverlay()
-                    .crumbling()
-                    .translucent()
-                    .expectedBufferSize(1536)
-                    .outlineMode(RenderSetup.OutlineMode.AFFECTS_OUTLINE)
-                    .build()));
+                    .affectsCrumbling()
+                    .sortOnUpload()
+                    .bufferSize(1536)
+                    .setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE)
+                    .createRenderSetup()));
 
     /// Translucent, self-lit and depth-correct: the layer for summoned spirit bodies.
     /// Memoized per texture, mirroring vanilla's layer factories.
-    public static RenderLayer spirit(Identifier texture) {
+    public static RenderType spirit(Identifier texture) {
         return SPIRIT.apply(texture);
     }
 }

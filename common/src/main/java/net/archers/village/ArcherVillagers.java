@@ -4,27 +4,26 @@ import com.google.common.collect.ImmutableSet;
 import net.archers.ArchersMod;
 import net.archers.block.ArcherBlocks;
 import net.archers.item.ArcherWeapons;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
+import net.minecraft.world.entity.npc.villager.VillagerTrades;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.BlockState;
 import net.archers.item.ArcherArmors;
 import net.archers.content.ArcherSounds;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.village.TradeOffers;
-import net.minecraft.village.VillagerProfession;
-import net.minecraft.world.poi.PointOfInterestType;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
 public class ArcherVillagers {
     public static final String ARCHERY_ARTISAN = "archery_artisan";
-    public static final Identifier POI_ID = Identifier.of(ArchersMod.ID, ARCHERY_ARTISAN);
+    public static final Identifier POI_ID = Identifier.fromNamespaceAndPath(ArchersMod.ID, ARCHERY_ARTISAN);
     public static final int POI_TICKET_COUNT = 1;
     public static final int POI_SEARCH_DISTANCE = 10;
 
@@ -33,7 +32,7 @@ public class ArcherVillagers {
     /// whose block-state mapping NeoForge wires via its POI registry callback) — done in each platform's
     /// entrypoint; this only exposes the shared state set.
     public static Set<BlockState> poiBlockStates() {
-        return ImmutableSet.copyOf(ArcherBlocks.WORKBENCH.block().getStateManager().getStates());
+        return ImmutableSet.copyOf(ArcherBlocks.WORKBENCH.block().getStateDefinition().getPossibleStates());
     }
 
     /// The registered archery-artisan profession, set by {@link #registerVillagers()}. Read by the
@@ -41,25 +40,25 @@ public class ArcherVillagers {
     public static VillagerProfession PROFESSION;
 
     /// Registry key of {@link #PROFESSION} — the loader trade-registration APIs are keyed by it since 1.21.2.
-    public static final RegistryKey<VillagerProfession> PROFESSION_KEY =
-            RegistryKey.of(RegistryKeys.VILLAGER_PROFESSION, Identifier.of(ArchersMod.ID, ARCHERY_ARTISAN));
+    public static final ResourceKey<VillagerProfession> PROFESSION_KEY =
+            ResourceKey.create(Registries.VILLAGER_PROFESSION, Identifier.fromNamespaceAndPath(ArchersMod.ID, ARCHERY_ARTISAN));
 
     /// Trade offers per merchant tier (1..5), populated by {@link #registerVillagers()}. Actual registration
     /// with the game is loader-specific and lives in each platform's entrypoint.
-    public static final LinkedHashMap<Integer, List<TradeOffers.Factory>> TRADES = new LinkedHashMap<>();
+    public static final LinkedHashMap<Integer, List<VillagerTrades.ItemListing>> TRADES = new LinkedHashMap<>();
 
-    public static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> workStation) {
-        var id = Identifier.of(ArchersMod.ID, name);
+    public static VillagerProfession registerProfession(String name, ResourceKey<PoiType> workStation) {
+        var id = Identifier.fromNamespaceAndPath(ArchersMod.ID, name);
         // `VillagerProfession.id` became a display `Text` in 1.21.11 (vanilla builds
         // `entity.<ns>.villager.<path>`). Keep the key the existing translations already use:
         // `entity.minecraft.villager.archers.archery_artisan`.
-        return Registry.register(Registries.VILLAGER_PROFESSION, Identifier.of(ArchersMod.ID, name), new VillagerProfession(
-                Text.translatable("entity.minecraft.villager." + id.getNamespace() + "." + id.getPath()),
+        return Registry.register(BuiltInRegistries.VILLAGER_PROFESSION, Identifier.fromNamespaceAndPath(ArchersMod.ID, name), new VillagerProfession(
+                Component.translatable("entity.minecraft.villager." + id.getNamespace() + "." + id.getPath()),
                 (entry) -> {
-                    return entry.matchesKey(workStation);
+                    return entry.is(workStation);
                 },
                 (entry) -> {
-                    return entry.matchesKey(workStation);
+                    return entry.is(workStation);
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
@@ -70,7 +69,7 @@ public class ArcherVillagers {
     public static void registerVillagers() {
         PROFESSION = registerProfession(
                 ARCHERY_ARTISAN,
-                RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID));
+                ResourceKey.create(BuiltInRegistries.POINT_OF_INTEREST_TYPE.key(), POI_ID));
 
         TRADES.clear();
         TRADES.put(1, List.of(

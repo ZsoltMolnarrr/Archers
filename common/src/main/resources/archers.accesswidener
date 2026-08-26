@@ -1,4 +1,2 @@
 accessWidener	v2	named
-# Custom render layer construction (ArcherRenderLayers.spirit): the emissive pipeline snippet is
-# the base of the depth-writing spirit pipeline. Same widening SpellEngine and ArmorModelAPI use.
-accessible	field	net/minecraft/client/gl/RenderPipelines	ENTITY_EMISSIVE_SNIPPET	Lcom/mojang/blaze3d/pipeline/RenderPipeline$Snippet;
+accessible	field	net/minecraft/client/renderer/RenderPipelines	ENTITY_EMISSIVE_SNIPPET	Lcom/mojang/blaze3d/pipeline/RenderPipeline$Snippet;

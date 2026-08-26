@@ -2,12 +2,12 @@ package net.archers.mixin.client.autofire;
 
 import net.archers.client.util.ItemUseDelay;
 import net.archers.item.misc.AutoFireHook;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.item.properties.numeric.UseDuration;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
 import net.rpg_foundation.ranged_weapon.api.RangedWeaponProperties;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.item.property.numeric.UseDurationProperty;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,35 +24,35 @@ public class LivingEntityMixin {
     /// Note `UseDurationProperty.getTicksUsedSoFar` is the raw tick count: unlike
     /// `UseDurationProperty.getValue`, it is not rescaled by Ranged Weapon API to vanilla's 20-tick pull.
     private static float archers$pullProgress(ItemStack stack, LivingEntity entity) {
-        if (entity.getActiveItem() != stack) {
+        if (entity.getUseItem() != stack) {
             return 0.0F;
         }
         if (stack.getItem() instanceof CrossbowItem) {
             if (CrossbowItem.isCharged(stack)) {
                 return 0.0F;
             }
-            return (float) UseDurationProperty.getTicksUsedSoFar(stack, entity) / CrossbowItem.getPullTime(stack, entity);
+            return (float) UseDuration.useDuration(stack, entity) / CrossbowItem.getChargeDuration(stack, entity);
         }
         var pullTime = RangedWeaponProperties.pullTimeTicks(stack, 20);
         if (pullTime <= 0) {
             return 0.0F;
         }
-        return (float) UseDurationProperty.getTicksUsedSoFar(stack, entity) / pullTime;
+        return (float) UseDuration.useDuration(stack, entity) / pullTime;
     }
 
     private int timeHoldingCharged = 0;
     private boolean autoFiring = false;
-    @Inject(method = "tickItemStackUsage", at = @At("HEAD"))
+    @Inject(method = "updateUsingItem", at = @At("HEAD"))
     private void autoFireHookRelease(ItemStack stack, CallbackInfo ci) {
         if (autoFiring) {
             return;
         }
         var entity = (LivingEntity) (Object) this;
         var charged = false;
-        if (entity.getEntityWorld().isClient()) {
-            if (entity == MinecraftClient.getInstance().player) {
-                var player = MinecraftClient.getInstance().player;
-                var mainHandStack = player.getMainHandStack();
+        if (entity.level().isClientSide()) {
+            if (entity == Minecraft.getInstance().player) {
+                var player = Minecraft.getInstance().player;
+                var mainHandStack = player.getMainHandItem();
                 if (AutoFireHook.isApplied(mainHandStack)) {
                     var state = archers$pullProgress(mainHandStack, player);
                     if (state >= 1) {
@@ -61,9 +61,9 @@ public class LivingEntityMixin {
                         if (timeHoldingCharged > 1) {
                             // Set weapon charged (in a synchronized way)
                             autoFiring = true;
-                            MinecraftClient.getInstance().interactionManager.stopUsingItem(player);
+                            Minecraft.getInstance().gameMode.releaseUsingItem(player);
                             // Wait a little before firing (to make sure the server has time to process the packet)
-                            ((ItemUseDelay) MinecraftClient.getInstance()).imposeItemUseCD_Archers(2);
+                            ((ItemUseDelay) Minecraft.getInstance()).imposeItemUseCD_Archers(2);
                             autoFiring = false;
                         }
                     }

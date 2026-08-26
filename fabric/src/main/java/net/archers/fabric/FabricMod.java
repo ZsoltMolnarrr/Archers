@@ -35,17 +35,17 @@ public final class FabricMod implements ModInitializer {
         // Creative-tab placement (Archers group) — Fabric API.
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
             for (var entry : Misc.ENTRIES) {
-                content.add(entry.item());
+                content.accept(entry.item());
             }
             for (var entry : ArcherBlocks.all) {
-                content.add(entry.item());
+                content.accept(entry.item());
             }
             // Gate BEFORE touching Quivers: reading the static field forces the JVM to link/verify
             // Quivers, whose factory references BundleAPI's CustomBundleItem — a NoClassDefFoundError
             // when BundleAPI is absent. The empty entries list never even gets iterated otherwise.
             if (FabricLoader.getInstance().isModLoaded("bundleapi")) {
                 for (var entry : Quivers.entries) {
-                    content.add(entry.item());
+                    content.accept(entry.item());
                 }
             }
         });

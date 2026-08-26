@@ -6,13 +6,13 @@ import net.archers.item.ArcherWeapons;
 import net.archers.item.misc.Misc;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.rpg_series.item.Weapon;
 
@@ -24,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
  */
 public class ArcherRecipes extends FabricRecipeProvider {
 
-    public ArcherRecipes(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public ArcherRecipes(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
@@ -32,30 +32,30 @@ public class ArcherRecipes extends FabricRecipeProvider {
     /// helpers (`createShaped`, `hasItem`, `conditionsFromItem`, `offerNetheriteUpgradeRecipe`) are
     /// instance members of the generator, which also holds the exporter.
     @Override
-    protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
         return new Generator(registries, exporter);
     }
 
-    private static class Generator extends RecipeGenerator {
-        Generator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+    private static class Generator extends RecipeProvider {
+        Generator(HolderLookup.Provider registries, RecipeOutput exporter) {
             super(registries, exporter);
         }
 
     @Override
-    public void generate() {
-        generateSpearRecipes(exporter);
-        generateBowRecipes(exporter);
-        generateCrossbowRecipes(exporter);
-        generateArmorRecipes(exporter);
-        generateOtherRecipes(exporter);
-        generateNetheriteUpgrades(exporter);
+    public void buildRecipes() {
+        generateSpearRecipes(output);
+        generateBowRecipes(output);
+        generateCrossbowRecipes(output);
+        generateArmorRecipes(output);
+        generateOtherRecipes(output);
+        generateNetheriteUpgrades(output);
     }
 
     // ========================================
     // SPEAR RECIPES
     // ========================================
 
-    private void generateSpearRecipes(RecipeExporter exporter) {
+    private void generateSpearRecipes(RecipeOutput exporter) {
         spear(exporter, ArcherWeapons.flint_spear, Items.FLINT);
         spear(exporter, ArcherWeapons.iron_spear, Items.IRON_INGOT);
         spear(exporter, ArcherWeapons.golden_spear, Items.GOLD_INGOT);
@@ -65,91 +65,91 @@ public class ArcherRecipes extends FabricRecipeProvider {
     /**
      * Generate spear recipe with standard pattern
      */
-    private void spear(RecipeExporter exporter, Weapon.Entry spearEntry, Item tipMaterial) {
-        createShaped(RecipeCategory.COMBAT, spearEntry.item())
+    private void spear(RecipeOutput exporter, Weapon.Entry spearEntry, Item tipMaterial) {
+        shaped(RecipeCategory.COMBAT, spearEntry.item())
                 .pattern("  P")
                 .pattern(" # ")
                 .pattern("#  ")
-                .input('P', tipMaterial)
-                .input('#', Items.STICK)
-                .criterion(hasItem(tipMaterial), conditionsFromItem(tipMaterial))
-                .offerTo(exporter);
+                .define('P', tipMaterial)
+                .define('#', Items.STICK)
+                .unlockedBy(getHasName(tipMaterial), has(tipMaterial))
+                .save(exporter);
     }
 
     // ========================================
     // BOW RECIPES
     // ========================================
 
-    private void generateBowRecipes(RecipeExporter exporter) {
+    private void generateBowRecipes(RecipeOutput exporter) {
         // Composite Longbow - bone + stick + string
-        createShaped(RecipeCategory.COMBAT, ArcherWeapons.composite_longbow.item())
+        shaped(RecipeCategory.COMBAT, ArcherWeapons.composite_longbow.item())
                 .pattern(" #X")
                 .pattern("B X")
                 .pattern(" #X")
-                .input('#', Items.STICK)
-                .input('B', Items.BONE)
-                .input('X', Items.STRING)
-                .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
-                .offerTo(exporter);
+                .define('#', Items.STICK)
+                .define('B', Items.BONE)
+                .define('X', Items.STRING)
+                .unlockedBy(getHasName(Items.BONE), has(Items.BONE))
+                .save(exporter);
 
         // Mechanic Shortbow - iron + redstone + string
-        createShaped(RecipeCategory.COMBAT, ArcherWeapons.mechanic_shortbow.item())
+        shaped(RecipeCategory.COMBAT, ArcherWeapons.mechanic_shortbow.item())
                 .pattern(" IX")
                 .pattern("R X")
                 .pattern(" IX")
-                .input('I', Items.IRON_INGOT)
-                .input('R', Items.REDSTONE)
-                .input('X', Items.STRING)
-                .criterion(hasItem(Items.REDSTONE), conditionsFromItem(Items.REDSTONE))
-                .offerTo(exporter);
+                .define('I', Items.IRON_INGOT)
+                .define('R', Items.REDSTONE)
+                .define('X', Items.STRING)
+                .unlockedBy(getHasName(Items.REDSTONE), has(Items.REDSTONE))
+                .save(exporter);
 
         // Royal Longbow - gold + diamond + string
-        createShaped(RecipeCategory.COMBAT, ArcherWeapons.royal_longbow.item())
+        shaped(RecipeCategory.COMBAT, ArcherWeapons.royal_longbow.item())
                 .pattern(" GX")
                 .pattern("D X")
                 .pattern(" GX")
-                .input('G', Items.GOLD_INGOT)
-                .input('D', Items.DIAMOND)
-                .input('X', Items.STRING)
-                .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
-                .offerTo(exporter);
+                .define('G', Items.GOLD_INGOT)
+                .define('D', Items.DIAMOND)
+                .define('X', Items.STRING)
+                .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
+                .save(exporter);
     }
 
     // ========================================
     // CROSSBOW RECIPES
     // ========================================
 
-    private void generateCrossbowRecipes(RecipeExporter exporter) {
+    private void generateCrossbowRecipes(RecipeOutput exporter) {
         // Rapid Crossbow - iron + redstone + string + tripwire_hook
-        createShaped(RecipeCategory.COMBAT, ArcherWeapons.rapid_crossbow.item())
+        shaped(RecipeCategory.COMBAT, ArcherWeapons.rapid_crossbow.item())
                 .pattern("IRI")
                 .pattern("XTX")
                 .pattern(" I ")
-                .input('I', Items.IRON_INGOT)
-                .input('R', Items.REDSTONE)
-                .input('X', Items.STRING)
-                .input('T', Items.TRIPWIRE_HOOK)
-                .criterion(hasItem(Items.REDSTONE), conditionsFromItem(Items.REDSTONE))
-                .offerTo(exporter);
+                .define('I', Items.IRON_INGOT)
+                .define('R', Items.REDSTONE)
+                .define('X', Items.STRING)
+                .define('T', Items.TRIPWIRE_HOOK)
+                .unlockedBy(getHasName(Items.REDSTONE), has(Items.REDSTONE))
+                .save(exporter);
 
         // Heavy Crossbow - iron + diamond + string + tripwire_hook
-        createShaped(RecipeCategory.COMBAT, ArcherWeapons.heavy_crossbow.item())
+        shaped(RecipeCategory.COMBAT, ArcherWeapons.heavy_crossbow.item())
                 .pattern("IDI")
                 .pattern("XTX")
                 .pattern(" I ")
-                .input('I', Items.IRON_INGOT)
-                .input('D', Items.DIAMOND)
-                .input('X', Items.STRING)
-                .input('T', Items.TRIPWIRE_HOOK)
-                .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
-                .offerTo(exporter);
+                .define('I', Items.IRON_INGOT)
+                .define('D', Items.DIAMOND)
+                .define('X', Items.STRING)
+                .define('T', Items.TRIPWIRE_HOOK)
+                .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
+                .save(exporter);
     }
 
     // ========================================
     // ARMOR RECIPES
     // ========================================
 
-    private void generateArmorRecipes(RecipeExporter exporter) {
+    private void generateArmorRecipes(RecipeOutput exporter) {
         // Archer Armor (T1) - leather + chain
         generateArcherArmorSet(exporter, ArcherArmors.archerArmorSet_T1, Items.LEATHER, Items.IRON_CHAIN);
 
@@ -160,137 +160,137 @@ public class ArcherRecipes extends FabricRecipeProvider {
     /**
      * Generate Archer armor set (T1 - simple pattern with leather + chain)
      */
-    private void generateArcherArmorSet(RecipeExporter exporter, Armor.Set armorSet, Item leather, Item chain) {
+    private void generateArcherArmorSet(RecipeOutput exporter, Armor.Set armorSet, Item leather, Item chain) {
         // Helmet - pattern: "LLL" / "C C"
-        createShaped(RecipeCategory.COMBAT, armorSet.head)
+        shaped(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("LLL")
                 .pattern("C C")
-                .input('L', leather)
-                .input('C', chain)
-                .criterion(hasItem(chain), conditionsFromItem(chain))
-                .offerTo(exporter);
+                .define('L', leather)
+                .define('C', chain)
+                .unlockedBy(getHasName(chain), has(chain))
+                .save(exporter);
 
         // Chestplate - pattern: "C C" / "LLL" / "LLL"
-        createShaped(RecipeCategory.COMBAT, armorSet.chest)
+        shaped(RecipeCategory.COMBAT, armorSet.chest)
                 .pattern("C C")
                 .pattern("LLL")
                 .pattern("LLL")
-                .input('L', leather)
-                .input('C', chain)
-                .criterion(hasItem(chain), conditionsFromItem(chain))
-                .offerTo(exporter);
+                .define('L', leather)
+                .define('C', chain)
+                .unlockedBy(getHasName(chain), has(chain))
+                .save(exporter);
 
         // Leggings - pattern: "CCC" / "L L" / "L L"
-        createShaped(RecipeCategory.COMBAT, armorSet.legs)
+        shaped(RecipeCategory.COMBAT, armorSet.legs)
                 .pattern("CCC")
                 .pattern("L L")
                 .pattern("L L")
-                .input('L', leather)
-                .input('C', chain)
-                .criterion(hasItem(chain), conditionsFromItem(chain))
-                .offerTo(exporter);
+                .define('L', leather)
+                .define('C', chain)
+                .unlockedBy(getHasName(chain), has(chain))
+                .save(exporter);
 
         // Boots - pattern: "C C" / "L L"
-        createShaped(RecipeCategory.COMBAT, armorSet.feet)
+        shaped(RecipeCategory.COMBAT, armorSet.feet)
                 .pattern("C C")
                 .pattern("L L")
-                .input('L', leather)
-                .input('C', chain)
-                .criterion(hasItem(chain), conditionsFromItem(chain))
-                .offerTo(exporter);
+                .define('L', leather)
+                .define('C', chain)
+                .unlockedBy(getHasName(chain), has(chain))
+                .save(exporter);
     }
 
     /**
      * Generate Ranger armor set (T2 - uses leather, rabbit_hide, and turtle_scute)
      */
-    private void generateRangerArmorSet(RecipeExporter exporter, Armor.Set armorSet, Item leather, Item rabbitHide, Item turtleScute) {
+    private void generateRangerArmorSet(RecipeOutput exporter, Armor.Set armorSet, Item leather, Item rabbitHide, Item turtleScute) {
         // Helmet - pattern: "SRS" / "L L"
-        createShaped(RecipeCategory.COMBAT, armorSet.head)
+        shaped(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("SRS")
                 .pattern("L L")
-                .input('S', turtleScute)
-                .input('R', rabbitHide)
-                .input('L', leather)
-                .criterion(hasItem(turtleScute), conditionsFromItem(turtleScute))
-                .offerTo(exporter);
+                .define('S', turtleScute)
+                .define('R', rabbitHide)
+                .define('L', leather)
+                .unlockedBy(getHasName(turtleScute), has(turtleScute))
+                .save(exporter);
 
         // Chestplate - pattern: "R R" / "LSL" / "LLL"
-        createShaped(RecipeCategory.COMBAT, armorSet.chest)
+        shaped(RecipeCategory.COMBAT, armorSet.chest)
                 .pattern("R R")
                 .pattern("LSL")
                 .pattern("LLL")
-                .input('L', leather)
-                .input('R', rabbitHide)
-                .input('S', turtleScute)
-                .criterion(hasItem(turtleScute), conditionsFromItem(turtleScute))
-                .offerTo(exporter);
+                .define('L', leather)
+                .define('R', rabbitHide)
+                .define('S', turtleScute)
+                .unlockedBy(getHasName(turtleScute), has(turtleScute))
+                .save(exporter);
 
         // Leggings - pattern: "SRS" / "L L" / "L L"
-        createShaped(RecipeCategory.COMBAT, armorSet.legs)
+        shaped(RecipeCategory.COMBAT, armorSet.legs)
                 .pattern("SRS")
                 .pattern("L L")
                 .pattern("L L")
-                .input('L', leather)
-                .input('R', rabbitHide)
-                .input('S', turtleScute)
-                .criterion(hasItem(turtleScute), conditionsFromItem(turtleScute))
-                .offerTo(exporter);
+                .define('L', leather)
+                .define('R', rabbitHide)
+                .define('S', turtleScute)
+                .unlockedBy(getHasName(turtleScute), has(turtleScute))
+                .save(exporter);
 
         // Boots - pattern: "R R" / "L L"
-        createShaped(RecipeCategory.COMBAT, armorSet.feet)
+        shaped(RecipeCategory.COMBAT, armorSet.feet)
                 .pattern("R R")
                 .pattern("L L")
-                .input('L', leather)
-                .input('R', rabbitHide)
-                .criterion(hasItem(rabbitHide), conditionsFromItem(rabbitHide))
-                .offerTo(exporter);
+                .define('L', leather)
+                .define('R', rabbitHide)
+                .unlockedBy(getHasName(rabbitHide), has(rabbitHide))
+                .save(exporter);
     }
 
     // ========================================
     // OTHER RECIPES
     // ========================================
 
-    private void generateOtherRecipes(RecipeExporter exporter) {
+    private void generateOtherRecipes(RecipeOutput exporter) {
         // Archers Workbench
-        createShaped(RecipeCategory.MISC, ArcherBlocks.WORKBENCH.block())
+        shaped(RecipeCategory.MISC, ArcherBlocks.WORKBENCH.block())
                 .pattern("SAL")
                 .pattern("###")
-                .input('S', Items.STRING)
-                .input('A', Items.ARROW)
-                .input('L', Items.LEATHER)
-                .input('#', ItemTags.PLANKS)
-                .criterion(hasItem(Items.ARROW), conditionsFromItem(Items.ARROW))
-                .offerTo(exporter);
+                .define('S', Items.STRING)
+                .define('A', Items.ARROW)
+                .define('L', Items.LEATHER)
+                .define('#', ItemTags.PLANKS)
+                .unlockedBy(getHasName(Items.ARROW), has(Items.ARROW))
+                .save(exporter);
 
         // Auto Fire Hook
-        createShaped(RecipeCategory.COMBAT, Misc.autoFireHook.item())
+        shaped(RecipeCategory.COMBAT, Misc.autoFireHook.item())
                 .pattern("C  ")
                 .pattern("C I")
                 .pattern(" R ")
-                .input('C', Items.COPPER_INGOT)
-                .input('I', Items.IRON_INGOT)
-                .input('R', Items.REDSTONE)
-                .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
-                .offerTo(exporter);
+                .define('C', Items.COPPER_INGOT)
+                .define('I', Items.IRON_INGOT)
+                .define('R', Items.REDSTONE)
+                .unlockedBy(getHasName(Items.COPPER_INGOT), has(Items.COPPER_INGOT))
+                .save(exporter);
     }
 
     // ========================================
     // NETHERITE UPGRADE RECIPES
     // ========================================
 
-    private void generateNetheriteUpgrades(RecipeExporter exporter) {
+    private void generateNetheriteUpgrades(RecipeOutput exporter) {
         // Weapon upgrades
-        offerNetheriteUpgradeRecipe(ArcherWeapons.diamond_spear.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_spear.item());
-        offerNetheriteUpgradeRecipe(ArcherWeapons.royal_longbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_longbow.item());
-        offerNetheriteUpgradeRecipe(ArcherWeapons.mechanic_shortbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_shortbow.item());
-        offerNetheriteUpgradeRecipe(ArcherWeapons.rapid_crossbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_rapid_crossbow.item());
-        offerNetheriteUpgradeRecipe(ArcherWeapons.heavy_crossbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_heavy_crossbow.item());
+        netheriteSmithing(ArcherWeapons.diamond_spear.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_spear.item());
+        netheriteSmithing(ArcherWeapons.royal_longbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_longbow.item());
+        netheriteSmithing(ArcherWeapons.mechanic_shortbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_shortbow.item());
+        netheriteSmithing(ArcherWeapons.rapid_crossbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_rapid_crossbow.item());
+        netheriteSmithing(ArcherWeapons.heavy_crossbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_heavy_crossbow.item());
 
         // Ranger armor upgrades (T2 -> T3)
-        offerNetheriteUpgradeRecipe(ArcherArmors.archerArmorSet_T2.head, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.head);
-        offerNetheriteUpgradeRecipe(ArcherArmors.archerArmorSet_T2.chest, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.chest);
-        offerNetheriteUpgradeRecipe(ArcherArmors.archerArmorSet_T2.legs, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.legs);
-        offerNetheriteUpgradeRecipe(ArcherArmors.archerArmorSet_T2.feet, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.feet);
+        netheriteSmithing(ArcherArmors.archerArmorSet_T2.head, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.head);
+        netheriteSmithing(ArcherArmors.archerArmorSet_T2.chest, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.chest);
+        netheriteSmithing(ArcherArmors.archerArmorSet_T2.legs, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.legs);
+        netheriteSmithing(ArcherArmors.archerArmorSet_T2.feet, RecipeCategory.COMBAT, ArcherArmors.archerArmorSet_T3.feet);
     }
 
     }

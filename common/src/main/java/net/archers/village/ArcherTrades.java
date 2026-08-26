@@ -1,22 +1,21 @@
 package net.archers.village;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.registry.tag.EnchantmentTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.village.TradeOffer;
-import net.minecraft.village.TradeOffers;
-import net.minecraft.village.TradedItem;
-
 import java.util.Optional;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.EnchantmentTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.npc.villager.VillagerTrades;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.trading.ItemCost;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.ItemLike;
 
 /// Trade-offer factories for the archery artisan.
 ///
@@ -28,7 +27,7 @@ public final class ArcherTrades {
     private ArcherTrades() { }
 
     /// Villager sells `count` x `item` for `price` emeralds.
-    public record Sell(Item item, int price, int count, int maxUses, int experience, float multiplier) implements TradeOffers.Factory {
+    public record Sell(Item item, int price, int count, int maxUses, int experience, float multiplier) implements VillagerTrades.ItemListing {
         public Sell(Item item, int price, int count, int experience) {
             this(item, price, count, 12, experience, 0.05F);
         }
@@ -37,35 +36,35 @@ public final class ArcherTrades {
         }
 
         @Override
-        public TradeOffer create(ServerWorld world, Entity entity, Random random) {
+        public MerchantOffer getOffer(ServerLevel world, Entity entity, RandomSource random) {
             var sold = new ItemStack(item);
             sold.setCount(count);
-            return new TradeOffer(new TradedItem(Items.EMERALD, price), sold, maxUses, experience, multiplier);
+            return new MerchantOffer(new ItemCost(Items.EMERALD, price), sold, maxUses, experience, multiplier);
         }
     }
 
     /// Villager buys `count` x `item` for `price` emeralds.
-    public record Buy(ItemConvertible item, int count, int maxUses, int experience, int price) implements TradeOffers.Factory {
+    public record Buy(ItemLike item, int count, int maxUses, int experience, int price) implements VillagerTrades.ItemListing {
         @Override
-        public TradeOffer create(ServerWorld world, Entity entity, Random random) {
-            return new TradeOffer(new TradedItem(item.asItem(), count),
+        public MerchantOffer getOffer(ServerLevel world, Entity entity, RandomSource random) {
+            return new MerchantOffer(new ItemCost(item.asItem(), count),
                     new ItemStack(Items.EMERALD, price), maxUses, experience, 0.05F);
         }
     }
 
     /// Villager sells a randomly enchanted `item`; the emerald price rises with the enchantment level,
     /// exactly as vanilla's tool trades do.
-    public record SellEnchanted(Item item, int basePrice, int maxUses, int experience, float multiplier) implements TradeOffers.Factory {
+    public record SellEnchanted(Item item, int basePrice, int maxUses, int experience, float multiplier) implements VillagerTrades.ItemListing {
         @Override
-        public TradeOffer create(ServerWorld world, Entity entity, Random random) {
+        public MerchantOffer getOffer(ServerLevel world, Entity entity, RandomSource random) {
             int level = 5 + random.nextInt(15);
-            var registryManager = world.getRegistryManager();
-            Optional<RegistryEntryList.Named<Enchantment>> onTradedEquipment = registryManager
-                    .getOrThrow(RegistryKeys.ENCHANTMENT)
-                    .getOptional(EnchantmentTags.ON_TRADED_EQUIPMENT);
-            var enchanted = EnchantmentHelper.enchant(random, new ItemStack(item), level, registryManager, onTradedEquipment);
+            var registryManager = world.registryAccess();
+            Optional<HolderSet.Named<Enchantment>> onTradedEquipment = registryManager
+                    .lookupOrThrow(Registries.ENCHANTMENT)
+                    .get(EnchantmentTags.ON_TRADED_EQUIPMENT);
+            var enchanted = EnchantmentHelper.enchantItem(random, new ItemStack(item), level, registryManager, onTradedEquipment);
             int price = Math.min(basePrice + level, 64);
-            return new TradeOffer(new TradedItem(Items.EMERALD, price), enchanted, maxUses, experience, multiplier);
+            return new MerchantOffer(new ItemCost(Items.EMERALD, price), enchanted, maxUses, experience, multiplier);
         }
     }
 }

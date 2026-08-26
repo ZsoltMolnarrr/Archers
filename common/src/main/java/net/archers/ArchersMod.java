@@ -12,16 +12,15 @@ import net.archers.item.ArcherArmors;
 import net.archers.item.misc.Misc;
 import net.archers.content.ArcherSounds;
 import net.archers.village.ArcherVillagers;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.rpg_foundation.structure_pool.api.StructurePoolAPI;
 import net.rpg_foundation.structure_pool.api.StructurePoolConfig;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.spell_engine.Platform;
 import net.spell_engine.PlatformEvents;
 import net.spell_engine.rpg_series.config.ConfigFile;
@@ -78,7 +77,7 @@ public class ArchersMod {
         if (tweaksConfig.value.enable_infinity_for_crossbows) {
             PlatformEvents.onAllowEnchanting((enchantment, target) -> {
                 if (target.getItem() instanceof CrossbowItem &&
-                        enchantment.getKey().get().getValue().equals(Enchantments.INFINITY.getValue())) {
+                        enchantment.unwrapKey().get().identifier().equals(Enchantments.INFINITY.identifier())) {
                     return TriState.ALLOW;
                 }
                 return TriState.PASS;
@@ -101,11 +100,11 @@ public class ArchersMod {
     }
 
     public static void registerItems() {
-        Group.ARCHERS = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
+        Group.ARCHERS = new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0)
                 .icon(() -> new ItemStack(ArcherArmors.archerArmorSet_T2.head))
-                .displayName(Text.translatable("itemGroup." + ID + ".general"))
+                .title(Component.translatable("itemGroup." + ID + ".general"))
                 .build();
-        Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS);
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Group.KEY, Group.ARCHERS);
         Misc.register();
         ArcherWeapons.register(itemConfig.value.ranged_weapons, itemConfig.value.melee_weapons);
         ArcherArmors.register(itemConfig.value.armor_sets);

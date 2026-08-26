@@ -1,11 +1,10 @@
 package net.archers.item;
 
 import net.archers.ArchersMod;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class ArcherItemTags {
     public static final List<RepairTag> REPAIR_TAGS = new ArrayList<>();
 
     private static TagKey<Item> repairs(String material, List<Identifier> required, List<Identifier> optional) {
-        var tag = TagKey.of(RegistryKeys.ITEM, Identifier.of(ArchersMod.ID, "repairs_" + material));
+        var tag = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ArchersMod.ID, "repairs_" + material));
         REPAIR_TAGS.add(new RepairTag(tag, required, optional));
         return tag;
     }
@@ -38,12 +37,12 @@ public class ArcherItemTags {
     /// Cross-mod material: the foreign item is an optional entry, the vanilla item keeps the weapon
     /// repairable when that mod is absent.
     private static TagKey<Item> repairsModded(String material, String moddedItem, String vanillaFallback) {
-        return repairs(material, List.of(Identifier.ofVanilla(vanillaFallback)), List.of(Identifier.of(moddedItem)));
+        return repairs(material, List.of(Identifier.withDefaultNamespace(vanillaFallback)), List.of(Identifier.parse(moddedItem)));
     }
 
-    public static final TagKey<Item> REPAIRS_FLINT = repairs("flint", Identifier.ofVanilla("flint"));
-    public static final TagKey<Item> REPAIRS_BONE = repairs("bone", Identifier.ofVanilla("bone"));
-    public static final TagKey<Item> REPAIRS_REDSTONE = repairs("redstone", Identifier.ofVanilla("redstone"));
+    public static final TagKey<Item> REPAIRS_FLINT = repairs("flint", Identifier.withDefaultNamespace("flint"));
+    public static final TagKey<Item> REPAIRS_BONE = repairs("bone", Identifier.withDefaultNamespace("bone"));
+    public static final TagKey<Item> REPAIRS_REDSTONE = repairs("redstone", Identifier.withDefaultNamespace("redstone"));
 
     public static final TagKey<Item> REPAIRS_AETERNIUM = repairsModded("aeternium", "betterend:aeternium_ingot", "netherite_ingot");
     public static final TagKey<Item> REPAIRS_CRYSTAL_SHARDS = repairsModded("crystal_shards", "betterend:crystal_shards", "netherite_ingot");

@@ -2,18 +2,18 @@ package net.archers.client.entity;
 
 import net.archers.ArchersMod;
 import net.archers.entity.SpiritWolfEntity;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.Identifier;
 import net.spell_engine.client.compatibility.ShaderCompatibility;
 
-public class DirewolfEntityRenderer extends MobEntityRenderer<SpiritWolfEntity, SpiritWolfRenderState, DirewolfEntityModel> {
+public class DirewolfEntityRenderer extends MobRenderer<SpiritWolfEntity, SpiritWolfRenderState, DirewolfEntityModel> {
     public static final Identifier TEXTURE =
-            Identifier.of(ArchersMod.ID, "textures/entity/direwolf_spell.png");
+            Identifier.fromNamespaceAndPath(ArchersMod.ID, "textures/entity/direwolf_spell.png");
 
-    public DirewolfEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new DirewolfEntityModel(context.getPart(DirewolfEntityModel.TEXTURE)), 0.5f);
+    public DirewolfEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new DirewolfEntityModel(context.bakeLayer(DirewolfEntityModel.TEXTURE)), 0.5f);
     }
 
     @Override
@@ -22,8 +22,8 @@ public class DirewolfEntityRenderer extends MobEntityRenderer<SpiritWolfEntity, 
     }
 
     @Override
-    public void updateRenderState(SpiritWolfEntity entity, SpiritWolfRenderState state, float tickProgress) {
-        super.updateRenderState(entity, state, tickProgress);
+    public void extractRenderState(SpiritWolfEntity entity, SpiritWolfRenderState state, float tickProgress) {
+        super.extractRenderState(entity, state, tickProgress);
         state.spawnAnimationState.copyFrom(entity.spawnAnimationState);
         state.despawnAnimationState.copyFrom(entity.despawnAnimationState);
         state.idleAnimationState.copyFrom(entity.idleAnimationState);
@@ -36,7 +36,7 @@ public class DirewolfEntityRenderer extends MobEntityRenderer<SpiritWolfEntity, 
     }
 
     @Override
-    public Identifier getTexture(SpiritWolfRenderState state) {
+    public Identifier getTextureLocation(SpiritWolfRenderState state) {
         return TEXTURE;
     }
 
@@ -44,10 +44,10 @@ public class DirewolfEntityRenderer extends MobEntityRenderer<SpiritWolfEntity, 
     // translucent layer (see DirewolfEntityModel); a boosted block light keeps the spirit
     // glowing in darkness without triggering shaderpack bloom.
     @Override
-    protected int getBlockLight(SpiritWolfEntity entity, BlockPos pos) {
+    protected int getBlockLightLevel(SpiritWolfEntity entity, BlockPos pos) {
         if (ShaderCompatibility.isShaderPackInUse()) {
-            return Math.max(12, super.getBlockLight(entity, pos));
+            return Math.max(12, super.getBlockLightLevel(entity, pos));
         }
-        return super.getBlockLight(entity, pos);
+        return super.getBlockLightLevel(entity, pos);
     }
 }

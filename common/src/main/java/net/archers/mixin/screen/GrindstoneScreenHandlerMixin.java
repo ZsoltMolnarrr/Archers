@@ -1,16 +1,16 @@
 package net.archers.mixin.screen;
 
 import net.archers.item.misc.AutoFireHook;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.GrindstoneScreenHandler;
+import net.minecraft.world.inventory.GrindstoneMenu;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(GrindstoneScreenHandler.class)
+@Mixin(GrindstoneMenu.class)
 public class GrindstoneScreenHandlerMixin {
-    @Inject(method = "getOutputStack", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "computeResult", at = @At("HEAD"), cancellable = true)
     private void getOutputStack_Archers(ItemStack firstInput, ItemStack secondInput, CallbackInfoReturnable<ItemStack> cir) {
         if (firstInput.isEmpty() && secondInput.isEmpty() ) {
             return;

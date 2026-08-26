@@ -2,20 +2,19 @@ package net.archers.item;
 
 import net.archers.ArchersMod;
 import net.archers.item.armor.ArcherArmor;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.archers.content.ArcherSounds;
 import net.rpg_foundation.ranged_weapon.api.EntityAttributes_RangedWeapon;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.item.Item;
-import net.minecraft.item.equipment.ArmorMaterial;
-import net.minecraft.item.equipment.EquipmentAsset;
-import net.minecraft.item.equipment.EquipmentAssetKeys;
-import net.minecraft.item.equipment.EquipmentType;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
 import net.spell_engine.rpg_series.config.ArmorSetConfig;
 import net.spell_engine.rpg_series.config.AttributeModifier;
 import net.spell_engine.rpg_series.item.Armor;
@@ -30,28 +29,28 @@ public class ArcherArmors {
     /// Item tag listing the items that repair this armor set (1.21.2+ replaced the
     /// `Supplier<Ingredient>` repair ingredient with a `TagKey<Item>`).
     public static TagKey<Item> repairTag(String name) {
-        return TagKey.of(RegistryKeys.ITEM, Identifier.of(ArchersMod.ID, "repairs_" + name));
+        return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ArchersMod.ID, "repairs_" + name));
     }
 
     /// Equipment asset key of the vanilla armor layer. Archers armor is drawn by the Armor Model API
     /// (geo model + own texture), so no `assets/archers/equipment/<name>.json` is shipped and the
     /// vanilla layer resolves to `EquipmentModelLoader.EMPTY` — same net effect as the 1.21.1
     /// `ArmorMaterial.Layer` that pointed at a texture we never shipped.
-    public static RegistryKey<EquipmentAsset> assetKey(String name) {
-        return RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, Identifier.of(ArchersMod.ID, name));
+    public static ResourceKey<EquipmentAsset> assetKey(String name) {
+        return ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(ArchersMod.ID, name));
     }
 
     public static ArmorMaterial material(String name,
                                          int durability,
                                          int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
-                                         int enchantability, RegistryEntry<SoundEvent> equipSound) {
+                                         int enchantability, Holder<SoundEvent> equipSound) {
         return new ArmorMaterial(
                 durability,
                 Map.of(
-                        EquipmentType.HELMET, protectionHead,
-                        EquipmentType.CHESTPLATE, protectionChest,
-                        EquipmentType.LEGGINGS, protectionLegs,
-                        EquipmentType.BOOTS, protectionFeet),
+                        ArmorType.HELMET, protectionHead,
+                        ArmorType.CHESTPLATE, protectionChest,
+                        ArmorType.LEGGINGS, protectionLegs,
+                        ArmorType.BOOTS, protectionFeet),
                 enchantability,
                 equipSound,
                 0F, 0F,
@@ -100,14 +99,14 @@ public class ArcherArmors {
         return new AttributeModifier(
                 EntityAttributes_RangedWeapon.DAMAGE.id.toString(),
                 value,
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+                net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     }
 
     private static AttributeModifier hasteMultiplier(float value) {
         return new AttributeModifier(
                 EntityAttributes_RangedWeapon.HASTE.id.toString(),
                 value,
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+                net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     }
 
     public static final float damage_T1 = 0.05F;
@@ -118,7 +117,7 @@ public class ArcherArmors {
 
     public static final Armor.Set archerArmorSet_T1 = create(
             material_t1,
-            Identifier.of(ArchersMod.ID, "archer_armor"),
+            Identifier.fromNamespaceAndPath(ArchersMod.ID, "archer_armor"),
             15,
             ArcherArmor::archer,
             ArmorSetConfig.with(
@@ -137,7 +136,7 @@ public class ArcherArmors {
 
     public static final Armor.Set archerArmorSet_T2 = create(
             material_t2,
-            Identifier.of(ArchersMod.ID, "ranger_armor"),
+            Identifier.fromNamespaceAndPath(ArchersMod.ID, "ranger_armor"),
             25,
             ArcherArmor::ranger,
             ArmorSetConfig.with(
@@ -160,7 +159,7 @@ public class ArcherArmors {
 
     public static final Armor.Set archerArmorSet_T3 = create(
             material_t3,
-            Identifier.of(ArchersMod.ID, "netherite_ranger_armor"),
+            Identifier.fromNamespaceAndPath(ArchersMod.ID, "netherite_ranger_armor"),
             35,
             ArcherArmor::ranger,
             ArmorSetConfig.with(

@@ -2,12 +2,11 @@ package net.archers.content;
 
 import net.archers.ArchersMod;
 import net.archers.block.ArcherWorkbenchBlock;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class ArcherSounds {
     public static class Entry {
         private final Identifier id;
         private final SoundEvent soundEvent;
-        private RegistryEntry<SoundEvent> entry;
+        private Holder<SoundEvent> entry;
         private int variants = 1;
 
         public Entry(Identifier id, SoundEvent soundEvent) {
@@ -24,15 +23,15 @@ public class ArcherSounds {
         }
 
         public Entry(String name) {
-            this(Identifier.of(ArchersMod.ID, name));
+            this(Identifier.fromNamespaceAndPath(ArchersMod.ID, name));
         }
 
         public Entry(Identifier id) {
-            this(id, SoundEvent.of(id));
+            this(id, SoundEvent.createVariableRangeEvent(id));
         }
 
         public Entry travelDistance(float distance) {
-            return new Entry(id, SoundEvent.of(id, distance));
+            return new Entry(id, SoundEvent.createFixedRangeEvent(id, distance));
         }
 
         public Entry variants(int variants) {
@@ -48,7 +47,7 @@ public class ArcherSounds {
             return soundEvent;
         }
 
-        public RegistryEntry<SoundEvent> entry() {
+        public Holder<SoundEvent> entry() {
             return entry;
         }
 
@@ -79,7 +78,7 @@ public class ArcherSounds {
 
     public static void register() {
         for (var entry: entries) {
-            entry.entry = Registry.registerReference(Registries.SOUND_EVENT, entry.id(), entry.soundEvent());
+            entry.entry = Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, entry.id(), entry.soundEvent());
         }
     }
 }

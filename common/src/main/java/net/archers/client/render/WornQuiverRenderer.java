@@ -1,15 +1,15 @@
 package net.archers.client.render;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.state.BipedEntityRenderState;
-import net.minecraft.client.render.item.ItemRenderState;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemDisplayContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.RotationAxis;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 
 /// Draws a quiver on the wearer's back, shared by the Trinkets (Fabric) and Curios (NeoForge) renderers.
 ///
@@ -24,29 +24,29 @@ import net.minecraft.util.math.RotationAxis;
 /// transform as a `translate(-0.5,-0.5,-0.5)` (centres the unit cube), so the final `translate(0.5,0.5,0.5)`
 /// cancels it: `M · T(+½) · T(-½) = M` — exactly the 1.21.1 placement.
 public class WornQuiverRenderer {
-    private static final ItemRenderState renderState = new ItemRenderState();
+    private static final ItemStackRenderState renderState = new ItemStackRenderState();
 
-    public static void render(ItemStack stack, BipedEntityModel<?> model, BipedEntityRenderState state,
-                              MatrixStack matrices, OrderedRenderCommandQueue queue, int light) {
-        var client = MinecraftClient.getInstance();
-        client.getItemModelManager().clearAndUpdate(renderState, stack, ItemDisplayContext.NONE, client.world, null, 0);
+    public static void render(ItemStack stack, HumanoidModel<?> model, HumanoidRenderState state,
+                              PoseStack matrices, SubmitNodeCollector queue, int light) {
+        var client = Minecraft.getInstance();
+        client.getItemModelResolver().updateForTopItem(renderState, stack, ItemDisplayContext.NONE, client.level, null, 0);
         if (renderState.isEmpty()) {
             return;
         }
-        matrices.push();
+        matrices.pushPose();
         // Trinkets' `translateToChest`
-        if (state.isInSneakingPose && !state.hasVehicle && !state.isSwimming) {
+        if (state.isCrouching && !state.isPassenger && !state.isVisuallySwimming) {
             matrices.translate(0.0F, 0.2F, 0.0F);
-            matrices.multiply(RotationAxis.POSITIVE_X.rotation(model.body.pitch));
+            matrices.mulPose(Axis.XP.rotation(model.body.xRot));
         }
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotation(model.body.yaw));
+        matrices.mulPose(Axis.YP.rotation(model.body.yRot));
         matrices.translate(0.0F, 0.4F, -0.16F);
         // Placement tuned on 1.21.1 (model in [0,1]^3 space)
         matrices.translate(-0.825F, 0.25F, 0.7F);
-        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-140));
+        matrices.mulPose(Axis.XP.rotationDegrees(-140));
         // Cancel the identity display transform's centring translate (see class doc)
         matrices.translate(0.5F, 0.5F, 0.5F);
-        renderState.render(matrices, queue, light, OverlayTexture.DEFAULT_UV, 0);
-        matrices.pop();
+        renderState.submit(matrices, queue, light, OverlayTexture.NO_OVERLAY, 0);
+        matrices.popPose();
     }
 }

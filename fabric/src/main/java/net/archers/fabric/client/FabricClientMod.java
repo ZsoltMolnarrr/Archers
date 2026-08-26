@@ -12,7 +12,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.render.BlockRenderLayer;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.spell_engine.fabric.compat.FabricCompatFeatures;
 
 import java.util.Objects;
@@ -27,7 +27,7 @@ public final class FabricClientMod implements ClientModInitializer {
         EntityRendererRegistry.register(ArcherEntities.SPIRIT_WOLF.type, DirewolfEntityRenderer::new);
 
         // Fabric-specific render layer registration
-        BlockRenderLayerMap.putBlock(ArcherBlocks.WORKBENCH.block(), BlockRenderLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(ArcherBlocks.WORKBENCH.block(), ChunkSectionLayer.CUTOUT);
 
         // Archers' custom tooltip lines — Fabric API (loader-specific; NeoForge uses ItemTooltipEvent).
         ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, lines) ->

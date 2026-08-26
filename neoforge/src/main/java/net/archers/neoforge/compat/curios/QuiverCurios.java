@@ -1,8 +1,8 @@
 package net.archers.neoforge.compat.curios;
 
 import net.archers.item.Quivers;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotContext;
@@ -32,15 +32,15 @@ public class QuiverCurios {
             if (entity == null) {
                 return;
             }
-            var world = entity.getEntityWorld();
-            if (world.isClient()                             // the server broadcast below reaches every nearby client
-                    || entity.age <= 100                     // gear already worn when entering a world/dimension
-                    || prevStack.isOf(this.stack.getItem())) // same quiver, only its contents changed
+            var world = entity.level();
+            if (world.isClientSide()                             // the server broadcast below reaches every nearby client
+                    || entity.tickCount <= 100                     // gear already worn when entering a world/dimension
+                    || prevStack.is(this.stack.getItem())) // same quiver, only its contents changed
             {
                 return;
             }
-            world.playSound(null, entity.getBlockPos(), SoundEvents.ITEM_ARMOR_EQUIP_GENERIC.value(),
-                    entity.getSoundCategory(), 1.0F, 1.0F);
+            world.playSound(null, entity.blockPosition(), SoundEvents.ARMOR_EQUIP_GENERIC.value(),
+                    entity.getSoundSource(), 1.0F, 1.0F);
         }
 
         @Override

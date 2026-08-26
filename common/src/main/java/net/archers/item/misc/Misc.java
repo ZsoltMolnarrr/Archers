@@ -1,10 +1,10 @@
 package net.archers.item.misc;
 
 import net.archers.item.Quivers;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 import net.spell_engine.Platform;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class Misc {
 
     public static void register() {
         for (var entry: ENTRIES) {
-            Registry.register(Registries.ITEM, entry.id, entry.item);
+            Registry.register(BuiltInRegistries.ITEM, entry.id, entry.item);
         }
         // Creative-tab placement is registered per-platform from each loader's entrypoint.
         if (Platform.util().isModLoaded("bundleapi")) {

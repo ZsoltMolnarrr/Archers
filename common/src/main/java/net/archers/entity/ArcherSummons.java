@@ -1,8 +1,8 @@
 package net.archers.entity;
 
 import net.archers.content.ArcherSounds;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.spell_engine.api.datagen.SpellBuilder.Placements;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell.Impact.Action.Summon;
@@ -115,13 +115,13 @@ public class ArcherSummons {
     /// (health 2.0 → 1.0, damage 0.5 → 0.3) so the two-wolf pack lands near a single wolf's
     /// former aggregate rather than doubling it.
     private static List<AttributeScaling.Entry> rangedCombatScaling() {
-        var s = ExternalSpellSchools.PHYSICAL_RANGED.attributeEntry.getIdAsString();
+        var s = ExternalSpellSchools.PHYSICAL_RANGED.attributeEntry.getRegisteredName();
         var entries = new ArrayList<AttributeScaling.Entry>();
-        entries.add(scalingEntry(EntityAttributes.MAX_HEALTH.getIdAsString(), s, 0, 1.0));
-        entries.add(scalingEntry(EntityAttributes.ARMOR.getIdAsString(), s, 10, 0.1));
-        entries.add(scalingEntry(EntityAttributes.ATTACK_DAMAGE.getIdAsString(), s, 0, 0.3));
-        entries.add(scalingEntry(EntityAttributes.ATTACK_KNOCKBACK.getIdAsString(), s, 0, 0.1));
-        entries.add(scalingEntry(EntityAttributes.KNOCKBACK_RESISTANCE.getIdAsString(), s, 5, 0.05));
+        entries.add(scalingEntry(Attributes.MAX_HEALTH.getRegisteredName(), s, 0, 1.0));
+        entries.add(scalingEntry(Attributes.ARMOR.getRegisteredName(), s, 10, 0.1));
+        entries.add(scalingEntry(Attributes.ATTACK_DAMAGE.getRegisteredName(), s, 0, 0.3));
+        entries.add(scalingEntry(Attributes.ATTACK_KNOCKBACK.getRegisteredName(), s, 0, 0.1));
+        entries.add(scalingEntry(Attributes.KNOCKBACK_RESISTANCE.getRegisteredName(), s, 5, 0.05));
         return entries;
     }
 
@@ -132,7 +132,7 @@ public class ArcherSummons {
         var entry = new AttributeScaling.Entry();
         entry.attribute_id = targetAttribute;
         entry.modifiers = List.of(new AttributeScaling.Entry.OwnerModifier(
-                ownerAttribute, EntityAttributeModifier.Operation.ADD_VALUE, base, coefficient));
+                ownerAttribute, AttributeModifier.Operation.ADD_VALUE, base, coefficient));
         return entry;
     }
 }

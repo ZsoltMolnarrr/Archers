@@ -1,16 +1,16 @@
 package net.archers.entity;
 
 import net.archers.ArchersMod;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.spell_engine.api.spell.summon.SummonedEntities;
 import net.spell_engine.api.spell.summon.SummonedEntityConfig;
 import net.tiny_config.ConfigManager;
@@ -51,18 +51,18 @@ public class ArcherEntities {
     }
 
     public static final Entry<SpiritWolfEntity> SPIRIT_WOLF = add(new Entry<>(
-            Identifier.of(ArchersMod.ID, "spirit_wolf"),
+            Identifier.fromNamespaceAndPath(ArchersMod.ID, "spirit_wolf"),
             "Spirit Wolf",
-            EntityType.Builder.<SpiritWolfEntity>create(SpiritWolfEntity::new, SpawnGroup.MISC)
+            EntityType.Builder.<SpiritWolfEntity>of(SpiritWolfEntity::new, MobCategory.MISC)
                     // dimensions(float, float) yields `changing` (fixed=false) so
                     // EntityDimensions.scaled() applies GENERIC_SCALE if one is ever added
                     // Halfway between the vanilla wolf (0.6 x 0.85) and the original 1x1
-                    .dimensions(0.8F, 0.925F)
-                    .maxTrackingRange(64)
-                    .trackingTickInterval(3)
+                    .sized(0.8F, 0.925F)
+                    .clientTrackingRange(64)
+                    .updateInterval(3)
                     // Vanilla build(RegistryKey) — the no-arg build() is a Fabric API interface-injected
                     // default (FabricEntityType.Builder) absent on NeoForge at runtime.
-                    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(ArchersMod.ID, "spirit_wolf"))),
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(ArchersMod.ID, "spirit_wolf"))),
             spiritWolfDefaults()));
 
     // Default base attributes per summon — seeded into Archers' OWN config file
@@ -75,9 +75,9 @@ public class ArcherEntities {
         e.common.follow_range = 32;
         // Flat +50% over the vanilla base values (jump 0.42, step 0.6) — agile like a wolf
         e.custom.add(new SummonedEntityConfig.CustomAttribute(
-                EntityAttributes.JUMP_STRENGTH.getIdAsString(), 0.63));
+                Attributes.JUMP_STRENGTH.getRegisteredName(), 0.63));
         e.custom.add(new SummonedEntityConfig.CustomAttribute(
-                EntityAttributes.STEP_HEIGHT.getIdAsString(), 0.9));
+                Attributes.STEP_HEIGHT.getRegisteredName(), 0.9));
         return e;
     }
 
@@ -107,7 +107,7 @@ public class ArcherEntities {
     public static void register() {
         summonConfig.refresh(); // load (or write) Archers' own config file before reading values from it
         for (var entry : entries) {
-            Registry.register(Registries.ENTITY_TYPE, entry.id, entry.type);
+            Registry.register(BuiltInRegistries.ENTITY_TYPE, entry.id, entry.type);
             if (entry.summonConfig != null) {
                 // Only summoned (living) entities carry a config; safe by construction.
                 @SuppressWarnings("unchecked")

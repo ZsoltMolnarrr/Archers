@@ -1,7 +1,7 @@
 package net.archers.client.entity;
 
-import net.minecraft.client.render.entity.state.LivingEntityRenderState;
-import net.minecraft.entity.AnimationState;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.world.entity.AnimationState;
 
 /// Per-frame snapshot of a [net.archers.entity.SpiritWolfEntity] (1.21.2+ split entity state from
 /// rendering). Carries the summon's animation states plus the two attack values the model needs,
