@@ -27,7 +27,7 @@
       },
       "on_true": {
         "type": "minecraft:range_dispatch",
-        "property": "ranged_weapon:pull",
+        "property": "minecraft:crossbow/pull",
         "fallback": {
           "type": "minecraft:model",
           "model": "archers:item/ruby_rapid_crossbow_pulling_0"

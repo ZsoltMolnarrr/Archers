@@ -8,7 +8,8 @@
     },
     "on_true": {
       "type": "minecraft:range_dispatch",
-      "property": "ranged_weapon:pull",
+      "property": "minecraft:use_duration",
+      "scale": 0.05,
       "fallback": {
         "type": "minecraft:model",
         "model": "archers:item/netherite_shortbow_pulling_0"
