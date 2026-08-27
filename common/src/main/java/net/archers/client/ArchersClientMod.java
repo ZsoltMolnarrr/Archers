@@ -3,6 +3,7 @@ package net.archers.client;
 import net.rpg_foundation.armor_api.client.ArmorRenderers;
 import net.rpg_foundation.armor_api.client.GeoArmorRenderer;
 import net.archers.client.armor.ArcherArmorRenderer;
+import net.archers.client.compatibility.IrisCompat;
 import net.archers.client.effect.HuntersMarkRenderer;
 import net.archers.client.effect.RootsRenderer;
 import net.archers.effect.ArcherEffects;
@@ -12,6 +13,10 @@ import net.spell_engine.rpg_series.item.Armor;
 
 public class ArchersClientMod {
     public static void init() {
+        // Declare our own render pipelines to Iris - without this the spirit layer is composited away
+        // under every shader pack (see IrisCompat).
+        IrisCompat.assignPipelines();
+
         CustomModelStatusEffect.register(ArcherEffects.HUNTERS_MARK.effect, new HuntersMarkRenderer());
         CustomModelStatusEffect.register(ArcherEffects.ENTANGLING_ROOTS.effect, new RootsRenderer());
 

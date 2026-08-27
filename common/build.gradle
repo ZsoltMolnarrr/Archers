@@ -36,6 +36,9 @@ dependencies {
     implementation("net.rpg_foundation:armor_model_api-${platform}:${project.armor_model_api_version}")
     implementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
 
+    // Compile-only: IrisCompat reaches IrisApi behind an isModLoaded gate
+    compileOnly("maven.modrinth:iris:${rootProject.iris_version}-fabric")
+
 //    implementation("maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}")
     implementation("com.github.TheRedBrain:bundle-api-${platform}:${project.bundle_api_version}")
 //    implementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")

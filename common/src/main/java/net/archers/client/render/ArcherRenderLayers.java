@@ -13,6 +13,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
 import net.spell_engine.api.render.CustomLayers;
 
+import java.util.List;
 import java.util.function.Function;
 
 /// Render layers owned by this mod.
@@ -74,5 +75,13 @@ public final class ArcherRenderLayers {
     /// Memoized per texture, mirroring vanilla's layer factories.
     public static RenderType spirit(Identifier texture) {
         return SPIRIT.apply(texture);
+    }
+
+    /// Every [RenderPipeline] this class builds itself, i.e. the ones a shader mod cannot know about
+    /// from vanilla's registry. Since 1.21.11 Iris maps *pipelines* (not render layers) to its shader
+    /// programs, so each of these has to be declared to it once at client init - see
+    /// [net.archers.client.compatibility.IrisCompat#assignPipelines].
+    public static List<RenderPipeline> customPipelines() {
+        return List.of(SPIRIT_PIPELINE);
     }
 }
