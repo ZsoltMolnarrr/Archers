@@ -1,3 +1,9 @@
+# 3.1.2
+
+- Updated for Minecraft 26.1.2
+- Villager trades of the Archery Artisan are now data-driven (`villager_trade` / `trade_set`), so data packs can extend or replace them
+- Trinkets support updated for Trinkets Updated 4.0
+
 # 3.1.1
 
 - Replaced armor rendering dependency AzureLibArmor with ArmorModelAPI
