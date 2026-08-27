@@ -7,9 +7,8 @@ import net.archers.item.Quivers;
 import net.archers.item.misc.Misc;
 import net.archers.village.ArcherVillagers;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.object.builder.v1.world.poi.PoiHelper;
 import net.fabricmc.loader.api.FabricLoader;
 
 public final class FabricMod implements ModInitializer {
@@ -23,17 +22,16 @@ public final class FabricMod implements ModInitializer {
         ArchersMod.registerItems();
         ArchersMod.registerEffects();
 
-        // Villager POI + trades — Fabric API registration (loader-specific; NeoForge does its own).
-        PointOfInterestHelper.register(ArcherVillagers.POI_ID,
+        // Villager POI — Fabric API registration (loader-specific; NeoForge does its own).
+        PoiHelper.register(ArcherVillagers.POI_ID,
                 ArcherVillagers.POI_TICKET_COUNT, ArcherVillagers.POI_SEARCH_DISTANCE,
                 ArcherVillagers.poiBlockStates());
-        ArchersMod.registerVillagers(); // registers the profession + builds ArcherVillagers.TRADES
-        ArcherVillagers.TRADES.forEach((tier, factories) ->
-                TradeOfferHelper.registerVillagerOffers(ArcherVillagers.PROFESSION_KEY, tier,
-                        list -> list.addAll(factories)));
+        // Offers themselves are data-driven since 26.1 (data/archers/{villager_trade,trade_set}); the
+        // profession only carries the trade-set keys, so there is nothing loader-specific left to register.
+        ArchersMod.registerVillagers();
 
         // Creative-tab placement (Archers group) — Fabric API.
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
+        CreativeModeTabEvents.modifyOutputEvent(Group.KEY).register(content -> {
             for (var entry : Misc.ENTRIES) {
                 content.accept(entry.item());
             }

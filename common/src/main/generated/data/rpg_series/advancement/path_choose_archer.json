@@ -16,7 +16,6 @@
       "components": {
         "minecraft:item_model": "archers:spell_book/archer"
       },
-      "count": 1,
       "id": "spell_engine:spell_book"
     },
     "title": {

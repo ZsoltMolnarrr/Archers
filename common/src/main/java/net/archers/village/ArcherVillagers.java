@@ -1,9 +1,10 @@
 package net.archers.village;
 
 import com.google.common.collect.ImmutableSet;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.archers.ArchersMod;
 import net.archers.block.ArcherBlocks;
-import net.archers.item.ArcherWeapons;
+import net.archers.content.ArcherSounds;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -12,13 +13,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.villager.VillagerProfession;
-import net.minecraft.world.entity.npc.villager.VillagerTrades;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.TradeSet;
 import net.minecraft.world.level.block.state.BlockState;
-import net.archers.item.ArcherArmors;
-import net.archers.content.ArcherSounds;
-import java.util.LinkedHashMap;
-import java.util.List;
+
 import java.util.Set;
 
 public class ArcherVillagers {
@@ -35,34 +32,46 @@ public class ArcherVillagers {
         return ImmutableSet.copyOf(ArcherBlocks.WORKBENCH.block().getStateDefinition().getPossibleStates());
     }
 
-    /// The registered archery-artisan profession, set by {@link #registerVillagers()}. Read by the
-    /// loader-specific trade-offer registration (Fabric `TradeOfferHelper` / NeoForge `VillagerTradesEvent`).
+    /// The registered archery-artisan profession, set by {@link #registerVillagers()}.
     public static VillagerProfession PROFESSION;
 
-    /// Registry key of {@link #PROFESSION} — the loader trade-registration APIs are keyed by it since 1.21.2.
+    /// Registry key of {@link #PROFESSION}.
     public static final ResourceKey<VillagerProfession> PROFESSION_KEY =
             ResourceKey.create(Registries.VILLAGER_PROFESSION, Identifier.fromNamespaceAndPath(ArchersMod.ID, ARCHERY_ARTISAN));
 
-    /// Trade offers per merchant tier (1..5), populated by {@link #registerVillagers()}. Actual registration
-    /// with the game is loader-specific and lives in each platform's entrypoint.
-    public static final LinkedHashMap<Integer, List<VillagerTrades.ItemListing>> TRADES = new LinkedHashMap<>();
+    /// Trade sets per merchant tier (1..5). Since 26.1 the offers themselves are data-driven:
+    /// `data/archers/villager_trade/archery_artisan/<level>/<trade>.json` (one offer each), grouped by
+    /// `data/archers/tags/villager_trade/archery_artisan/level_<n>.json` and drawn from by
+    /// `data/archers/trade_set/archery_artisan/level_<n>.json` (`amount: 2`, mirroring vanilla's two
+    /// random offers per tier). The profession only carries the trade-set keys.
+    public static ResourceKey<TradeSet> tradeSet(int level) {
+        return ResourceKey.create(Registries.TRADE_SET,
+                Identifier.fromNamespaceAndPath(ArchersMod.ID, ARCHERY_ARTISAN + "/level_" + level));
+    }
+
+    private static Int2ObjectMap<ResourceKey<TradeSet>> tradeSets() {
+        return Int2ObjectMap.ofEntries(
+                Int2ObjectMap.entry(1, tradeSet(1)),
+                Int2ObjectMap.entry(2, tradeSet(2)),
+                Int2ObjectMap.entry(3, tradeSet(3)),
+                Int2ObjectMap.entry(4, tradeSet(4)),
+                Int2ObjectMap.entry(5, tradeSet(5))
+        );
+    }
 
     public static VillagerProfession registerProfession(String name, ResourceKey<PoiType> workStation) {
         var id = Identifier.fromNamespaceAndPath(ArchersMod.ID, name);
         // `VillagerProfession.id` became a display `Text` in 1.21.11 (vanilla builds
         // `entity.<ns>.villager.<path>`). Keep the key the existing translations already use:
         // `entity.minecraft.villager.archers.archery_artisan`.
-        return Registry.register(BuiltInRegistries.VILLAGER_PROFESSION, Identifier.fromNamespaceAndPath(ArchersMod.ID, name), new VillagerProfession(
+        return Registry.register(BuiltInRegistries.VILLAGER_PROFESSION, id, new VillagerProfession(
                 Component.translatable("entity.minecraft.villager." + id.getNamespace() + "." + id.getPath()),
-                (entry) -> {
-                    return entry.is(workStation);
-                },
-                (entry) -> {
-                    return entry.is(workStation);
-                },
+                (entry) -> entry.is(workStation),
+                (entry) -> entry.is(workStation),
                 ImmutableSet.of(),
                 ImmutableSet.of(),
-                ArcherSounds.WORKBENCH.soundEvent())
+                ArcherSounds.WORKBENCH.soundEvent(),
+                tradeSets())
         );
     }
 
@@ -70,31 +79,5 @@ public class ArcherVillagers {
         PROFESSION = registerProfession(
                 ARCHERY_ARTISAN,
                 ResourceKey.create(BuiltInRegistries.POINT_OF_INTEREST_TYPE.key(), POI_ID));
-
-        TRADES.clear();
-        TRADES.put(1, List.of(
-                new ArcherTrades.Sell(Items.ARROW, 2, 8, 128, 3, 0.01f),
-                new ArcherTrades.Buy(Items.LEATHER, 8, 12, 6, 5)
-        ));
-        TRADES.put(2, List.of(
-                new ArcherTrades.Sell(ArcherWeapons.composite_longbow.item(), 6, 1, 16),
-                new ArcherTrades.Sell(ArcherArmors.archerArmorSet_T1.head, 15, 1, 18),
-                new ArcherTrades.Buy(Items.STRING, 6, 12, 8, 3)
-        ));
-        TRADES.put(3, List.of(
-                new ArcherTrades.Sell(ArcherArmors.archerArmorSet_T1.feet, 15, 1, 18),
-                new ArcherTrades.Buy(Items.REDSTONE, 12, 12, 5, 8),
-                new ArcherTrades.Sell(ArcherArmors.archerArmorSet_T1.legs, 15, 1, 18)
-        ));
-        TRADES.put(4, List.of(
-                new ArcherTrades.Sell(ArcherArmors.archerArmorSet_T1.chest, 15, 1, 18),
-                new ArcherTrades.Sell(Items.TURTLE_SCUTE, 20, 12, 10)
-        ));
-        TRADES.put(5, List.of(
-                new ArcherTrades.SellEnchanted(ArcherWeapons.royal_longbow.item(), 40, 3, 30, 0F),
-                new ArcherTrades.SellEnchanted(ArcherWeapons.mechanic_shortbow.item(), 40, 3, 30, 0F),
-                new ArcherTrades.SellEnchanted(ArcherWeapons.rapid_crossbow.item(), 40, 3, 30, 0F),
-                new ArcherTrades.SellEnchanted(ArcherWeapons.heavy_crossbow.item(), 40, 3, 30, 0F)
-        ));
     }
 }

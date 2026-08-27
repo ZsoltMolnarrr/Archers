@@ -1,7 +1,10 @@
 package net.archers.client.render;
 
 import com.mojang.blaze3d.pipeline.BlendFunction;
+import com.mojang.blaze3d.pipeline.ColorTargetState;
+import com.mojang.blaze3d.pipeline.DepthStencilState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.CompareOp;
 import net.archers.ArchersMod;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
@@ -25,7 +28,7 @@ public final class ArcherRenderLayers {
 
     /// Vanilla `ENTITY_TRANSLUCENT_EMISSIVE` with exactly one state changed: this one writes depth.
     ///
-    /// The vanilla pipeline sets `withDepthWrite(false)`, so an entity drawn on it leaves the depth
+    /// The vanilla pipeline sets `DepthStencilState(LEQUAL, false)`, so an entity drawn on it leaves the depth
     /// buffer untouched. Everything drawn afterwards then depth-tests against whatever is *behind* the
     /// entity and wins, which is why a spirit rendered on it sinks behind water (the translucent
     /// terrain pass runs after entities) and behind its own drop shadow (`entity_shadow` is
@@ -50,9 +53,11 @@ public final class ArcherRenderLayers {
             .withShaderDefine("ALPHA_CUTOUT", 0.1F)
             .withShaderDefine("PER_FACE_LIGHTING")
             .withSampler("Sampler1")
-            .withBlend(BlendFunction.TRANSLUCENT)
+            .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
             .withCull(false)
-            .withDepthWrite(true)
+            // 26.1: `withDepthWrite`/`withDepthTestFunction` collapsed into one `DepthStencilState`.
+            // This is `DepthStencilState.DEFAULT` spelled out: LEQUAL test *and* depth write.
+            .withDepthStencilState(new DepthStencilState(CompareOp.LESS_THAN_OR_EQUAL, true))
             .build();
 
     private static final Function<Identifier, RenderType> SPIRIT = Util.memoize(texture ->

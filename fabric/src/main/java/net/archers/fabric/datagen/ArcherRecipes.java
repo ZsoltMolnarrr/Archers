@@ -4,7 +4,7 @@ import net.archers.block.ArcherBlocks;
 import net.archers.item.ArcherArmors;
 import net.archers.item.ArcherWeapons;
 import net.archers.item.misc.Misc;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -24,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
  */
 public class ArcherRecipes extends FabricRecipeProvider {
 
-    public ArcherRecipes(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public ArcherRecipes(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

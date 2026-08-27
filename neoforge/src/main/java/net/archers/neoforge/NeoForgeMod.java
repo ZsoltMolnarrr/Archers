@@ -15,9 +15,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(ArchersMod.ID)
@@ -28,8 +26,6 @@ public final class NeoForgeMod {
         modBus.addListener(RegisterEvent.class, NeoForgeMod::register);
         // Creative-tab placement (Archers group) — NeoForge mod-bus event (replaces ItemGroupEvents).
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, NeoForgeMod::buildTabContents);
-        // Villager trades — game-bus event (fired per profession); replaces Fabric API's TradeOfferHelper.
-        NeoForge.EVENT_BUS.addListener(VillagerTradesEvent.class, NeoForgeMod::onVillagerTrades);
         // Quiver equip sound, via a Curios capability on the (third-party) bundle items.
         if (ModList.get().isLoaded("curios")) {
             modBus.addListener(RegisterCapabilitiesEvent.class, QuiverCurios::registerCapabilities);
@@ -61,7 +57,9 @@ public final class NeoForgeMod {
             } catch (Exception e) { }
         });
         event.register(Registries.VILLAGER_PROFESSION, reg -> {
-            ArchersMod.registerVillagers(); // registers the profession + builds ArcherVillagers.TRADES
+            // Offers themselves are data-driven since 26.1 (data/archers/{villager_trade,trade_set});
+            // the profession only carries the trade-set keys.
+            ArchersMod.registerVillagers();
         });
     }
 
@@ -81,17 +79,5 @@ public final class NeoForgeMod {
                 event.accept(entry.item());
             }
         }
-    }
-
-    private static void onVillagerTrades(VillagerTradesEvent event) {
-        if (event.getType() != ArcherVillagers.PROFESSION_KEY) {
-            return;
-        }
-        ArcherVillagers.TRADES.forEach((tier, factories) -> {
-            var tierList = event.getTrades().get(tier.intValue());
-            if (tierList != null) {
-                tierList.addAll(factories);
-            }
-        });
     }
 }

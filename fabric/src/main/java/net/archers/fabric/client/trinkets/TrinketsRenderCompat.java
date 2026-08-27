@@ -1,6 +1,6 @@
 package net.archers.fabric.client.trinkets;
 
-import dev.emi.trinkets.api.client.TrinketRendererRegistry;
+import eu.pb4.trinkets.api.client.TrinketRendererRegistry;
 import net.archers.item.Quivers;
 
 public class TrinketsRenderCompat {

@@ -14,7 +14,6 @@
       "translate": "advancements.rpg_series.spell_novice_archer.description"
     },
     "icon": {
-      "count": 1,
       "id": "archers:composite_longbow"
     },
     "title": {

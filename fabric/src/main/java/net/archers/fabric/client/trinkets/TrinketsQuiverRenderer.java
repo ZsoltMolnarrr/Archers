@@ -1,8 +1,8 @@
 package net.archers.fabric.client.trinkets;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.client.TrinketRenderer;
+import eu.pb4.trinkets.api.TrinketSlotAccess;
+import eu.pb4.trinkets.api.client.TrinketRenderer;
 import net.archers.client.render.WornQuiverRenderer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
@@ -14,8 +14,8 @@ import net.minecraft.world.item.ItemStack;
 /// Renders a quiver on the wearer's back (Trinkets slot), see [WornQuiverRenderer].
 public class TrinketsQuiverRenderer implements TrinketRenderer {
     @Override
-    public void render(ItemStack itemStack,
-                       SlotReference slotReference,
+    public void submit(ItemStack itemStack,
+                       TrinketSlotAccess slotAccess,
                        EntityModel<? extends LivingEntityRenderState> entityModel,
                        PoseStack matrixStack,
                        SubmitNodeCollector queue,
