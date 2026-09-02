@@ -2,7 +2,8 @@ package net.archers.client.effect;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.archers.ArchersMod;
-import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +19,8 @@ public class RootsRenderer implements CustomModelStatusEffect.Renderer {
     public void renderEffect(long appliedAtWorldTime, int amplifier, LivingEntity livingEntity, float delta, PoseStack matrixStack, SubmitNodeCollector queue, int light) {
         matrixStack.pushPose();
         matrixStack.translate(0, 0.5, 0);
-        CustomModels.render(Sheets.cutoutBlockSheet(), modelId, matrixStack, queue, light, livingEntity.getId());
+        // 26.2: `Sheets.cutoutBlockSheet()` was removed; it was exactly this expression.
+        CustomModels.render(RenderTypes.entityCutoutCull(TextureAtlas.LOCATION_BLOCKS), modelId, matrixStack, queue, light, livingEntity.getId());
         matrixStack.popPose();
     }
 }

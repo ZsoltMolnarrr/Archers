@@ -6,6 +6,7 @@ import com.mojang.blaze3d.pipeline.DepthStencilState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.platform.CompareOp;
 import net.archers.ArchersMod;
+import net.minecraft.client.renderer.BindGroupLayouts;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
@@ -29,11 +30,11 @@ public final class ArcherRenderLayers {
 
     /// Vanilla `ENTITY_TRANSLUCENT_EMISSIVE` with exactly one state changed: this one writes depth.
     ///
-    /// The vanilla pipeline sets `DepthStencilState(LEQUAL, false)`, so an entity drawn on it leaves the depth
+    /// The vanilla pipeline sets `DepthStencilState(GEQUAL, false)` (reverse-Z since 26.2), so an entity drawn on it leaves the depth
     /// buffer untouched. Everything drawn afterwards then depth-tests against whatever is *behind* the
     /// entity and wins, which is why a spirit rendered on it sinks behind water (the translucent
     /// terrain pass runs after entities) and behind its own drop shadow (`entity_shadow` is
-    /// `LEQUAL`-tested and also unwritten, so it paints straight over the legs). Writing depth puts the
+    /// depth-tested the same way and also unwritten, so it paints straight over the legs). Writing depth puts the
     /// silhouette into the depth buffer and both rejections happen on their own.
     ///
     /// Depth writing is only safe here because the emissive program discards at `alpha < 0.1`
@@ -53,12 +54,14 @@ public final class ArcherRenderLayers {
             .withLocation(Identifier.fromNamespaceAndPath(ArchersMod.ID, "pipeline/spirit"))
             .withShaderDefine("ALPHA_CUTOUT", 0.1F)
             .withShaderDefine("PER_FACE_LIGHTING")
-            .withSampler("Sampler1")
+            .withBindGroupLayout(BindGroupLayouts.SAMPLER1)
             .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
             .withCull(false)
             // 26.1: `withDepthWrite`/`withDepthTestFunction` collapsed into one `DepthStencilState`.
-            // This is `DepthStencilState.DEFAULT` spelled out: LEQUAL test *and* depth write.
-            .withDepthStencilState(new DepthStencilState(CompareOp.LESS_THAN_OR_EQUAL, true))
+            // 26.2: reverse-Z — vanilla flipped every depth compare, so this is still
+            // `DepthStencilState.DEFAULT` spelled out: GEQUAL test *and* depth write
+            // (the vanilla pipeline this mirrors, `ENTITY_TRANSLUCENT_EMISSIVE`, is `GEQUAL, false`).
+            .withDepthStencilState(new DepthStencilState(CompareOp.GREATER_THAN_OR_EQUAL, true))
             .build();
 
     private static final Function<Identifier, RenderType> SPIRIT = Util.memoize(texture ->
@@ -67,7 +70,6 @@ public final class ArcherRenderLayers {
                     .useOverlay()
                     .affectsCrumbling()
                     .sortOnUpload()
-                    .bufferSize(1536)
                     .setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE)
                     .createRenderSetup()));
 
