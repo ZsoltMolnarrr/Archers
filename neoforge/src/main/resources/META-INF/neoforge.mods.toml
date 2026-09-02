@@ -11,12 +11,12 @@ authors = "Daedelus"
 description = '''
 Draw, Release, Conquer - Master the art of Archery!
 '''
-logoFile = "icon.png"
+iconFile = "icon.png"
 
 [[dependencies.archers]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.1,)"
+versionRange = "[26.2,)"
 ordering = "NONE"
 side = "BOTH"
 
