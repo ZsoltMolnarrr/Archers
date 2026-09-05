@@ -64,8 +64,8 @@ dependencies {
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 
     implementation("me.shedaniel.cloth:cloth-config-${platform}:${project.cloth_config_version}")
-//    implementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}")
     implementation("net.rpg_foundation:armor_model_api-${platform}:${project.armor_model_api_version}")
+//    implementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}")
     implementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
 
     // Trinkets Updated 4.0 (Patbox): mod id `trinkets_updated` (`provides: trinkets`), API package
@@ -73,16 +73,16 @@ dependencies {
     // `yumi_mc_core`, which loads from this dependency in the dev runtime.
     implementation("maven.modrinth:trinkets-updated:${project.trinkets_version}")
 
-//    implementation("maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}")
-    implementation("com.github.TheRedBrain:bundle-api-${platform}:${project.bundle_api_version}")
-//    implementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
+    implementation("maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}")
+//    implementation("com.github.TheRedBrain:bundle-api-${platform}:${project.bundle_api_version}")
     implementation("net.rpg_foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
-//    implementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
+//    implementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
     implementation("net.rpg_foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
-//    implementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
+//    implementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
     implementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
-//    implementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+//    implementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
     implementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
+//    implementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
 }
 
 processResources {
@@ -153,7 +153,7 @@ publishMods {
         client = true                    // >=1 of client/server REQUIRED by CurseForge (Error 1021)
         server = true
         changelogType = "markdown"
-        requires("fabric-api", "armor-model-api", "spell-engine", "ranged-weapon-api", "structure-pool-api")
+        requires("fabric-api", "armor-model-api", "spell-engine", "ranged-weapon-api", "structure-pool-api", "bundle-api")
     }
 
     modrinth {
@@ -166,6 +166,7 @@ publishMods {
         requires { slug = "spell-engine" }
         requires { slug = "ranged-weapon-api" }
         requires { slug = "structure-pool-api" }
+        requires { slug = "bundle-api" }
     }
 
     // Each platform publishes its own GitHub release under a distinct, platform-suffixed
