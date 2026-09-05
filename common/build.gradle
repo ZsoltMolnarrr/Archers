@@ -32,8 +32,8 @@ dependencies {
     implementation "net.fabricmc.fabric-api:fabric-api:$project.fabric_api_version"
 
     implementation("me.shedaniel.cloth:cloth-config-${platform}:${project.cloth_config_version}")
-//    implementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}")
-    implementation("net.rpg_foundation:armor_model_api-${platform}:${project.armor_model_api_version}")
+    implementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}")
+//    implementation("net.rpg_foundation:armor_model_api-${platform}:${project.armor_model_api_version}")
     implementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
 
     // Compile-only: IrisCompat reaches IrisApi behind an isModLoaded gate
@@ -41,16 +41,17 @@ dependencies {
 
     implementation("maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}")
 //    implementation("com.github.TheRedBrain:bundle-api-${platform}:${project.bundle_api_version}")
-//    implementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
-    implementation("net.rpg_foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
-//    implementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
-    implementation("net.rpg_foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
-//    implementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
-    implementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
-//    implementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
-    // `transitive = false`: everything SpellEngine needs on the common classpath is declared above;
+    implementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
+//    implementation("net.rpg_foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
+    implementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
+//    implementation("net.rpg_foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
+    implementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
+//    implementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
+    // The Modrinth artifact has no pom, so nothing is transitive. On the commented mavenLocal
+    // line below, `transitive = false` is required: everything SpellEngine needs on the common classpath is declared above;
     // its module metadata would otherwise pull duplicates of the same artifacts.
-    implementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}") { transitive = false }
+    implementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+//    implementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}") { transitive = false }
 
     // Compatibility
     // Fabric specific
