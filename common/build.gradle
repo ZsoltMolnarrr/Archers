@@ -39,8 +39,8 @@ dependencies {
     // Compile-only: IrisCompat reaches IrisApi behind an isModLoaded gate
     compileOnly("maven.modrinth:iris:${rootProject.iris_version}-fabric")
 
-//    implementation("maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}")
-    implementation("com.github.TheRedBrain:bundle-api-${platform}:${project.bundle_api_version}")
+    implementation("maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}")
+//    implementation("com.github.TheRedBrain:bundle-api-${platform}:${project.bundle_api_version}")
 //    implementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
     implementation("net.rpg_foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
 //    implementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
