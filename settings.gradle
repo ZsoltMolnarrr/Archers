@@ -11,4 +11,4 @@ rootProject.name = 'archers'
 
 include 'common'
 include 'fabric'
-// No `forge` module on the 1.20.1 line — RangedWeaponAPI is Fabric-only there.
+include 'forge'

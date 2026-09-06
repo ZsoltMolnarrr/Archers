@@ -5,6 +5,7 @@ import net.archers.block.ArcherBlocks;
 import net.archers.item.Group;
 import net.archers.item.Quivers;
 import net.archers.item.misc.Misc;
+import net.archers.fabric.village.FabricVillageStructures;
 import net.archers.village.ArcherVillagers;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -15,6 +16,9 @@ import net.fabricmc.loader.api.FabricLoader;
 public final class FabricMod implements ModInitializer {
     @Override
     public void onInitialize() {
+        // StructurePoolAPI is Fabric-only on 1.20.1 — install the village injector before the common
+        // setup runs (ArchersMod.init() calls VillageStructures.injectIfAvailable()).
+        FabricVillageStructures.install();
         // Run our common setup.
         ArchersMod.init();
         ArchersMod.registerEntities();

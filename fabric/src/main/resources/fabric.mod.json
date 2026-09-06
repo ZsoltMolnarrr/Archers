@@ -41,7 +41,7 @@
     "fabric-api": ">=0.92.0",
     "armor_model_api": ">=1.0.0",
     "spell_engine": ">=1.10.5",
-    "ranged_weapon_api": ">=1.1.0",
+    "ranged_weapon_api": ">=2.3.4",
     "structure_pool_api": "*"
   },
   "recommends": {

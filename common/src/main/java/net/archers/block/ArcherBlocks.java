@@ -39,9 +39,16 @@ public class ArcherBlocks {
                     .nonOpaque()
     ));
 
-    public static void register() {
+    /// Split from {@link #registerItems()} for Forge 47: `RegisterEvent` opens one window per registry and
+    /// locks every other one, so blocks and block items cannot be registered from the same window.
+    public static void registerBlocks() {
         for (var entry : all) {
             Registry.register(Registries.BLOCK, new Identifier(ArchersMod.ID, entry.name), entry.block);
+        }
+    }
+
+    public static void registerItems() {
+        for (var entry : all) {
             Registry.register(Registries.ITEM, new Identifier(ArchersMod.ID, entry.name), entry.item());
         }
         // Creative-tab placement (into the Archers group) is registered per-platform from each loader's

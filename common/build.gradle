@@ -38,9 +38,11 @@ dependencies {
     modImplementation("net.spell_engine:spell_engine-${platform}:${rootProject.spell_engine_version}") { transitive = false }
     modImplementation("com.github.TheRedBrain:bundle-api-${platform}:${rootProject.bundle_api_version}")
 
-    // Legacy published Fabric-only artifacts (no 1.20.1 Forge build exists for either). Archers is
-    // Fabric-only on this line, so these can stay in `common` — unlike Wizards, which had to hide
-    // StructurePoolAPI behind a platform seam for its Forge module.
-    modImplementation("maven.modrinth:ranged-weapon-api:${rootProject.ranged_weapon_api_version}")
-    modImplementation("maven.modrinth:structure-pool-api:${rootProject.structure_pool_api_version}")
+    // RangedWeaponAPI 2.3.4 (1.20.1-modern port, Fabric + Forge) — a hard dependency: every Archers
+    // bow/crossbow is a RWA CustomBow/CustomCrossbow built through SpellEngine's RangedWeapons factories.
+    modImplementation("net.foundation:ranged_weapon_api-${platform}:${rootProject.ranged_weapon_api_version}")
+
+    // StructurePoolAPI is NOT here: the only 1.20.1 artifact is Fabric-only, so both the API calls and
+    // the `config/archers/villages.json` config live behind the `village.VillageStructures` seam, whose
+    // only implementation is in `fabric/` (see net.archers.fabric.village.FabricVillageStructures).
 }

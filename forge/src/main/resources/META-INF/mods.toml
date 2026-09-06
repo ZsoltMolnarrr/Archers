@@ -1,0 +1,73 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+issueTrackerURL = "https://github.com/ZsoltMolnarrr/Archers/issues"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "archers"
+version = "${version}"
+displayName = "Archers (RPG Series)"
+authors = "Daedelus"
+description = '''
+Draw, Release, Conquer - Master the art of Archery!
+'''
+logoFile = "icon.png"
+
+[[dependencies.archers]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers]]
+modId = "armor_model_api"
+mandatory = true
+versionRange = "[1.0.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers]]
+modId = "spell_engine"
+mandatory = true
+versionRange = "[1.10.5,)"
+ordering = "AFTER"
+side = "BOTH"
+
+# Every Archers bow/crossbow is a RangedWeaponAPI CustomBow/CustomCrossbow (see ArcherWeapons).
+[[dependencies.archers]]
+modId = "ranged_weapon_api"
+mandatory = true
+versionRange = "[2.3.4,)"
+ordering = "AFTER"
+side = "BOTH"
+
+# Quivers are BundleAPI CustomBundleItems (see Quivers). Registration is gated on the mod being
+# loaded, but the client-side quiver model ids are not, so this stays a hard dependency (as it was
+# on the NeoForge module).
+[[dependencies.archers]]
+modId = "bundleapi"
+mandatory = true
+versionRange = "[1.1.0,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.archers]]
+modId = "curios"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
+# StructurePoolAPI has no Forge artifact on 1.20.1; vanilla-village archery-range injection is
+# Fabric-only (Repurposed Structures / Lithostitched data-driven injection still works on both loaders).
+
+# Mixin configs are declared in the jar MANIFEST (`MixinConfigs:`) by Loom (`loom.forge.mixinConfig`),
+# not in this file — the `[[mixins]]` table is NeoForge-only.

@@ -12,8 +12,7 @@ import net.archers.item.ArcherArmors;
 import net.archers.item.misc.Misc;
 import net.archers.content.ArcherSounds;
 import net.archers.village.ArcherVillagers;
-import net.fabric_extras.structure_pool.api.StructurePoolAPI;
-import net.fabric_extras.structure_pool.api.StructurePoolConfig;
+import net.archers.village.VillageStructures;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemGroup;
@@ -35,6 +34,9 @@ public class ArchersMod {
             ("equipment", Default.itemConfig)
             .builder()
             .setDirectory(ID)
+            // Discards (and regenerates) files written before the RangedWeaponAPI 2.x `RangedConfig`
+            // field rename — see ArchersItemConfig.
+            .schemaVersion(ArchersItemConfig.SCHEMA_VERSION)
             .sanitize(true)
             .build();
     public static ConfigManager<ConfigFile.Effects> effectsConfig = new ConfigManager<>
@@ -44,12 +46,8 @@ public class ArchersMod {
             .sanitize(true)
             .build();
 
-    public static ConfigManager<StructurePoolConfig> villagesConfig = new ConfigManager<>
-            ("villages", Default.villages)
-            .builder()
-            .setDirectory(ID)
-            .sanitize(true)
-            .build();
+    // `config/archers/villages.json` lives in `net.archers.fabric.village.FabricVillageStructures`:
+    // StructurePoolAPI is Fabric-only on 1.20.1 (see net.archers.village.VillageStructures).
 
     public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
             ("tweaks", new TweaksConfig())
@@ -62,15 +60,13 @@ public class ArchersMod {
         tweaksConfig.refresh();
         itemConfig.refresh();
         effectsConfig.refresh();
-        villagesConfig.refresh();
         if (Platform.util().isDevelopmentEnvironment()) {
             // Make sure items are enabled for datagen
             tweaksConfig.value.ignore_items_required_mods = true;
         }
-        if (!Platform.util().isModLoaded("lithostitched")) {
-            // Only inject the village if the Lithostitched is not present
-            StructurePoolAPI.injectAll(ArchersMod.villagesConfig.value);
-        }
+        // Vanilla-village archery ranges. StructurePoolAPI is Fabric-only on 1.20.1 — the injector is
+        // installed by the Fabric entrypoint and stays absent on Forge.
+        VillageStructures.injectIfAvailable();
 
         // Apply some of the tweaks. Enchant-allow is routed through SpellEngine's loader-neutral
         // PlatformEvents.onAllowEnchanting (Fabric: EnchantmentEvents; NeoForge: IItemExtension mixin),
@@ -98,7 +94,7 @@ public class ArchersMod {
     }
 
     public static void registerBlocks() {
-        ArcherBlocks.register();
+        ArcherBlocks.registerBlocks();
     }
 
     public static void registerItems() {
@@ -107,6 +103,7 @@ public class ArchersMod {
                 .displayName(Text.translatable("itemGroup." + ID + ".general"))
                 .build();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS);
+        ArcherBlocks.registerItems();
         Misc.register();
         ArcherWeapons.register(itemConfig.value.ranged_weapons, itemConfig.value.melee_weapons);
         ArcherArmors.register(itemConfig.value.armor_sets);

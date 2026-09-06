@@ -1,3 +1,10 @@
+# 3.1.1.002
+
+- Added Forge support on the 1.20.1 line (RangedWeaponAPI now has a Forge build)
+- Adopted RangedWeaponAPI 2.3.4 and Spell Engine 1.10.5.004
+- `config/archers/equipment.json` is regenerated once: ranged weapon tuning is now expressed as
+  `pull_time_bonus` (seconds) and `velocity_bonus` instead of absolute ticks / velocity
+
 # 3.1.1.001
 
 - Ported to Minecraft 1.20.1 (Fabric only — RangedWeaponAPI has no Forge build on this line)
