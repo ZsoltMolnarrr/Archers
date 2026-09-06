@@ -11,9 +11,10 @@ import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.render.CustomLayers;
 import net.spell_engine.api.render.CustomModels;
 import net.spell_engine.api.render.LightEmission;
+import net.spell_engine.utils.EntityScale;
 
 public class HuntersMarkRenderer implements CustomModelStatusEffect.Renderer {
-    public static final Identifier modelId = Identifier.of(ArchersMod.ID, "spell_effect/hunters_mark");
+    public static final Identifier modelId = new Identifier(ArchersMod.ID, "spell_effect/hunters_mark");
     private static final RenderLayer GLOWING_RENDER_LAYER = CustomLayers.spellEffect(LightEmission.GLOW, false);
     //TexturedRenderLayers.getEntityCutout();
 
@@ -25,7 +26,8 @@ public class HuntersMarkRenderer implements CustomModelStatusEffect.Renderer {
         var direction = camera.getPos().subtract(livingEntity.getPos()).normalize().multiply(livingEntity.getWidth() * 0.5F);
 
         matrixStack.push();
-        var verticalOffset = (livingEntity.getHeight() / livingEntity.getScale()) * 0.75F;
+        // 1.20.1 has no LivingEntity#getScale() / GENERIC_SCALE — SpellEngine's EntityScale is the seam.
+        var verticalOffset = (livingEntity.getHeight() / EntityScale.of(livingEntity)) * 0.75F;
         matrixStack.translate(direction.x, verticalOffset, direction.z);
 
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180F + (float)Math.toDegrees(Math.atan2(direction.x, direction.z)) ));

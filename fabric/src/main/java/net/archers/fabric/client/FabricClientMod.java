@@ -30,7 +30,8 @@ public final class FabricClientMod implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ArcherBlocks.WORKBENCH.block(), RenderLayer.getCutout());
 
         // Archers' custom tooltip lines — Fabric API (loader-specific; NeoForge uses ItemTooltipEvent).
-        ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, lines) ->
+        // Fabric API 0.92: the callback is 3-arg (no separate TooltipType).
+        ItemTooltipCallback.EVENT.register((stack, tooltipContext, lines) ->
                 ArchersTooltip.addLines(stack, lines));
 
         var slotCompat = FabricCompatFeatures.initSlotCompat();

@@ -4,7 +4,6 @@
   "package": "net.archers.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "component.DataComponentTypesMixin",
     "screen.AnvilScreenHandlerMixin",
     "screen.GrindstoneScreenHandlerMixin"
   ],

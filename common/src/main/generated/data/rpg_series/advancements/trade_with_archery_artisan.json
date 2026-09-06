@@ -1,0 +1,40 @@
+{
+  "parent": "rpg_series:misc_items",
+  "criteria": {
+    "trade_with_archery_artisan": {
+      "conditions": {
+        "villager": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "nbt": "{VillagerData:{profession:\"archers:archery_artisan\"}}"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:villager_trade"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.rpg_series.trade_with_archery_artisan.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "minecraft:arrow"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.rpg_series.trade_with_archery_artisan.title"
+    }
+  },
+  "requirements": [
+    [
+      "trade_with_archery_artisan"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

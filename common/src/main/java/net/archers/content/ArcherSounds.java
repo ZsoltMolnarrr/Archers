@@ -24,7 +24,7 @@ public class ArcherSounds {
         }
 
         public Entry(String name) {
-            this(Identifier.of(ArchersMod.ID, name));
+            this(new Identifier(ArchersMod.ID, name));
         }
 
         public Entry(Identifier id) {

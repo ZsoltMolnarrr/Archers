@@ -5,7 +5,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -49,13 +48,13 @@ public class ArcherEntities {
     }
 
     public static final Entry<SpiritWolfEntity> SPIRIT_WOLF = add(new Entry<>(
-            Identifier.of(ArchersMod.ID, "spirit_wolf"),
+            new Identifier(ArchersMod.ID, "spirit_wolf"),
             "Spirit Wolf",
             EntityType.Builder.<SpiritWolfEntity>create(SpiritWolfEntity::new, SpawnGroup.MISC)
                     // dimensions(float, float) yields `changing` (fixed=false) so
                     // EntityDimensions.scaled() applies GENERIC_SCALE if one is ever added
                     // Halfway between the vanilla wolf (0.6 x 0.85) and the original 1x1
-                    .dimensions(0.8F, 0.925F)
+                    .setDimensions(0.8F, 0.925F)
                     .maxTrackingRange(64)
                     .trackingTickInterval(3)
                     // Vanilla build(String id) — the no-arg build() is a Fabric API interface-injected
@@ -71,11 +70,8 @@ public class ArcherEntities {
         var e = new SummonedEntityConfig.Entry();
         e.common = new SummonedEntityConfig.CommonAttributes(20, 0.35, 3);
         e.common.follow_range = 32;
-        // Flat +50% over the vanilla base values (jump 0.42, step 0.6) — agile like a wolf
-        e.custom.add(new SummonedEntityConfig.CustomAttribute(
-                EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(), 0.63));
-        e.custom.add(new SummonedEntityConfig.CustomAttribute(
-                EntityAttributes.GENERIC_STEP_HEIGHT.getIdAsString(), 0.9));
+        // 1.20.1 has neither a living-entity jump-strength attribute (HORSE_JUMP_STRENGTH only) nor
+        // GENERIC_STEP_HEIGHT (1.20.5+), so the wolf runs on vanilla jump/step values on this line.
         return e;
     }
 

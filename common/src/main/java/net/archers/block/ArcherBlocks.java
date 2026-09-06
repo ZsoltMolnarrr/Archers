@@ -4,7 +4,7 @@ import net.archers.ArchersMod;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
-import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -33,7 +33,7 @@ public class ArcherBlocks {
     public static final Entry WORKBENCH = entry(ArcherWorkbenchBlock.ID.getPath(), new ArcherWorkbenchBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.OAK_TAN)
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .strength(2.5F)
                     .sounds(BlockSoundGroup.WOOD)
                     .nonOpaque()
@@ -41,8 +41,8 @@ public class ArcherBlocks {
 
     public static void register() {
         for (var entry : all) {
-            Registry.register(Registries.BLOCK, Identifier.of(ArchersMod.ID, entry.name), entry.block);
-            Registry.register(Registries.ITEM, Identifier.of(ArchersMod.ID, entry.name), entry.item());
+            Registry.register(Registries.BLOCK, new Identifier(ArchersMod.ID, entry.name), entry.block);
+            Registry.register(Registries.ITEM, new Identifier(ArchersMod.ID, entry.name), entry.item());
         }
         // Creative-tab placement (into the Archers group) is registered per-platform from each loader's
         // entrypoint, iterating ArcherBlocks.all — no Fabric API ItemGroupEvents in common.

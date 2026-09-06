@@ -77,8 +77,9 @@ public class ArchersMod {
         // using SpellEngine's TriState — no Fabric API EnchantmentEvents in common.
         if (tweaksConfig.value.enable_infinity_for_crossbows) {
             PlatformEvents.onAllowEnchanting((enchantment, target) -> {
+                // 1.20.1: `Enchantments.INFINITY` is the Enchantment itself, not a RegistryKey.
                 if (target.getItem() instanceof CrossbowItem &&
-                        enchantment.getKey().get().getValue().equals(Enchantments.INFINITY.getValue())) {
+                        enchantment.value() == Enchantments.INFINITY) {
                     return TriState.ALLOW;
                 }
                 return TriState.PASS;

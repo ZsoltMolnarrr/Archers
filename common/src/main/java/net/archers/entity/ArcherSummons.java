@@ -1,8 +1,10 @@
 package net.archers.entity;
 
 import net.archers.content.ArcherSounds;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.registry.Registries;
 import net.spell_engine.api.datagen.SpellBuilder.Placements;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell.Impact.Action.Summon;
@@ -115,24 +117,32 @@ public class ArcherSummons {
     /// (health 2.0 → 1.0, damage 0.5 → 0.3) so the two-wolf pack lands near a single wolf's
     /// former aggregate rather than doubling it.
     private static List<AttributeScaling.Entry> rangedCombatScaling() {
-        var s = ExternalSpellSchools.PHYSICAL_RANGED.attributeEntry.getIdAsString();
+        // PHYSICAL_RANGED is an *external* school: its attribute is RangedWeaponAPI's `ranged_weapon:damage`
+        // (or vanilla attack damage when RWA is absent), so the owner attribute id has to be read off the
+        // school's attribute entry rather than the school id.
+        var s = attributeId(ExternalSpellSchools.PHYSICAL_RANGED.attributeEntry.value());
         var entries = new ArrayList<AttributeScaling.Entry>();
-        entries.add(scalingEntry(EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString(), s, 0, 1.0));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ARMOR.getIdAsString(), s, 10, 0.1));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(), s, 0, 0.3));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_KNOCKBACK.getIdAsString(), s, 0, 0.1));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(), s, 5, 0.05));
+        entries.add(scalingEntry(attributeId(EntityAttributes.GENERIC_MAX_HEALTH), s, 0, 1.0));
+        entries.add(scalingEntry(attributeId(EntityAttributes.GENERIC_ARMOR), s, 10, 0.1));
+        entries.add(scalingEntry(attributeId(EntityAttributes.GENERIC_ATTACK_DAMAGE), s, 0, 0.3));
+        entries.add(scalingEntry(attributeId(EntityAttributes.GENERIC_ATTACK_KNOCKBACK), s, 0, 0.1));
+        entries.add(scalingEntry(attributeId(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE), s, 5, 0.05));
         return entries;
     }
 
+    /// 1.20.1 `EntityAttribute` has no `getIdAsString()` — resolve through the registry instead.
+    private static String attributeId(EntityAttribute attribute) {
+        return Registries.ATTRIBUTE.getId(attribute).toString();
+    }
+
     /// A single attribute-scaling entry: `targetAttribute += base + ownerAttribute * coefficient`
-    /// (ADD_VALUE).
+    /// (ADDITION).
     private static AttributeScaling.Entry scalingEntry(String targetAttribute, String ownerAttribute,
                                                        double base, double coefficient) {
         var entry = new AttributeScaling.Entry();
         entry.attribute_id = targetAttribute;
         entry.modifiers = List.of(new AttributeScaling.Entry.OwnerModifier(
-                ownerAttribute, EntityAttributeModifier.Operation.ADD_VALUE, base, coefficient));
+                ownerAttribute, EntityAttributeModifier.Operation.ADDITION, base, coefficient));
         return entry;
     }
 }

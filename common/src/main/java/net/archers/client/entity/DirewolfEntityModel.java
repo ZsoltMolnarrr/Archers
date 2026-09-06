@@ -100,7 +100,7 @@ public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity>
 
 	// Basic render features
 
-	public static final EntityModelLayer TEXTURE = new EntityModelLayer(Identifier.of(ArchersMod.ID, "direwolf"), "main");
+	public static final EntityModelLayer TEXTURE = new EntityModelLayer(new Identifier(ArchersMod.ID, "direwolf"), "main");
 
 	private void setHeadAngles(float headYaw, float headPitch) {
 		headYaw = MathHelper.clamp(headYaw, -60, 60);
@@ -115,8 +115,10 @@ public class DirewolfEntityModel extends SinglePartEntityModel<SpiritWolfEntity>
 	}
 
 	@Override
-	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
-		root.render(matrices, vertices, light, overlay, color);
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay,
+					   float red, float green, float blue, float alpha) {
+		// 1.20.1 passes the tint as four float channels; the packed ARGB int arrived in 1.21.
+		root.render(matrices, vertices, light, overlay, red, green, blue, alpha);
 	}
 
 	// Animations

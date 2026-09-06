@@ -1,8 +1,10 @@
 package net.archers.effect;
 
 import net.archers.ArchersMod;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.registry.Registries;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.util.Identifier;
 import net.spell_engine.rpg_series.config.AttributeModifier;
@@ -17,6 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArcherEffects {
+    /// 1.20.1 `EntityAttribute` is a plain object with no id accessor — the registry is the only lookup.
+    private static String attributeId(EntityAttribute attribute) {
+        return Registries.ATTRIBUTE.getId(attribute).toString();
+    }
+
     public static final List<Effects.Entry> entries = new ArrayList<>();
     private static Effects.Entry add(Effects.Entry entry) {
         entries.add(entry);
@@ -24,14 +31,14 @@ public class ArcherEffects {
     }
 
     public static Effects.Entry HUNTERS_MARK_STASH = add(new Effects.Entry(
-            Identifier.of(ArchersMod.ID, "hunters_mark_stash"),
+            new Identifier(ArchersMod.ID, "hunters_mark_stash"),
             "Power Shot",
             "Next shot applies Hunter's Mark",
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xff0000)
     ));
 
     public static Effects.Entry HUNTERS_MARK = add(new Effects.Entry(
-            Identifier.of(ArchersMod.ID, "hunters_mark"),
+            new Identifier(ArchersMod.ID, "hunters_mark"),
             "Marked",
             "Increases damage taken from all sources",
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0xff0000),
@@ -39,27 +46,24 @@ public class ArcherEffects {
                     new AttributeModifier(
                             SpellEngineAttributes.DAMAGE_TAKEN.id.toString(),
                             0.1F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            EntityAttributeModifier.Operation.MULTIPLY_BASE
                     )
             ))
     ));
 
     public static final Effects.Entry ENTANGLING_ROOTS = add(new Effects.Entry(
-            Identifier.of(ArchersMod.ID, "entangling_roots"),
+            new Identifier(ArchersMod.ID, "entangling_roots"),
             "Entangling Roots",
             "Reduces movement speed",
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x993333),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            attributeId(EntityAttributes.GENERIC_MOVEMENT_SPEED),
                             -0.5F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
-                    ),
-                    new AttributeModifier(
-                            EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(),
-                            -0.5F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            EntityAttributeModifier.Operation.MULTIPLY_BASE
                     )
+                    // 1.20.1 has no living-entity jump-strength attribute (only HORSE_JUMP_STRENGTH),
+                    // so Entangling Roots only slows on this line.
             ))
     ));
 

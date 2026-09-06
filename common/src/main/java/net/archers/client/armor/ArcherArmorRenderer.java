@@ -19,8 +19,8 @@ public final class ArcherArmorRenderer {
 
     private static GeoArmorRenderer make(String modelName, String textureName, String trimTextureName) {
         return GeoArmorRenderer.of(
-                Identifier.of(ArchersMod.ID, "geo/" + modelName + ".geo.json"),
-                Identifier.of(ArchersMod.ID, "textures/armor/" + textureName + ".png"))
-                .trim(Identifier.of(ArchersMod.ID, "armor/trim/" + trimTextureName), false);
+                new Identifier(ArchersMod.ID, "geo/" + modelName + ".geo.json"),
+                new Identifier(ArchersMod.ID, "textures/armor/" + textureName + ".png"))
+                .trim(new Identifier(ArchersMod.ID, "armor/trim/" + trimTextureName), false);
     }
 }

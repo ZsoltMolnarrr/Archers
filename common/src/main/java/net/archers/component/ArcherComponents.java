@@ -1,21 +1,30 @@
 package net.archers.component;
 
-import com.mojang.serialization.Codec;
 import net.archers.ArchersMod;
-import net.minecraft.component.ComponentType;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
+import net.minecraft.item.ItemStack;
 
-import java.util.function.UnaryOperator;
-
+/// 1.20.1 has no data components, so the Auto-Fire Hook flag lives in the stack's NBT under the
+/// legacy key {@code archers:afh} — the exact key the pre-1.21 Archers releases used, so hooked
+/// crossbows from those worlds keep working.
 public class ArcherComponents {
-    public static final ComponentType<Boolean> AUTO_FIRE = register(
-            Identifier.of(ArchersMod.ID, "afh"), builder -> builder.codec(Codec.BOOL).packetCodec(PacketCodecs.BOOL)
-    );
+    public static final String AUTO_FIRE_NBT_KEY = ArchersMod.ID + ":afh";
 
-    private static <T> ComponentType<T> register(Identifier id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
-        return Registry.register(Registries.DATA_COMPONENT_TYPE, id, ((ComponentType.Builder)builderOperator.apply(ComponentType.builder())).build());
+    public static boolean getAutoFire(ItemStack stack) {
+        var nbt = stack.getNbt();
+        return nbt != null && nbt.getBoolean(AUTO_FIRE_NBT_KEY);
+    }
+
+    public static void setAutoFire(ItemStack stack, boolean value) {
+        stack.getOrCreateNbt().putBoolean(AUTO_FIRE_NBT_KEY, value);
+    }
+
+    public static void removeAutoFire(ItemStack stack) {
+        var nbt = stack.getNbt();
+        if (nbt != null) {
+            nbt.remove(AUTO_FIRE_NBT_KEY);
+            if (nbt.isEmpty()) {
+                stack.setNbt(null);
+            }
+        }
     }
 }

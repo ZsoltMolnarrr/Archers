@@ -29,7 +29,7 @@ public class ArchersClientMod {
         registerArmorRenderer(ArcherArmors.archerArmorSet_T3, ArcherArmorRenderer.netheriteRanger());
 
         List<Identifier> quiverModels = Quivers.entries.stream()
-                .map(entry -> Identifier.of(ArchersMod.ID, "item/quiver/" + entry.id().getPath()))
+                .map(entry -> new Identifier(ArchersMod.ID, "item/quiver/" + entry.id().getPath()))
                 .toList();
         CustomModels.registerModelIds(quiverModels);
     }

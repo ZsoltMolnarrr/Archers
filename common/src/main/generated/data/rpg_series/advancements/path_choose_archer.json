@@ -1,0 +1,33 @@
+{
+  "parent": "rpg_series:classes",
+  "criteria": {
+    "book": {
+      "conditions": {
+        "spell_pool": "archers:spell_book/archer"
+      },
+      "trigger": "spell_engine:spell_book_creation"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.rpg_series.path_choose_archer.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "spell_engine:spell_book",
+      "nbt": "{spell_engine:{item_model:\"archers:item/spell_book/archer\"}}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.rpg_series.path_choose_archer.title"
+    }
+  },
+  "requirements": [
+    [
+      "book"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,3 +1,7 @@
+# 3.1.1.001
+
+- Ported to Minecraft 1.20.1 (Fabric only — RangedWeaponAPI has no Forge build on this line)
+
 # 3.1.1
 
 - Replaced armor rendering dependency AzureLibArmor with ArmorModelAPI

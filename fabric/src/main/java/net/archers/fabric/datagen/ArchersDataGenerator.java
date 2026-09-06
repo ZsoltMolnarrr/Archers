@@ -13,11 +13,12 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.datagen.NamespacedLangGenerator;
@@ -34,6 +35,7 @@ import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class ArchersDataGenerator implements DataGeneratorEntrypoint {
     @Override
@@ -48,6 +50,15 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(WeaponGen::new);
         pack.addProvider(ArchersAdvancements::new);
         pack.addProvider(LangGen::new);
+    }
+
+    /// 1.20.1 / Fabric API 0.92: the datagen `WrapperLookup` is assembled from `BuiltinRegistries.REGISTRY_BUILDER`
+    /// plus whatever each entrypoint contributes here — Fabric's `DynamicRegistries.registerSynced` only feeds the
+    /// *runtime* `RegistryLoader`, not data generation. Without this, `FabricTagProvider<Spell>` dies with
+    /// "Registry spell_engine:spell not found".
+    @Override
+    public void buildRegistry(RegistryBuilder registryBuilder) {
+        RPGSeriesDataGen.buildRegistry(registryBuilder);
     }
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
@@ -120,16 +131,16 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class UnsmeltGenerator extends FabricRecipeProvider {
-        public UnsmeltGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-            super(output, registriesFuture);
+        public UnsmeltGenerator(FabricDataOutput output) {
+            super(output);
         }
 
         public static int UNSMELT_TIME = 300;
 
         @Override
-        public void generate(RecipeExporter exporter) {
+        public void generate(Consumer<RecipeJsonProvider> exporter) {
             disassembleArmor(exporter, ArcherArmors.archerArmorSet_T1, Items.LEATHER);
-            disassembleArmor(exporter, ArcherArmors.archerArmorSet_T2, Items.TURTLE_SCUTE);
+            disassembleArmor(exporter, ArcherArmors.archerArmorSet_T2, Items.SCUTE);
             disassembleArmor(exporter, ArcherArmors.archerArmorSet_T3, Items.NETHERITE_SCRAP);
 
             disassemble(exporter,
@@ -174,7 +185,7 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
                     Items.NETHERITE_SCRAP);
         }
 
-        private static void disassembleArmor(RecipeExporter exporter, Armor.Set armorSet, Item output) {
+        private static void disassembleArmor(Consumer<RecipeJsonProvider> exporter, Armor.Set armorSet, Item output) {
             FabricRecipeProvider.offerSmelting(exporter,
                     armorSet.pieces(),
                     RecipeCategory.MISC,
@@ -193,7 +204,7 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
             );
         }
 
-        private static void disassemble(RecipeExporter exporter, List<ItemConvertible> items, Item output) {
+        private static void disassemble(Consumer<RecipeJsonProvider> exporter, List<ItemConvertible> items, Item output) {
             FabricRecipeProvider.offerSmelting(exporter,
                     items,
                     RecipeCategory.MISC,
@@ -245,7 +256,9 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
         }
 
         @Override
-        public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, FabricLanguageProvider.TranslationBuilder builder) {
+        /// 1.20.1 / Fabric API 0.92: `FabricLanguageProvider` is registry-independent — the callback takes
+        /// only the translation builder.
+        public void generateTranslations(FabricLanguageProvider.TranslationBuilder builder) {
             var namespace = ArchersMod.ID;
 
             // Creative tab

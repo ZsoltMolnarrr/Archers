@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     {
       "id": "archers:power_shot",

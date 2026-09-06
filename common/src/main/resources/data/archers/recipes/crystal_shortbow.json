@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "betterend"
+      ]
+    }
+  ],
+  "key": {
+    "M": {
+      "item": "betterend:aeternium_ingot"
+    },
+    "C": {
+      "item": "betterend:crystal_shards"
+    },
+    "X": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    " CX",
+    "M X",
+    " CX"
+  ],
+  "result": {
+    "item": "archers:crystal_shortbow"
+  },
+  "show_notification": true
+}

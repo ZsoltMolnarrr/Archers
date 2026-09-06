@@ -29,7 +29,8 @@ public class LivingEntityMixin {
                 var player = MinecraftClient.getInstance().player;
                 var mainHandStack = player.getMainHandStack();
                 if (AutoFireHook.isApplied(mainHandStack)) {
-                    var predicate = ModelPredicateProviderRegistry.get(mainHandStack, Identifier.of("pull"));
+                    // 1.20.1: the registry is keyed by Item, not ItemStack.
+                    var predicate = ModelPredicateProviderRegistry.get(mainHandStack.getItem(), new Identifier("pull"));
                     if (predicate != null) {
                         var state = predicate.call(mainHandStack, (ClientWorld) entity.getWorld(), player, 1234);
                         if (state >= 1) {

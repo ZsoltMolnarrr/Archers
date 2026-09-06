@@ -22,7 +22,7 @@ public class TrinketsQuiverRenderer implements TrinketRenderer {
     private final Identifier modelId;
 
     public TrinketsQuiverRenderer(String modelName) {
-        this.modelId = Identifier.of(ArchersMod.ID, "item/quiver/" + modelName);
+        this.modelId = new Identifier(ArchersMod.ID, "item/quiver/" + modelName);
     }
 
     @Override

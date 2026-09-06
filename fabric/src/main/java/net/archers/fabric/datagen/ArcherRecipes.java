@@ -6,17 +6,16 @@ import net.archers.item.ArcherWeapons;
 import net.archers.item.misc.Misc;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.rpg_series.item.Weapon;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 /**
  * Generates all crafting recipes for the Archers mod using Fabric's built-in API.
@@ -24,12 +23,14 @@ import java.util.concurrent.CompletableFuture;
  */
 public class ArcherRecipes extends FabricRecipeProvider {
 
-    public ArcherRecipes(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(output, registriesFuture);
+    /// 1.20.1 / Fabric API 0.92: `FabricRecipeProvider` is registry-independent — a 1-arg constructor and
+    /// `generate(Consumer<RecipeJsonProvider>)`.
+    public ArcherRecipes(FabricDataOutput output) {
+        super(output);
     }
 
     @Override
-    public void generate(RecipeExporter exporter) {
+    public void generate(Consumer<RecipeJsonProvider> exporter) {
         generateSpearRecipes(exporter);
         generateBowRecipes(exporter);
         generateCrossbowRecipes(exporter);
@@ -42,7 +43,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
     // SPEAR RECIPES
     // ========================================
 
-    private void generateSpearRecipes(RecipeExporter exporter) {
+    private void generateSpearRecipes(Consumer<RecipeJsonProvider> exporter) {
         spear(exporter, ArcherWeapons.flint_spear, Items.FLINT);
         spear(exporter, ArcherWeapons.iron_spear, Items.IRON_INGOT);
         spear(exporter, ArcherWeapons.golden_spear, Items.GOLD_INGOT);
@@ -52,7 +53,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
     /**
      * Generate spear recipe with standard pattern
      */
-    private void spear(RecipeExporter exporter, Weapon.Entry spearEntry, Item tipMaterial) {
+    private void spear(Consumer<RecipeJsonProvider> exporter, Weapon.Entry spearEntry, Item tipMaterial) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, spearEntry.item())
                 .pattern("  P")
                 .pattern(" # ")
@@ -67,7 +68,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
     // BOW RECIPES
     // ========================================
 
-    private void generateBowRecipes(RecipeExporter exporter) {
+    private void generateBowRecipes(Consumer<RecipeJsonProvider> exporter) {
         // Composite Longbow - bone + stick + string
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ArcherWeapons.composite_longbow.item())
                 .pattern(" #X")
@@ -106,7 +107,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
     // CROSSBOW RECIPES
     // ========================================
 
-    private void generateCrossbowRecipes(RecipeExporter exporter) {
+    private void generateCrossbowRecipes(Consumer<RecipeJsonProvider> exporter) {
         // Rapid Crossbow - iron + redstone + string + tripwire_hook
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ArcherWeapons.rapid_crossbow.item())
                 .pattern("IRI")
@@ -136,18 +137,18 @@ public class ArcherRecipes extends FabricRecipeProvider {
     // ARMOR RECIPES
     // ========================================
 
-    private void generateArmorRecipes(RecipeExporter exporter) {
+    private void generateArmorRecipes(Consumer<RecipeJsonProvider> exporter) {
         // Archer Armor (T1) - leather + chain
         generateArcherArmorSet(exporter, ArcherArmors.archerArmorSet_T1, Items.LEATHER, Items.CHAIN);
 
         // Ranger Armor (T2) - leather + rabbit_hide + turtle_scute
-        generateRangerArmorSet(exporter, ArcherArmors.archerArmorSet_T2, Items.LEATHER, Items.RABBIT_HIDE, Items.TURTLE_SCUTE);
+        generateRangerArmorSet(exporter, ArcherArmors.archerArmorSet_T2, Items.LEATHER, Items.RABBIT_HIDE, Items.SCUTE);
     }
 
     /**
      * Generate Archer armor set (T1 - simple pattern with leather + chain)
      */
-    private void generateArcherArmorSet(RecipeExporter exporter, Armor.Set armorSet, Item leather, Item chain) {
+    private void generateArcherArmorSet(Consumer<RecipeJsonProvider> exporter, Armor.Set armorSet, Item leather, Item chain) {
         // Helmet - pattern: "LLL" / "C C"
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("LLL")
@@ -190,7 +191,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
     /**
      * Generate Ranger armor set (T2 - uses leather, rabbit_hide, and turtle_scute)
      */
-    private void generateRangerArmorSet(RecipeExporter exporter, Armor.Set armorSet, Item leather, Item rabbitHide, Item turtleScute) {
+    private void generateRangerArmorSet(Consumer<RecipeJsonProvider> exporter, Armor.Set armorSet, Item leather, Item rabbitHide, Item turtleScute) {
         // Helmet - pattern: "SRS" / "L L"
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("SRS")
@@ -237,7 +238,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
     // OTHER RECIPES
     // ========================================
 
-    private void generateOtherRecipes(RecipeExporter exporter) {
+    private void generateOtherRecipes(Consumer<RecipeJsonProvider> exporter) {
         // Archers Workbench
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ArcherBlocks.WORKBENCH.block())
                 .pattern("SAL")
@@ -265,7 +266,7 @@ public class ArcherRecipes extends FabricRecipeProvider {
     // NETHERITE UPGRADE RECIPES
     // ========================================
 
-    private void generateNetheriteUpgrades(RecipeExporter exporter) {
+    private void generateNetheriteUpgrades(Consumer<RecipeJsonProvider> exporter) {
         // Weapon upgrades
         offerNetheriteUpgradeRecipe(exporter, ArcherWeapons.diamond_spear.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_spear.item());
         offerNetheriteUpgradeRecipe(exporter, ArcherWeapons.royal_longbow.item(), RecipeCategory.COMBAT, ArcherWeapons.netherite_longbow.item());

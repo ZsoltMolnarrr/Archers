@@ -10,7 +10,7 @@ import net.spell_engine.client.compatibility.ShaderCompatibility;
 
 public class DirewolfEntityRenderer extends MobEntityRenderer<SpiritWolfEntity, DirewolfEntityModel> {
     public static final Identifier TEXTURE =
-            Identifier.of(ArchersMod.ID, "textures/entity/direwolf_spell.png");
+            new Identifier(ArchersMod.ID, "textures/entity/direwolf_spell.png");
 
     public DirewolfEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new DirewolfEntityModel(context.getPart(DirewolfEntityModel.TEXTURE)), 0.5f);

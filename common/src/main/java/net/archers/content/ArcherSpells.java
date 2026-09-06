@@ -122,7 +122,7 @@ public class ArcherSpells {
 
     public static final Entry power_shot = add(power_shot().book(Book.ARCHER));
     private static Entry power_shot() {
-        var id = Identifier.of(ArchersMod.ID, "power_shot");
+        var id = new Identifier(ArchersMod.ID, "power_shot");
         var name = "Power Shot";
         var description = "Your next {effect_amplifier_cap} arrows inflict the target with Hunter's Mark for {effect_duration} seconds, increasing its damage taken by "
                 + TooltipTokens.effect(ArcherEffects.HUNTERS_MARK.id)
@@ -169,7 +169,7 @@ public class ArcherSpells {
 
     public static final Entry entangling_roots = add(entangling_roots().book(Book.ARCHER));
     private static Entry entangling_roots() {
-        var id = Identifier.of(ArchersMod.ID, "entangling_roots");
+        var id = new Identifier(ArchersMod.ID, "entangling_roots");
         var name = "Entangling Roots";
         var description = "Conjures roots to sprout from the ground in the nearby area, slowing down enemies for {cloud_duration} seconds.";
         var spell = activeSpellBase();
@@ -215,7 +215,7 @@ public class ArcherSpells {
 
     public static final Entry barrage = add(barrage().book(Book.ARCHER));
     private static Entry barrage() {
-        var id = Identifier.of(ArchersMod.ID, "barrage");
+        var id = new Identifier(ArchersMod.ID, "barrage");
         var name = "Barrage";
         var description = "Fires multiple arrows in quick succession.";
         var spell = activeSpellBase();
@@ -253,7 +253,7 @@ public class ArcherSpells {
 
     public static final Entry rain_of_arrows = add(rain_of_arrows().book(Book.ARCHER));
     private static Entry rain_of_arrows() {
-        var id = Identifier.of(ArchersMod.ID, "rain_of_arrows");
+        var id = new Identifier(ArchersMod.ID, "rain_of_arrows");
         var name = "Rain of Arrows";
         var description = "Rains arrows over the targeted area for 5 seconds, each dealing {damage} damage to enemies within {impact_range} blocks.";
         var spell = activeSpellBase();
@@ -326,7 +326,7 @@ public class ArcherSpells {
 
     public static final Entry magic_arrow = add(magic_arrow().book(Book.ARCHER));
     private static Entry magic_arrow() {
-        var id = Identifier.of(ArchersMod.ID, "magic_arrow");
+        var id = new Identifier(ArchersMod.ID, "magic_arrow");
         var name = "Magic Arrow";
         var description = "Shoots a magical arrow piercing thru all enemies in its path, dealing {damage} damage to each target. The longer the cast is held, the harder it hits and the further the arrow flies.";
         var spell = activeSpellBase();
@@ -409,7 +409,7 @@ public class ArcherSpells {
 
     public static final Entry spirit_wolf = add(spirit_wolf().book(Book.ARCHER));
     private static Entry spirit_wolf() {
-        var id = Identifier.of(ArchersMod.ID, "spirit_wolf");
+        var id = new Identifier(ArchersMod.ID, "spirit_wolf");
         var name = "Spirit Wolf Pack";
         var description = "Summons a pack of " + TooltipTokens.placeholder(TooltipTokens.summonCountToken) + " Spirit Wolves to fight by your side for " + TooltipTokens.placeholder(TooltipTokens.summonDurationToken) + " sec, empowered by your Ranged Damage.";
         var spell = activeSpellBase();

@@ -1,0 +1,34 @@
+{
+  "parent": "rpg_series:path_choose_archer",
+  "criteria": {
+    "bind": {
+      "conditions": {
+        "complete": false,
+        "spell_pool": "archers:spell_book/archer"
+      },
+      "trigger": "spell_engine:spell_binding"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.rpg_series.spell_novice_archer.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "archers:composite_longbow",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.rpg_series.spell_novice_archer.title"
+    }
+  },
+  "requirements": [
+    [
+      "bind"
+    ]
+  ],
+  "sends_telemetry_event": false
+}
