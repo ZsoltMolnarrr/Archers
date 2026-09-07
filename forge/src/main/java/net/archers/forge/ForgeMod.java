@@ -1,7 +1,6 @@
 package net.archers.forge;
 
 import net.archers.ArchersMod;
-import net.archers.block.ArcherBlocks;
 import net.archers.forge.client.ForgeClientMod;
 import net.archers.item.Group;
 import net.archers.item.Quivers;
@@ -86,11 +85,12 @@ public final class ForgeMod {
         if (!event.getTabKey().equals(Group.KEY)) {
             return;
         }
-        // Forge 47's `accept` takes a Supplier<? extends ItemConvertible>.
+        // Forge 47's `accept` takes a Supplier<? extends ItemConvertible>. The blocks are NOT added here:
+        // Forge posts this event per mod container in mod-load order, so anything an Archers-owned listener
+        // adds always lands after SpellEngine's contributions. They go in through SpellEngine's
+        // PlatformEvents.onItemGroupModify from ArchersMod.registerItems() instead, registered ahead of the
+        // weapon/armor listeners so they come first.
         for (var entry : Misc.ENTRIES) {
-            event.accept(() -> entry.item());
-        }
-        for (var entry : ArcherBlocks.all) {
             event.accept(() -> entry.item());
         }
         // Gate BEFORE touching Quivers: reading the static field forces the JVM to link/verify Quivers,

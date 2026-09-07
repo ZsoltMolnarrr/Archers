@@ -51,7 +51,8 @@ public class ArcherBlocks {
         for (var entry : all) {
             Registry.register(Registries.ITEM, new Identifier(ArchersMod.ID, entry.name), entry.item());
         }
-        // Creative-tab placement (into the Archers group) is registered per-platform from each loader's
-        // entrypoint, iterating ArcherBlocks.all — no Fabric API ItemGroupEvents in common.
+        // Creative-tab placement (into the Archers group) is loader-neutral, dispatched by SpellEngine's
+        // `PlatformEvents.onItemGroupModify` from `ArchersMod.registerItems()` — registered there ahead of
+        // the weapon/armor registrations so the blocks come first in the tab.
     }
 }

@@ -1,7 +1,6 @@
 package net.archers.fabric;
 
 import net.archers.ArchersMod;
-import net.archers.block.ArcherBlocks;
 import net.archers.item.Group;
 import net.archers.item.Quivers;
 import net.archers.item.misc.Misc;
@@ -36,12 +35,11 @@ public final class FabricMod implements ModInitializer {
                 TradeOfferHelper.registerVillagerOffers(ArcherVillagers.PROFESSION, tier,
                         list -> list.addAll(factories)));
 
-        // Creative-tab placement (Archers group) — Fabric API.
+        // Creative-tab placement (Archers group) — Fabric API. The blocks are NOT added here: they go in
+        // through SpellEngine's loader-neutral PlatformEvents.onItemGroupModify from
+        // ArchersMod.registerItems(), registered ahead of the weapon/armor listeners so they come first.
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
             for (var entry : Misc.ENTRIES) {
-                content.add(entry.item());
-            }
-            for (var entry : ArcherBlocks.all) {
                 content.add(entry.item());
             }
             // Gate BEFORE touching Quivers: reading the static field forces the JVM to link/verify

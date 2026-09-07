@@ -104,6 +104,21 @@ public class ArchersMod {
                 .build();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS);
         ArcherBlocks.registerItems();
+
+        // Blocks into the Archers creative tab. Dispatched by SpellEngine on both loaders
+        // (Fabric `ItemGroupEvents` / Forge `BuildCreativeModeTabContentsEvent`).
+        //
+        // ORDER MATTERS: on both loaders the group modifiers run in *registration* order, so this listener
+        // is installed BEFORE the weapon/armor registrations install SpellEngine's own listeners — that is
+        // what puts the blocks at the front of the tab. It has to live here rather than in the loader
+        // entrypoints: on Forge the tab event is posted per mod container in mod-load order, so anything an
+        // Archers-owned listener adds would always land *after* SpellEngine's contributions.
+        PlatformEvents.onItemGroupModify(Group.KEY, (content, context) -> {
+            for (var entry : ArcherBlocks.all) {
+                content.add(entry.item());
+            }
+        });
+
         Misc.register();
         ArcherWeapons.register(itemConfig.value.ranged_weapons, itemConfig.value.melee_weapons);
         ArcherArmors.register(itemConfig.value.armor_sets);
