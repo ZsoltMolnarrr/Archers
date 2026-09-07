@@ -86,7 +86,8 @@ dependencies {
     // needs a pin. `localRuntime` keeps it out of the published POM.
     localRuntime("io.github.llamalad7:mixinextras-forge:${rootProject.mixin_extras_version}")
 
-    // StructurePoolAPI has no Forge artifact on 1.20.1 — see archers-port-notes.md.
+    // StructurePoolAPI (1.20.1-modern port; mavenLocal). NOT JiJ'd - standalone library mod.
+    modImplementation("net.foundation:structure_pool_api-${platform}:${rootProject.structure_pool_api_version}")
 }
 
 processResources {
@@ -137,7 +138,7 @@ publishMods {
         server = true
         changelogType = "markdown"
         // StructurePoolAPI is not listed: it is Fabric-only on 1.20.1.
-        requires("armor-model-api", "spell-engine", "ranged-weapon-api")
+        requires("armor-model-api", "spell-engine", "ranged-weapon-api", "structure-pool-api")
     }
 
     modrinth {
@@ -149,6 +150,7 @@ publishMods {
         requires { slug = "armor-model-api" }
         requires { slug = "spell-engine" }
         requires { slug = "ranged-weapon-api" }
+        requires { slug = "structure-pool-api" }
     }
 
     // Each platform publishes its own GitHub release under a distinct, platform-suffixed

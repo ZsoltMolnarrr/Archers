@@ -93,9 +93,8 @@ dependencies {
     // RangedWeaponAPI 2.3.4 (1.20.1-modern port) from mavenLocal — hard dependency on both loaders.
     modImplementation("net.foundation:ranged_weapon_api-${platform}:${rootProject.ranged_weapon_api_version}")
 
-    // StructurePoolAPI: legacy published Fabric-only artifact, no 1.20.1 Forge build exists. Fabric
-    // module only — `FabricVillageStructures` is the sole user (see common/.../village/VillageStructures).
-    modImplementation("maven.modrinth:structure-pool-api:${rootProject.structure_pool_api_version}")
+    // StructurePoolAPI (1.20.1-modern port; mavenLocal). NOT JiJ'd - standalone library mod.
+    modImplementation("net.foundation:structure_pool_api-${platform}:${rootProject.structure_pool_api_version}")
 }
 
 processResources {

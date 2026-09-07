@@ -42,7 +42,9 @@ dependencies {
     // bow/crossbow is a RWA CustomBow/CustomCrossbow built through SpellEngine's RangedWeapons factories.
     modImplementation("net.foundation:ranged_weapon_api-${platform}:${rootProject.ranged_weapon_api_version}")
 
-    // StructurePoolAPI is NOT here: the only 1.20.1 artifact is Fabric-only, so both the API calls and
-    // the `config/archers/villages.json` config live behind the `village.VillageStructures` seam, whose
-    // only implementation is in `fabric/` (see net.archers.fabric.village.FabricVillageStructures).
+    // StructurePoolAPI 1.2.1+ ships a Forge artifact too, and its `injectAll` touches no loader API,
+    // so the village injection and the `config/archers/villages.json` config live here in `common`.
+    // The `-common` artifact carries the whole API surface and no loader dependency. NOT JiJ'd: it is
+    // a standalone library mod the player installs.
+    modImplementation("net.foundation:structure_pool_api-common:${rootProject.structure_pool_api_version}")
 }

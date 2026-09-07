@@ -12,7 +12,8 @@ import net.archers.item.ArcherArmors;
 import net.archers.item.misc.Misc;
 import net.archers.content.ArcherSounds;
 import net.archers.village.ArcherVillagers;
-import net.archers.village.VillageStructures;
+import net.fabric_extras.structure_pool.api.StructurePoolAPI;
+import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemGroup;
@@ -46,8 +47,12 @@ public class ArchersMod {
             .sanitize(true)
             .build();
 
-    // `config/archers/villages.json` lives in `net.archers.fabric.village.FabricVillageStructures`:
-    // StructurePoolAPI is Fabric-only on 1.20.1 (see net.archers.village.VillageStructures).
+    public static ConfigManager<StructurePoolConfig> villageConfig = new ConfigManager<>
+            ("villages", Default.villageConfig)
+            .builder()
+            .setDirectory(ID)
+            .sanitize(true)
+            .build();
 
     public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
             ("tweaks", new TweaksConfig())
@@ -64,9 +69,17 @@ public class ArchersMod {
             // Make sure items are enabled for datagen
             tweaksConfig.value.ignore_items_required_mods = true;
         }
-        // Vanilla-village archery ranges. StructurePoolAPI is Fabric-only on 1.20.1 — the injector is
-        // installed by the Fabric entrypoint and stays absent on Forge.
-        VillageStructures.injectIfAvailable();
+        villageConfig.refresh();
+        if (!Platform.util().isModLoaded("lithostitched")) {
+            // Only inject the archery ranges if Lithostitched is not present - otherwise the
+            // data-driven paths in `resources/data/archers` already do it.
+            //
+            // `injectAll` only *queues* the entries; StructurePoolAPI's own entrypoint applies them
+            // when the server starts (Fabric SERVER_STARTING / Forge ServerAboutToStartEvent, both
+            // before the spawn region generates). The queue is deliberately never cleared, so this
+            // must be called exactly once, here at mod init - never per world load.
+            StructurePoolAPI.injectAll(villageConfig.value);
+        }
 
         // Apply some of the tweaks. Enchant-allow is routed through SpellEngine's loader-neutral
         // PlatformEvents.onAllowEnchanting (Fabric: EnchantmentEvents; NeoForge: IItemExtension mixin),
