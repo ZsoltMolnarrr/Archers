@@ -50,9 +50,8 @@ public final class ForgeMod {
             QuiverCurios.installFactory();
         }
 
-        // Run our common setup (configs only — registers nothing). The vanilla-village archery-range
-        // injection inside it is a no-op on Forge: StructurePoolAPI is Fabric-only on 1.20.1, so no
-        // VillageStructures.Injector is installed here.
+        // Run our common setup (configs only — registers nothing). It also queues the vanilla-village
+        // archery-range injection, which StructurePoolAPI applies on ServerAboutToStartEvent.
         ArchersMod.init();
 
         var modBus = FMLJavaModLoadingContext.get().getModEventBus();
