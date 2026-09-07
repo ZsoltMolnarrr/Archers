@@ -5,15 +5,21 @@ import net.archers.client.entity.DirewolfEntityModel;
 import net.archers.client.entity.DirewolfEntityRenderer;
 import net.archers.client.util.ArchersTooltip;
 import net.archers.entity.ArcherEntities;
+import net.archers.forge.ForgeMod;
+import net.archers.forge.client.curios.CuriosRenderCompat;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.spell_engine.client.gui.ConfigMenuScreen;
+import net.spell_engine.forge.compat.ForgeCompatFeatures;
+
+import java.util.Objects;
 
 /// Client-only wiring for Forge 47; only touched from {@link net.archers.forge.ForgeMod} behind a
 /// `Dist.CLIENT` check. Mod-bus listeners are registered explicitly (Forge 47's `@EventBusSubscriber`
@@ -41,6 +47,14 @@ public final class ForgeClientMod {
         // Archers' custom tooltip lines — game-bus event (replaces Fabric API's ItemTooltipCallback).
         MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, ItemTooltipEvent.class, tooltip ->
                 ArchersTooltip.addLines(tooltip.getItemStack(), tooltip.getToolTip()));
+
+        // Worn-quiver model, the Curios counterpart of Fabric's TrinketsRenderCompat. `initSlotCompat()`
+        // is SpellEngine's idempotent slot-mod probe; it returns "curios" here and null when Curios is
+        // absent. The ModList guard comes first so `CuriosRenderCompat` is never even linked without it.
+        if (ModList.get().isLoaded(ForgeMod.CURIOS_ID)
+                && Objects.equals(ForgeCompatFeatures.initSlotCompat(), ForgeMod.CURIOS_ID)) {
+            CuriosRenderCompat.init();
+        }
     }
 
     private static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

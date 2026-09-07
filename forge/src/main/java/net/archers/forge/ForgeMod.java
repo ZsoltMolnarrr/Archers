@@ -2,6 +2,7 @@ package net.archers.forge;
 
 import net.archers.ArchersMod;
 import net.archers.forge.client.ForgeClientMod;
+import net.archers.forge.compat.curios.QuiverCurios;
 import net.archers.item.Group;
 import net.archers.item.Quivers;
 import net.archers.item.misc.Misc;
@@ -33,10 +34,22 @@ import net.minecraftforge.registries.RegisterEvent;
 /// window below, so the ordering holds.
 @Mod(ArchersMod.ID)
 public final class ForgeMod {
+    /// Curios is optional (see `mods.toml`); every Curios-touching class must sit behind this check.
+    public static final String CURIOS_ID = "curios";
+
     // FMLJavaModLoadingContext.get() is flagged for removal by late 47.x builds, but the
     // constructor-injected replacement doesn't exist on early 47.x; get() works on all of [47,).
     @SuppressWarnings("removal")
     public ForgeMod() {
+        // Curios quiver integration — install the item factory BEFORE anything registers items
+        // (`Quivers.register()` runs inside the ITEM window below). Gated on both mods: the factory
+        // builds a `Quivers.QuiverItem` subclass (BundleAPI's CustomBundleItem) that implements
+        // Curios' `ICurioItem`, so either mod being absent would be a NoClassDefFoundError.
+        // Without it the quivers stay plain items — equippable, but silent.
+        if (ModList.get().isLoaded("bundleapi") && ModList.get().isLoaded(CURIOS_ID)) {
+            QuiverCurios.installFactory();
+        }
+
         // Run our common setup (configs only — registers nothing). The vanilla-village archery-range
         // injection inside it is a no-op on Forge: StructurePoolAPI is Fabric-only on 1.20.1, so no
         // VillageStructures.Injector is installed here.
