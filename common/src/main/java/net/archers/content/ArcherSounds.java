@@ -9,7 +9,9 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ArcherSounds {
     public static class Entry {
@@ -76,6 +78,20 @@ public class ArcherSounds {
     public static final Entry SPIRIT_WOLF_SUMMON = add(new Entry("spirit_wolf_summon").variants(2));
 
 
+
+    /// Creation only — the sound events keyed by the id they register under. A loader that registers
+    /// them itself (Forge) iterates this instead of calling {@link #register()}.
+    ///
+    /// The `Entry#entry` `RegistryEntry` is deliberately not reproduced on that path: Forge's
+    /// `RegisterEvent` helper returns void, and nothing ever reads `entry()` at runtime — armor materials
+    /// take the raw `SoundEvent` and spells reference sounds by id.
+    public static Map<Identifier, SoundEvent> soundsToRegister() {
+        var sounds = new LinkedHashMap<Identifier, SoundEvent>();
+        for (var entry: entries) {
+            sounds.put(entry.id(), entry.soundEvent());
+        }
+        return sounds;
+    }
 
     public static void register() {
         for (var entry: entries) {

@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.rpg_series.config.WeaponConfig;
 import net.spell_engine.rpg_series.item.Equipment;
@@ -16,6 +17,7 @@ import net.spell_engine.rpg_series.item.Weapon;
 import net.spell_engine.rpg_series.item.Weapons;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -106,6 +108,29 @@ public class ArcherWeapons {
     // MARK: Register
 
     public static void register(Map<String, RangedConfig> rangedConfig, Map<String, WeaponConfig> meleeConfig) {
+        itemsToRegister(rangedConfig, meleeConfig)
+                .forEach((id, item) -> Registry.register(Registries.ITEM, id, item));
+    }
+
+    /// Adds the mod-gated entries, then builds every weapon item, keyed by the id it registers under.
+    /// Creation only — a loader that registers items itself (Forge) iterates this instead of calling
+    /// {@link #register}. Must run inside the `ITEM` registration window: `Item`'s constructor takes an
+    /// intrusive registry holder.
+    public static Map<Identifier, Item> itemsToRegister(Map<String, RangedConfig> rangedConfig, Map<String, WeaponConfig> meleeConfig) {
+        addConditionalEntries();
+        var items = new LinkedHashMap<Identifier, Item>();
+        // Melee before ranged — this is also the order they take in the creative tab, because both
+        // helpers install their item-group listener as they build.
+        items.putAll(Weapon.itemsToRegister(meleeConfig, meleeEntries, Group.KEY));
+        items.putAll(RangedWeapon.itemsToRegister(rangedConfig, rangedEntries, Group.KEY));
+        return items;
+    }
+
+    private static boolean conditionalEntriesAdded = false;
+
+    private static void addConditionalEntries() {
+        if (conditionalEntriesAdded) { return; }
+        conditionalEntriesAdded = true;
         if (ArchersMod.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(BETTER_END)) {
             var aeterniumRepair = ingredient("betterend:aeternium_ingot", Platform.util().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
             var crystalRepair = ingredient("betterend:crystal_shards", Platform.util().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
@@ -127,8 +152,5 @@ public class ArcherWeapons {
             addRanged(RangedWeapons.rapidCrossbow(NAMESPACE, "aether_rapid_crossbow", Equipment.Tier.TIER_4, aetherRepair).loot(-1, "aether"));
             addRanged(RangedWeapons.heavyCrossbow(NAMESPACE, "aether_heavy_crossbow", Equipment.Tier.TIER_4, aetherRepair).loot(-1, "aether"));
         }
-
-        Weapon.register(meleeConfig, meleeEntries, Group.KEY);
-        RangedWeapon.register(rangedConfig, rangedEntries, Group.KEY);
     }
 }

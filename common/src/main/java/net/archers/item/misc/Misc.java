@@ -8,6 +8,8 @@ import net.minecraft.util.Identifier;
 import net.spell_engine.Platform;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Misc {
     public record Entry(Identifier id, Item item) { }
@@ -21,13 +23,22 @@ public class Misc {
     }
     public static Entry autoFireHook = add(AutoFireHook.id, AutoFireHook.item);
 
-    public static void register() {
+    /// The misc items — plus the quivers when BundleAPI is present — keyed by the id they register under.
+    /// Creation only: a loader that registers items itself (Forge) iterates this instead of calling
+    /// {@link #register()}. Must run inside the `ITEM` registration window (see `Quivers#itemsToRegister`).
+    public static Map<Identifier, Item> itemsToRegister() {
+        var items = new LinkedHashMap<Identifier, Item>();
         for (var entry: ENTRIES) {
-            Registry.register(Registries.ITEM, entry.id, entry.item);
+            items.put(entry.id, entry.item);
         }
-        // Creative-tab placement is registered per-platform from each loader's entrypoint.
         if (Platform.util().isModLoaded("bundleapi")) {
-            Quivers.register();
+            items.putAll(Quivers.itemsToRegister());
         }
+        return items;
+    }
+
+    public static void register() {
+        itemsToRegister().forEach((id, item) -> Registry.register(Registries.ITEM, id, item));
+        // Creative-tab placement is registered per-platform from each loader's entrypoint.
     }
 }

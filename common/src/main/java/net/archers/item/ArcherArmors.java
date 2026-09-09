@@ -7,6 +7,7 @@ import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
@@ -160,6 +161,13 @@ public class ArcherArmors {
 
     public static void register(Map<String, ArmorSetConfig> configs) {
         Armor.register(configs, entries, Group.KEY);
+    }
+
+    /// Creation only — the armour items keyed by the id they register under. A loader that registers items
+    /// itself (Forge) iterates this instead of calling {@link #register}. Must run inside the `ITEM`
+    /// registration window: `Item`'s constructor takes an intrusive registry holder.
+    public static Map<Identifier, Item> itemsToRegister(Map<String, ArmorSetConfig> configs) {
+        return Armor.itemsToRegister(configs, entries, Group.KEY);
     }
 }
 

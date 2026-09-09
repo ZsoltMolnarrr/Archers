@@ -5,6 +5,7 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.Registries;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.util.Identifier;
 import net.spell_engine.rpg_series.config.AttributeModifier;
@@ -17,6 +18,7 @@ import net.spell_engine.api.entity.SpellEngineAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ArcherEffects {
     /// 1.20.1 `EntityAttribute` is a plain object with no id accessor — the registry is the only lookup.
@@ -72,5 +74,16 @@ public class ArcherEffects {
         Synchronized.configure(ENTANGLING_ROOTS.effect, true);
 
         Effects.register(entries, config.effects);
+    }
+
+    /// Configures the effects and returns them keyed by the id they register under. Creation only — a
+    /// loader that registers status effects itself (Forge) iterates this instead of calling
+    /// {@link #register}, and follows it with `Effects.linkEntries(entries)` to fill in the
+    /// `Entry#entry` registry entries that `Registry.registerReference` would have returned.
+    public static Map<Identifier, StatusEffect> effectsToRegister(ConfigFile.Effects config) {
+        Synchronized.configure(HUNTERS_MARK.effect, true);
+        Synchronized.configure(ENTANGLING_ROOTS.effect, true);
+
+        return Effects.effectsToRegister(entries, config.effects);
     }
 }

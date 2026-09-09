@@ -14,7 +14,9 @@ import net.tiny_config.ConfigManager;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ArcherEntities {
 
@@ -97,9 +99,26 @@ public class ArcherEntities {
     }
 
     public static void register() {
+        entityTypesToRegister().forEach((id, type) -> Registry.register(Registries.ENTITY_TYPE, id, type));
+    }
+
+    /// Loads Archers' summoned-entity config, hands each summon's base attributes to SpellEngine's buffer,
+    /// and returns the entity types keyed by the id they register under. Creation only — nothing is written
+    /// to a vanilla registry here, so a loader that registers entity types itself (Forge) iterates this
+    /// instead of calling {@link #register()}.
+    ///
+    /// The `EntityType`s themselves are built in this class's static initialiser, so the **first touch of
+    /// this class must happen inside the `ENTITY_TYPE` registration window**: `EntityType.Builder#build`
+    /// constructs an intrusive registry holder, which throws `Registry is already frozen` outside it.
+    ///
+    /// `SummonedEntities.registerAttributes` writes into SpellEngine's own map (flushed later, from its
+    /// `EntityAttributeCreationEvent` listener on Forge), not into a vanilla registry, so it belongs on
+    /// the creation side.
+    public static Map<Identifier, EntityType<?>> entityTypesToRegister() {
         summonConfig.refresh(); // load (or write) Archers' own config file before reading values from it
+        var types = new LinkedHashMap<Identifier, EntityType<?>>();
         for (var entry : entries) {
-            Registry.register(Registries.ENTITY_TYPE, entry.id, entry.type);
+            types.put(entry.id, entry.type);
             if (entry.summonConfig != null) {
                 // Only summoned (living) entities carry a config; safe by construction.
                 @SuppressWarnings("unchecked")
@@ -108,5 +127,6 @@ public class ArcherEntities {
                 SummonedEntities.registerAttributes(entry.id, livingType, summonConfig.value::entryFor);
             }
         }
+        return types;
     }
 }

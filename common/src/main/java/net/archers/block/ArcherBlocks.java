@@ -20,6 +20,12 @@ public class ArcherBlocks {
         public Entry(String name, Block block) {
             this(name, block, new BlockItem(block, new Item.Settings()));
         }
+
+        /// The id both the block and its block item register under. Shared so the Forge entrypoint's
+        /// registration loop cannot drift from the one below.
+        public Identifier id() {
+            return new Identifier(ArchersMod.ID, name);
+        }
     }
 
     public static final ArrayList<Entry> all = new ArrayList<>();
@@ -43,13 +49,13 @@ public class ArcherBlocks {
     /// locks every other one, so blocks and block items cannot be registered from the same window.
     public static void registerBlocks() {
         for (var entry : all) {
-            Registry.register(Registries.BLOCK, new Identifier(ArchersMod.ID, entry.name), entry.block);
+            Registry.register(Registries.BLOCK, entry.id(), entry.block);
         }
     }
 
     public static void registerItems() {
         for (var entry : all) {
-            Registry.register(Registries.ITEM, new Identifier(ArchersMod.ID, entry.name), entry.item());
+            Registry.register(Registries.ITEM, entry.id(), entry.item());
         }
         // Creative-tab placement (into the Archers group) is loader-neutral, dispatched by SpellEngine's
         // `PlatformEvents.onItemGroupModify` from `ArchersMod.registerItems()` — registered there ahead of

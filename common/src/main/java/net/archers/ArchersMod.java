@@ -110,28 +110,44 @@ public class ArchersMod {
         ArcherBlocks.registerBlocks();
     }
 
-    public static void registerItems() {
-        Group.ARCHERS = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
-                .icon(() -> new ItemStack(ArcherArmors.archerArmorSet_T2.head))
-                .displayName(Text.translatable("itemGroup." + ID + ".general"))
-                .build();
-        Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS);
-        ArcherBlocks.registerItems();
+    /// Builds the Archers creative tab (once). Creation only — a loader that registers it itself (Forge)
+    /// calls this from its own `ITEM_GROUP` window, which is a different, much later window than `ITEM`.
+    public static ItemGroup createItemGroup() {
+        if (Group.ARCHERS == null) {
+            Group.ARCHERS = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
+                    .icon(() -> new ItemStack(ArcherArmors.archerArmorSet_T2.head))
+                    .displayName(Text.translatable("itemGroup." + ID + ".general"))
+                    .build();
+        }
+        return Group.ARCHERS;
+    }
 
-        // Blocks into the Archers creative tab. Dispatched by SpellEngine on both loaders
-        // (Fabric `ItemGroupEvents` / Forge `BuildCreativeModeTabContentsEvent`).
-        //
-        // ORDER MATTERS: on both loaders the group modifiers run in *registration* order, so this listener
-        // is installed BEFORE the weapon/armor registrations install SpellEngine's own listeners — that is
-        // what puts the blocks at the front of the tab. It has to live here rather than in the loader
-        // entrypoints: on Forge the tab event is posted per mod container in mod-load order, so anything an
-        // Archers-owned listener adds would always land *after* SpellEngine's contributions.
+    private static boolean blockItemGroupListenerInstalled = false;
+
+    /// Blocks into the Archers creative tab. Dispatched by SpellEngine on both loaders
+    /// (Fabric `ItemGroupEvents` / Forge `BuildCreativeModeTabContentsEvent`).
+    ///
+    /// ORDER MATTERS: on both loaders the group modifiers run in *registration* order, so this listener
+    /// must be installed BEFORE the weapon/armor registrations install SpellEngine's own listeners — that
+    /// is what puts the blocks at the front of the tab. Keep the call site where it is in
+    /// {@link #registerItems()} and in the Forge entrypoint's `ITEM` window. It has to go through
+    /// SpellEngine's `PlatformEvents` rather than a loader event of ours: on Forge the tab event is posted
+    /// per mod container in mod-load order, so anything an Archers-owned listener adds would always land
+    /// *after* SpellEngine's contributions.
+    public static void installBlockItemGroupListener() {
+        if (blockItemGroupListenerInstalled) { return; }
+        blockItemGroupListenerInstalled = true;
         PlatformEvents.onItemGroupModify(Group.KEY, (content, context) -> {
             for (var entry : ArcherBlocks.all) {
                 content.add(entry.item());
             }
         });
+    }
 
+    public static void registerItems() {
+        Registry.register(Registries.ITEM_GROUP, Group.KEY, createItemGroup());
+        ArcherBlocks.registerItems();
+        installBlockItemGroupListener();
         Misc.register();
         ArcherWeapons.register(itemConfig.value.ranged_weapons, itemConfig.value.melee_weapons);
         ArcherArmors.register(itemConfig.value.armor_sets);

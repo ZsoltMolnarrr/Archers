@@ -17,7 +17,9 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class Quivers {
@@ -55,14 +57,25 @@ public class Quivers {
         return entry;
     }
 
-    public static void register() {
-        entry("small_quiver", 4, null);
-        entry("medium_quiver", 8, null);
-        entry("large_quiver", 12, Rarity.UNCOMMON);
-
-        for(var entry: entries) {
-            Registry.register(Registries.ITEM, entry.id(), entry.item());
+    /// Builds the three quivers (once) and returns them keyed by the id they register under. Creation only
+    /// — a loader that registers items itself (Forge) iterates this instead of calling {@link #register()}.
+    /// Must run inside the `ITEM` registration window: `Item`'s constructor takes an intrusive registry
+    /// holder.
+    public static Map<Identifier, Item> itemsToRegister() {
+        if (entries.isEmpty()) {
+            entry("small_quiver", 4, null);
+            entry("medium_quiver", 8, null);
+            entry("large_quiver", 12, Rarity.UNCOMMON);
         }
+        var items = new LinkedHashMap<Identifier, Item>();
+        for (var entry: entries) {
+            items.put(entry.id(), entry.item());
+        }
+        return items;
+    }
+
+    public static void register() {
+        itemsToRegister().forEach((id, item) -> Registry.register(Registries.ITEM, id, item));
         // Creative-tab placement (COMBAT/Archers group) is registered per-platform from each loader's
         // entrypoint, iterating Quivers.entries (guarded by the bundleapi check) — no Fabric API here.
     }
