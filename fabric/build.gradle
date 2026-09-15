@@ -75,11 +75,11 @@ dependencies {
     modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${rootProject.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${rootProject.cloth_config_version}")
 
-    // Ecosystem libraries: the Modrinth maven for the released ones, mavenLocal for the 1.20.1-modern ports.
+    // Ecosystem libraries: all resolved from the Modrinth maven.
     modImplementation("maven.modrinth:armor-model-api:${rootProject.armor_model_api_version}-${platform}")
     modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}")
-    modImplementation("net.spell_power:spell_power-${platform}:${rootProject.spell_power_version}")
-    modImplementation("net.spell_engine:spell_engine-${platform}:${rootProject.spell_engine_version}")
+    modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}")
+    modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}")
     // Bundle API (quivers), vendored under libs/maven and JiJ'd into the production jar.
     include(modImplementation("com.github.TheRedBrain:bundle-api-${platform}:${rootProject.bundle_api_version}"))
 
@@ -98,8 +98,8 @@ dependencies {
     modLocalRuntime("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${rootProject.cardinal_components_version}")
     modLocalRuntime("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${rootProject.cardinal_components_version}")
 
-    // RangedWeaponAPI 2.3.4 (1.20.1-modern port) from mavenLocal — hard dependency on both loaders.
-    modImplementation("net.foundation:ranged_weapon_api-${platform}:${rootProject.ranged_weapon_api_version}")
+    // RangedWeaponAPI 2.3.4 (1.20.1-modern port) from the Modrinth maven — hard dependency on both loaders.
+    modImplementation("maven.modrinth:ranged-weapon-api:${rootProject.ranged_weapon_api_version}-${platform}")
 
     // StructurePoolAPI from the Modrinth maven. NOT JiJ'd - standalone library mod.
     modImplementation("maven.modrinth:structure-pool-api:${rootProject.structure_pool_api_version}-${platform}")

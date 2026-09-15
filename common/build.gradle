@@ -38,16 +38,16 @@ dependencies {
     modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${rootProject.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${rootProject.cloth_config_version}")
 
-    // Ecosystem libraries: the Modrinth maven for the released ones, mavenLocal for the 1.20.1-modern ports.
+    // Ecosystem libraries: all resolved from the Modrinth maven.
     modImplementation("maven.modrinth:armor-model-api:${rootProject.armor_model_api_version}-${platform}")
     modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}")
-    modImplementation("net.spell_power:spell_power-${platform}:${rootProject.spell_power_version}")
-    modImplementation("net.spell_engine:spell_engine-${platform}:${rootProject.spell_engine_version}") { transitive = false }
+    modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}")
+    modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}") { transitive = false }
     modImplementation("com.github.TheRedBrain:bundle-api-${platform}:${rootProject.bundle_api_version}")
 
     // RangedWeaponAPI 2.3.4 (1.20.1-modern port, Fabric + Forge) — a hard dependency: every Archers
     // bow/crossbow is a RWA CustomBow/CustomCrossbow built through SpellEngine's RangedWeapons factories.
-    modImplementation("net.foundation:ranged_weapon_api-${platform}:${rootProject.ranged_weapon_api_version}")
+    modImplementation("maven.modrinth:ranged-weapon-api:${rootProject.ranged_weapon_api_version}-${platform}")
 
     // StructurePoolAPI 1.2.1+ ships a Forge artifact too, and its `injectAll` touches no loader API,
     // so the village injection and the `config/archers/villages.json` config live here in `common`.
