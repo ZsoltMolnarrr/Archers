@@ -10,6 +10,7 @@ import net.archers.effect.ArcherEffects;
 import net.archers.item.ArcherArmors;
 import net.archers.item.Quivers;
 import net.minecraft.util.Identifier;
+import net.spell_engine.Platform;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.render.CustomModels;
 import net.spell_engine.rpg_series.item.Armor;
@@ -28,10 +29,13 @@ public class ArchersClientMod {
         registerArmorRenderer(ArcherArmors.archerArmorSet_T2, ArcherArmorRenderer.ranger());
         registerArmorRenderer(ArcherArmors.archerArmorSet_T3, ArcherArmorRenderer.netheriteRanger());
 
-        List<Identifier> quiverModels = Quivers.entries.stream()
-                .map(entry -> new Identifier(ArchersMod.ID, "item/quiver/" + entry.id().getPath()))
-                .toList();
-        CustomModels.registerModelIds(quiverModels);
+        // Gate BEFORE touching Quivers (see the entrypoints): linking it needs BundleAPI on the classpath.
+        if (Platform.util().isModLoaded("bundleapi")) {
+            List<Identifier> quiverModels = Quivers.entries.stream()
+                    .map(entry -> new Identifier(ArchersMod.ID, "item/quiver/" + entry.id().getPath()))
+                    .toList();
+            CustomModels.registerModelIds(quiverModels);
+        }
     }
 
     private static void registerArmorRenderer(Armor.Set set, GeoArmorRenderer renderer) {

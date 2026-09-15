@@ -1,5 +1,6 @@
 # 3.1.1.002
 
+- Bundle API 1.1.0+1.20.1 is embedded in the jar (no separate download) until an upstream 1.20.1 release exists; it is now an optional dependency on Forge
 - Added Forge support on the 1.20.1 line (RangedWeaponAPI now has a Forge build)
 - Adopted RangedWeaponAPI 2.3.4 and Spell Engine 1.10.5.004
 - `config/archers/equipment.json` is regenerated once: ranged weapon tuning is now expressed as

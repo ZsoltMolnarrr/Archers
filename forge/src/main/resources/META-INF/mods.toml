@@ -49,12 +49,13 @@ versionRange = "[2.3.4,)"
 ordering = "AFTER"
 side = "BOTH"
 
-# Quivers are BundleAPI CustomBundleItems (see Quivers). Registration is gated on the mod being
-# loaded, but the client-side quiver model ids are not, so this stays a hard dependency (as it was
-# on the NeoForge module).
+# Quivers are BundleAPI CustomBundleItems (see Quivers). The library is JiJ'd, but kept optional so a
+# user-managed copy also satisfies it — and so Archers still boots (without quivers) if it is ever
+# removed; every use of Quivers is gated on the mod being loaded. Forge 47 aborts the boot on an
+# optional dependency with an empty `versionRange`, so the range is explicit.
 [[dependencies.archers]]
 modId = "bundleapi"
-mandatory = true
+mandatory = false
 versionRange = "[1.1.0,)"
 ordering = "AFTER"
 side = "BOTH"

@@ -36,6 +36,13 @@ configurations {
 }
 
 repositories {
+    // Bundle API for 1.20.1 is vendored from the ZsoltMolnarrr/bundle-api fork (branch `1.20.1-modern`)
+    // until upstream publishes a 1.20.1 build to Modrinth. See libs/maven/README.md for the exit path.
+    maven {
+        name = 'VendoredBundleApi'
+        url = uri("${rootProject.projectDir}/libs/maven")
+        content { includeGroup 'com.github.TheRedBrain' }
+    }
     maven { url 'https://maven.fabricmc.net' }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
@@ -73,7 +80,8 @@ dependencies {
     modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}")
     modImplementation("net.spell_power:spell_power-${platform}:${rootProject.spell_power_version}")
     modImplementation("net.spell_engine:spell_engine-${platform}:${rootProject.spell_engine_version}")
-    modImplementation("com.github.TheRedBrain:bundle-api-${platform}:${rootProject.bundle_api_version}")
+    // Bundle API (quivers), vendored under libs/maven and JiJ'd into the production jar.
+    include(modImplementation("com.github.TheRedBrain:bundle-api-${platform}:${rootProject.bundle_api_version}"))
 
     // Trinkets: the quiver render compat compiles against it; it is also pulled in transitively by
     // SpellEngine's Fabric artifact. Modrinth Maven serves minimal POMs (no transitive deps) and
@@ -144,6 +152,7 @@ publishMods {
         server = true
         changelogType = "markdown"
         requires("fabric-api", "armor-model-api", "spell-engine", "ranged-weapon-api", "structure-pool-api")
+        embeds("bundle-api")      // JiJ'd; no separate download
     }
 
     modrinth {
@@ -157,6 +166,7 @@ publishMods {
         requires { slug = "spell-engine" }
         requires { slug = "ranged-weapon-api" }
         requires { slug = "structure-pool-api" }
+        embeds { slug = "bundle-api" }   // JiJ'd; no separate download
     }
 
     // Each platform publishes its own GitHub release under a distinct, platform-suffixed

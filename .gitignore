@@ -122,3 +122,5 @@ forge/run/
 *.blend1
 src/main/generated/.cache
 common/src/main/generated/.cache
+# Vendored Bundle API maven repository (see libs/maven/README.md) — jars must be committed
+!libs/maven/**/*.jar
