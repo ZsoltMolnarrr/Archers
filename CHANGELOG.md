@@ -13,11 +13,34 @@
 >
 > **Back up your world before updating.**
 
-- Bundle API 1.1.0+1.20.1 is embedded in the jar (no separate download) until an upstream 1.20.1 release exists; it is now an optional dependency on Forge
-- Added Forge support on the 1.20.1 line (RangedWeaponAPI now has a Forge build)
-- Adopted RangedWeaponAPI 2.3.4 and Spell Engine 1.10.5.004
-- `config/archers/equipment.json` is regenerated once: ranged weapon tuning is now expressed as
-  `pull_time_bonus` (seconds) and `velocity_bonus` instead of absolute ticks / velocity
+- Ported to Minecraft 1.20.1 (Fabric + Forge 47)
+- `config/archers/equipment.json` is regenerated once: ranged weapon tuning is now expressed as `pull_time_bonus` (seconds) and `velocity_bonus`
+
+### What's new since 1.3.0
+
+Everything below was released between 1.3.0 and 3.1.1 on newer Minecraft versions only.
+
+#### New spells & skills
+
+- The Archery manual now offers **6 spells**: two choices across three tiers
+- New spells: **Rain of Arrows** and **Spirit Wolf Pack**, which summons spirit wolves to fight alongside you
+- **Power Shot** is an active skill; **Entangling Roots** is a spell book choice; **Magic Arrow** is charged
+
+#### New items & equipment
+
+- Three craftable quivers: **Quiver**, **Hunting Quiver** and **Battle Quiver**, worn in a dedicated slot (Trinkets on Fabric, Curios on Forge) and shown on your back
+- Aether dungeon loot: **Holy Spear**, **Silver Bow of the Acropolis**, **Sky Crossbow**, **Valkyrie Ballista**
+- Armor trim support for every archer armor piece
+- Longbows and Heavy Crossbows shoot faster arrows with a flatter arc; netherite ranged weapons are fireproof
+- The **Auto-Fire Hook** applies to all RPG Series ranged weapons and can be removed at a grindstone
+- All recipes in the vanilla recipe book; smelting recipes disassemble archer weapons and armor
+
+#### Progression & world
+
+- **Skill Tree** support: bow, crossbow and archer nodes recognise Archers' weapons
+- Archery Range trade advancement and spell casting advancements
+- Archery Ranges also generate through Lithostitched
+- Fully translated into 20 languages
 
 # 3.1.1.001
 
