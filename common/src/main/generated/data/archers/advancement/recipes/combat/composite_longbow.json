@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:composite_longbow"
+        "recipes": "archers:composite_longbow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:gold_nugget_from_blasting_royal_longbow"
+        "recipes": "archers:gold_nugget_from_blasting_royal_longbow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

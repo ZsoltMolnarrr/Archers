@@ -27,8 +27,8 @@ public class HuntersMarkRenderer implements CustomModelStatusEffect.Renderer {
         var verticalOffset = (livingEntity.getBbHeight() / livingEntity.getScale()) * 0.75F;
         matrixStack.translate(direction.x, verticalOffset, direction.z);
 
-        matrixStack.mulPose(Axis.YP.rotationDegrees(180F + (float)Math.toDegrees(Math.atan2(direction.x, direction.z)) ));
-        matrixStack.mulPose(Axis.XP.rotationDegrees(camera.xRot()));
+        matrixStack.rotateDegrees(Axis.YP, 180F + (float)Math.toDegrees(Math.atan2(direction.x, direction.z)) );
+        matrixStack.rotateDegrees(Axis.XP, camera.xRot());
 
         CustomModels.render(GLOWING_RENDER_LAYER, modelId, matrixStack, queue, light, livingEntity.getId());
 

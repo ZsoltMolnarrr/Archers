@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:rapid_crossbow"
+        "recipes": "archers:rapid_crossbow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

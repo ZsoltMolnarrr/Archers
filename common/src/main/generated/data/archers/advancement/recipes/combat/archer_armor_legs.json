@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:archer_armor_legs"
+        "recipes": "archers:archer_armor_legs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

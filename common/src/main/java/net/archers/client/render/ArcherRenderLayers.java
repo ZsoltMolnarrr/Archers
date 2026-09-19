@@ -1,10 +1,10 @@
 package net.archers.client.render;
 
-import com.mojang.blaze3d.pipeline.BlendFunction;
-import com.mojang.blaze3d.pipeline.ColorTargetState;
-import com.mojang.blaze3d.pipeline.DepthStencilState;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.platform.CompareOp;
+import com.mojang.renderpearl.api.pipeline.BlendFunction;
+import com.mojang.renderpearl.api.pipeline.ColorTargetState;
+import com.mojang.renderpearl.api.pipeline.CompareOp;
+import com.mojang.renderpearl.api.pipeline.DepthStencilState;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import net.archers.ArchersMod;
 import net.minecraft.client.renderer.BindGroupLayouts;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -66,6 +66,17 @@ public final class ArcherRenderLayers {
 
     private static final Function<Identifier, RenderType> SPIRIT = Util.memoize(texture ->
             CustomLayers.create("archers_spirit", RenderSetup.builder(SPIRIT_PIPELINE)
+                    // 26.3: a blending setup must take an OIT stance, or the first draw with
+                    // *Improved Transparency* on throws ("does not have OIT pipelines set up"):
+                    // `submitModel` routes on `hasBlending() && !forceSolidModelPhase()`, and with
+                    // the option on every translucent phase is the single `oitTranslucent` pass.
+                    // This is a genuinely translucent body (not equal-depth overdraw), so it takes
+                    // the same set as the vanilla pipeline it mirrors — `entityTranslucentEmissive`
+                    // pairs `ENTITY_TRANSLUCENT_EMISSIVE` with `OIT_ENTITY_EMISSIVE`. The local
+                    // depth-write deviation has no OIT counterpart: with the option on everything
+                    // translucent is composited by weight, so the ordering fixes below only apply
+                    // with it off.
+                    .setOitPipelines(RenderPipelines.OIT_ENTITY_EMISSIVE)
                     .withTexture("Sampler0", texture)
                     .useOverlay()
                     .affectsCrumbling()

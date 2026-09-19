@@ -138,11 +138,13 @@ public class ArchersAdvancements extends FabricAdvancementProvider {
         // so keep them untelemetered rather than using the telemetered Advancement.Builder.create().
         var entry = Advancement.Builder.recipeAdvancement()
                 .parent(Identifier.parse(parent))
+                // 26.3: `display(..., @Nullable Identifier background, ...)` split into
+                // `rootDisplay(...)` (with background) and `display(...)` (without). Every advancement
+                // here has a parent, so the background was always null — same DisplayInfo, same JSON.
                 .display(
                         icon,
                         Component.translatable(translationKey(id, "title")),
                         Component.translatable(translationKey(id, "description")),
-                        null,
                         frame,
                         showToast,
                         announceToChat,

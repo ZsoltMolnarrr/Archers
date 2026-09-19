@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:diamond_spear"
+        "recipes": "archers:diamond_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:netherite_ranger_armor_feet_smithing"
+        "recipes": "archers:netherite_ranger_armor_feet_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

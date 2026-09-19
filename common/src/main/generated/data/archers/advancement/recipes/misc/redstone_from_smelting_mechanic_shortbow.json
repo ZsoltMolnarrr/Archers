@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:redstone_from_smelting_mechanic_shortbow"
+        "recipes": "archers:redstone_from_smelting_mechanic_shortbow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

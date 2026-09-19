@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:iron_spear"
+        "recipes": "archers:iron_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

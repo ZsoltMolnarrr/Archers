@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:netherite_scrap_from_blasting_netherite_rapid_crossbow"
+        "recipes": "archers:netherite_scrap_from_blasting_netherite_rapid_crossbow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

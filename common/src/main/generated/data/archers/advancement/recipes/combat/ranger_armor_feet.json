@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:ranger_armor_feet"
+        "recipes": "archers:ranger_armor_feet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

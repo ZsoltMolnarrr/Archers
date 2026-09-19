@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:turtle_scute_from_blasting_ranger_armor_chest"
+        "recipes": "archers:turtle_scute_from_blasting_ranger_armor_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

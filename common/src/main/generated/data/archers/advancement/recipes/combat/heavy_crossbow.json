@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:heavy_crossbow"
+        "recipes": "archers:heavy_crossbow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

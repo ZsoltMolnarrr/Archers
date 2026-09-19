@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:mechanic_shortbow"
+        "recipes": "archers:mechanic_shortbow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

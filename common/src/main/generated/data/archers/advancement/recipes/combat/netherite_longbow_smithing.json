@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:netherite_longbow_smithing"
+        "recipes": "archers:netherite_longbow_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

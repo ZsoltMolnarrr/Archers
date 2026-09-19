@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:ranger_armor_legs"
+        "recipes": "archers:ranger_armor_legs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

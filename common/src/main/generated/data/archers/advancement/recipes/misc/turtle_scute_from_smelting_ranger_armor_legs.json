@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:turtle_scute_from_smelting_ranger_armor_legs"
+        "recipes": "archers:turtle_scute_from_smelting_ranger_armor_legs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

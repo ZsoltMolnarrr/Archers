@@ -4,7 +4,6 @@ import net.archers.ArchersMod;
 import net.archers.block.ArcherBlocks;
 import net.archers.item.Group;
 import net.archers.item.Quivers;
-import net.archers.neoforge.compat.curios.QuiverCurios;
 import net.archers.item.misc.Misc;
 import net.archers.village.ArcherVillagers;
 import net.minecraft.core.Registry;
@@ -20,6 +19,11 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(ArchersMod.ID)
 public final class NeoForgeMod {
+    /// TODO 26.3 (Curios): the Curios integration (`compat/curios/**`) is excluded from the compile while
+    /// `enable_curios=false` (see gradle.properties), so it is reached reflectively instead of by a direct
+    /// reference. With the gate restored the class is present again and this resolves it as before.
+    private static final String QUIVER_CURIOS = "net.archers.neoforge.compat.curios.QuiverCurios";
+
     public NeoForgeMod(IEventBus modBus) {
         // Run our common setup.
         ArchersMod.init();
@@ -28,7 +32,21 @@ public final class NeoForgeMod {
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, NeoForgeMod::buildTabContents);
         // Quiver equip sound, via a Curios capability on the (third-party) bundle items.
         if (ModList.get().isLoaded("curios")) {
-            modBus.addListener(RegisterCapabilitiesEvent.class, QuiverCurios::registerCapabilities);
+            try {
+                var register = Class.forName(QUIVER_CURIOS)
+                        .getMethod("registerCapabilities", RegisterCapabilitiesEvent.class);
+                modBus.addListener(RegisterCapabilitiesEvent.class, event -> {
+                    try {
+                        register.invoke(null, event);
+                    } catch (ReflectiveOperationException e) {
+                        throw new RuntimeException("Failed to register Curios quiver capabilities", e);
+                    }
+                });
+            } catch (ClassNotFoundException e) {
+                // built without the Curios integration
+            } catch (ReflectiveOperationException e) {
+                throw new RuntimeException("Failed to initialize Curios compat", e);
+            }
         }
     }
 

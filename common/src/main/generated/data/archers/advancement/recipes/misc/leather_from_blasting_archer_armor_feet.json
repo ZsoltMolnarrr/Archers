@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:leather_from_blasting_archer_armor_feet"
+        "recipes": "archers:leather_from_blasting_archer_armor_feet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

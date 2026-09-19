@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:iron_nugget_from_blasting_iron_spear"
+        "recipes": "archers:iron_nugget_from_blasting_iron_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

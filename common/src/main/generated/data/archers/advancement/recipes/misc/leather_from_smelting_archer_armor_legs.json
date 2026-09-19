@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:leather_from_smelting_archer_armor_legs"
+        "recipes": "archers:leather_from_smelting_archer_armor_legs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

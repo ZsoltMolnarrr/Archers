@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:archer_armor_feet"
+        "recipes": "archers:archer_armor_feet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

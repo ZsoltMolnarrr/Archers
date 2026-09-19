@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:iron_nugget_from_blasting_heavy_crossbow"
+        "recipes": "archers:iron_nugget_from_blasting_heavy_crossbow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:netherite_shortbow_smithing"
+        "recipes": "archers:netherite_shortbow_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

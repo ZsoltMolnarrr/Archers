@@ -37,13 +37,13 @@ public class WornQuiverRenderer {
         // Trinkets' `translateToChest`
         if (state.isCrouching && !state.isPassenger && !state.isVisuallySwimming) {
             matrices.translate(0.0F, 0.2F, 0.0F);
-            matrices.mulPose(Axis.XP.rotation(model.body.xRot));
+            matrices.rotate(Axis.XP, model.body.xRot);
         }
-        matrices.mulPose(Axis.YP.rotation(model.body.yRot));
+        matrices.rotate(Axis.YP, model.body.yRot);
         matrices.translate(0.0F, 0.4F, -0.16F);
         // Placement tuned on 1.21.1 (model in [0,1]^3 space)
         matrices.translate(-0.825F, 0.25F, 0.7F);
-        matrices.mulPose(Axis.XP.rotationDegrees(-140));
+        matrices.rotateDegrees(Axis.XP, -140);
         // Cancel the identity display transform's centring translate (see class doc)
         matrices.translate(0.5F, 0.5F, 0.5F);
         renderState.submit(matrices, queue, light, OverlayTexture.NO_OVERLAY, 0);

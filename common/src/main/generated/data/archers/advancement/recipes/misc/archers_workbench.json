@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "archers:archers_workbench"
+        "recipes": "archers:archers_workbench"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
