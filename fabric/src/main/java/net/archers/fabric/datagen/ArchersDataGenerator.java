@@ -1,5 +1,8 @@
 package net.archers.fabric.datagen;
 
+import net.spell_engine.rpg_series.item.Equipment;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.registry.RegistryKeys;
 import net.archers.ArchersMod;
 import net.archers.content.ArcherSounds;
 import net.archers.content.ArcherSpells;
@@ -63,6 +66,27 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
             ).toList();
             generateBowTags(bowEntries);
             generateArmorTags(ArcherArmors.entries, RPGSeriesItemTags.ArmorMetaType.ARCHERY);
+
+            generateLootAffiliation("archer",
+                    List.of(Equipment.WeaponType.SHORT_BOW, Equipment.WeaponType.LONG_BOW,
+                            Equipment.WeaponType.RAPID_CROSSBOW, Equipment.WeaponType.HEAVY_CROSSBOW,
+                            Equipment.WeaponType.SPEAR),
+                    ArcherArmors.entries);
+        }
+
+        /// Loot affiliation: items relevant for the wearer of the given spell book
+        /// (`archers:spell_book/<book>` -> `archers:loot_affiliation/<book>`), these drop more often
+        /// for them from the loot injected by Spell Engine.
+        private void generateLootAffiliation(String book, List<Equipment.WeaponType> weaponTypes, List<Armor.Entry> armors) {
+            var tag = getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM, Identifier.of(ArchersMod.ID, "loot_affiliation/" + book)));
+            for (var type: weaponTypes) {
+                tag.addOptionalTag(RPGSeriesItemTags.WeaponType.get(type));
+            }
+            for (var armor: armors) {
+                for (var id: armor.armorSet().pieceIds()) {
+                    tag.addOptional((Identifier) id);
+                }
+            }
         }
     }
 

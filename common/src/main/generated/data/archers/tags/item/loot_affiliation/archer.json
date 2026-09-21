@@ -1,0 +1,72 @@
+{
+  "values": [
+    {
+      "id": "#rpg_series:weapon_type/short_bow",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/long_bow",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/rapid_crossbow",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/heavy_crossbow",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/spear",
+      "required": false
+    },
+    {
+      "id": "archers:archer_armor_head",
+      "required": false
+    },
+    {
+      "id": "archers:archer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "archers:archer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "archers:archer_armor_feet",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_head",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_chest",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_legs",
+      "required": false
+    },
+    {
+      "id": "archers:ranger_armor_feet",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_ranger_armor_head",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_ranger_armor_chest",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_ranger_armor_legs",
+      "required": false
+    },
+    {
+      "id": "archers:netherite_ranger_armor_feet",
+      "required": false
+    }
+  ]
+}
