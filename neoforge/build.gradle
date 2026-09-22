@@ -72,7 +72,7 @@ dependencies {
     implementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
 
     // Curios - https://docs.illusivesoulworks.com/category/curios
-    // Gated via enable_curios (see gradle.properties, TODO 26.3 (Curios)).
+    // Gated via enable_curios (see gradle.properties).
     if (rootProject.enable_curios.toBoolean()) {
         implementation("top.theillusivec4.curios:curios-neoforge:${project.curios_version}")
     }
@@ -96,7 +96,7 @@ dependencies {
 
 sourceSets.main.java {
     // The Curios integration stays in-tree, but out of the compile while Curios is gated off
-    // (see gradle.properties, TODO 26.3 (Curios)). Both call sites resolve it reflectively.
+    // (see gradle.properties). Both call sites resolve it reflectively.
     if (!rootProject.enable_curios.toBoolean()) {
         exclude 'net/archers/neoforge/compat/curios/**'
         exclude 'net/archers/neoforge/client/curios/**'

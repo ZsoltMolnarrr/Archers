@@ -19,9 +19,9 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(ArchersMod.ID)
 public final class NeoForgeMod {
-    /// TODO 26.3 (Curios): the Curios integration (`compat/curios/**`) is excluded from the compile while
-    /// `enable_curios=false` (see gradle.properties), so it is reached reflectively instead of by a direct
-    /// reference. With the gate restored the class is present again and this resolves it as before.
+    /// Curios gate (see gradle.properties): with `enable_curios=false` the Curios integration
+    /// (`compat/curios/**`) is excluded from the compile, so it is reached reflectively instead of by a
+    /// direct reference. With the gate on (the normal case) the class is present and this resolves it.
     private static final String QUIVER_CURIOS = "net.archers.neoforge.compat.curios.QuiverCurios";
 
     public NeoForgeMod(IEventBus modBus) {
