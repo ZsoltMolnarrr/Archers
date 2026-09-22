@@ -43,10 +43,6 @@ public final class IrisCompat {
         /// lighting), the same program vanilla mob eyes and `ENTITY_TRANSLUCENT_EMISSIVE` resolve to -
         /// which is what the spirit layer is built from
         /// ([ArcherRenderLayers] widens and reuses `ENTITY_EMISSIVE_SNIPPET`).
-        ///
-        /// The shadow-pass variant (`assignPipelineShadow`, new in Iris 1.11) is deliberately not
-        /// called: it does not exist in 1.10.x and would hard-fail there, and a translucent emissive
-        /// overdraw contributes nothing to a shadow map.
         static void assign() {
             var api = net.irisshaders.iris.api.v0.IrisApi.getInstance();
             var pipelines = ArcherRenderLayers.customPipelines();
@@ -54,6 +50,28 @@ public final class IrisCompat {
                 api.assignPipeline(pipeline, net.irisshaders.iris.api.v0.IrisProgram.EMISSIVE_ENTITIES);
             }
             LOGGER.info("Registered {} custom pipelines with Iris", pipelines.size());
+            assignShadows(api);
+        }
+
+        /// Iris 1.11.6+ (26.3) keeps a second override list for its shadow pass; a pipeline missing from it
+        /// logs "Missing program ... in override list" with a stack trace on every shadow-pass draw. The
+        /// spirit pipeline is entity-derived (`ENTITY_TRANSLUCENT_EMISSIVE`), which Iris maps to its entity
+        /// shadow program, so `SHADOW_ENTITIES` is the matching coarse bucket. Older Iris (1.10.x, and the
+        /// NeoForge 26.2 jar) has no `assignPipelineShadow`; the first `NoSuchMethodError` ends the loop.
+        private static void assignShadows(net.irisshaders.iris.api.v0.IrisApi api) {
+            int assigned = 0;
+            for (var pipeline : ArcherRenderLayers.customPipelines()) {
+                try {
+                    api.assignPipelineShadow(pipeline, net.irisshaders.iris.api.v0.IrisShadowProgram.SHADOW_ENTITIES);
+                    assigned++;
+                } catch (NoSuchMethodError | NoClassDefFoundError e) {
+                    LOGGER.info("Iris shadow pipeline assignment unavailable ({}), skipping", e.toString());
+                    return;
+                } catch (Throwable e) {
+                    LOGGER.warn("Failed to assign shadow pipeline {} to Iris: {}", pipeline.getLocation(), e.toString());
+                }
+            }
+            LOGGER.info("Registered {} custom pipelines with Iris for the shadow pass", assigned);
         }
     }
 }
