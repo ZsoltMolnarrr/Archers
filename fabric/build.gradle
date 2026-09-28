@@ -151,7 +151,7 @@ publishMods {
         server = true
         changelogType = "markdown"
         requires("fabric-api", "armor-model-api", "spell-engine", "ranged-weapon-api", "structure-pool-api")
-        embeds("bundle-api")      // JiJ'd; no separate download
+        // embeds("bundle-api")  // not declared: a launcher-resolved standalone Bundle API would override the embedded 1.3.0 build
     }
 
     modrinth {
@@ -164,7 +164,7 @@ publishMods {
         requires { slug = "spell-engine" }
         requires { slug = "ranged-weapon-api" }
         requires { slug = "structure-pool-api" }
-        embeds { slug = "bundle-api" }   // JiJ'd; no separate download
+        // embeds { slug = "bundle-api" }  // not declared: a launcher-resolved standalone Bundle API would override the embedded 1.3.0 build
     }
 
     // Each platform publishes its own GitHub release under a distinct, platform-suffixed

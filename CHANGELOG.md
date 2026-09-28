@@ -12,7 +12,7 @@
 >
 > **Back up your world before updating.**
 
-- Fixed launch crash `NoClassDefFoundError: net/minecraft/item/Item`, caused by the embedded Bundle API 1.2.0 (reverted to Bundle API 1.1.0)
+- Fixed launch crash `NoClassDefFoundError: net/minecraft/item/Item`, caused by the embedded Bundle API 1.2.0 (now embeds a working Bundle API build versioned 1.3.0, which also takes precedence over a separately installed 1.2.0 on Forge)
 
 # 3.1.3+1.20.1
 
