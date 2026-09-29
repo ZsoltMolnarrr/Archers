@@ -1,0 +1,25 @@
+{
+  "values": [
+    {
+      "id": "#rpg_series:weapon_type/short_bow",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/long_bow",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/rapid_crossbow",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/heavy_crossbow",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/spear",
+      "required": false
+    },
+    "#archers:armor_type/archer_armor"
+  ]
+}
