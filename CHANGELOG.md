@@ -1,3 +1,7 @@
+# 3.1.3
+
+- Fix Auto-Fire Hook getting stuck on crossbows instead of firing continuously
+
 # 3.1.1
 
 - Replaced armor rendering dependency AzureLibArmor with ArmorModelAPI
