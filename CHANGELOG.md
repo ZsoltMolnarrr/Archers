@@ -1,5 +1,6 @@
 # 3.1.3
 
+- Archer equipment is now affiliated loot: it drops more often for players carrying the matching spell book
 - Fix Auto-Fire Hook getting stuck on crossbows instead of firing continuously
 
 # 3.1.2

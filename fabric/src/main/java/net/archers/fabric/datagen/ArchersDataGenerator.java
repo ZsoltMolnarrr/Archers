@@ -1,5 +1,7 @@
 package net.archers.fabric.datagen;
 
+import net.spell_engine.rpg_series.item.Equipment;
+import net.minecraft.tags.TagKey;
 import net.archers.ArchersMod;
 import net.archers.content.ArcherSounds;
 import net.archers.content.ArcherSpells;
@@ -75,6 +77,38 @@ public class ArchersDataGenerator implements DataGeneratorEntrypoint {
                 var tag = builder(repair.tag());
                 repair.required().forEach(id -> tag.add(ResourceKey.create(Registries.ITEM, id)));
                 repair.optional().forEach(id -> tag.addOptional(ResourceKey.create(Registries.ITEM, id)));
+            }
+
+            var archerArmor = generateClassArmorTag("archer_armor", ArcherArmors.entries);
+            generateLootAffiliation("archer",
+                    List.of(Equipment.WeaponType.SHORT_BOW, Equipment.WeaponType.LONG_BOW,
+                            Equipment.WeaponType.RAPID_CROSSBOW, Equipment.WeaponType.HEAVY_CROSSBOW,
+                            Equipment.WeaponType.SPEAR),
+                    List.of(archerArmor));
+        }
+
+        /// Class armor tag: `archers:armor_type/<name>`, holding every piece of the given armor sets
+        private TagKey<Item> generateClassArmorTag(String name, List<Armor.Entry> armors) {
+            var tagKey = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ArchersMod.ID, "armor_type/" + name));
+            var tag = builder(tagKey);
+            for (var armor: armors) {
+                for (var id: armor.armorSet().pieceIds()) {
+                    tag.addOptional(ResourceKey.create(Registries.ITEM, (Identifier) id));
+                }
+            }
+            return tagKey;
+        }
+
+        /// Loot affiliation: items relevant for the wearer of the given spell book
+        /// (`archers:spell_book/<book>` -> `archers:loot_affiliation/<book>`), these drop more often
+        /// for them from the loot injected by Spell Engine.
+        private void generateLootAffiliation(String book, List<Equipment.WeaponType> weaponTypes, List<TagKey<Item>> armorTags) {
+            var tag = builder(TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ArchersMod.ID, "loot_affiliation/" + book)));
+            for (var type: weaponTypes) {
+                tag.addOptionalTag(RPGSeriesItemTags.WeaponType.get(type));
+            }
+            for (var armorTag: armorTags) {
+                tag.addTag(armorTag);
             }
         }
     }
