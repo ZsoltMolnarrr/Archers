@@ -54,8 +54,12 @@ public class LivingEntityMixin {
                 var player = Minecraft.getInstance().player;
                 var mainHandStack = player.getMainHandItem();
                 if (AutoFireHook.isApplied(mainHandStack)) {
-                    var state = archers$pullProgress(mainHandStack, player);
-                    if (state >= 1) {
+                    // Since 1.21.2 the server loads the crossbow in `onUseTick` while it is still held,
+                    // after which its pull reads 0, so a loaded crossbow still in use is also ready
+                    var loaded = mainHandStack.getItem() instanceof CrossbowItem
+                            && CrossbowItem.isCharged(mainHandStack)
+                            && player.getUseItem() == mainHandStack;
+                    if (loaded || archers$pullProgress(mainHandStack, player) >= 1) {
                         charged = true;
                         // 1 Extra tick to avoid releaseing earlier than server agrees on being charged
                         if (timeHoldingCharged > 1) {
